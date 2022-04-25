@@ -5,16 +5,8 @@ using System.Net.Http;              // HttpClient
 using NUnit.Framework;
 
 [TestFixture]
-public class ApiTests
+public class ApiTests: TestsBase
 {
-    static string server;
-
-    [SetUp]
-    public void Setup()
-    {
-        server = System.Environment.GetEnvironmentVariable("MC_SERVER") ?? "http://192.168.1.82:8080";
-    }
-
     [Test]
     public async Task api_version()
     {

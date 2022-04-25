@@ -3,16 +3,8 @@ using System;                       // Console
 using NUnit.Framework;
 
 [TestFixture]
-public class ModelTests
+public class ModelTests: TestsBase
 {
-    static string server;
-
-    [SetUp]
-    public void Setup()
-    {
-        server = System.Environment.GetEnvironmentVariable("MC_SERVER") ?? "http://192.168.1.82:8080";
-    }
-
     Model SimpleBM () {
         var model = new Model();
         model.TimeStart = 0;

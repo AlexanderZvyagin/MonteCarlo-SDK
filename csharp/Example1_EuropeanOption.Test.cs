@@ -3,16 +3,8 @@ using System;                       // Console
 using NUnit.Framework;
 
 [TestFixture]
-public class Example1_EuropeanOption_Test
+public class Example1_EuropeanOption_Test: TestsBase
 {
-    static string server;
-
-    [SetUp]
-    public void Setup()
-    {
-        server = System.Environment.GetEnvironmentVariable("MC_SERVER") ?? "http://192.168.1.82:8080";
-    }
-
     // https://www.johndcook.com/blog/cpp_erf/
     public double erf (double x)
     {
@@ -38,7 +30,7 @@ public class Example1_EuropeanOption_Test
     }
 
     public double cndf (double x) {
-        return (erf(x)+1)/2;
+        return (erf(x/Math.Sqrt(2))+1)/2;
     }
 
     public (double,double) Black76 (
@@ -122,13 +114,15 @@ public class Example1_EuropeanOption_Test
         return model;
     }
 
+
+    [TestCase(100,300,0.4,4,0.2,10000,1000)]
     [TestCase(100,300,0.2,0.4,0)]
     [TestCase(100,300,0.2,0.4,0.2)]
     [TestCase(100,200,0.1,1,0)]
-    // [TestCase(150,200,0.1,10,0.02)]
-    // [TestCase(100,100,0.1,10,0.02)]
-    // [TestCase(100,200,1,1,0,100000,10000)]
-    // [TestCase(150,200,0.2,4,0.2,100000,10000)]
+    [TestCase(150,200,0.1,10,0.02)]
+    [TestCase(100,100,0.1,10,0.02)]
+    [TestCase(100,200,1,1,0,100000,10000)]
+    [TestCase(150,200,0.2,4,0.2,100000,10000)]
     public void EuropeanOptionCallPutPrices(
         double spot,
         double strike,
@@ -161,8 +155,8 @@ public class Example1_EuropeanOption_Test
         Console.WriteLine($"Put : {mc_put .mean*discount}  {bs_put }");
 
         double nsigma=3;
-        Assert.That(bs_call/discount,Is.EqualTo(mc_call.mean).Within(nsigma*mc_call.meanError),"call price error");
-        Assert.That(bs_put /discount,Is.EqualTo(mc_put .mean).Within(nsigma*mc_put .meanError),"put price error"); 
+        Assert.That(bs_call/discount,Is.EqualTo(mc_call.mean).Within(abseps+nsigma*mc_call.meanError),"call price error");
+        Assert.That(bs_put /discount,Is.EqualTo(mc_put .mean).Within(abseps+nsigma*mc_put .meanError),"put price error"); 
     }
 
 
@@ -347,4 +341,6 @@ public class Example1_EuropeanOption_Test
     //     Console.WriteLine($"{p1_js}");
     //     var p2 = System.Text.Json.JsonSerializer.Deserialize<Parameter>(p1_js,options);
     // }
+
+
 }
