@@ -120,7 +120,8 @@ public class Results {
         List<double> Stddev = null,
         List<double> Skewness = null,
         List<double> Time_points = null,
-        List<int>    Time_steps = null
+        List<int>    Time_steps = null,
+        List<string> Error = null
     ) {
         names       = Names       ?? new List<string> {};
         npaths      = Npaths      ?? new List<int>    {};
@@ -129,6 +130,7 @@ public class Results {
         skewness    = Skewness    ?? new List<double> {};
         time_points = Time_points ?? new List<double> {};
         time_steps  = Time_steps  ?? new List<int>    {};
+        error       = Error       ?? new List<string> {};
     }
 
     public List<string> names { get; set; }
@@ -138,15 +140,24 @@ public class Results {
     public List<double> skewness { get; set; }
     public List<double> time_points { get; set; }
     public List<int> time_steps { get; set; }
-    
+    public List<string> error { get; set; }
+
     public int StatesCount => names.Count;
     public int PointsCount => time_points.Count;
 
+    public bool Good => error.Count==0;
+
     public void Print(){
-        Console.WriteLine($"The results table has {names.Count} states evaluated at {time_points.Count} time point(s).");
-        for(int point=0; point<PointsCount; point++)
-            for(int state=0; state<StatesCount; state++)
-                Console.WriteLine($"[{state}] {names[state]} time={time_points[point]} {StatisticsOfStatePoint(state,point).ToString()}");
+        if(error.Count>0){
+            Console.WriteLine("Model computation error:");
+            foreach(var e in error)
+                Console.WriteLine($"    {e}");
+        } else {
+            Console.WriteLine($"The results table has {names.Count} states evaluated at {time_points.Count} time point(s).");
+            for(int point=0; point<PointsCount; point++)
+                for(int state=0; state<StatesCount; state++)
+                    Console.WriteLine($"[{state}] {names[state]} time={time_points[point]} {StatisticsOfStatePoint(state,point).ToString()}");
+        }
     }
 
     public Statistics StatisticsOfStatePoint(int state,int point){

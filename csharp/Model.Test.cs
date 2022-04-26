@@ -46,6 +46,39 @@ public class ModelTests: TestsBase
         return model;
     }
 
+    Model BadModelWithoutEvaluationPoints () {
+        var model = new Model();
+        model.TimeStart = 0;
+        model.TimeSteps = 100;
+        model.NumPaths = 10000;
+        model.updaters.Add(new Updater(
+            "IndependentBrownianMotion"
+        ));
+        model.updaters.Add(new Updater(
+            "SimpleBrownianMotion",
+            _start:new Parameter("",1),
+            _args:new List<Parameter>{new Parameter("",1),new Parameter("",0.1)}
+        ));
+        return model;
+    }
+
+    Model BadModelWithWrongArguments () {
+        var model = new Model();
+        model.TimeStart = 0;
+        model.TimeSteps = 100;
+        model.NumPaths = 10000;
+        model.updaters.Add(new Updater(
+            "IndependentBrownianMotion"
+        ));
+        model.updaters.Add(new Updater(
+            "SimpleBrownianMotion",
+            _start:new Parameter("",1),
+            _args:new List<Parameter>{new Parameter("",1)}
+        ));
+        model.evaluations.Add(new EvaluationPoint(0,1.1));
+        return model;
+    }
+
     // Model GbmDigitalDoubleBarrierOption (
     //     double spot = 100,
     //     double drift = 0.2,
@@ -135,6 +168,10 @@ public class ModelTests: TestsBase
             return TwoSimpleBMs();
         if(name=="EuropeanOptionModel")
             return Example1_EuropeanOption_Test.EuropeanOptionModel();
+        if(name=="BadModelWithoutEvaluationPoints")
+            return BadModelWithoutEvaluationPoints();
+        if(name=="BadModelWithWrongArguments")
+            return BadModelWithWrongArguments();
         throw new ArgumentException($"Unknown name {name}");
     }
 
@@ -145,6 +182,15 @@ public class ModelTests: TestsBase
     public void RunModel(string name){
         var result = Helper.Run(CreateModel(name),server);
         result.Print();
+        Assert.That(true,Is.EqualTo(result.Good));
+    }
+
+    [TestCase("BadModelWithoutEvaluationPoints")]
+    // [TestCase("BadModelWithWrongArguments")]
+    public void RunModelShowError(string name){
+        var result = Helper.Run(CreateModel(name),server);
+        result.Print();
+        Assert.That(false,Is.EqualTo(result.Good));
     }
 
     // [Test]
