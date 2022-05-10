@@ -1,7 +1,7 @@
 const supertest = require('supertest');
 const expect = require('expect');
 
-const serverAddress = process.env.MCSERVER || 'http://192.168.1.82:8080';
+const serverAddress = process.env.MCSERVER || 'http://naz.hopto.org:8001';
 const server = supertest.agent(serverAddress);
 
 function Parameter (name,value=NaN,step=NaN,min=NaN,max=NaN) {
