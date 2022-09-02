@@ -23,6 +23,12 @@ class Updater:
     def __init__ (self,**kwargs):
         for k,v in kwargs.items():
             setattr(self,k,v)
+    # def __init__ (self,type,name='',start=None,args=[],refs=[]):
+    #     self.type = type
+    #     self.name = name
+    #     self.start = start
+    #     self.args = args
+    #     self.refs = refs
     def toJson (self):
         return json.dumps(self,default=vars)
 
