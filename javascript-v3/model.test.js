@@ -1,3 +1,4 @@
+import fetch from "node-fetch"
 import {assert, describe, expect, it, beforeEach, afterEach, test} from 'vitest'
 import server from './server.js'
 import model from './model'
