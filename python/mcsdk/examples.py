@@ -19,7 +19,7 @@ def BuildModel_Simple ():
         name = "IndependentBrownianMotion"
     ))
     m.updaters.append(Updater(
-        name = "SimpleBrownianMotion",
+        name = "BrownianMotion",
         start = Parameter("start",0.1),
         args = [
             Parameter("drift",0.2),
@@ -37,7 +37,7 @@ def TwoProcessesModel ():
         name = "IndependentBrownianMotion"
     ))
     m.updaters.append(Updater(
-        name = "SimpleBrownianMotion",
+        name = "BrownianMotion",
         start = Parameter("start",0.1),
         args = [
             Parameter("drift",0.2),
@@ -45,7 +45,7 @@ def TwoProcessesModel ():
         ]
     ))
     m.updaters.append(Updater(
-        name = "SimpleBrownianMotion",
+        name = "BrownianMotion",
         start = Parameter("start",0.1),
         args = [
             Parameter("drift",0.2),
@@ -63,7 +63,7 @@ def FinanceOption ():
         name = "IndependentBrownianMotion"
     ))
     m.updaters.append(Updater(
-        name = "SimpleGeometricalBrownianMotion",
+        name = "GeometricalBrownianMotion",
         start = Parameter("start",130),
         args = [
             Parameter("drift",0.0),
