@@ -6,7 +6,6 @@ def BadModel ():
     m.TimeSteps = 10
     m.NumPaths = 10000
     m.updaters.append(Updater(
-        type = "Error",
         name = "Error"
     ))
     return m
@@ -17,11 +16,9 @@ def BuildModel_Simple ():
     m.TimeSteps = 10
     m.NumPaths = 10000
     m.updaters.append(Updater(
-        type = "IndependentBrownianMotion",
         name = "IndependentBrownianMotion"
     ))
     m.updaters.append(Updater(
-        type = "SimpleBrownianMotion",
         name = "SimpleBrownianMotion",
         start = Parameter("start",0.1),
         args = [
@@ -37,11 +34,9 @@ def TwoProcessesModel ():
     m.TimeSteps = 10
     m.NumPaths = 10000
     m.updaters.append(Updater(
-        type = "IndependentBrownianMotion",
         name = "IndependentBrownianMotion"
     ))
     m.updaters.append(Updater(
-        type = "SimpleBrownianMotion",
         name = "SimpleBrownianMotion",
         start = Parameter("start",0.1),
         args = [
@@ -50,7 +45,6 @@ def TwoProcessesModel ():
         ]
     ))
     m.updaters.append(Updater(
-        type = "SimpleBrownianMotion",
         name = "SimpleBrownianMotion",
         start = Parameter("start",0.1),
         args = [
@@ -60,17 +54,15 @@ def TwoProcessesModel ():
     ))
     return m
 
-def FxOption_vanilla ():
+def FinanceOption ():
     m = Model()
     m.TimeStart = 0
     m.TimeSteps = 10
-    m.NumPaths = 10000
+    m.NumPaths = 10
     m.updaters.append(Updater(
-        type = "IndependentBrownianMotion",
         name = "IndependentBrownianMotion"
     ))
     m.updaters.append(Updater(
-        type = "SimpleGeometricalBrownianMotion",
         name = "SimpleGeometricalBrownianMotion",
         start = Parameter("start",130),
         args = [
@@ -82,7 +74,6 @@ def FxOption_vanilla ():
     assert fxProcessNumber==0
 
     m.updaters.append(Updater(
-        type = "Product_Option",
         name = "Product_Option",
         start = Parameter("call",None),
         args = [

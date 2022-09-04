@@ -9,7 +9,7 @@ class Parameter:
         if step is not None: self.step = step
         if min is not None: self.min = min
         if max is not None: self.max = max
-    def toJson (self):
+    def json (self):
         return json.dumps(self,default=vars)
 
 class EvaluationPoint:
@@ -18,7 +18,7 @@ class EvaluationPoint:
         self.time = time
         if value is not None: self.value = value
         if error is not None: self.error = error
-    def toJson (self):
+    def json (self):
         return json.dumps(self,default=vars)
 
 class Updater:
@@ -31,7 +31,7 @@ class Updater:
     #     self.start = start
     #     self.args = args
     #     self.refs = refs
-    def toJson (self):
+    def json (self):
         return json.dumps(self,default=vars)
 
 class Model:
@@ -43,7 +43,7 @@ class Model:
         self.evaluations = []
     def NumStatefulProcesses (self):
         return len([x for x in self.updaters if hasattr(x,'start')])
-    def toJson (self):
+    def json (self):
         return json.dumps(self,default=vars)
 
 class Result:
@@ -53,7 +53,7 @@ class Result:
         self.stddev = stddev
         self.skewness = skewness
     def MeanError (self):
-        return self.stddev/math.sqrt(self.n)
+        return None if self.stddev is None else self.stddev/math.sqrt(self.n)
     def __str__ (self):
         return f'n={self.n} mean={self.mean} +/- {self.MeanError()}'
     def __repr__ (self):
