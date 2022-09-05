@@ -41,6 +41,7 @@ class Model:
         self.NumPaths = 1
         self.updaters = []
         self.evaluations = []
+        self.RandomSeed = -1 # generate random seed
     def NumStatefulProcesses (self):
         return len([x for x in self.updaters if hasattr(x,'start')])
     def json (self):
