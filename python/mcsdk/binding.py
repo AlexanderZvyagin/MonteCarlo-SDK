@@ -2,15 +2,14 @@ import json
 import math
 import pandas as pd
 
-class Parameter:
-    def __init__ (self,name,value=None,step=None,min=None,max=None):
-        self.name = name
-        if value is not None: self.value = value
-        if step is not None: self.step = step
-        if min is not None: self.min = min
-        if max is not None: self.max = max
-    def json (self):
-        return json.dumps(self,default=vars)
+# class Parameter:
+#     def __init__ (self,value=None,step=None,min=None,max=None):
+#         if value is not None: self.value = value
+#         if step is not None: self.step = step
+#         if min is not None: self.min = min
+#         if max is not None: self.max = max
+#     def json (self):
+#         return json.dumps(self,default=vars)
 
 class EvaluationPoint:
     def __init__ (self,state,time,value=None,error=None):
@@ -62,6 +61,9 @@ class Result:
     
 class EvaluationResults:
     def __init__ (self,data,model=None):
+        error = data.get('error')
+        if error:
+            raise Exception(error)
         self.model = model
         self.names = data['names']
         self.npaths = data['npaths']
