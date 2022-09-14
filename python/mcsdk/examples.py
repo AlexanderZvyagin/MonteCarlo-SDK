@@ -1,18 +1,12 @@
-from .binding import *
+from .dto import *
 
 def BuildModel_Simple ():
     m = Model()
     m.TimeStart = 0
     m.TimeSteps = 10
     m.NumPaths = 10000
-    m.updaters.append(Updater(
-        name = "IndependentBrownianMotion"
-    ))
-    m.updaters.append(Updater(
-        name = "BrownianMotion",
-        start = 0.1,
-        args = [0.2,2] # drft, diffusion
-    ))
+    m.Add(IndependentBrownianMotion())
+    m.Add(BrownianMotion(0.1,0.2,2)) # start, drift, diffusion
     return m
 
 def TwoProcessesModel ():
@@ -20,17 +14,7 @@ def TwoProcessesModel ():
     m.TimeStart = 0
     m.TimeSteps = 10
     m.NumPaths = 10000
-    m.updaters.append(Updater(
-        name = "IndependentBrownianMotion"
-    ))
-    m.updaters.append(Updater(
-        name = "BrownianMotion",
-        start = 0.1,
-        args = [0.2,2] # drft, diffusion
-    ))
-    m.updaters.append(Updater(
-        name = "BrownianMotion",
-        start = 0.1,
-        args = [0.2,2] # drft, diffusion
-    ))
+    m.Add(IndependentBrownianMotion())
+    m.Add(BrownianMotion(0.1,0.2,2)) # start, drift, diffusion
+    m.Add(BrownianMotion(0.1,0.2,2)) # start, drift, diffusion
     return m
