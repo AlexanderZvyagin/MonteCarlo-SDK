@@ -13,12 +13,32 @@ from typing import List
 #     def json (self):
 #         return json.dumps(self,default=vars)
 
+class HistogramAxis:
+    def __init__ (self, state, bins, min, max):
+        self.state = state
+        self.bins = bins
+        self.min = min
+        self.max = max
+    def json (self):
+        return json.dumps(self,default=vars)
+
+class Histogram:
+    def __init__ (self, x:HistogramAxis, y=None):
+        self.x = x
+        if y: self.y = y
+    def json (self):
+        return json.dumps(self,default=vars)
+
 class EvaluationPoint:
-    def __init__ (self,state,time,value=None,error=None):
+    def __init__ (self,state:int,time:float,value:float=None,error:float=None):
         self.state = state
         self.time = time
         if value is not None: self.value = value
         if error is not None: self.error = error
+        self.histograms = []
+    def Add (self,histogram):
+        self.histograms.append(histogram)
+        return self
     def json (self):
         return json.dumps(self,default=vars)
 
@@ -131,9 +151,8 @@ class Model:
     def Add (self, updater: Updater):
         self.updaters.append(updater)
         title = getattr(updater,'_title',None)
-        if title:
-            updater._eq = self.NumStatefulProcesses()-1
-            self._titles[updater._eq] = title
+        updater._eq = self.NumStatefulProcesses()-1
+        self._titles[updater._eq] = title
     def NumStatefulProcesses (self):
         return len([x for x in self.updaters if hasattr(x,'start')])
     def json (self):
@@ -164,6 +183,7 @@ class EvaluationResults:
         self.skewness = data['skewness']
         self.time_points = data['time_points']
         self.time_steps = data['time_steps']
+        self.histograms = data['histograms']
         self.model = model
         
         self.Validation ()
