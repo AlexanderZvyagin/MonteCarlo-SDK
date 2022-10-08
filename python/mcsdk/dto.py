@@ -147,6 +147,8 @@ class Model:
         self.updaters = []
         self.evaluations = []
         self.RandomSeed = -1 # generate random seed
+        self.RunTimeoutSeconds = 1
+        self.MemoryLimitKB = 1
         self._titles = {}
     def Add (self, updater: Updater):
         self.updaters.append(updater)
