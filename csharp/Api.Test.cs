@@ -31,7 +31,7 @@ public class ApiTests: TestsBase
             ""TimeSteps"":2,
             ""NumPaths"":2,
             ""updaters"":[
-                {""name"":""IndependentBrownianMotion"",""args"":[],""refs"":[]},
+                {""name"":""IndependentGaussian"",""args"":[],""refs"":[]},
                 {""name"":""SimpleBrownianMotion"",""start"":{""value"":0},""args"":[{""value"":-0.1},{""value"":0.1}],""refs"":[]}
             ],
             ""evaluations"":[

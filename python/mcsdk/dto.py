@@ -52,11 +52,11 @@ class Updater:
     def json (self):
         return json.dumps(self,default=lambda o: {k:v for k,v in o.__dict__.items() if k[0]!='_'})
 
-class IndependentBrownianMotion (Updater):
+class IndependentGaussian (Updater):
     def __init__ (self):
         Updater.__init__ (
             self,
-            name  = 'IndependentBrownianMotion'
+            name  = 'IndependentGaussian'
         )
 
 class BrownianMotion (Updater):
