@@ -11,7 +11,7 @@ public class ModelTests: TestsBase
         model.TimeSteps = 100;
         model.NumPaths = 10000;
         model.updaters.Add(new Updater(
-            "IndependentBrownianMotion"
+            "IndependentGaussian"
         ));
         model.updaters.Add(new Updater(
             "SimpleBrownianMotion",
@@ -28,7 +28,7 @@ public class ModelTests: TestsBase
         model.TimeSteps = 100;
         model.NumPaths = 10000;
         model.updaters.Add(new Updater(
-            "IndependentBrownianMotion"
+            "IndependentGaussian"
         ));
         model.updaters.Add(new Updater(
             "SimpleBrownianMotion",
@@ -52,7 +52,7 @@ public class ModelTests: TestsBase
         model.TimeSteps = 100;
         model.NumPaths = 10000;
         model.updaters.Add(new Updater(
-            "IndependentBrownianMotion"
+            "IndependentGaussian"
         ));
         model.updaters.Add(new Updater(
             "SimpleBrownianMotion",
@@ -68,7 +68,7 @@ public class ModelTests: TestsBase
         model.TimeSteps = 100;
         model.NumPaths = 10000;
         model.updaters.Add(new Updater(
-            "IndependentBrownianMotion"
+            "IndependentGaussian"
         ));
         model.updaters.Add(new Updater(
             "SimpleBrownianMotion",
@@ -96,7 +96,7 @@ public class ModelTests: TestsBase
 
     //     // We don't number functions which have no state
     //     model.equations.Add(new Model.Function(
-    //         "IndependentBrownianMotion"
+    //         "IndependentGaussian"
     //     ));
 
     //     // Equation 0 (the first equation with a state)
@@ -223,7 +223,7 @@ public class ModelTests: TestsBase
     //     model.NumPaths = numPaths;
 
     //     int? bmEq =
-    //         model.Add(new Model.Function("IndependentBrownianMotion"));
+    //         model.Add(new Model.Function("IndependentGaussian"));
     //     Assert.That(bmEq,Is.Null);
     //     int underlyingEq = 
     //         model.Add(new Model.Function(
@@ -305,7 +305,7 @@ public class ModelTests: TestsBase
     //     model.NumPaths = numPaths;
 
     //     int? bmEq =
-    //         model.Add(new Model.Function("IndependentBrownianMotion"));
+    //         model.Add(new Model.Function("IndependentGaussian"));
     //     Assert.That(bmEq,Is.Null);
     //     int underlyingEq = 
     //         model.Add(new Model.Function(

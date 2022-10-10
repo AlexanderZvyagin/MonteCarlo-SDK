@@ -36,7 +36,7 @@ function BuildModel_Simple () {
     model.TimeStart = 0;
     model.TimeSteps = 10;
     model.NumPaths = 10000;
-    AddStatelessUpdater(model,"IndependentBrownianMotion");
+    AddStatelessUpdater(model,"IndependentGaussian");
     AddStatefulUpdater (
         model,
         "SimpleBrownianMotion",

@@ -15,7 +15,7 @@ function BuildModel_Simple () {
     m.NumPaths = 10000;
     model.AddStatelessUpdater({
         model: m,
-        name:"IndependentBrownianMotion"
+        name:"IndependentGaussian"
     });
     model.AddStatefulUpdater ({
         model: m,
@@ -36,7 +36,7 @@ function FxOption_vanilla () {
     m.NumPaths = 10000;
     model.AddStatelessUpdater({
         model: m,
-        name:"IndependentBrownianMotion"
+        name:"IndependentGaussian"
     });
 
     const fxProcessNumber =
@@ -74,7 +74,7 @@ function FxOption_SingleBarrierUpAndOut () {
     m.NumPaths = 10000;
     model.AddStatelessUpdater({
         model: m,
-        name:"IndependentBrownianMotion"
+        name:"IndependentGaussian"
     });
 
     const fxProcessNumber =
