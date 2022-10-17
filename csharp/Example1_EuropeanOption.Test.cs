@@ -73,7 +73,7 @@ public class Example1_EuropeanOption_Test: TestsBase
 
         // We don't number functions which have no state
         model.updaters.Add(new Updater(
-            "IndependentBrownianMotion"
+            "IndependentGaussian"
         ));
 
         // Equation 0 (the first equation with a state)
@@ -190,7 +190,7 @@ public class Example1_EuropeanOption_Test: TestsBase
     //     model.NumPaths = numPaths;
 
     //     int? bmEq =
-    //         model.Add(new Model.Function("IndependentBrownianMotion"));
+    //         model.Add(new Model.Function("IndependentGaussian"));
     //     Assert.That(bmEq,Is.Null);
     //     int underlyingEq = 
     //         model.Add(new Model.Function(
@@ -272,7 +272,7 @@ public class Example1_EuropeanOption_Test: TestsBase
     //     model.NumPaths = numPaths;
 
     //     int? bmEq =
-    //         model.Add(new Model.Function("IndependentBrownianMotion"));
+    //         model.Add(new Model.Function("IndependentGaussian"));
     //     Assert.That(bmEq,Is.Null);
     //     int underlyingEq = 
     //         model.Add(new Model.Function(

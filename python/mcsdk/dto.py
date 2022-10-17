@@ -4,15 +4,6 @@ import pandas as pd
 from enum import IntEnum
 from typing import List
 
-# class Parameter:
-#     def __init__ (self,value=None,step=None,min=None,max=None):
-#         if value is not None: self.value = value
-#         if step is not None: self.step = step
-#         if min is not None: self.min = min
-#         if max is not None: self.max = max
-#     def json (self):
-#         return json.dumps(self,default=vars)
-
 class HistogramAxis:
     def __init__ (self, state, bins, min, max):
         self.state = state
@@ -59,6 +50,30 @@ class IndependentGaussian (Updater):
             name  = 'IndependentGaussian'
         )
 
+class CorrelatedGaussian (Updater):
+    def __init__ (self, correlation:float, W1:int, W2:int):
+        assert abs(correlation)<=1
+        Updater.__init__ (
+            self,
+            name  = 'CorrelatedGaussian',
+            args = [correlation],
+            refs = [W1,W2]
+        )
+
+class Linear1DInterpolation (Updater):
+    def __init__ (self, f, ref:int, xmin:float, xmax:float, points:int=100, title:str=''):
+        assert xmin<xmax
+        assert points>=2 and points<=1024
+        dx = (xmax-xmin)/(points-1)
+        Updater.__init__ (
+            self,
+            name  = 'Linear1DInterpolation',
+            start = None,
+            refs  = [ref],
+            args  = [xmin,xmax,f(xmin)] + [f(xmin+dx*i) for i in range(1,points-1)] + [f(xmax)],
+            _title = title
+        )
+
 class BrownianMotion (Updater):
     def __init__ (self, start:float, drift:float, diffusion:float, title:str=''):
         Updater.__init__ (
@@ -99,13 +114,19 @@ class GeometricalBrownianMotionRef (Updater):
             _title = title
         )
 
-class Product_Option (Updater):
+class Option (Updater):
     Call = 0
     Put = 1
     def __init__ (self, underlying:int, strike:float, call_put:int, title:str=''):
+        if not title:
+            title = "underlying={} {} K={}".format(
+                underlying,
+                {Option.Call:'Call',Option.Put:'Put'} [call_put],
+                strike
+            )
         Updater.__init__ (
             self,
-            name  = 'Product_Option',
+            name  = 'Option',
             start = None,
             refs = [underlying],
             args = [strike,call_put],
@@ -148,8 +169,10 @@ class Model:
         self.evaluations = []
         self.RandomSeed = -1 # generate random seed
         self.RunTimeoutSeconds = 1
-        self.MemoryLimitKB = 1
+        self.MemoryLimitKB = 64
         self._titles = {}
+    def AddEvaluationRequest(self,time:float):
+        self.evaluations.append(EvaluationPoint(0,time))
     def Add (self, updater: Updater):
         self.updaters.append(updater)
         title = getattr(updater,'_title',None)
