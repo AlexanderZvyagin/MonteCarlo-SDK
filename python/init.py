@@ -4,4 +4,5 @@ logging.basicConfig (
     level = logging.INFO
 )
 from mcsdk import *
-server = 'http://naz.hopto.org:8001'
+server = 'http://localhost:8080'
+#server = 'http://naz.hopto.org:8001'

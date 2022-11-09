@@ -5,9 +5,9 @@ from enum import IntEnum
 from typing import List
 
 class HistogramAxis:
-    def __init__ (self, state, bins, min, max):
+    def __init__ (self, state, nbins, min, max):
         self.state = state
-        self.bins = bins
+        self.nbins = nbins
         self.min = min
         self.max = max
     def json (self):
@@ -36,7 +36,6 @@ class EvaluationPoint:
 class Updater:
     def __init__ (self,**kwargs):
         for k,v in kwargs.items():
-            # assert k in ['name','args','refs','start']
             setattr(self,k,v)
     def Number (self):
         return self._eq
@@ -44,10 +43,11 @@ class Updater:
         return json.dumps(self,default=lambda o: {k:v for k,v in o.__dict__.items() if k[0]!='_'})
 
 class IndependentGaussian (Updater):
-    def __init__ (self):
+    def __init__ (self,refs=[]):
         Updater.__init__ (
             self,
-            name  = 'IndependentGaussian'
+            name = 'IndependentGaussian',
+            refs = refs
         )
 
 class CorrelatedGaussian (Updater):
