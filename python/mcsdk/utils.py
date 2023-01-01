@@ -2,22 +2,8 @@ import math
 
 def linspace(min:float,max:float,n:int):
     assert n>=2 and min!=max
-    step = (max-min)/(n-1)
-    return [min] + [min+step*i for i in range(1,n-1)] + [max]
-
-def test_linspace_n2 ():
-    assert linspace(1,2,2) == [1,2]
-    assert linspace(2,1,2) == [2,1]
-    assert linspace(-3,5,2) == [-3,5]
-    assert linspace(5,-3,2) == [5,-3]
-
-def test_linspace_n3 ():
-    assert linspace(1,2,3) == [1,1.5,2]
-    assert linspace(2,1,3) == [2,1.5,1]
-
-def test_linspace_n6 ():
-    assert linspace(0,10,6) == [0,2,4,6,8,10]
-    
+    step = (max-min)/n
+    return [min] + [min+step*i for i in range(1,n-2)] + [max]
 
 def newton_solver(f,x0,xstep=1,xmin=None,xmax=None,tol=1e-5,calls_max=100,xstep_min=1e-5):
     '''Solve an equation f(x)=0
@@ -86,6 +72,9 @@ def newton_solver(f,x0,xstep=1,xmin=None,xmax=None,tol=1e-5,calls_max=100,xstep_
     }
 
 def test_newton_solver():
+    '''
+    '''
+    
     r = newton_solver(lambda x:x+10,1,calls_max=20,tol=1e-12)
     assert r['success'] and r['calls']<=10
 

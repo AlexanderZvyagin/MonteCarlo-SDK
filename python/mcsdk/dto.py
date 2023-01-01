@@ -33,12 +33,33 @@ class EvaluationPoint:
     def json (self):
         return json.dumps(self,default=vars)
 
+class Parameter:
+    def __init__ (self, *kargs, **kwargs,):
+        if kwargs and kargs:
+            raise Exception('Cannot accept "kwargs" and "args" at the same time')
+        for name in ['value', 'step', 'min', 'max']:
+            v = kwargs.get(name)
+            if v is not None:
+                setattr(self,name,v)
+        if kargs:
+            if len(kargs)!=1:
+                raise Exception(f'Too many ({len(kargs)}) for "kargs" argument.')
+            self.value = kargs[0]
+    def json (self):
+        return json.dumps(self,default=lambda o: {k:v for k,v in o.__dict__.items() if k[0]!='_'})
+
 class Updater:
     def __init__ (self,**kwargs):
         for k,v in kwargs.items():
             setattr(self,k,v)
-    def Number (self):
-        return self._eq
+    def GetEquationNumber (self):
+        '''Non-negative number'''
+        return self._equation
+    def GetStateNumber (self):
+        '''Return None for a stateless updater. Otherwise return a non-negative number.'''
+        return self._state
+    def HasState (self):
+        return hasattr(self,'start')
     def json (self):
         return json.dumps(self,default=lambda o: {k:v for k,v in o.__dict__.items() if k[0]!='_'})
 
@@ -51,8 +72,9 @@ class IndependentGaussian (Updater):
         )
 
 class CorrelatedGaussian (Updater):
-    def __init__ (self, correlation:float, W1:int, W2:int):
-        assert abs(correlation)<=1
+    def __init__ (self, correlation, W1:int, W2:int):
+        correlation_value = correlation.value if isinstance(correlation,Parameter) else correlation
+        assert abs(correlation_value)<=1
         Updater.__init__ (
             self,
             name  = 'CorrelatedGaussian',
@@ -176,10 +198,13 @@ class Model:
     def Add (self, updater: Updater):
         self.updaters.append(updater)
         title = getattr(updater,'_title',None)
-        updater._eq = self.NumStatefulProcesses()-1
-        self._titles[updater._eq] = title
+        updater._equation = len(self.updaters)-1
+        updater._state = self.NumStatefulProcesses()-1 if updater.HasState() else None
+#        updater._eq = self.NumStatefulProcesses()-1
+        self._titles[updater._state] = title
+        return updater
     def NumStatefulProcesses (self):
-        return len([x for x in self.updaters if hasattr(x,'start')])
+        return len([x for x in self.updaters if x.HasState()])
     def json (self):
         return json.dumps(self,default=lambda o: {k:v for k,v in o.__dict__.items() if k[0]!='_'})
 
@@ -261,3 +286,53 @@ class EvaluationResults:
         return f'{self.NumStates()} states with {self.NumEvaluations()} evaluations'
     def __repr__ (self):
         return str(self)
+
+def IsCalibrationParameter (par):
+    if not isinstance(par,Parameter):
+        return False
+    step = getattr(par,'step',math.nan)
+    if math.isnan(step) or step==0:
+        return False
+    return True
+
+class ModelCalibrationParameter:
+    def __init__ (self, parameter, equation:int, narg:int):
+        ''' if narg=-1: it is 'start', otherwise it is the updater argument number.'''
+        self.parameter = parameter
+        self.equation = equation
+        self.narg = narg
+    def __str__ (self):
+        return 'eq={} narg={} {}'.format(self.equation,self.narg,self.parameter.json())
+
+class ModelCalibration:
+    def __init__ (self, model):
+        self.model = model
+        self.cpars = []
+        for eq, updater in enumerate(self.model.updaters):
+            if updater.HasState() and IsCalibrationParameter(updater.start):
+                self.cpars.append(ModelCalibrationParameter(updater.start, eq, -1))
+            for narg, arg in enumerate(getattr(updater,'args',[])):
+                if IsCalibrationParameter(arg):
+                    self.cpars.append(ModelCalibrationParameter(arg, eq, narg))
+
+    def Print (self):
+        print(f'{len(self.cpars)} calibration parameters:')
+        for cpar in self.cpars:
+            print('{} {}'.format(self.model.updaters[cpar.equation].name,cpar))
+
+    def GetState (self):
+        return [cpar.parameter.value for cpar in self.cpars]
+    
+    def SetCalibrationParameter (self,index,value):
+        assert index>=0 and index<len(self.cpars)
+        cpar = self.cpars[index]
+        updater = self.model.updaters[cpar.equation]
+        if cpar.narg==-1:
+            assert isinstance(updater.start,Parameter)
+            updater.start.value = value
+        else:
+            assert cpar.narg>=0 and cpar.narg<len(updater.args)
+            arg = updater.args[cpar.narg]
+            assert isinstance(arg,Parameter)
+            arg.value = value
+        
