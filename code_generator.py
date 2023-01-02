@@ -1,4 +1,4 @@
-indent = '    ' # FIXME
+indent = '    ' # FIXME make it configurable? Is it language-dependent?
 
 type_cpp = {
     None:'void',
