@@ -1,3 +1,4 @@
+import traceback
 import numpy as np
 
 def CreateMatrix (rows, cols, value=0):
@@ -5,17 +6,15 @@ def CreateMatrix (rows, cols, value=0):
 
 class UnscentedKalmanFilter:
     
-    def __init__ (self):
-        self.L = 0
-        self.M = 0
-        self.alpha = 0.5
-        self.beta  = 2
-    
-    def Init (self, L, M):
+    def __init__ (self, L, M, alpha=0.5, beta=2):
         assert L>0 and M>0
-        assert self.L==0 and self.M==0
-        self.L = L
-        self.M = M
+        self.L     = L
+        self.M     = M
+        self.alpha = alpha
+        self.beta  = beta
+    
+#     def Init (self, L, M):
+#         assert self.L==0 and self.M==0
         self.kappa = 3-L
         self._lambda = self.alpha**2 * (self.L+self.kappa) - self.L;
         w = 1.0/(2*(self.L+self._lambda))
@@ -29,8 +28,13 @@ class UnscentedKalmanFilter:
     def RunAllIterations (self, iteration_start:int, iteration_last:int):
         iteration = iteration_start
         while iteration<=iteration_last:
-            self.RunSingleIteration (iteration)
-            iteration += 1
+            try:
+                self.RunSingleIteration (iteration)
+                iteration += 1
+            except:
+                traceback.print_exc()
+                return False
+        return True
         
     def RunSingleIteration (self, iteration):
         assert self.x.shape == (self.L,1)
@@ -59,12 +63,19 @@ class UnscentedKalmanFilter:
         
         self.Log (iteration, 'predicted error cov', error_cov)
         
+#         predicted_measurements_for_sigma_points = []
+#         for i in range(self.L*2+1):
+#             measurement = self.GetPredictedMeasurement (sigma_points_predicted[i], iteration)
+#             predicted_measurements_for_sigma_points.append(measurement)
+
         # Eq (14)
+        predicted_measurements_for_sigma_points = self.GetPredictedMeasurements (
+            sigma_points_predicted,
+            iteration
+        )
+
         predicted_measurement  = CreateMatrix(self.M,1)
-        predicted_measurements_for_sigma_points = []
-        for i in range(self.L*2+1):
-            measurement = self.GetPredictedMeasurement (sigma_points_predicted[i], iteration)
-            predicted_measurements_for_sigma_points.append(measurement)
+        for measurement in predicted_measurements_for_sigma_points:
             predicted_measurement += self.Wm[i] * measurement
         
         self.Log(iteration, 'predicted_measurement:', predicted_measurement)
@@ -132,8 +143,15 @@ class UnscentedKalmanFilter:
         return sigma_points
         
     def GetPredictedMeasurement (self, state, iteration):
-        raise NotImplementedError('This method must be implemented in a derived class.')
+        raise NotImplementedError ('Consider implementing GetMeasurement() or GetMeasurements() your derived class.')
         
+    def GetPredictedMeasurements (self, states, iteration):
+        '''You may want to override this method to run parallel compuations.'''
+        return [
+            self.GetPredictedMeasurement (state, iteration)
+            for state in states
+        ]
+    
     def GetMeasurement (self, iteration):
         raise NotImplementedError('This method must be implemented in a derived class.')
         
@@ -180,9 +198,9 @@ class KalmanFilterMonitor:
             case 'residual':
                 for i in range(M):
                     data[f'residual[{i}]'] = value[i,0]
-                length = (value.getT()*measurement_gram_matrix*value)
-                assert length.shape == (1,1)
-                data[f'residual.length'] = length[0,0]
+                length_square = (value.getT()*measurement_gram_matrix*value)
+                assert length_square.shape == (1,1)
+                data[f'residual.length'] = np.sqrt(length_square[0,0])
             case 'new state and its error matrix':
                 state = value[0]
                 for i in range(L):
@@ -191,9 +209,9 @@ class KalmanFilterMonitor:
                     state_diff = state - self._kf.GetTrueState()
                     for i in range(L):
                         data[f'state_diff[{i}]'] = state_diff[i,0]
-                    length = (state_diff.getT()*state_gram_matrix*state_diff)
-                    assert length.shape == (1,1)
-                    data[f'state_diff.length'] = length[0,0]
+                    length_square = (state_diff.getT()*state_gram_matrix*state_diff)
+                    assert length_square.shape == (1,1)
+                    data[f'state_diff.length'] = np.sqrt(length_square[0,0])
 #             case _:
 #                 print(f'unmatched {name}')
         
