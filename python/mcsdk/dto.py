@@ -27,11 +27,27 @@ class EvaluationPoint:
         if value is not None: self.value = value
         if error is not None: self.error = error
         self.histograms = []
+    def GetState (self):
+        return self.state
+    def GetTime (self):
+        return self.time
+    def GetValue (self):
+        return getattr(self,'value',None)
+    def GetError (self):
+        return getattr(self,'error',None)
     def Add (self,histogram):
         self.histograms.append(histogram)
         return self
     def json (self):
         return json.dumps(self,default=vars)
+    def __repr__ (self):
+        s = f'EvaluationPoint(state={self.state},time={self.time}'
+        if hasattr(self,'value'):
+            s += f',value={self.value}'
+        if hasattr(self,'error'):
+            s += f',error={self.error}'
+        s += ')'
+        return s
 
 class Parameter:
     def __init__ (self, *kargs, **kwargs,):
@@ -60,6 +76,8 @@ class Updater:
         return self._state
     def HasState (self):
         return hasattr(self,'start')
+    def GetStart (self):
+        return self.start
     def json (self):
         return json.dumps(self,default=lambda o: {k:v for k,v in o.__dict__.items() if k[0]!='_'})
 
@@ -105,6 +123,10 @@ class BrownianMotion (Updater):
             args  = [drift,diffusion],
             _title = title
         )
+    def GetDrift (self):
+        return self.args[0]
+    def GetDiffusion (self):
+        return self.args[1]
 
 class BrownianMotionRef (Updater):
     def __init__ (self, start:float, drift:int, diffusion:int, title:str=''):
@@ -125,6 +147,10 @@ class GeometricalBrownianMotion (Updater):
             args  = [drift,diffusion],
             _title = title
         )
+    def GetDrift (self):
+        return self.args[0]
+    def GetDiffusion (self):
+        return self.args[1]
 
 class GeometricalBrownianMotionRef (Updater):
     def __init__ (self, start:float, drift:int, diffusion:int, title:str=''):
@@ -136,6 +162,19 @@ class GeometricalBrownianMotionRef (Updater):
             _title = title
         )
 
+class ZeroCouponBond (Updater):
+    def __init__ (self, underlying:int, start:float=1, title:str=''):
+        if not title:
+            title = f'underlying={underlying} start={start}'
+        Updater.__init__ (
+            self,
+            name   = 'ZeroCouponBond',
+            start  = start,
+            refs   = [underlying],
+            args   = [],
+            _title = title
+        )
+        
 class Option (Updater):
     Call = 0
     Put = 1
@@ -200,7 +239,6 @@ class Model:
         title = getattr(updater,'_title',None)
         updater._equation = len(self.updaters)-1
         updater._state = self.NumStatefulProcesses()-1 if updater.HasState() else None
-#        updater._eq = self.NumStatefulProcesses()-1
         self._titles[updater._state] = title
         return updater
     def NumStatefulProcesses (self):
@@ -214,8 +252,17 @@ class Result:
         self.mean = mean
         self.stddev = stddev
         self.skewness = skewness
-    def MeanError (self):
+    def GetMean (self):
+        return self.mean
+    def GetMeanError (self):
         return None if self.stddev is None else self.stddev/math.sqrt(self.n)
+    def MeanError (self):
+        print('Result.MeanError() is depricated, please use Result.GetMeanError()')
+        return self.GetMeanError()
+    def GetStdDev (self):
+        return self.stddev
+    def GetSkewness (self):
+        return self.skewness
     def __str__ (self):
         return f'n={self.n} mean={self.mean} +/- {self.MeanError()}'
     def __repr__ (self):
