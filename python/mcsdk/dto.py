@@ -212,12 +212,12 @@ class Barrier (Updater):
         )
 
 class Multiplication (Updater):
-    def __init__ (self, start:float, refs:List[int], title:str=''):
+    def __init__ (self, refs:List[int], factor:float=1, title:str=''):
         Updater.__init__ (
             self,
             name  = 'Multiplication',
-            start = start,
             refs = refs,
+            args = [factor],
             _title = title
         )
 
