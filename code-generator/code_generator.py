@@ -54,7 +54,7 @@ class FunctionDeclaration (Generator):
 
     def _add_statemenets (self, language):
         if language=='python' and not self.statements:
-            return ['pass']
+            return [f'{indent}pass']
         code = []
         for statement in self.statements:
             if type(statement)==str:
