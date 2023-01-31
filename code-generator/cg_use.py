@@ -1,4 +1,5 @@
 from cg import *
+from math import nan
 
 if __name__ == '__main__':
 
@@ -12,7 +13,7 @@ if __name__ == '__main__':
     obj.attributes.append(Variable('start','string',None))
     obj.attributes.append(Variable('nargs_min','int',None))
     obj.attributes.append(Variable('nrefs_min','int',None))
-    obj.methods.append(Function (obj.name,''))
+    obj.methods.append(Function (obj.name,'ctor-all-attributes'))
     objs.append(obj)
 
     obj = Struct('UpdaterDto')
@@ -20,20 +21,33 @@ if __name__ == '__main__':
     obj.attributes.append(Variable('refs','int[]',None))
     obj.attributes.append(Variable('args','float[]',None))
     obj.attributes.append(Variable('start','float',None))
-    obj.methods.append(Function (obj.name,''))
+    obj.methods.append(Function (obj.name,'ctor-all-attributes'))
     objs.append(obj)
     UpdaterDto = obj
 
     obj = Struct('Updater',UpdaterDto)
     obj.attributes.append(Variable('_equation','int',-1))
     obj.attributes.append(Variable('_state','int',-1))
-    obj.methods.append(Function (obj.name,''))
+    obj.methods.append(Function (obj.name,'ctor-all-attributes'))
     objs.append(obj)
-    Updater = obj
 
-    obj = Struct('UpdaterDerived',Updater)
-    obj.attributes.append(Variable('__ok','string','aaaaa!'))
-    obj.methods.append(Function (obj.name,''))
+    obj = Struct('HistogramAxis')
+    obj.attributes.append(Variable('state','int',-1))
+    obj.attributes.append(Variable('nbins','int',0))
+    obj.attributes.append(Variable('min','float',nan))
+    obj.attributes.append(Variable('max','float',nan))
+    obj.methods.append(Function (obj.name,'ctor-all-attributes'))
+    objs.append(obj)
+
+    obj = Struct('Histogram1D')
+    obj.attributes.append(Variable('x','HistogramAxis',None))
+    obj.methods.append(Function (obj.name,'ctor-all-attributes'))
+    objs.append(obj)
+
+    obj = Struct('Histogram1D')
+    obj.attributes.append(Variable('x','HistogramAxis',None))
+    obj.attributes.append(Variable('y','HistogramAxis',None))
+    obj.methods.append(Function (obj.name,'ctor-all-attributes'))
     objs.append(obj)
 
     for language in ('python','cpp','typescript'):

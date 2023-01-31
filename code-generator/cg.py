@@ -1,4 +1,5 @@
 from collections import namedtuple
+import math
 
 indent = ' '*4
 
@@ -10,32 +11,50 @@ ext = {
     'typescript' : 'ts'
 }
 
-typescript_types = {
-    ''       : '',
-    'string' : 'string',
-    'int'    : 'number',
-    'int[]'  : 'number[]',
-    'float'  : 'number',
-    'float[]': 'number[]',
-}
+def typescript_type (name:str):
+    return {
+        ''       : '',
+        'string' : 'string',
+        'int'    : 'number',
+        'int[]'  : 'number[]',
+        'float'  : 'number',
+        'float[]': 'number[]',
+    }.get(name,name)
 
-cpp_types = {
-    ''       : '',
-    'void'   : 'void',
-    'string' : 'std::string',
-    'int'    : 'int',
-    'int[]'  : 'std::vector<int>',
-    'float'  : 'float',
-    'float[]': 'std::vector<float>',
-}
+def typescript_value (arg):
+    if type(arg)==float:
+        if math.isnan(arg):
+            return 'Number.NaN'
+    return arg
 
-python_types = {
-    'string' : 'str',
-    'int'    : 'int',
-    'int[]'  : 'list[int]',
-    'float'  : 'float',
-    'float[]': 'list[float]',
-}
+def cpp_type (name:str):
+    return {
+        ''       : '',
+        'void'   : 'void',
+        'string' : 'std::string',
+        'int'    : 'int',
+        'int[]'  : 'std::vector<int>',
+        'float'  : 'float',
+        'float[]': 'std::vector<float>',
+    }.get(name,name)
+
+def cpp_value (arg):
+    if type(arg)==float:
+        if math.isnan(arg):
+            return 'NAN'
+    return arg
+
+def python_type (name:str):
+    return {
+        'string' : 'str',
+        'int'    : 'int',
+        'int[]'  : 'list[int]',
+        'float'  : 'float',
+        'float[]': 'list[float]',
+    }.get(name,name)
+
+def python_value (arg):
+    return str(arg)
 
 class Struct:
     '''Holds info on a structure.
@@ -78,7 +97,10 @@ def Function_python(self:Function, obj:Struct=None):
 
     attributes = []
     if ctor:
-        attributes = obj.GetAllAttributes()
+        if self.type == 'ctor-all-attributes':
+            attributes = obj.GetAllAttributes()
+        else:
+            raise Exception(f'not supported: ctor type "{self.type}"')
     else:
         attributes = self.args
 
@@ -87,7 +109,8 @@ def Function_python(self:Function, obj:Struct=None):
 
     args_code = [f'{indent}self']
     for a in attributes:
-        args_code.append(f'{indent}{a.name} : {python_types[a.type]}')
+        default = '' if a.defval is None else f' = {python_value(a.defval)}'
+        args_code.append(f'{indent}{a.name} : {python_type(a.type)}{default}')
     for i in range(len(args_code)-1):
         args_code[i] += ','
     code.extend(args_code)
@@ -129,7 +152,7 @@ def Struct_python (self:Struct):
 
 
 def Function_cpp(self:Function, obj:Struct=None):
-    ftype = cpp_types[self.type]+' '
+    ftype = cpp_type(self.type)+' '
     ctor = False
     derived = False
     if obj:
@@ -144,13 +167,17 @@ def Function_cpp(self:Function, obj:Struct=None):
 
     attributes = []
     if ctor:
-        attributes = obj.GetAllAttributes()
+        if self.type == 'ctor-all-attributes':
+            attributes = obj.GetAllAttributes()
+        else:
+            raise Exception(f'not supported: ctor type "{self.type}"')
     else:
         attributes = self.args
 
     args_code = []
     for a in attributes:
-        args_code.append(f'{indent}{cpp_types[a.type]} {a.name}')
+        default = '' if a.defval is None else f' = {cpp_value(a.defval)}'
+        args_code.append(f'{indent}{cpp_type(a.type)} {a.name}{default}')
     for i in range(len(args_code)-1):
         args_code[i] += ','
     code.extend(args_code)
@@ -185,7 +212,7 @@ def Struct_cpp (self:Struct):
     code.append(f'')
     
     for a in self.attributes:
-        code.append(f'{indent}{cpp_types[a.type]} {a.name};')
+        code.append(f'{indent}{cpp_type(a.type)} {a.name};')
 
     code.append('')
 
@@ -214,13 +241,17 @@ def Function_typescript (self:Function, obj:Struct=None):
 
     attributes = []
     if ctor:
-        attributes = obj.GetAllAttributes()
+        if self.type == 'ctor-all-attributes':
+            attributes = obj.GetAllAttributes()
+        else:
+            raise Exception(f'not supported: ctor type "{self.type}"')
     else:
         attributes = self.args
 
     args_code = []
     for a in attributes:
-        args_code.append(f'{indent}{a.name} : {typescript_types[a.type]}')
+        default = '' if a.defval is None else f' = {typescript_value(a.defval)}'
+        args_code.append(f'{indent}{a.name} : {typescript_type(a.type)}{default}')
     for i in range(len(args_code)-1):
         args_code[i] += ','
     code.extend(args_code)
@@ -250,7 +281,7 @@ def Struct_typescript (self:Struct):
     code.append('')
     
     for a in self.attributes:
-        code.append(f'{indent}{a.name} : {typescript_types[a.type]};')
+        code.append(f'{indent}{a.name} : {typescript_type(a.type)};')
 
     code.append('')
 
@@ -271,12 +302,14 @@ def File_prefix_cpp (objs):
         '',
         '#include <string>',
         '#include <vector>',
+        '#include <cmath> // NAN',
         ''
     ]
 
 def File_prefix_python (objs):
     return [
         f'# {autogen_text}',
+        'from math import nan',
         ''
     ]
 
