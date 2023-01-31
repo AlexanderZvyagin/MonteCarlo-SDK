@@ -42,12 +42,13 @@ class Struct:
     
     Should contain info enough to generate code for all languages.
     '''
-    def __init__ (self, name:str):
+    def __init__ (self, name:str, base=None):
         self.name = name
         self.attributes = []
         self.methods = []
+        self.base = base # Struct
     def __repr__ (self):
-        return f"Struct('{self.name}') #attributes={len(self.attributes)} #methods={len(self.methods)}"
+        return f"Struct('{self.name}',base={self.base}) #attributes={len(self.attributes)} #methods={len(self.methods)}"
 
 class Function:
     def __init__ (self, name:str, type:str, args=[]):
@@ -75,17 +76,32 @@ def Function_python(self:Function, obj:Struct=None):
         args_code[i] += ','
     code.extend(args_code)
 
-
     code.append('):')
     if ctor:
-        for a in obj.attributes:
-            code.append(f'{indent}self.{a.name} = {a.name}')
+        if obj.base:
+            super_args = []
+            code_init = []
+            for a in obj.attributes:
+                if a.name in [v.name for v in obj.base.attributes]:
+                    super_args.append(a.name)
+                else:
+                    code_init.append(f'{indent}self.{a.name} = {a.name}')
+            code.append(f'{indent}super().__init({",".join(super_args)})')
+            code.extend(code_init)
+        else:
+            for a in obj.attributes:
+                code.append(f'{indent}self.{a.name} = {a.name}')
+    else:
+        print('no code')
 
     return code
 
 def Struct_python (self:Struct):
     code = []
-    code.append(f'class {self.name}:')
+    if self.base:
+        code.append(f'class {self.name} ({self.base.name}):')
+    else:
+        code.append(f'class {self.name}:')
     code.append('')
     
     for func in self.methods:
@@ -119,13 +135,18 @@ def Function_cpp(self:Function, obj:Struct=None):
     if ctor:
         for a in obj.attributes:
             code.append(f'{indent}this->{a.name} = {a.name};')
+    else:
+        print('no code')
     code.append('}')
 
     return code
 
 def Struct_cpp (self:Struct):
     code = []
-    code.append(f'class {self.name} {{')
+    if self.base:
+        code.append(f'class {self.name}: public {self.base.name} {{')
+    else:
+        code.append(f'class {self.name} {{')
     code.append(f'public:')
     code.append(f'')
     
@@ -165,6 +186,8 @@ def Function_typescript (self:Function, obj:Struct=None):
     if ctor:
         for a in obj.attributes:
             code.append(f'{indent}this.{a.name} = {a.name};')
+    else:
+        print('no code')
 
     code.append('}')
 
@@ -172,7 +195,10 @@ def Function_typescript (self:Function, obj:Struct=None):
 
 def Struct_typescript (self:Struct):
     code = []
-    code.append(f'class {self.name} {{')
+    if self.base:
+        code.append(f'class {self.name} extends {self.base.name} {{')
+    else:
+        code.append(f'class {self.name} {{')
     code.append('')
     
     for a in self.attributes:
@@ -244,7 +270,7 @@ def test_UpdaterDoc():
 
 def test_files ():
 
-    fname = 'dto'
+    fname = 'output/dto'
     objs = [] # objects in the file
 
     obj = Struct('UpdaterDoc')
@@ -262,6 +288,17 @@ def test_files ():
     obj.attributes.append(Variable('refs','int[]',None))
     obj.attributes.append(Variable('args','float[]',None))
     obj.attributes.append(Variable('start','float',None))
+    obj.methods.append(Function (obj.name,''))
+    objs.append(obj)
+    UpdaterDto = obj
+
+    obj = Struct('Updater',UpdaterDto)
+    # obj.attributes.append(Variable('name','string',None))
+    # obj.attributes.append(Variable('refs','int[]',None))
+    # obj.attributes.append(Variable('args','float[]',None))
+    # obj.attributes.append(Variable('start','float',None))
+    obj.attributes.append(Variable('_equation','int',-1))
+    obj.attributes.append(Variable('_state','int',-1))
     obj.methods.append(Function (obj.name,''))
     objs.append(obj)
 
