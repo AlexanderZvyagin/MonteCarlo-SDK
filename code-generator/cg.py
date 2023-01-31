@@ -49,6 +49,13 @@ class Struct:
         self.base = base # Struct
     def __repr__ (self):
         return f"Struct('{self.name}',base={self.base}) #attributes={len(self.attributes)} #methods={len(self.methods)}"
+    def GetAllAttributes (self):
+        attrs = []
+        this = self
+        while this:
+            attrs = [a for a in this.attributes] + attrs
+            this = this.base
+        return attrs
 
 class Function:
     def __init__ (self, name:str, type:str, args=[]):
@@ -61,16 +68,25 @@ class Function:
 def Function_python(self:Function, obj:Struct=None):
     fname = self.name
     ctor = False
+    derived = False
     if obj:
+        derived = obj.base is not None
         if self.name==obj.name:
             fname = '__init__'
             ctor = True
             assert len(self.args)==0
 
+    attributes = []
+    if ctor:
+        attributes = obj.GetAllAttributes()
+    else:
+        attributes = self.args
+
     code = []
     code.append(f'def {fname}(')
+
     args_code = [f'{indent}self']
-    for a in (obj.attributes if ctor else self.args):
+    for a in attributes:
         args_code.append(f'{indent}{a.name} : {python_types[a.type]}')
     for i in range(len(args_code)-1):
         args_code[i] += ','
@@ -78,11 +94,11 @@ def Function_python(self:Function, obj:Struct=None):
 
     code.append('):')
     if ctor:
-        if obj.base:
+        if derived:
             super_args = []
             code_init = []
-            for a in obj.attributes:
-                if a.name in [v.name for v in obj.base.attributes]:
+            for a in obj.GetAllAttributes():
+                if a.name in [v.name for v in obj.base.GetAllAttributes()]:
                     super_args.append(a.name)
                 else:
                     code_init.append(f'{indent}self.{a.name} = {a.name}')
@@ -127,10 +143,8 @@ def Function_cpp(self:Function, obj:Struct=None):
     code.append(f'{ftype}{self.name}(')
 
     attributes = []
-    if ctor and obj.base:
-        attributes = obj.base.attributes + obj.attributes
-    elif ctor:
-        attributes = obj.attributes
+    if ctor:
+        attributes = obj.GetAllAttributes()
     else:
         attributes = self.args
 
@@ -141,11 +155,10 @@ def Function_cpp(self:Function, obj:Struct=None):
         args_code[i] += ','
     code.extend(args_code)
 
-
     if derived:
         code.append(f') : {obj.base.name} (')
         args_code = []
-        for a in obj.base.attributes:
+        for a in obj.base.GetAllAttributes():
             args_code.append(f'{indent}{a.name}')
         for i in range(len(args_code)-1):
             args_code[i] += ','
@@ -200,10 +213,8 @@ def Function_typescript (self:Function, obj:Struct=None):
 
 
     attributes = []
-    if ctor and obj.base:
-        attributes = obj.base.attributes + obj.attributes
-    elif ctor:
-        attributes = obj.attributes
+    if ctor:
+        attributes = obj.GetAllAttributes()
     else:
         attributes = self.args
 
@@ -219,28 +230,12 @@ def Function_typescript (self:Function, obj:Struct=None):
     if derived:
         code.append(f'{indent}super (')
         args_code = []
-        for a in obj.base.attributes:
+        for a in obj.base.GetAllAttributes():
             args_code.append(f'{indent*2}{a.name}')
         for i in range(len(args_code)-1):
             args_code[i] += ','
         code.extend(args_code)
         code.append(f'{indent})')
-
-
-    # args_code = []
-    # for a in (obj.attributes if ctor else self.args):
-    #     args_code.append(f'{indent}{a.name} : {typescript_types[a.type]}')
-    # for i in range(len(args_code)-1):
-    #     args_code[i] += ','
-    # code.extend(args_code)
-
-    # code.append('){')
-
-    # if ctor:
-    #     for a in obj.attributes:
-    #         code.append(f'{indent}this.{a.name} = {a.name};')
-    # else:
-    #     print('no code')
 
     code.append('}')
 
@@ -300,116 +295,6 @@ def File_suffix_typescript (objs):
     code.append('}')
     return code
 
-def test_main ():
-
-    function = 'Struct'
-    obj = Struct('ABC')
-    obj.attributes.append(Variable('TimeSteps','int',1))
-
-    obj.methods.append(Function (obj.name,'void'))
-    obj.methods.append(Function ('Add','float',[Variable('x','float',None),Variable('y','float',None)]))
-
-    for language in ('python','cpp','typescript'):
-        name = f'{function}_{language}'
-        f = globals().get(name)
-        if not f:
-            print(f'Not found: "{name}"')
-            continue
-
-        for line in f(obj):
-            print(line)
-
-def test_UpdaterDoc():
-
-    function = 'Struct'
-    obj = Struct('UpdaterDoc')
-    obj.attributes.append(Variable('name','string',None))
-    obj.attributes.append(Variable('title','string',None))
-    obj.attributes.append(Variable('doc_md','string',None))
-    obj.attributes.append(Variable('start','string',None))
-    obj.attributes.append(Variable('nargs_min','int',None))
-    obj.attributes.append(Variable('nrefs_min','int',None))
-
-    obj.methods.append(Function (obj.name,''))
-    # obj.methods.append(Function ('Add','float',[Variable('x','float',None),Variable('y','float',None)]))
-
-    fname = '1'
-
-    for language in ('python','cpp','typescript'):
-        print('************************************************')
-        print(f'*** {language} ***')
-        print('************************************************')
-        name = f'{function}_{language}'
-        f = globals().get(name)
-        if not f:
-            print(f'Not found: "{name}"')
-            continue
-
-        with open(fname+'.'+ext[language],'w') as file:
-            
-            for line in f(obj):
-                print(line)
-                file.write(line+'\n')
-
-
-
-def test_files ():
-
-    fname = 'output/dto'
-    objs = [] # objects in the file
-
-    obj = Struct('UpdaterDoc')
-    obj.attributes.append(Variable('name','string',None))
-    obj.attributes.append(Variable('title','string',None))
-    obj.attributes.append(Variable('doc_md','string',None))
-    obj.attributes.append(Variable('start','string',None))
-    obj.attributes.append(Variable('nargs_min','int',None))
-    obj.attributes.append(Variable('nrefs_min','int',None))
-    obj.methods.append(Function (obj.name,''))
-    objs.append(obj)
-
-    obj = Struct('UpdaterDto')
-    obj.attributes.append(Variable('name','string',None))
-    obj.attributes.append(Variable('refs','int[]',None))
-    obj.attributes.append(Variable('args','float[]',None))
-    obj.attributes.append(Variable('start','float',None))
-    obj.methods.append(Function (obj.name,''))
-    objs.append(obj)
-    UpdaterDto = obj
-
-    obj = Struct('Updater',UpdaterDto)
-    obj.attributes.append(Variable('_equation','int',-1))
-    obj.attributes.append(Variable('_state','int',-1))
-    obj.methods.append(Function (obj.name,''))
-    objs.append(obj)
-
-    for language in ('python','cpp','typescript'):
-        write_objs(fname,language,objs)
-
-    # for language in ('python','cpp','typescript'):
-    #     with open(fname+'.'+ext[language],'w') as file:
-    #         file_prefix_code = globals().get(f'File_prefix_{language}')
-    #         if file_prefix_code:
-    #             for line in file_prefix_code(objs):
-    #                 file.write(line+'\n')
-    #         for obj in objs:
-    #             if isinstance(obj,Struct):
-    #                 name = f'Struct_{language}'
-    #                 func = globals().get(name)
-    #                 if not func:
-    #                     print(f'Not found: "{name}"')
-    #                     continue
-
-    #                 for line in func(obj):
-    #                     file.write(line+'\n')
-    #             else:
-    #                 print(f'Cannot handle {type(obj)}')
-
-    #         file_suffix_code = globals().get(f'File_suffix_{language}')
-    #         if file_suffix_code:
-    #             for line in file_suffix_code(objs):
-    #                 file.write(line+'\n')
-
 def write_objs(fname:str,language,objs=[]):
     '''fname: full path name without extension, the file will be overwritten. the directory path must exist.'''
     with open(fname+'.'+ext[language],'w') as file:
@@ -434,6 +319,3 @@ def write_objs(fname:str,language,objs=[]):
         if file_suffix_code:
             for line in file_suffix_code(objs):
                 file.write(line+'\n')
-
-if __name__ == '__main__':
-    test_files()
