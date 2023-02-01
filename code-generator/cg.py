@@ -13,7 +13,6 @@ ext = {
 
 def typescript_type (name:str):
     return {
-        ''       : '',
         'string' : 'string',
         'int'    : 'number',
         'int[]'  : 'number[]',
@@ -29,7 +28,6 @@ def typescript_value (arg):
 
 def cpp_type (name:str):
     return {
-        ''       : '',
         'void'   : 'void',
         'string' : 'std::string',
         'int'    : 'int',
@@ -77,12 +75,22 @@ class Struct:
         return attrs
 
 class Function:
-    def __init__ (self, name:str, type:str, args=[]):
+    def __init__ (self, name:str, type:str, args=[],body_language={}):
+        '''body_language: dictionary of language:str=>list[str]'''
         self.name = name
         self.type = type
         self.args = args
+        self.body_language = body_language
     def __repr__ (self):
         return f"Function('{self.name}','{self.type}',{self.args})"
+
+def get_body (body):
+    if body is None:
+        return []
+    elif type(body)==str:
+        return body.split('\n')
+    else:
+        return body
 
 def Function_python(self:Function, obj:Struct=None):
     fname = self.name
@@ -105,7 +113,7 @@ def Function_python(self:Function, obj:Struct=None):
         attributes = self.args
 
     code = []
-    code.append(f'def {fname}(')
+    code.append(f'def {fname} (')
 
     args_code = [f'{indent}self']
     for a in attributes:
@@ -125,13 +133,14 @@ def Function_python(self:Function, obj:Struct=None):
                     super_args.append(a.name)
                 else:
                     code_init.append(f'{indent}self.{a.name} = {a.name}')
-            code.append(f'{indent}super().__init({",".join(super_args)})')
+            code.append(f'{indent}super().__init__({",".join(super_args)})')
             code.extend(code_init)
         else:
             for a in obj.attributes:
                 code.append(f'{indent}self.{a.name} = {a.name}')
     else:
-        print('no code')
+        for line in get_body(self.body_language.get('python')):
+            code.append(f'{indent}{line}')
 
     return code
 
@@ -150,7 +159,6 @@ def Struct_python (self:Struct):
 
     return code
 
-
 def Function_cpp(self:Function, obj:Struct=None):
     ftype = cpp_type(self.type)+' '
     ctor = False
@@ -163,7 +171,7 @@ def Function_cpp(self:Function, obj:Struct=None):
             assert len(self.args)==0
 
     code = []
-    code.append(f'{ftype}{self.name}(')
+    code.append(f'{ftype}{self.name} (')
 
     attributes = []
     if ctor:
@@ -182,7 +190,7 @@ def Function_cpp(self:Function, obj:Struct=None):
         args_code[i] += ','
     code.extend(args_code)
 
-    if derived:
+    if derived and ctor:
         code.append(f') : {obj.base.name} (')
         args_code = []
         for a in obj.base.GetAllAttributes():
@@ -197,7 +205,9 @@ def Function_cpp(self:Function, obj:Struct=None):
         for a in obj.attributes:
             code.append(f'{indent}this->{a.name} = {a.name};')
     else:
-        print('no code')
+        for line in get_body(self.body_language.get('cpp')):
+            code.append(f'{indent}{line}')
+
     code.append('}')
 
     return code
@@ -234,10 +244,12 @@ def Function_typescript (self:Function, obj:Struct=None):
             fname = 'constructor'
             ctor = True
             assert len(self.args)==0
+            ftype = ''
+        else:
+            ftype = f': {typescript_type(self.type)} '
 
     code = []
-    code.append(f'{fname}(')
-
+    code.append(f'{fname} (')
 
     attributes = []
     if ctor:
@@ -256,9 +268,9 @@ def Function_typescript (self:Function, obj:Struct=None):
         args_code[i] += ','
     code.extend(args_code)
 
-    code.append('){')
+    code.append(f') {ftype}{{')
 
-    if derived:
+    if derived and ctor:
         code.append(f'{indent}super (')
         args_code = []
         for a in obj.base.GetAllAttributes():
@@ -267,6 +279,9 @@ def Function_typescript (self:Function, obj:Struct=None):
             args_code[i] += ','
         code.extend(args_code)
         code.append(f'{indent})')
+    if not ctor:
+        for line in get_body(self.body_language.get('typescript')):
+            code.append(f'{indent}{line}')
 
     code.append('}')
 
@@ -302,6 +317,7 @@ def File_prefix_cpp (objs):
         '',
         '#include <string>',
         '#include <vector>',
+        '#include <stdexcept>',
         '#include <cmath> // NAN',
         ''
     ]
