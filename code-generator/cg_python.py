@@ -4,6 +4,7 @@ def File_prefix_python (objs):
     return [
         f'# {autogen_text}',
         'from math import nan',
+        'import json',
         ''
     ]
 
@@ -42,7 +43,9 @@ def Function_python(self:Function, obj:Struct=None):
     code = []
     code.append(f'def {fname} (')
 
-    args_code = [f'{indent}self']
+    args_code = []
+    if obj:
+        args_code.append(f'{indent}self')
     for a in attributes:
         default = '' if a.defval is None else f' = {python_value(a.defval)}'
         args_code.append(f'{indent}{a.name} : {python_type(a.type)}{default}')
@@ -85,3 +88,10 @@ def Struct_python (self:Struct):
         code.append('')
     
     return code
+
+def Struct_to_JSON_python (self):
+    print('This is Struct_to_JSON_python for',self)
+    return [
+        f'def {self.name}_to_JSON (self):',
+        f"{indent}return json.dumps(self,default=lambda o: {{k:v for k,v in o.__dict__.items() if k[0]!='_'}})"
+    ]

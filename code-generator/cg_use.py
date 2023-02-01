@@ -74,5 +74,22 @@ return self._state
     obj.methods.append(Function (obj.name,'ctor-all-attributes'))
     objs.append(obj)
 
+    objs.append(Function (
+        'test_1',
+        'void',
+        body_language = {
+            'typescript':
+'''
+''',
+            'cpp':
+'''
+''',
+            'python':
+'''
+pass
+'''
+        }
+    ))
+
     for language in ('python','cpp','typescript'):
         write_objs(fname,language,objs)

@@ -18,6 +18,7 @@ def File_suffix_typescript (objs):
 
 def typescript_type (name:str):
     return {
+        'void'   : 'void',
         'string' : 'string',
         'int'    : 'number',
         'int[]'  : 'number[]',
@@ -35,6 +36,7 @@ def Function_typescript (self:Function, obj:Struct=None):
     fname = self.name
     ctor = False
     derived = False
+    ftype = self.type
     if obj:
         derived = obj.base is not None
         if self.name==obj.name:
@@ -46,7 +48,10 @@ def Function_typescript (self:Function, obj:Struct=None):
             ftype = f': {typescript_type(self.type)} '
 
     code = []
-    code.append(f'{fname} (')
+    if obj:
+        code.append(f'{fname} (')
+    else:
+        code.append(f'function {fname} (')
 
     attributes = []
     if ctor:
