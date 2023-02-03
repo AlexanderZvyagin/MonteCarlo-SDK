@@ -1,3 +1,7 @@
+# This file can be (and should be) imported
+# by all language-specific implementations.
+
+import asyncio, sys
 from collections import namedtuple
 
 indent = ' '*4
@@ -26,19 +30,34 @@ class Struct:
         return attrs
 
 class Function:
-    def __init__ (self, name:str, type:str, args=[],body_language={}):
-        '''body_language: dictionary of language:str=>list[str]'''
+    def __init__ (self, name:str, type:str, args=[], lines={}):
+        '''lines: dictionary of language:str=>list[str]'''
         self.name = name
         self.type = type
         self.args = args
-        self.body_language = body_language
+        self.lines = lines
     def __repr__ (self):
         return f"Function('{self.name}','{self.type}',{self.args})"
 
-def get_body (body):
+def get_lines (body):
     if body is None:
         return []
     elif type(body)==str:
         return body.split('\n')
     else:
         return body
+
+async def run(cmd):
+    proc = await asyncio.create_subprocess_shell(
+        cmd,
+        stdout=asyncio.subprocess.PIPE,
+        stderr=asyncio.subprocess.PIPE)
+
+    stdout, stderr = await proc.communicate()
+
+    print(f'[{cmd!r} exited with {proc.returncode}]')
+    assert proc.returncode==0
+    if stdout:
+        print(f'[stdout]\n{stdout.decode()}')
+    if stderr:
+        print(f'[stderr]\n{stderr.decode()}')

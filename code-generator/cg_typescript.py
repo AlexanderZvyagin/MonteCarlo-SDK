@@ -82,7 +82,7 @@ def Function_typescript (self:Function, obj:Struct=None):
         code.extend(args_code)
         code.append(f'{indent})')
     if not ctor:
-        for line in get_body(self.body_language.get('typescript')):
+        for line in get_lines(self.lines.get('typescript')):
             code.append(f'{indent}{line}')
 
     code.append('}')
@@ -110,3 +110,6 @@ def Struct_typescript (self:Struct):
     code.append(f'}}')
     code.append('')
     return code
+
+def typescript_run_test(fname):
+    asyncio.run(run(f'tsc {fname}'))

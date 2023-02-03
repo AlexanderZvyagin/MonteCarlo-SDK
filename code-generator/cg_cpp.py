@@ -63,7 +63,7 @@ def Function_cpp(self:Function, obj:Struct=None):
         for a in obj.attributes:
             code.append(f'{indent}this->{a.name} = {a.name};')
     else:
-        for line in get_body(self.body_language.get('cpp')):
+        for line in get_lines(self.lines.get('cpp')):
             code.append(f'{indent}{line}')
 
     code.append('}')
@@ -103,3 +103,6 @@ def File_prefix_cpp (objs):
         '#include <cmath> // NAN',
         ''
     ]
+
+def cpp_run_test(fname):
+    asyncio.run(run(f'g++ {fname} -o {fname}.exe && {fname}.exe'))

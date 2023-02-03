@@ -69,7 +69,7 @@ def Function_python(self:Function, obj:Struct=None):
             for a in obj.attributes:
                 code.append(f'{indent}self.{a.name} = {a.name}')
     else:
-        for line in get_body(self.body_language.get('python')):
+        for line in get_lines(self.lines.get('python')):
             code.append(f'{indent}{line}')
 
     return code
@@ -95,3 +95,6 @@ def Struct_to_JSON_python (self):
         f'def {self.name}_to_JSON (self):',
         f"{indent}return json.dumps(self,default=lambda o: {{k:v for k,v in o.__dict__.items() if k[0]!='_'}})"
     ]
+
+def python_run_test(fname):
+    asyncio.run(run(f'pytest {fname}'))
