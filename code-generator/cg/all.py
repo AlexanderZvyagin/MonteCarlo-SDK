@@ -1,7 +1,7 @@
 # This file can be (and should be) imported
 # by all language-specific implementations.
 
-import asyncio, sys
+import asyncio
 from collections import namedtuple
 
 indent = ' '*4

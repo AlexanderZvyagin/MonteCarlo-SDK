@@ -1,4 +1,4 @@
-from cg_all import *
+from .all import *
 
 def File_prefix_python (objs):
     return [

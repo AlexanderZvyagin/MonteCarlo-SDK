@@ -1,4 +1,4 @@
-from cg_all import *
+from .all import *
 import math
 
 def File_prefix_typescript (objs):

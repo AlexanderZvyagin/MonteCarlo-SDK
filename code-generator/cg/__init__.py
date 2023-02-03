@@ -1,8 +1,8 @@
 import math
-from cg_all import *
-from cg_python import *
-from cg_typescript import *
-from cg_cpp import *
+from .all import *
+from .python import *
+from .typescript import *
+from .cpp import *
 
 ext = {
     'cpp' : 'cpp',

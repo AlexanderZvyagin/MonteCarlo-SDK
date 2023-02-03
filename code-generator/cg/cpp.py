@@ -1,4 +1,4 @@
-from cg_all import *
+from .all import *
 import math
 
 def cpp_type (name:str):
