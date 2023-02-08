@@ -42,7 +42,6 @@ def Function_typescript (self:Function, obj:Struct=None):
         if self.name==obj.name:
             fname = 'constructor'
             ctor = True
-            assert len(self.args)==0
             ftype = ''
         else:
             ftype = f': {typescript_type(self.type)} '
@@ -56,9 +55,12 @@ def Function_typescript (self:Function, obj:Struct=None):
     attributes = []
     if ctor:
         if self.type == 'ctor-all-attributes':
+            assert len(self.args)==0
             attributes = obj.GetAllAttributes()
+        elif self.type == 'ctor-special':
+            attributes = self.args
         else:
-            raise Exception(f'not supported: ctor type "{self.type}"')
+            print(f'not supported: ctor type "{self.type}"')
     else:
         attributes = self.args
 
@@ -72,7 +74,7 @@ def Function_typescript (self:Function, obj:Struct=None):
 
     code.append(f') {ftype}{{')
 
-    if derived and ctor:
+    if derived and self.type == 'ctor-all-attributes':
         code.append(f'{indent}super (')
         args_code = []
         for a in obj.base.GetAllAttributes():
@@ -81,9 +83,8 @@ def Function_typescript (self:Function, obj:Struct=None):
             args_code[i] += ','
         code.extend(args_code)
         code.append(f'{indent})')
-    if not ctor:
-        for line in get_lines(self.lines.get('typescript')):
-            code.append(f'{indent}{line}')
+    for line in get_lines(self.lines.get('typescript')):
+        code.append(f'{indent}{line}')
 
     code.append('}')
 

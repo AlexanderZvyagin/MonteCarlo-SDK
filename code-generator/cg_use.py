@@ -12,7 +12,26 @@ def create_dto(fname, languages):
     obj.attributes.append(Variable('start','string',None))
     obj.attributes.append(Variable('nargs_min','int',None))
     obj.attributes.append(Variable('nrefs_min','int',None))
-    obj.methods.append(Function (obj.name,'ctor-all-attributes'))
+    obj.methods.append(Function (
+        obj.name,
+        'constructor',
+        args = [
+            Variable('name','string',None),
+            Variable('title','string',None),
+            Variable('doc_md','string',None),
+            Variable('start','string',None),
+            Variable('nargs_min','int',None),
+            Variable('nrefs_min','int',None)
+        ],
+        mapping = [
+            ('name',[('name',Variable('name'))]),
+            ('title',[('title',Variable('title'))]),
+            ('doc_md',[('doc_md',Variable('doc_md'))]),
+            ('start',[('start',Variable('start'))]),
+            ('nargs_min',[('nargs_min',Variable('nargs_min'))]),
+            ('nrefs_min',[('nrefs_min',Variable('nrefs_min'))]),
+        ]
+    ))
     objs.append(obj)
 
     obj = Struct('UpdaterDto')
@@ -20,14 +39,46 @@ def create_dto(fname, languages):
     obj.attributes.append(Variable('refs','int[]',None))
     obj.attributes.append(Variable('args','float[]',None))
     obj.attributes.append(Variable('start','float',None))
-    obj.methods.append(Function (obj.name,'ctor-all-attributes'))
+    obj.methods.append(Function (
+        obj.name,
+        'constructor',
+        args = [
+            Variable('name','string',None),
+            Variable('refs','int[]',None),
+            Variable('args','float[]',None),
+            Variable('start','float',None)
+        ],
+        mapping = [
+            ('name',[('name',Variable('name'))]),
+            ('refs',[('refs',Variable('refs'))]),
+            ('args',[('args',Variable('args'))]),
+            ('start',[('start',Variable('start'))]),
+        ]
+    ))
     objs.append(obj)
     UpdaterDto = obj
 
     obj = Struct('Updater',UpdaterDto)
     obj.attributes.append(Variable('_equation','int',-1))
     obj.attributes.append(Variable('_state','int',-1))
-    obj.methods.append(Function (obj.name,'ctor-all-attributes'))
+    obj.methods.append(Function (
+        obj.name,
+        'constructor',
+        args = [
+            Variable('name','string',None),
+            Variable('refs','int[]',None),
+            Variable('args','float[]',None),
+            Variable('start','float',None)
+        ],
+        mapping = [
+            (obj.base.name,[
+                ('name',Variable('name')),
+                ('refs',Variable('refs')),
+                ('args',Variable('args')),
+                ('start',Variable('start')),
+            ])
+        ]
+    ))
     obj.methods.append(Function (
         'GetStateNumber',
         'int',
@@ -53,37 +104,70 @@ return self._state
         }
     ))
     objs.append(obj)
+    Updater = obj
+
+    # 'Barrier' is an updater with special arguments
+    obj = Struct('Barrier',Updater)
+    obj.methods.append(Function (
+        obj.name,
+        'constructor',
+        args = [
+            Variable('underlying','int'  ,None),
+            Variable('start'     ,'float',None),
+            Variable('level'     ,'float',None),
+            Variable('direction' ,'int'  ,None),
+            Variable('action'    ,'int'  ,None),
+            Variable('value'     ,'float',None),
+        ],
+        lines = {
+            'python':
+'''
+super().__init__('Barrier',[underlying],[level, value, direction, action],start)
+''',
+            'typescript':
+'''
+super('Barrier',[underlying],[level, value, direction, action],start)
+'''
+        },
+        mapping = [(obj.base.name,[
+            ('name','Barrier'),
+            ('refs',[
+                Variable('underlying')
+            ]),
+            ('args',[
+                Variable('level'),
+                Variable('value'),
+                Variable('direction'),
+                Variable('action')
+            ]),
+            ('start',Variable('start'))
+        ])]
+    ))
+    
+    objs.append(obj)
+
 
     obj = Struct('HistogramAxis')
     obj.attributes.append(Variable('state','int',-1))
     obj.attributes.append(Variable('nbins','int',0))
     obj.attributes.append(Variable('min','float',nan))
     obj.attributes.append(Variable('max','float',nan))
-    obj.methods.append(Function (obj.name,'ctor-all-attributes'))
+    obj.methods.append(Function (obj.name,'constructor'))
     objs.append(obj)
 
     obj = Struct('Histogram1D')
     obj.attributes.append(Variable('x','HistogramAxis',None))
-    obj.methods.append(Function (obj.name,'ctor-all-attributes'))
+    obj.methods.append(Function (obj.name,'constructor'))
     objs.append(obj)
 
     obj = Struct('Histogram2D')
     obj.attributes.append(Variable('x','HistogramAxis',None))
     obj.attributes.append(Variable('y','HistogramAxis',None))
-    obj.methods.append(Function (obj.name,'ctor-all-attributes'))
+    obj.methods.append(Function (obj.name,'constructor'))
     objs.append(obj)
 
     for language in languages:
         write_objs(fname,language,objs)
-
-# def create_dto_test(fname, languages):
-#     objs = [] # objects in the file
-
-#     objs.append(File())
-
-
-#     for language in languages:
-#         write_objs(fname,language,objs)
 
 class File:
     def __init__ (self, file_name:str):
@@ -97,35 +181,6 @@ def write_file (f, language):
             for line in get_lines(lines):
                 file.write(line+'\n')
                 
-        # if isinstance(obj,list):
-        #     print('ok, list')
-        # else:
-        #     raise Exception(f'Unsupported type: {type(obj)}')
-
-
-
-# asyncio.run(run('ls /zzz'))
-
-
-
-# def python_run_test(fname):
-#     print(f'python_run_test: {fname}')
-#     asyncio.run(run(f'python3 {fname}'))
-
-
-# def typescript_run_test(fname):
-#     asyncio.run(run(f'npx tsx {fname}'))
-
-
-def run_test(fname,language):
-    # asyncio.run(f'python {fname}')
-    name = f'{language}_run_test'
-    code = globals().get(name)
-    if not code:
-        print(f'Not found: {name}')
-    else:
-        code(fname)
-
 def create_dto_test(fname,languages):
     f = File(fname)
     f.objs.append({
@@ -174,25 +229,3 @@ if __name__ == '__main__':
     languages = ('python','cpp','typescript')
     create_dto('output/dto',languages)
     create_dto_test('output/dto-test',languages)
-    
-    
-
-    # asyncio.run(run('g++ output/dto.test.cpp -o dto.test.cpp.exe && ls'))
-
-#     objs.append(Function (
-#         'test_1',
-#         'void',
-#         body_language = {
-#             'typescript':
-# '''
-# ''',
-#             'cpp':
-# '''
-# ''',
-#             'python':
-# '''
-# pass
-# '''
-#         }
-#     ))
-

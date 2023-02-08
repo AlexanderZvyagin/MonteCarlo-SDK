@@ -7,7 +7,7 @@ from collections import namedtuple
 indent = ' '*4
 autogen_text = 'This is an automatically generated file.'
 
-Variable = namedtuple('Variable',['name','type','defval'])
+Variable = namedtuple('Variable',['name','type','defval'],defaults=['',None,None])
 
 class Struct:
     '''Holds info on a structure.
@@ -29,13 +29,46 @@ class Struct:
             this = this.base
         return attrs
 
+class CodeBlock:
+    def __init__ (self, code={}):
+        self.code = code
+
+# class FunctionCall:
+#     def __init__ (self, name):
+#         '''
+        
+#         name: function name to call
+#         args: list of argument names
+        
+#         '''
+#         self.code = code
+
 class Function:
-    def __init__ (self, name:str, type:str, args=[], lines={}):
-        '''lines: dictionary of language:str=>list[str]'''
+
+    class Call:
+        '''
+        FunctionCall('myfunc',[1,'arg_string',Variable('aa')])
+        '''
+        def __init__ (self,name:str,args=[]):
+            pass
+
+    class Code:
+        def __init__ (self,code):
+            pass
+
+    def __init__ (self, name:str, type:str, args=[], lines={}, mapping=[]):
+        '''lines: dictionary of language:str=>list[str]
+        
+        mapping: it is an array of (key,value) pairs
+        '''
         self.name = name
         self.type = type
         self.args = args
+
         self.lines = lines
+        self.objs  = [] # Call,Code
+        self.mapping = mapping
+
     def __repr__ (self):
         return f"Function('{self.name}','{self.type}',{self.args})"
 

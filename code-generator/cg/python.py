@@ -5,6 +5,7 @@ def File_prefix_python (objs):
         f'# {autogen_text}',
         'from math import nan',
         'import json',
+        '# 1',
         ''
     ]
 
@@ -29,14 +30,16 @@ def Function_python(self:Function, obj:Struct=None):
         if self.name==obj.name:
             fname = '__init__'
             ctor = True
-            assert len(self.args)==0
 
     attributes = []
     if ctor:
         if self.type == 'ctor-all-attributes':
+            assert len(self.args)==0
             attributes = obj.GetAllAttributes()
+        elif self.type == 'ctor-special':
+            attributes = self.args
         else:
-            raise Exception(f'not supported: ctor type "{self.type}"')
+            print(f'not supported: ctor type "{self.type}"')
     else:
         attributes = self.args
 
@@ -54,7 +57,7 @@ def Function_python(self:Function, obj:Struct=None):
     code.extend(args_code)
 
     code.append('):')
-    if ctor:
+    if self.type == 'ctor-all-attributes':
         if derived:
             super_args = []
             code_init = []
@@ -68,9 +71,8 @@ def Function_python(self:Function, obj:Struct=None):
         else:
             for a in obj.attributes:
                 code.append(f'{indent}self.{a.name} = {a.name}')
-    else:
-        for line in get_lines(self.lines.get('python')):
-            code.append(f'{indent}{line}')
+    for line in get_lines(self.lines.get('python')):
+        code.append(f'{indent}{line}')
 
     return code
 
@@ -90,7 +92,6 @@ def Struct_python (self:Struct):
     return code
 
 def Struct_to_JSON_python (self):
-    print('This is Struct_to_JSON_python for',self)
     return [
         f'def {self.name}_to_JSON (self):',
         f"{indent}return json.dumps(self,default=lambda o: {{k:v for k,v in o.__dict__.items() if k[0]!='_'}})"

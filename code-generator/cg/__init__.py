@@ -41,3 +41,11 @@ def write_objs(fname:str,language,objs=[]):
         if file_suffix_code:
             for line in file_suffix_code(objs):
                 file.write(line+'\n')
+
+def run_test(fname,language):
+    name = f'{language}_run_test'
+    code = globals().get(name)
+    if not code:
+        print(f'Not found: {name}')
+    else:
+        code(fname)
