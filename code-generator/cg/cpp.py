@@ -2,47 +2,42 @@ from .all import *
 import math
 
 def cpp_type (name:str):
+
+    if name[-2:]=='[]':
+        t = cpp_type(name[:-2])
+        return f'std::vector<{t}>'
+
     return {
-        'void'   : 'void',
-        'string' : 'std::string',
-        'int'    : 'int',
-        'int[]'  : 'std::vector<int>',
-        'float'  : 'float',
-        'float[]': 'std::vector<float>',
+        'void'    : 'void',
+        'string'  : 'std::string',
+        'int'     : 'int',
+        'float'   : 'float',
     }.get(name,name)
 
 def cpp_value (arg):
-    if type(arg)==float:
+    if isinstance(arg,list):
+        x = [ f'{item.name}'   for item in arg]
+        y = ','.join(x)
+        return f'{{{y}}}'
+    elif isinstance(arg,str):
+        return f'"{arg}"'
+    elif type(arg)==float:
         if math.isnan(arg):
             return 'NAN'
-    return arg
+        else:
+            return arg
+    else:
+        return arg
 
-# derived ctor
 def Constructor_cpp(ctor:Function,base:Struct):
-    debug = False
     assert ctor.name == base.name
     code = []
     code.append('')
     
-    if debug:
-        for arg in ctor.args:
-            code.append(f'//       {arg}')
-        predecessors = []
-        this = base
-        while this:
-            predecessors.append(this.name)
-            code.append(f'//   {".".join(predecessors)} attributes:')
-            for attr in this.attributes:
-                code.append(f'//       {attr}')
-            this = this.base
-    
-        code.append(f'//   this class attributes which are not present in the ctor args')
-        x = [attr for attr in base.attributes if attr.name not in ctor.args]
-        code.append(f'//     {x}')
-
     code.append(f'{ctor.name} (')
     for i,arg in enumerate(ctor.args):
-        code.append(f'{indent}{cpp_type(arg.type)} {arg.name}{"," if i+1<len(ctor.args) else ""}')
+        defval = '' if arg.defval is None else f' = {cpp_value(arg.defval)}'
+        code.append(f'{indent}{cpp_type(arg.type)} {arg.name}{defval}{"," if i+1<len(ctor.args) else ""}')
     code.append(f')')
 
     for i,(name,mapping) in enumerate(ctor.mapping):
@@ -50,15 +45,8 @@ def Constructor_cpp(ctor:Function,base:Struct):
         for i,(k,v) in enumerate(mapping):
             if isinstance(v,Variable):
                 line = f'{v.name}'
-            elif isinstance(v,list):
-                # x = [ f'({get_type(item.name)}) {item.name}'   for item in v]
-                x = [ f'{item.name}'   for item in v]
-                y = ','.join(x)
-                line = f'{{{y}}}'
-            elif isinstance(v,str):
-                line = f'"{v}"'
             else:
-                line = str(v)
+                line = cpp_value(v)
             code.append(indent + line + (',' if i+1<len(mapping) else ''))
         code.append(')')
 
