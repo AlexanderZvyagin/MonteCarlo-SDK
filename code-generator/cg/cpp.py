@@ -42,7 +42,7 @@ def Constructor_cpp(ctor:Function,base:Struct):
 
     for i,(name,mapping) in enumerate(ctor.mapping):
         code.append(f'{":" if i==0 else ","} {name} (')
-        for i,(k,v) in enumerate(mapping):
+        for i,v in enumerate(mapping):
             if isinstance(v,Variable):
                 line = f'{v.name}'
             else:

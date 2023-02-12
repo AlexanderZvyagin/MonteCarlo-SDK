@@ -24,12 +24,12 @@ def create_dto(fname, languages):
             Variable('nrefs_min','int',None)
         ],
         mapping = [
-            ('name',[('name',Variable('name'))]),
-            ('title',[('title',Variable('title'))]),
-            ('doc_md',[('doc_md',Variable('doc_md'))]),
-            ('start',[('start',Variable('start'))]),
-            ('nargs_min',[('nargs_min',Variable('nargs_min'))]),
-            ('nrefs_min',[('nrefs_min',Variable('nrefs_min'))]),
+            ('name',[Variable('name')]),
+            ('title',[Variable('title')]),
+            ('doc_md',[Variable('doc_md')]),
+            ('start',[Variable('start')]),
+            ('nargs_min',[Variable('nargs_min')]),
+            ('nrefs_min',[Variable('nrefs_min')]),
         ]
     ))
     objs.append(obj)
@@ -49,10 +49,10 @@ def create_dto(fname, languages):
             Variable('start','float',None)
         ],
         mapping = [
-            ('name',[('name',Variable('name'))]),
-            ('refs',[('refs',Variable('refs'))]),
-            ('args',[('args',Variable('args'))]),
-            ('start',[('start',Variable('start'))]),
+            ('name',[Variable('name')]),
+            ('refs',[Variable('refs')]),
+            ('args',[Variable('args')]),
+            ('start',[Variable('start')]),
         ]
     ))
     objs.append(obj)
@@ -70,14 +70,12 @@ def create_dto(fname, languages):
             Variable('args','float[]',None),
             Variable('start','float',None)
         ],
-        mapping = [
-            (obj.base.name,[
-                ('name',Variable('name')),
-                ('refs',Variable('refs')),
-                ('args',Variable('args')),
-                ('start',Variable('start')),
-            ])
-        ]
+        mapping = [(obj.base.name,[
+            Variable('name'),
+            Variable('refs'),
+            Variable('args'),
+            Variable('start'),
+        ])]
     ))
     obj.methods.append(Function (
         'GetStateNumber',
@@ -114,10 +112,10 @@ return self._state
             Variable('refs_','int[]'  ,None),
         ],
         mapping = [(obj.base.name,[
-            ('name','IndependentGaussian'),
-            ('refs',Variable('refs_')),
-            ('args',[]),
-            ('start',nan),
+            'IndependentGaussian',
+            Variable('refs_'),
+            [],
+            nan
         ])]
     ))
     objs.append(obj)
@@ -132,10 +130,10 @@ return self._state
             Variable('state2','int'  ,None),
         ],
         mapping = [(obj.base.name,[
-            ('name','CorrelatedGaussian'),
-            ('refs',[Variable('state1'),Variable('state2')]),
-            ('args',[Variable('correlation')]),
-            ('start',nan),
+            'CorrelatedGaussian',
+            [Variable('state1'),Variable('state2')],
+            [Variable('correlation')],
+            nan,
         ])]
     ))
     objs.append(obj)
@@ -164,17 +162,17 @@ super('Barrier',[underlying],[level, value, direction, action],start)
 '''
         },
         mapping = [(obj.base.name,[
-            ('name','Barrier'),
-            ('refs',[
+            'Barrier',
+            [
                 Variable('underlying')
-            ]),
-            ('args',[
+            ],
+            [
                 Variable('level'),
                 Variable('value'),
                 Variable('direction'),
                 Variable('action')
-            ]),
-            ('start',Variable('start'))
+            ],
+            Variable('start')
         ])]
     ))
     
@@ -192,14 +190,14 @@ super('Barrier',[underlying],[level, value, direction, action],start)
         args = [
             Variable('_state','int',-1),
             Variable('_nbins','int',-1),
-            Variable('_min'  ,'int',nan),
-            Variable('_max'  ,'int',nan),
+            Variable('_min'  ,'float',nan),
+            Variable('_max'  ,'float',nan),
         ],
         mapping = [
-            ('state',[('state',Variable('_state'))]),
-            ('nbins',[('nbins',Variable('_nbins'))]),
-            ('min',[('min',Variable('_min'))]),
-            ('max',[('max',Variable('_max'))]),
+            ('state',[Variable('_state')]),
+            ('nbins',[Variable('_nbins')]),
+            ('min',[Variable('_min')]),
+            ('max',[Variable('_max')]),
         ]
     ))
     objs.append(obj)
@@ -213,7 +211,7 @@ super('Barrier',[underlying],[level, value, direction, action],start)
             Variable('x','HistogramAxis',None),
         ],
         mapping = [('x',[
-            ('x',Variable('x')),
+            Variable('x'),
         ])]
     ))
     objs.append(obj)
@@ -229,8 +227,8 @@ super('Barrier',[underlying],[level, value, direction, action],start)
             Variable('y','HistogramAxis',None),
         ],
         mapping = [
-            ('x',[('x',Variable('x'))]),
-            ('y',[('y',Variable('y'))])
+            ('x',[Variable('x')]),
+            ('y',[Variable('y')])
         ]
     ))
     objs.append(obj)
@@ -245,7 +243,7 @@ super('Barrier',[underlying],[level, value, direction, action],start)
             Variable('x','HistogramAxis',None),
         ],
         mapping = [
-            ('x',[('x',Variable('x'))]),
+            ('x',[Variable('x')]),
         ]
     ))
     obj.methods.append(Function (
@@ -256,8 +254,8 @@ super('Barrier',[underlying],[level, value, direction, action],start)
             Variable('y','HistogramAxis',None),
         ],
         mapping = [
-            ('x',[('x',Variable('x'))]),
-            ('y',[('y',Variable('y'))])
+            ('x',[Variable('x')]),
+            ('y',[Variable('y')])
         ]
     ))
     objs.append(obj)
@@ -277,10 +275,10 @@ super('Barrier',[underlying],[level, value, direction, action],start)
             Variable('error_','float',None),
         ],
         mapping = [
-            ('state',[('state',Variable('state_'))]),
-            ('time',[('time',Variable('time_'))]),
-            ('value',[('value',Variable('value_'))]),
-            ('error',[('error',Variable('error_'))]),
+            ('state',[Variable('state_')]),
+            ('time',[Variable('time_')]),
+            ('value',[Variable('value_')]),
+            ('error',[Variable('error_')]),
         ]
     ))
     objs.append(obj)
@@ -311,10 +309,10 @@ super('Barrier',[underlying],[level, value, direction, action],start)
             Variable('max_','float',None),
         ],
         mapping = [
-            ('value',[('value',Variable('value_'))]),
-            ('step',[('step',Variable('step_'))]),
-            ('min',[('min',Variable('min_'))]),
-            ('max',[('max',Variable('max_'))]),
+            ('value',[Variable('value_')]),
+            ('step',[Variable('step_')]),
+            ('min',[Variable('min_')]),
+            ('max',[Variable('max_')]),
         ]
     ))
     objs.append(obj)
