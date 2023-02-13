@@ -98,6 +98,8 @@ def Struct_cpp (self:Struct):
             code.append(f'{indent}{line}')
         code.append('')
 
+    code.extend(Struct_compare_cpp(self))
+
     code.append(f'}};')
 
     if self.generate_json:
@@ -106,6 +108,14 @@ def Struct_cpp (self:Struct):
         code.extend(Struct_from_JSON_cpp(self))
         code.extend(Struct_from_JSON_string_cpp(self))
 
+    return code
+
+def Struct_compare_cpp(self:Struct):
+    code = []
+    code.append(f'{indent}bool operator == (const {self.name} &other) const {{')
+    code.append(f'{indent*2}return true;')
+    code.append(f'{indent}}}')
+    code.append(f'{indent}bool operator != (const {self.name} &other) const {{return not(*this==other);}}')
     return code
 
 def Struct_to_JSON_cpp (self:Struct):
