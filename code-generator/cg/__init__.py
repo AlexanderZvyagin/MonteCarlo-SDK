@@ -19,15 +19,17 @@ def write_objs(fname:str,language,objs=[]):
                 file.write(line+'\n')
         for obj in objs:
             if isinstance(obj,Struct):
-                for prefix in ('Struct','Struct_from_JSON','Struct_to_JSON'):
-                    name = f'{prefix}_{language}'
-                    func = globals().get(name)
-                    if func:
-                        for line in func(obj):
-                            file.write(line+'\n')
-                        file.write('\n')
-                    else:
-                        print(f'There is no function {name}')
+                name = f'Struct_{language}'
+                func = globals().get(name)
+                if func:
+                    for line in func(obj):
+                        file.write(line+'\n')
+                    file.write('\n')
+                else:
+                    print(f'There is no function {name}')
+            elif isinstance(obj,CodeBlock):
+                for line in obj.code.get(language,[]):
+                    file.write(line+'\n')
             elif isinstance(obj,Function):
                 name = f'Function_{language}'
                 func = globals().get(name)

@@ -12,16 +12,28 @@ def create_dto(fname, languages):
     obj.attributes.append(Variable('start','string',None))
     obj.attributes.append(Variable('nargs_min','int',None))
     obj.attributes.append(Variable('nrefs_min','int',None))
+    # obj.methods.append(Function (
+    #     obj.name,
+    #     'constructor',
+    #     mapping = [
+    #         ('name',['']),
+    #         ('title',['']),
+    #         ('doc_md',['']),
+    #         ('start',['']),
+    #         ('nargs_min',[-1]),
+    #         ('nrefs_min',[-1]),
+    #     ]
+    # ))
     obj.methods.append(Function (
         obj.name,
         'constructor',
         args = [
-            Variable('name','string',None),
-            Variable('title','string',None),
-            Variable('doc_md','string',None),
-            Variable('start','string',None),
-            Variable('nargs_min','int',None),
-            Variable('nrefs_min','int',None)
+            Variable('name','string',''),
+            Variable('title','string',''),
+            Variable('doc_md','string',''),
+            Variable('start','string',''),
+            Variable('nargs_min','int',-1),
+            Variable('nrefs_min','int',-1)
         ],
         mapping = [
             ('name',[Variable('name')]),
@@ -43,10 +55,10 @@ def create_dto(fname, languages):
         obj.name,
         'constructor',
         args = [
-            Variable('name','string',None),
-            Variable('refs','int[]',None),
-            Variable('args','float[]',None),
-            Variable('start','float',None)
+            Variable('name','string',''),
+            Variable('refs','int[]',[]),
+            Variable('args','float[]',[]),
+            Variable('start','float',nan)
         ],
         mapping = [
             ('name',[Variable('name')]),
@@ -65,10 +77,10 @@ def create_dto(fname, languages):
         obj.name,
         'constructor',
         args = [
-            Variable('name','string',None),
-            Variable('refs','int[]',None),
-            Variable('args','float[]',None),
-            Variable('start','float',None)
+            Variable('name','string',''),
+            Variable('refs','int[]',[]),
+            Variable('args','float[]',[]),
+            Variable('start','float',nan)
         ],
         mapping = [(obj.base.name,[
             Variable('name'),
@@ -101,10 +113,41 @@ return self._state
 '''
         }
     ))
+
+    obj.methods.append(Function (
+        'TTTT',
+        'int',
+        args = [Variable('arg','int',-11)],
+        lines = {
+            'typescript':
+'''
+return arg;
+''',
+            'cpp':
+'''
+return arg;
+''',
+            'python':
+'''
+return arg
+'''
+        }
+    ))
     objs.append(obj)
     Updater = obj
 
-    obj = Struct('IndependentGaussian',Updater)
+
+    objs.append(CodeBlock(code={
+        'cpp': {'''
+void from_json(const json &j, std::vector<Updater> &u) {
+    for(auto v: j)
+        u.push_back(v);
+}
+'''
+        }
+    }))
+
+    obj = Struct('IndependentGaussian',Updater,generate_json=False)
     obj.methods.append(Function (
         obj.name,
         'constructor',
@@ -120,7 +163,7 @@ return self._state
     ))
     objs.append(obj)
     
-    obj = Struct('CorrelatedGaussian',Updater)
+    obj = Struct('CorrelatedGaussian',Updater,generate_json=False)
     obj.methods.append(Function (
         obj.name,
         'constructor',
@@ -139,7 +182,7 @@ return self._state
     objs.append(obj)
 
     # 'Barrier' is an updater with special arguments
-    obj = Struct('Barrier',Updater)
+    obj = Struct('Barrier',Updater,generate_json=False)
     obj.methods.append(Function (
         obj.name,
         'constructor',
@@ -151,16 +194,16 @@ return self._state
             Variable('action'    ,'int'  ,None),
             Variable('value'     ,'float',None),
         ],
-        lines = {
-            'python':
-'''
-super().__init__('Barrier',[underlying],[level, value, direction, action],start)
-''',
-            'typescript':
-'''
-super('Barrier',[underlying],[level, value, direction, action],start)
-'''
-        },
+#         lines = {
+#             'python':
+# '''
+# super().__init__('Barrier',[underlying],[level, value, direction, action],start)
+# ''',
+#             'typescript':
+# '''
+# super('Barrier',[underlying],[level, value, direction, action],start)
+# '''
+#         },
         mapping = [(obj.base.name,[
             'Barrier',
             [
@@ -177,7 +220,6 @@ super('Barrier',[underlying],[level, value, direction, action],start)
     ))
     
     objs.append(obj)
-
 
     obj = Struct('HistogramAxis')
     obj.attributes.append(Variable('state','int',-1))
@@ -202,63 +244,78 @@ super('Barrier',[underlying],[level, value, direction, action],start)
     ))
     objs.append(obj)
 
-    obj = Struct('Histogram1D')
-    obj.attributes.append(Variable('x','HistogramAxis',None))
-    obj.methods.append(Function (
-        obj.name,
-        'constructor',
-        args = [
-            Variable('x','HistogramAxis',None),
-        ],
-        mapping = [('x',[
-            Variable('x'),
-        ])]
-    ))
-    objs.append(obj)
+    # obj = Struct('Histogram1D')
+    # obj.attributes.append(Variable('x','HistogramAxis',None))
+    # obj.methods.append(Function (
+    #     obj.name,
+    #     'constructor',
+    #     args = [
+    #         Variable('x','HistogramAxis',None),
+    #     ],
+    #     mapping = [('x',[
+    #         Variable('x'),
+    #     ])]
+    # ))
+    # objs.append(obj)
 
-    obj = Struct('Histogram2D')
-    obj.attributes.append(Variable('x','HistogramAxis',None))
-    obj.attributes.append(Variable('y','HistogramAxis',None))
-    obj.methods.append(Function (
-        obj.name,
-        'constructor',
-        args = [
-            Variable('x','HistogramAxis',None),
-            Variable('y','HistogramAxis',None),
-        ],
-        mapping = [
-            ('x',[Variable('x')]),
-            ('y',[Variable('y')])
-        ]
-    ))
-    objs.append(obj)
+    # obj = Struct('Histogram2D')
+    # obj.attributes.append(Variable('x','HistogramAxis',None))
+    # obj.attributes.append(Variable('y','HistogramAxis',None))
+    # obj.methods.append(Function (
+    #     obj.name,
+    #     'constructor',
+    #     args = [
+    #         Variable('x','HistogramAxis',None),
+    #         Variable('y','HistogramAxis',None),
+    #     ],
+    #     mapping = [
+    #         ('x',[Variable('x')]),
+    #         ('y',[Variable('y')])
+    #     ]
+    # ))
+    # objs.append(obj)
 
     obj = Struct('Histogram')
     obj.attributes.append(Variable('x','HistogramAxis',None))
     obj.attributes.append(Variable('y','HistogramAxis',None))
     obj.methods.append(Function (
         obj.name,
-        'constructor',
-        args = [
-            Variable('x','HistogramAxis',None),
-        ],
-        mapping = [
-            ('x',[Variable('x')]),
-        ]
+        'constructor'
     ))
-    obj.methods.append(Function (
-        obj.name,
-        'constructor',
-        args = [
-            Variable('x','HistogramAxis',None),
-            Variable('y','HistogramAxis',None),
-        ],
-        mapping = [
-            ('x',[Variable('x')]),
-            ('y',[Variable('y')])
-        ]
-    ))
+    # obj.methods.append(Function (
+    #     obj.name,
+    #     'constructor',
+    #     args = [
+    #         Variable('x','HistogramAxis',None),
+    #     ],
+    #     mapping = [
+    #         ('x',[Variable('x')]),
+    #     ]
+    # ))
+    # obj.methods.append(Function (
+    #     obj.name,
+    #     'constructor',
+    #     args = [
+    #         Variable('x','HistogramAxis',None),
+    #         Variable('y','HistogramAxis',None),
+    #     ],
+    #     mapping = [
+    #         ('x',[Variable('x')]),
+    #         ('y',[Variable('y')])
+    #     ]
+    # ))
     objs.append(obj)
+
+    objs.append(CodeBlock(code={
+        'cpp': {'''
+void from_json(const json &j, std::vector<Histogram> &u) {
+    for(auto v: j)
+        u.push_back(v);
+}
+'''
+        }
+    }))
+
 
     obj = Struct ('EvaluationPoint')
     obj.attributes.append(Variable('state','int',None))
@@ -269,10 +326,10 @@ super('Barrier',[underlying],[level, value, direction, action],start)
         obj.name,
         'constructor',
         args = [
-            Variable('state_','int',None),
-            Variable('time_','float',None),
-            Variable('value_','float',None),
-            Variable('error_','float',None),
+            Variable('state_','int',-1),
+            Variable('time_','float',nan),
+            Variable('value_','float',nan),
+            Variable('error_','float',nan),
         ],
         mapping = [
             ('state',[Variable('state_')]),
@@ -292,6 +349,30 @@ super('Barrier',[underlying],[level, value, direction, action],start)
     obj.attributes.append(Variable('time_points','float[]',None))
     obj.attributes.append(Variable('time_steps','int[]',None))
     obj.attributes.append(Variable('histograms','Histogram[]',None))
+    obj.methods.append(Function (
+        obj.name,
+        'constructor',
+        args = [
+            Variable('names_','string[]',[]),
+            Variable('npaths_','int[]',[]),
+            Variable('mean_','float[]',[]),
+            Variable('stddev_','float[]',[]),
+            Variable('skewness_','float[]',[]),
+            Variable('time_points_','float[]',[]),
+            Variable('time_steps_','int[]',[]),
+            Variable('histograms_','Histogram[]',[]),
+        ],
+        mapping = [
+            ('names',[Variable('names_')]),
+            ('npaths',[Variable('npaths_')]),
+            ('mean',[Variable('mean_')]),
+            ('stddev',[Variable('stddev_')]),
+            ('skewness',[Variable('skewness_')]),
+            ('time_points',[Variable('time_points_')]),
+            ('time_steps',[Variable('time_steps_')]),
+            ('histograms',[Variable('histograms_')]),
+        ]
+    ))
     objs.append(obj)
 
     obj = Struct ('Parameter')
@@ -303,10 +384,10 @@ super('Barrier',[underlying],[level, value, direction, action],start)
         obj.name,
         'constructor',
         args = [
-            Variable('value_','float',None),
-            Variable('step_','float',None),
-            Variable('min_','float',None),
-            Variable('max_','float',None),
+            Variable('value_','float',nan),
+            Variable('step_','float',nan),
+            Variable('min_','float',nan),
+            Variable('max_','float',nan),
         ],
         mapping = [
             ('value',[Variable('value_')]),
@@ -325,6 +406,28 @@ super('Barrier',[underlying],[level, value, direction, action],start)
     obj.attributes.append(Variable('evaluations','EvaluationPoint[]',None))
     obj.attributes.append(Variable('RunTimeoutSeconds','float',None))
     obj.attributes.append(Variable('MemoryLimitKB','int',None))
+    obj.methods.append(Function (
+        obj.name,
+        'constructor',
+        args = [
+            Variable('TimeStart_','float',nan),
+            Variable('TimeSteps_','int',0),
+            Variable('NumPaths_','int',0),
+            Variable('updaters_','Updater[]',[]),
+            Variable('evaluations_','EvaluationPoint[]',[]),
+            Variable('RunTimeoutSeconds_','float',1),
+            Variable('MemoryLimitKB_','int',1),
+        ],
+        mapping = [
+            ('TimeStart',[Variable('TimeStart_')]),
+            ('TimeSteps',[Variable('TimeSteps_')]),
+            ('NumPaths',[Variable('NumPaths_')]),
+            ('updaters',[Variable('updaters_')]),
+            ('evaluations',[Variable('evaluations_')]),
+            ('RunTimeoutSeconds',[Variable('RunTimeoutSeconds_')]),
+            ('MemoryLimitKB',[Variable('MemoryLimitKB_')]),
+        ]
+    ))
     objs.append(obj)
 
     for language in languages:
@@ -388,6 +491,6 @@ def test_sum():
 if __name__ == '__main__':
 
     # languages = ('python','cpp','typescript')
-    languages = ('cpp',)
+    languages = ('python','cpp')
     create_dto('output/dto',languages)
     create_dto_test('output/dto-test',languages)

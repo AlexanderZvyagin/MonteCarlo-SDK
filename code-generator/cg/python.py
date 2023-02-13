@@ -9,7 +9,7 @@ def File_prefix_python (objs):
         ''
     ]
 
-def python_type (name:str):
+def python_type_to_string (name:str):
     return {
         'string' : 'str',
         'int'    : 'int',
@@ -18,62 +18,63 @@ def python_type (name:str):
         'float[]': 'list[float]',
     }.get(name,name)
 
-def python_value (arg):
-    return str(arg)
+def python_value_to_string (arg):
+    if type(arg)==Variable:
+        return arg.name
+    elif isinstance(arg,list):
+        x = [ f'{item.name}'   for item in arg]
+        y = ','.join(x)
+        return f'{{{y}}}'
+    elif type(arg)==str:
+        return f'"{arg}"'
+    else:
+        return str(arg)
+
+def Constructor_python(ctor:Function,base:Struct):
+    assert ctor.name == base.name
+    code = []
+    code.append('')
+    
+    code.append(f'def __init__ (')
+    code.append(f'{indent}self,')
+    for i,arg in enumerate(ctor.args):
+        defval = '' if arg.defval is None else f' = {python_value_to_string(arg.defval)}'
+        code.append(f'{indent}{arg.name}{defval}{"," if i+1<len(ctor.args) else ""}')
+    code.append(f'):')
+
+    for i,(name,mapping) in enumerate(ctor.mapping):
+        if base.base and name==base.base.name:
+            code.append(f'{indent}super.__init__(')
+            for arg in mapping:
+                code.append(f'{indent*2}{python_value_to_string(arg)},')
+            code.append(f'{indent})')
+        else:
+            assert len(mapping)==1
+            arg = mapping[0]
+            code.append(f'{indent}self.{name} = {python_value_to_string(arg)}')
+
+    return code
 
 def Function_python(self:Function, obj:Struct=None):
-    fname = self.name
-    ctor = False
-    derived = False
-    if obj:
-        derived = obj.base is not None
-        if self.name==obj.name:
-            fname = '__init__'
-            ctor = True
-
-    attributes = []
-    if ctor:
-        if self.type == 'ctor-all-attributes':
-            assert len(self.args)==0
-            attributes = obj.GetAllAttributes()
-        elif self.type == 'ctor-special':
-            attributes = self.args
-        else:
-            print(f'not supported: ctor type "{self.type}"')
-    else:
-        attributes = self.args
-
     code = []
-    code.append(f'def {fname} (')
 
-    args_code = []
-    if obj:
-        args_code.append(f'{indent}self')
-    for a in attributes:
-        default = '' if a.defval is None else f' = {python_value(a.defval)}'
-        args_code.append(f'{indent}{a.name} : {python_type(a.type)}{default}')
-    for i in range(len(args_code)-1):
-        args_code[i] += ','
-    code.extend(args_code)
+    if obj and self.name==obj.name:
+        code = Constructor_python(self,obj)
+    else:
+        code = []
+        code.append(f'def {self.name} (')
+        if obj:
+            code.append(f'{indent}self,')
 
-    code.append('):')
-    if self.type == 'ctor-all-attributes':
-        if derived:
-            super_args = []
-            code_init = []
-            for a in obj.GetAllAttributes():
-                if a.name in [v.name for v in obj.base.GetAllAttributes()]:
-                    super_args.append(a.name)
-                else:
-                    code_init.append(f'{indent}self.{a.name} = {a.name}')
-            code.append(f'{indent}super().__init__({",".join(super_args)})')
-            code.extend(code_init)
-        else:
-            for a in obj.attributes:
-                code.append(f'{indent}self.{a.name} = {a.name}')
+        for a in self.args:
+            default = '' if a.defval is None else f' = {python_value_to_string(a.defval)}'
+            code.append(f'{indent}{a.name}{default}')
+        code.append('):')
+
     for line in get_lines(self.lines.get('python')):
         code.append(f'{indent}{line}')
 
+    code.append(f'{indent}pass')
     return code
 
 def Struct_python (self:Struct):
@@ -88,10 +89,13 @@ def Struct_python (self:Struct):
         for line in Function_python(func,self):
             code.append(f'{indent}{line}')
         code.append('')
-    
+
+    if self.generate_json:
+        code.extend(Struct_to_JSON_string_python(self))
+
     return code
 
-def Struct_to_JSON_python (self):
+def Struct_to_JSON_string_python (self):
     return [
         f'def {self.name}_to_JSON (self):',
         f"{indent}return json.dumps(self,default=lambda o: {{k:v for k,v in o.__dict__.items() if k[0]!='_'}})"

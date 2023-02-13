@@ -14,11 +14,12 @@ class Struct:
     
     Should contain info enough to generate code for all languages.
     '''
-    def __init__ (self, name:str, base=None):
+    def __init__ (self, name:str, base=None, generate_json=True):
         self.name = name
         self.attributes = []
         self.methods = []
-        self.base = base # Struct
+        self.base = base
+        self.generate_json = generate_json
     def __repr__ (self):
         return f"Struct('{self.name}',base={self.base}) #attributes={len(self.attributes)} #methods={len(self.methods)}"
     def GetAllAttributes (self):
@@ -32,16 +33,6 @@ class Struct:
 class CodeBlock:
     def __init__ (self, code={}):
         self.code = code
-
-# class FunctionCall:
-#     def __init__ (self, name):
-#         '''
-        
-#         name: function name to call
-#         args: list of argument names
-        
-#         '''
-#         self.code = code
 
 class Function:
 
