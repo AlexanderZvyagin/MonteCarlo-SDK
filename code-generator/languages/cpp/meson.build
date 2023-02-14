@@ -10,7 +10,7 @@ project (
 executable (
     'run-cpp',
     sources: [
-        'run-cpp.cpp',
+        '../../output/dto-tests.cpp',
     ],
     include_directories : ['../../output'],
     link_with    : [],

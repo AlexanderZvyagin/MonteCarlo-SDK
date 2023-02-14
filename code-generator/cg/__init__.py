@@ -1,14 +1,7 @@
-import math
 from .all import *
 from .python import *
 from .typescript import *
 from .cpp import *
-
-ext = {
-    'cpp' : 'cpp',
-    'python' : 'py',
-    'typescript' : 'ts'
-}
 
 def write_objs(fname:str,language,objs=[]):
     '''fname: full path name without extension, the file will be overwritten. the directory path must exist.'''
@@ -44,10 +37,11 @@ def write_objs(fname:str,language,objs=[]):
             for line in file_suffix_code(objs):
                 file.write(line+'\n')
 
-def run_test(fname,language):
-    name = f'{language}_run_test'
-    code = globals().get(name)
-    if not code:
-        print(f'Not found: {name}')
+    name = f'Tests_{language}'
+    func = globals().get(name)
+    if not func:
+        print(f'No code for {name}')
     else:
-        code(fname)
+        with open(fname+'-tests.'+ext[language],'w') as file:
+            for line in func(objs):
+                file.write(line+'\n')

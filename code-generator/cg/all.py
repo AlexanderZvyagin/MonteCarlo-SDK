@@ -1,13 +1,26 @@
 # This file can be (and should be) imported
 # by all language-specific implementations.
 
-import asyncio
+import os, subprocess
 from collections import namedtuple
 
 indent = ' '*4
 autogen_text = 'This is an automatically generated file.'
 
 Variable = namedtuple('Variable',['name','type','defval'],defaults=['',None,None])
+
+ext = {
+    'cpp' : 'cpp',
+    'python' : 'py',
+    'typescript' : 'ts'
+}
+
+def decode_type(type_name:str):
+    '''return (bool,str) for is_list and type_string'''
+    if type_name[-2:]=='[]':
+        return (True,type_name[:-2])
+    else:
+        return (False,type_name)
 
 class Struct:
     '''Holds info on a structure.
@@ -71,17 +84,51 @@ def get_lines (body):
     else:
         return body
 
-async def run(cmd):
-    proc = await asyncio.create_subprocess_shell(
-        cmd,
-        stdout=asyncio.subprocess.PIPE,
-        stderr=asyncio.subprocess.PIPE)
+# async def run(cmd):
+#     proc = await asyncio.create_subprocess_shell(
+#         cmd,
+#         stdout=asyncio.subprocess.PIPE,
+#         stderr=asyncio.subprocess.PIPE)
 
-    stdout, stderr = await proc.communicate()
+#     stdout, stderr = await proc.communicate()
 
-    print(f'[{cmd!r} exited with {proc.returncode}]')
-    assert proc.returncode==0
-    if stdout:
-        print(f'[stdout]\n{stdout.decode()}')
-    if stderr:
-        print(f'[stderr]\n{stderr.decode()}')
+#     print(f'[{cmd!r} exited with {proc.returncode}]')
+#     assert proc.returncode==0
+#     if stdout:
+#         print(f'[stdout]\n{stdout.decode()}')
+#     if stderr:
+#         print(f'[stderr]\n{stderr.decode()}')
+
+def run_test(language,command,struct_name='',file1='',file2=''):
+    cmd = [
+        './run',
+        command,
+        struct_name,
+        os.path.abspath(file1) if file1 else '',
+        os.path.abspath(file2) if file2 else ''
+    ]
+    proc = subprocess.run (cmd, capture_output=True, text=True, cwd=f'languages/{language}')
+    print('')
+    print('>>>',cmd)
+    print(f'ExitCode={proc.returncode} StdOutLen={len(proc.stdout)} StdErrLen={len(proc.stderr)}')
+    for v in ['stdout','stderr']:
+        if not getattr(proc,v):
+            continue
+        print(f'*** {v} ***')
+        print(getattr(proc,v))
+    proc.check_returncode()
+
+def run_round_trip_tests(lang1,lang2,objs,outdir):
+
+    for lang in [lang1,lang2]:
+        run_test(lang,'build')
+
+    for obj in objs:
+        if type(obj)!=Struct:
+            continue
+        struct_name = obj.name
+        json_file1 = f'{outdir}/{struct_name}-{lang1}-create.json'
+        run_test(lang1,'create',struct_name,json_file1)
+        json_file2 = f'{outdir}/{struct_name}-{lang2}-convert.json'
+        run_test(lang2,'convert',struct_name,json_file1,json_file2) 
+        run_test(lang1,'compare',struct_name,json_file1,json_file2)

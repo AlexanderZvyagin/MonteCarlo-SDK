@@ -12,36 +12,24 @@ def create_dto(fname, languages):
     obj.attributes.append(Variable('start','string',None))
     obj.attributes.append(Variable('nargs_min','int',None))
     obj.attributes.append(Variable('nrefs_min','int',None))
-    # obj.methods.append(Function (
-    #     obj.name,
-    #     'constructor',
-    #     mapping = [
-    #         ('name',['']),
-    #         ('title',['']),
-    #         ('doc_md',['']),
-    #         ('start',['']),
-    #         ('nargs_min',[-1]),
-    #         ('nrefs_min',[-1]),
-    #     ]
-    # ))
     obj.methods.append(Function (
         obj.name,
         'constructor',
         args = [
-            Variable('name','string',''),
-            Variable('title','string',''),
-            Variable('doc_md','string',''),
-            Variable('start','string',''),
-            Variable('nargs_min','int',-1),
-            Variable('nrefs_min','int',-1)
+            Variable('name_','string',''),
+            Variable('title_','string',''),
+            Variable('doc_md_','string',''),
+            Variable('start_','string',''),
+            Variable('nargs_min_','int',-1),
+            Variable('nrefs_min_','int',-1)
         ],
         mapping = [
-            ('name',[Variable('name')]),
-            ('title',[Variable('title')]),
-            ('doc_md',[Variable('doc_md')]),
-            ('start',[Variable('start')]),
-            ('nargs_min',[Variable('nargs_min')]),
-            ('nrefs_min',[Variable('nrefs_min')]),
+            ('name',[Variable('name_')]),
+            ('title',[Variable('title_')]),
+            ('doc_md',[Variable('doc_md_')]),
+            ('start',[Variable('start_')]),
+            ('nargs_min',[Variable('nargs_min_')]),
+            ('nrefs_min',[Variable('nrefs_min_')]),
         ]
     ))
     objs.append(obj)
@@ -55,16 +43,16 @@ def create_dto(fname, languages):
         obj.name,
         'constructor',
         args = [
-            Variable('name','string',''),
-            Variable('refs','int[]',[]),
-            Variable('args','float[]',[]),
-            Variable('start','float',nan)
+            Variable('name_','string',''),
+            Variable('refs_','int[]',[]),
+            Variable('args_','float[]',[]),
+            Variable('start_','float',nan)
         ],
         mapping = [
-            ('name',[Variable('name')]),
-            ('refs',[Variable('refs')]),
-            ('args',[Variable('args')]),
-            ('start',[Variable('start')]),
+            ('name',[Variable('name_')]),
+            ('refs',[Variable('refs_')]),
+            ('args',[Variable('args_')]),
+            ('start',[Variable('start_')]),
         ]
     ))
     objs.append(obj)
@@ -110,26 +98,6 @@ return _state;
 if self._state<0:
     raise Exception(f'Updater {self.name} has no state.')
 return self._state
-'''
-        }
-    ))
-
-    obj.methods.append(Function (
-        'TTTT',
-        'int',
-        args = [Variable('arg','int',-11)],
-        lines = {
-            'typescript':
-'''
-return arg;
-''',
-            'cpp':
-'''
-return arg;
-''',
-            'python':
-'''
-return arg
 '''
         }
     ))
@@ -181,7 +149,6 @@ void from_json(const json &j, std::vector<Updater> &u) {
     ))
     objs.append(obj)
 
-    # 'Barrier' is an updater with special arguments
     obj = Struct('Barrier',Updater,generate_json=False)
     obj.methods.append(Function (
         obj.name,
@@ -194,16 +161,6 @@ void from_json(const json &j, std::vector<Updater> &u) {
             Variable('action'    ,'int'  ,None),
             Variable('value'     ,'float',None),
         ],
-#         lines = {
-#             'python':
-# '''
-# super().__init__('Barrier',[underlying],[level, value, direction, action],start)
-# ''',
-#             'typescript':
-# '''
-# super('Barrier',[underlying],[level, value, direction, action],start)
-# '''
-#         },
         mapping = [(obj.base.name,[
             'Barrier',
             [
@@ -243,37 +200,6 @@ void from_json(const json &j, std::vector<Updater> &u) {
         ]
     ))
     objs.append(obj)
-
-    # obj = Struct('Histogram1D')
-    # obj.attributes.append(Variable('x','HistogramAxis',None))
-    # obj.methods.append(Function (
-    #     obj.name,
-    #     'constructor',
-    #     args = [
-    #         Variable('x','HistogramAxis',None),
-    #     ],
-    #     mapping = [('x',[
-    #         Variable('x'),
-    #     ])]
-    # ))
-    # objs.append(obj)
-
-    # obj = Struct('Histogram2D')
-    # obj.attributes.append(Variable('x','HistogramAxis',None))
-    # obj.attributes.append(Variable('y','HistogramAxis',None))
-    # obj.methods.append(Function (
-    #     obj.name,
-    #     'constructor',
-    #     args = [
-    #         Variable('x','HistogramAxis',None),
-    #         Variable('y','HistogramAxis',None),
-    #     ],
-    #     mapping = [
-    #         ('x',[Variable('x')]),
-    #         ('y',[Variable('y')])
-    #     ]
-    # ))
-    # objs.append(obj)
 
     obj = Struct('Histogram')
     obj.attributes.append(Variable('x','HistogramAxis',None))
@@ -315,7 +241,6 @@ void from_json(const json &j, std::vector<Histogram> &u) {
 '''
         }
     }))
-
 
     obj = Struct ('EvaluationPoint')
     obj.attributes.append(Variable('state','int',None))
@@ -432,6 +357,8 @@ void from_json(const json &j, std::vector<Histogram> &u) {
 
     for language in languages:
         write_objs(fname,language,objs)
+    
+    return objs
 
 class File:
     def __init__ (self, file_name:str):
@@ -485,12 +412,13 @@ def test_sum():
 
     for language in languages:
         write_file(f,language)
-        run_test(f.file_name + '.' + ext[language],language)
+        # run_test(f.file_name + '.' + ext[language],language)
 
 
 if __name__ == '__main__':
 
     # languages = ('python','cpp','typescript')
     languages = ('python','cpp')
-    create_dto('output/dto',languages)
+    objs = create_dto('output/dto',languages)
     create_dto_test('output/dto-test',languages)
+    run_round_trip_tests('cpp','cpp',objs,'output')
