@@ -20,8 +20,8 @@ def create_dto(fname, languages):
             Variable('title_','string',''),
             Variable('doc_md_','string',''),
             Variable('start_','string',''),
-            Variable('nargs_min_','int',-1),
-            Variable('nrefs_min_','int',-1)
+            Variable('nargs_min_','int',-88),
+            Variable('nrefs_min_','int',-88)
         ],
         mapping = [
             ('name',[Variable('name_')]),
@@ -59,8 +59,8 @@ def create_dto(fname, languages):
     UpdaterDto = obj
 
     obj = Struct('Updater',UpdaterDto)
-    obj.attributes.append(Variable('_equation','int',-1))
-    obj.attributes.append(Variable('_state','int',-1))
+    obj.attributes.append(Variable('_equation','int',-88))
+    obj.attributes.append(Variable('_state','int',-88))
     obj.methods.append(Function (
         obj.name,
         'constructor',
@@ -115,51 +115,51 @@ void from_json(const json &j, std::vector<Updater> &u) {
         }
     }))
 
-    obj = Struct('IndependentGaussian',Updater,generate_json=False)
+    obj = Struct('IndependentGaussian',Updater,generate_json=True)
     obj.methods.append(Function (
         obj.name,
         'constructor',
         args = [
-            Variable('refs_','int[]'  ,None),
+            Variable('refs_','int[]'  ,[]),
         ],
         mapping = [(obj.base.name,[
             'IndependentGaussian',
             Variable('refs_'),
             [],
-            nan
+            -88 # FIXME: cannot use math.nan for the moment
         ])]
     ))
     objs.append(obj)
     
-    obj = Struct('CorrelatedGaussian',Updater,generate_json=False)
+    obj = Struct('CorrelatedGaussian',Updater,generate_json=True)
     obj.methods.append(Function (
         obj.name,
         'constructor',
         args = [
-            Variable('correlation','float'  ,None),
-            Variable('state1','int'  ,None),
-            Variable('state2','int'  ,None),
+            Variable('correlation','float'  ,nan),
+            Variable('state1','int'  ,-88),
+            Variable('state2','int'  ,-88),
         ],
         mapping = [(obj.base.name,[
             'CorrelatedGaussian',
             [Variable('state1'),Variable('state2')],
             [Variable('correlation')],
-            nan,
+            -88 # FIXME: cannot use math.nan for the moment
         ])]
     ))
     objs.append(obj)
 
-    obj = Struct('Barrier',Updater,generate_json=False)
+    obj = Struct('Barrier',Updater,generate_json=True)
     obj.methods.append(Function (
         obj.name,
         'constructor',
         args = [
-            Variable('underlying','int'  ,None),
-            Variable('start'     ,'float',None),
-            Variable('level'     ,'float',None),
-            Variable('direction' ,'int'  ,None),
-            Variable('action'    ,'int'  ,None),
-            Variable('value'     ,'float',None),
+            Variable('underlying','int'  ,-88),
+            Variable('start'     ,'float',nan),
+            Variable('level'     ,'float',nan),
+            Variable('direction' ,'int'  ,-88),
+            Variable('action'    ,'int'  ,-88),
+            Variable('value'     ,'float',nan),
         ],
         mapping = [(obj.base.name,[
             'Barrier',
@@ -179,7 +179,7 @@ void from_json(const json &j, std::vector<Updater> &u) {
     objs.append(obj)
 
     obj = Struct('HistogramAxis')
-    obj.attributes.append(Variable('state','int',-1))
+    obj.attributes.append(Variable('state','int',-88))
     obj.attributes.append(Variable('nbins','int',0))
     obj.attributes.append(Variable('min','float',nan))
     obj.attributes.append(Variable('max','float',nan))
@@ -187,10 +187,10 @@ void from_json(const json &j, std::vector<Updater> &u) {
         obj.name,
         'constructor',
         args = [
-            Variable('_state','int',-1),
-            Variable('_nbins','int',-1),
-            Variable('_min'  ,'float',nan),
-            Variable('_max'  ,'float',nan),
+            Variable('_state','int',-88),
+            Variable('_nbins','int',-88),
+            Variable('_min'  ,'float',-88), # FIXME: cannot use math.nan for the moment
+            Variable('_max'  ,'float',-88), # FIXME: cannot use math.nan for the moment
         ],
         mapping = [
             ('state',[Variable('_state')]),
@@ -251,7 +251,7 @@ void from_json(const json &j, std::vector<Histogram> &u) {
         obj.name,
         'constructor',
         args = [
-            Variable('state_','int',-1),
+            Variable('state_','int',-88),
             Variable('time_','float',nan),
             Variable('value_','float',nan),
             Variable('error_','float',nan),
@@ -420,5 +420,5 @@ if __name__ == '__main__':
     # languages = ('python','cpp','typescript')
     languages = ('python','cpp')
     objs = create_dto('output/dto',languages)
-    create_dto_test('output/dto-test',languages)
+    # create_dto_test('output/dto-test',languages)
     run_round_trip_tests('cpp','cpp',objs,'output')

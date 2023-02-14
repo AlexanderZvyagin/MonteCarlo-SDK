@@ -300,6 +300,7 @@ std::vector<{obj.name}> random_list_of_{obj.name} (int min = 0, int max = 3) {{
 
 cpp_test_template = '''
 #include <random>
+#include <limits>
 #include <filesystem>
 #include <iostream>
 #include <fstream>
@@ -326,7 +327,20 @@ std::vector<int> random_list_of_ints (int min = 0, int max = 3) {
     return list;
 }
 
-float random_float (float min = -1e6, float max = 1e6) {
+float random_float (
+    float min            = -1e6,
+    float max            =  1e6,
+    bool can_be_nan      = false,
+    bool can_be_infinity = false
+) {
+    std::uniform_int_distribution<int> yes_no(0,1);
+
+    if(can_be_nan and yes_no(generator))
+        return NAN;
+
+    if(can_be_infinity and yes_no(generator))
+        return (yes_no(generator) ? -1 : 1) * std::numeric_limits<float>::infinity();
+
     std::uniform_real_distribution uniform_dist(min,max);
     return uniform_dist (generator);
 }
