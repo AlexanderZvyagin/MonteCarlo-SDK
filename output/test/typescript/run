@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+case "$1" in
+    build)
+        ln -fs /home/zvyagin/Projects/MonteCarlo/mcsdk-cg/output/dto/mcsdk.ts /home/zvyagin/Projects/MonteCarlo/mcsdk-cg/output/test/typescript/dto.ts
+        ln -fs /home/zvyagin/Projects/MonteCarlo/mcsdk-cg/output/test/mcsdk_test.ts /home/zvyagin/Projects/MonteCarlo/mcsdk-cg/output/test/typescript/dto_tests.ts
+        npm install typescript
+        npm install --save-dev @types/node
+        ./node_modules/typescript/bin/tsc --lib es2022 dto_tests.ts
+        ;;
+    *)
+        node dto_tests.js $@
+        ;;
+esac
