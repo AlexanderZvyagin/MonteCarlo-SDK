@@ -1,0 +1,1 @@
+/home/zvyagin/Projects/MonteCarlo/mcsdk-cg/output/test/mcsdk_test.py
