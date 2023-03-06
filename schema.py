@@ -672,6 +672,7 @@ return this;
     obj.attributes.append(Variable('NumPaths','int'))
     obj.attributes.append(Variable('updaters',Updater,list=True))
     obj.attributes.append(Variable('evaluations',EvaluationPoint,list=True))
+    obj.attributes.append(Variable('RandomSeed','int'))
     obj.attributes.append(Variable('RunTimeoutSeconds','float'))
     obj.attributes.append(Variable('MemoryLimitKB','int'))
     obj.methods.append(Function (
@@ -683,6 +684,7 @@ return this;
             Variable('NumPaths','int',0),
             Variable('updaters',Updater,[],list=True),
             Variable('evaluations',EvaluationPoint,[],list=True),
+            Variable('RandomSeed','int',-1),
             Variable('RunTimeoutSeconds','float',1),
             Variable('MemoryLimitKB','int',1),
         ],
@@ -692,6 +694,7 @@ return this;
             ('NumPaths',[Variable('NumPaths')]),
             ('updaters',[Variable('updaters')]),
             ('evaluations',[Variable('evaluations')]),
+            ('RandomSeed',[Variable('RandomSeed')]),
             ('RunTimeoutSeconds',[Variable('RunTimeoutSeconds')]),
             ('MemoryLimitKB',[Variable('MemoryLimitKB')]),
         ]
