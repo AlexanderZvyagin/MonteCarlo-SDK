@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+case "$1" in
+    build)
+        cp /home/zvyagin/Projects/MonteCarlo/SDK/mcsdk-f/output/dto/mcsdk.py /home/zvyagin/Projects/MonteCarlo/SDK/mcsdk-f/output/test/python/dto.py
+        cp /home/zvyagin/Projects/MonteCarlo/SDK/mcsdk-f/output/test/mcsdk_test.py /home/zvyagin/Projects/MonteCarlo/SDK/mcsdk-f/output/test/python
+        ;;
+    *)
+        ./run-python $@
+        ;;
+esac
