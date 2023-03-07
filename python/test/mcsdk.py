@@ -1,1 +1,1 @@
-../output/dto/mcsdk.py
+../../output/dto/mcsdk.py
