@@ -156,6 +156,54 @@ std::optional<std::vector<std::string>> random_optional_list_string (
         return {};
 }
 
+// Forward declarations for DtoError
+class DtoError;
+DtoError random_DtoError (void);
+std::optional<DtoError> random_optional_DtoError (void);
+std::vector<DtoError> random_list_DtoError (int min=0, int max=3);
+std::optional<std::vector<DtoError>> random_optional_list_DtoError (int min=0, int max=3);
+
+
+DtoError random_DtoError (void) {
+    return DtoError (
+        random_optional_string(),
+        random_optional_string(),
+        random_optional_int(),
+        random_optional_list_DtoError()
+
+    );
+}
+
+
+std::optional<DtoError> random_optional_DtoError (void) {
+    if(yes_no())
+        return {};
+    return random_DtoError ();
+}
+
+
+std::vector<DtoError> random_list_DtoError (int min, int max) {
+    const auto size = random_int(min,max);
+    std::vector<DtoError> list;
+    for(int i=0; i<size; i++)
+        list.push_back(random_DtoError());
+    return list;
+}
+
+
+std::optional<std::vector<DtoError>> random_optional_list_DtoError (int min, int max) {
+    if(yes_no())
+        return {};
+    return random_list_DtoError (min,max);
+}
+
+// Forward declarations for UpdaterDoc
+class UpdaterDoc;
+UpdaterDoc random_UpdaterDoc (void);
+std::optional<UpdaterDoc> random_optional_UpdaterDoc (void);
+std::vector<UpdaterDoc> random_list_UpdaterDoc (int min=0, int max=3);
+std::optional<std::vector<UpdaterDoc>> random_optional_list_UpdaterDoc (int min=0, int max=3);
+
 
 UpdaterDoc random_UpdaterDoc (void) {
     return UpdaterDoc (
@@ -177,7 +225,7 @@ std::optional<UpdaterDoc> random_optional_UpdaterDoc (void) {
 }
 
 
-std::vector<UpdaterDoc> random_list_UpdaterDoc (int min = 0, int max = 3) {
+std::vector<UpdaterDoc> random_list_UpdaterDoc (int min, int max) {
     const auto size = random_int(min,max);
     std::vector<UpdaterDoc> list;
     for(int i=0; i<size; i++)
@@ -186,11 +234,18 @@ std::vector<UpdaterDoc> random_list_UpdaterDoc (int min = 0, int max = 3) {
 }
 
 
-std::vector<UpdaterDoc> random_optional_list_UpdaterDoc (int min = 0, int max = 3) {
+std::optional<std::vector<UpdaterDoc>> random_optional_list_UpdaterDoc (int min, int max) {
     if(yes_no())
         return {};
     return random_list_UpdaterDoc (min,max);
 }
+
+// Forward declarations for UpdaterDto
+class UpdaterDto;
+UpdaterDto random_UpdaterDto (void);
+std::optional<UpdaterDto> random_optional_UpdaterDto (void);
+std::vector<UpdaterDto> random_list_UpdaterDto (int min=0, int max=3);
+std::optional<std::vector<UpdaterDto>> random_optional_list_UpdaterDto (int min=0, int max=3);
 
 
 UpdaterDto random_UpdaterDto (void) {
@@ -211,7 +266,7 @@ std::optional<UpdaterDto> random_optional_UpdaterDto (void) {
 }
 
 
-std::vector<UpdaterDto> random_list_UpdaterDto (int min = 0, int max = 3) {
+std::vector<UpdaterDto> random_list_UpdaterDto (int min, int max) {
     const auto size = random_int(min,max);
     std::vector<UpdaterDto> list;
     for(int i=0; i<size; i++)
@@ -220,11 +275,18 @@ std::vector<UpdaterDto> random_list_UpdaterDto (int min = 0, int max = 3) {
 }
 
 
-std::vector<UpdaterDto> random_optional_list_UpdaterDto (int min = 0, int max = 3) {
+std::optional<std::vector<UpdaterDto>> random_optional_list_UpdaterDto (int min, int max) {
     if(yes_no())
         return {};
     return random_list_UpdaterDto (min,max);
 }
+
+// Forward declarations for Updater
+class Updater;
+Updater random_Updater (void);
+std::optional<Updater> random_optional_Updater (void);
+std::vector<Updater> random_list_Updater (int min=0, int max=3);
+std::optional<std::vector<Updater>> random_optional_list_Updater (int min=0, int max=3);
 
 
 Updater random_Updater (void) {
@@ -246,7 +308,7 @@ std::optional<Updater> random_optional_Updater (void) {
 }
 
 
-std::vector<Updater> random_list_Updater (int min = 0, int max = 3) {
+std::vector<Updater> random_list_Updater (int min, int max) {
     const auto size = random_int(min,max);
     std::vector<Updater> list;
     for(int i=0; i<size; i++)
@@ -255,11 +317,18 @@ std::vector<Updater> random_list_Updater (int min = 0, int max = 3) {
 }
 
 
-std::vector<Updater> random_optional_list_Updater (int min = 0, int max = 3) {
+std::optional<std::vector<Updater>> random_optional_list_Updater (int min, int max) {
     if(yes_no())
         return {};
     return random_list_Updater (min,max);
 }
+
+// Forward declarations for IndependentGaussian
+class IndependentGaussian;
+IndependentGaussian random_IndependentGaussian (void);
+std::optional<IndependentGaussian> random_optional_IndependentGaussian (void);
+std::vector<IndependentGaussian> random_list_IndependentGaussian (int min=0, int max=3);
+std::optional<std::vector<IndependentGaussian>> random_optional_list_IndependentGaussian (int min=0, int max=3);
 
 
 IndependentGaussian random_IndependentGaussian (void) {
@@ -278,7 +347,7 @@ std::optional<IndependentGaussian> random_optional_IndependentGaussian (void) {
 }
 
 
-std::vector<IndependentGaussian> random_list_IndependentGaussian (int min = 0, int max = 3) {
+std::vector<IndependentGaussian> random_list_IndependentGaussian (int min, int max) {
     const auto size = random_int(min,max);
     std::vector<IndependentGaussian> list;
     for(int i=0; i<size; i++)
@@ -287,11 +356,18 @@ std::vector<IndependentGaussian> random_list_IndependentGaussian (int min = 0, i
 }
 
 
-std::vector<IndependentGaussian> random_optional_list_IndependentGaussian (int min = 0, int max = 3) {
+std::optional<std::vector<IndependentGaussian>> random_optional_list_IndependentGaussian (int min, int max) {
     if(yes_no())
         return {};
     return random_list_IndependentGaussian (min,max);
 }
+
+// Forward declarations for CorrelatedGaussian
+class CorrelatedGaussian;
+CorrelatedGaussian random_CorrelatedGaussian (void);
+std::optional<CorrelatedGaussian> random_optional_CorrelatedGaussian (void);
+std::vector<CorrelatedGaussian> random_list_CorrelatedGaussian (int min=0, int max=3);
+std::optional<std::vector<CorrelatedGaussian>> random_optional_list_CorrelatedGaussian (int min=0, int max=3);
 
 
 CorrelatedGaussian random_CorrelatedGaussian (void) {
@@ -312,7 +388,7 @@ std::optional<CorrelatedGaussian> random_optional_CorrelatedGaussian (void) {
 }
 
 
-std::vector<CorrelatedGaussian> random_list_CorrelatedGaussian (int min = 0, int max = 3) {
+std::vector<CorrelatedGaussian> random_list_CorrelatedGaussian (int min, int max) {
     const auto size = random_int(min,max);
     std::vector<CorrelatedGaussian> list;
     for(int i=0; i<size; i++)
@@ -321,11 +397,18 @@ std::vector<CorrelatedGaussian> random_list_CorrelatedGaussian (int min = 0, int
 }
 
 
-std::vector<CorrelatedGaussian> random_optional_list_CorrelatedGaussian (int min = 0, int max = 3) {
+std::optional<std::vector<CorrelatedGaussian>> random_optional_list_CorrelatedGaussian (int min, int max) {
     if(yes_no())
         return {};
     return random_list_CorrelatedGaussian (min,max);
 }
+
+// Forward declarations for BrownianMotion
+class BrownianMotion;
+BrownianMotion random_BrownianMotion (void);
+std::optional<BrownianMotion> random_optional_BrownianMotion (void);
+std::vector<BrownianMotion> random_list_BrownianMotion (int min=0, int max=3);
+std::optional<std::vector<BrownianMotion>> random_optional_list_BrownianMotion (int min=0, int max=3);
 
 
 BrownianMotion random_BrownianMotion (void) {
@@ -346,7 +429,7 @@ std::optional<BrownianMotion> random_optional_BrownianMotion (void) {
 }
 
 
-std::vector<BrownianMotion> random_list_BrownianMotion (int min = 0, int max = 3) {
+std::vector<BrownianMotion> random_list_BrownianMotion (int min, int max) {
     const auto size = random_int(min,max);
     std::vector<BrownianMotion> list;
     for(int i=0; i<size; i++)
@@ -355,11 +438,18 @@ std::vector<BrownianMotion> random_list_BrownianMotion (int min = 0, int max = 3
 }
 
 
-std::vector<BrownianMotion> random_optional_list_BrownianMotion (int min = 0, int max = 3) {
+std::optional<std::vector<BrownianMotion>> random_optional_list_BrownianMotion (int min, int max) {
     if(yes_no())
         return {};
     return random_list_BrownianMotion (min,max);
 }
+
+// Forward declarations for BrownianMotionRef
+class BrownianMotionRef;
+BrownianMotionRef random_BrownianMotionRef (void);
+std::optional<BrownianMotionRef> random_optional_BrownianMotionRef (void);
+std::vector<BrownianMotionRef> random_list_BrownianMotionRef (int min=0, int max=3);
+std::optional<std::vector<BrownianMotionRef>> random_optional_list_BrownianMotionRef (int min=0, int max=3);
 
 
 BrownianMotionRef random_BrownianMotionRef (void) {
@@ -380,7 +470,7 @@ std::optional<BrownianMotionRef> random_optional_BrownianMotionRef (void) {
 }
 
 
-std::vector<BrownianMotionRef> random_list_BrownianMotionRef (int min = 0, int max = 3) {
+std::vector<BrownianMotionRef> random_list_BrownianMotionRef (int min, int max) {
     const auto size = random_int(min,max);
     std::vector<BrownianMotionRef> list;
     for(int i=0; i<size; i++)
@@ -389,11 +479,18 @@ std::vector<BrownianMotionRef> random_list_BrownianMotionRef (int min = 0, int m
 }
 
 
-std::vector<BrownianMotionRef> random_optional_list_BrownianMotionRef (int min = 0, int max = 3) {
+std::optional<std::vector<BrownianMotionRef>> random_optional_list_BrownianMotionRef (int min, int max) {
     if(yes_no())
         return {};
     return random_list_BrownianMotionRef (min,max);
 }
+
+// Forward declarations for GeometricalBrownianMotion
+class GeometricalBrownianMotion;
+GeometricalBrownianMotion random_GeometricalBrownianMotion (void);
+std::optional<GeometricalBrownianMotion> random_optional_GeometricalBrownianMotion (void);
+std::vector<GeometricalBrownianMotion> random_list_GeometricalBrownianMotion (int min=0, int max=3);
+std::optional<std::vector<GeometricalBrownianMotion>> random_optional_list_GeometricalBrownianMotion (int min=0, int max=3);
 
 
 GeometricalBrownianMotion random_GeometricalBrownianMotion (void) {
@@ -414,7 +511,7 @@ std::optional<GeometricalBrownianMotion> random_optional_GeometricalBrownianMoti
 }
 
 
-std::vector<GeometricalBrownianMotion> random_list_GeometricalBrownianMotion (int min = 0, int max = 3) {
+std::vector<GeometricalBrownianMotion> random_list_GeometricalBrownianMotion (int min, int max) {
     const auto size = random_int(min,max);
     std::vector<GeometricalBrownianMotion> list;
     for(int i=0; i<size; i++)
@@ -423,11 +520,18 @@ std::vector<GeometricalBrownianMotion> random_list_GeometricalBrownianMotion (in
 }
 
 
-std::vector<GeometricalBrownianMotion> random_optional_list_GeometricalBrownianMotion (int min = 0, int max = 3) {
+std::optional<std::vector<GeometricalBrownianMotion>> random_optional_list_GeometricalBrownianMotion (int min, int max) {
     if(yes_no())
         return {};
     return random_list_GeometricalBrownianMotion (min,max);
 }
+
+// Forward declarations for GeometricalBrownianMotionRef
+class GeometricalBrownianMotionRef;
+GeometricalBrownianMotionRef random_GeometricalBrownianMotionRef (void);
+std::optional<GeometricalBrownianMotionRef> random_optional_GeometricalBrownianMotionRef (void);
+std::vector<GeometricalBrownianMotionRef> random_list_GeometricalBrownianMotionRef (int min=0, int max=3);
+std::optional<std::vector<GeometricalBrownianMotionRef>> random_optional_list_GeometricalBrownianMotionRef (int min=0, int max=3);
 
 
 GeometricalBrownianMotionRef random_GeometricalBrownianMotionRef (void) {
@@ -448,7 +552,7 @@ std::optional<GeometricalBrownianMotionRef> random_optional_GeometricalBrownianM
 }
 
 
-std::vector<GeometricalBrownianMotionRef> random_list_GeometricalBrownianMotionRef (int min = 0, int max = 3) {
+std::vector<GeometricalBrownianMotionRef> random_list_GeometricalBrownianMotionRef (int min, int max) {
     const auto size = random_int(min,max);
     std::vector<GeometricalBrownianMotionRef> list;
     for(int i=0; i<size; i++)
@@ -457,11 +561,18 @@ std::vector<GeometricalBrownianMotionRef> random_list_GeometricalBrownianMotionR
 }
 
 
-std::vector<GeometricalBrownianMotionRef> random_optional_list_GeometricalBrownianMotionRef (int min = 0, int max = 3) {
+std::optional<std::vector<GeometricalBrownianMotionRef>> random_optional_list_GeometricalBrownianMotionRef (int min, int max) {
     if(yes_no())
         return {};
     return random_list_GeometricalBrownianMotionRef (min,max);
 }
+
+// Forward declarations for ZeroCouponBond
+class ZeroCouponBond;
+ZeroCouponBond random_ZeroCouponBond (void);
+std::optional<ZeroCouponBond> random_optional_ZeroCouponBond (void);
+std::vector<ZeroCouponBond> random_list_ZeroCouponBond (int min=0, int max=3);
+std::optional<std::vector<ZeroCouponBond>> random_optional_list_ZeroCouponBond (int min=0, int max=3);
 
 
 ZeroCouponBond random_ZeroCouponBond (void) {
@@ -481,7 +592,7 @@ std::optional<ZeroCouponBond> random_optional_ZeroCouponBond (void) {
 }
 
 
-std::vector<ZeroCouponBond> random_list_ZeroCouponBond (int min = 0, int max = 3) {
+std::vector<ZeroCouponBond> random_list_ZeroCouponBond (int min, int max) {
     const auto size = random_int(min,max);
     std::vector<ZeroCouponBond> list;
     for(int i=0; i<size; i++)
@@ -490,11 +601,18 @@ std::vector<ZeroCouponBond> random_list_ZeroCouponBond (int min = 0, int max = 3
 }
 
 
-std::vector<ZeroCouponBond> random_optional_list_ZeroCouponBond (int min = 0, int max = 3) {
+std::optional<std::vector<ZeroCouponBond>> random_optional_list_ZeroCouponBond (int min, int max) {
     if(yes_no())
         return {};
     return random_list_ZeroCouponBond (min,max);
 }
+
+// Forward declarations for Option
+class Option;
+Option random_Option (void);
+std::optional<Option> random_optional_Option (void);
+std::vector<Option> random_list_Option (int min=0, int max=3);
+std::optional<std::vector<Option>> random_optional_list_Option (int min=0, int max=3);
 
 
 Option random_Option (void) {
@@ -515,7 +633,7 @@ std::optional<Option> random_optional_Option (void) {
 }
 
 
-std::vector<Option> random_list_Option (int min = 0, int max = 3) {
+std::vector<Option> random_list_Option (int min, int max) {
     const auto size = random_int(min,max);
     std::vector<Option> list;
     for(int i=0; i<size; i++)
@@ -524,11 +642,18 @@ std::vector<Option> random_list_Option (int min = 0, int max = 3) {
 }
 
 
-std::vector<Option> random_optional_list_Option (int min = 0, int max = 3) {
+std::optional<std::vector<Option>> random_optional_list_Option (int min, int max) {
     if(yes_no())
         return {};
     return random_list_Option (min,max);
 }
+
+// Forward declarations for Barrier
+class Barrier;
+Barrier random_Barrier (void);
+std::optional<Barrier> random_optional_Barrier (void);
+std::vector<Barrier> random_list_Barrier (int min=0, int max=3);
+std::optional<std::vector<Barrier>> random_optional_list_Barrier (int min=0, int max=3);
 
 
 Barrier random_Barrier (void) {
@@ -552,7 +677,7 @@ std::optional<Barrier> random_optional_Barrier (void) {
 }
 
 
-std::vector<Barrier> random_list_Barrier (int min = 0, int max = 3) {
+std::vector<Barrier> random_list_Barrier (int min, int max) {
     const auto size = random_int(min,max);
     std::vector<Barrier> list;
     for(int i=0; i<size; i++)
@@ -561,11 +686,18 @@ std::vector<Barrier> random_list_Barrier (int min = 0, int max = 3) {
 }
 
 
-std::vector<Barrier> random_optional_list_Barrier (int min = 0, int max = 3) {
+std::optional<std::vector<Barrier>> random_optional_list_Barrier (int min, int max) {
     if(yes_no())
         return {};
     return random_list_Barrier (min,max);
 }
+
+// Forward declarations for Multiplication
+class Multiplication;
+Multiplication random_Multiplication (void);
+std::optional<Multiplication> random_optional_Multiplication (void);
+std::vector<Multiplication> random_list_Multiplication (int min=0, int max=3);
+std::optional<std::vector<Multiplication>> random_optional_list_Multiplication (int min=0, int max=3);
 
 
 Multiplication random_Multiplication (void) {
@@ -585,7 +717,7 @@ std::optional<Multiplication> random_optional_Multiplication (void) {
 }
 
 
-std::vector<Multiplication> random_list_Multiplication (int min = 0, int max = 3) {
+std::vector<Multiplication> random_list_Multiplication (int min, int max) {
     const auto size = random_int(min,max);
     std::vector<Multiplication> list;
     for(int i=0; i<size; i++)
@@ -594,11 +726,18 @@ std::vector<Multiplication> random_list_Multiplication (int min = 0, int max = 3
 }
 
 
-std::vector<Multiplication> random_optional_list_Multiplication (int min = 0, int max = 3) {
+std::optional<std::vector<Multiplication>> random_optional_list_Multiplication (int min, int max) {
     if(yes_no())
         return {};
     return random_list_Multiplication (min,max);
 }
+
+// Forward declarations for HistogramAxis
+class HistogramAxis;
+HistogramAxis random_HistogramAxis (void);
+std::optional<HistogramAxis> random_optional_HistogramAxis (void);
+std::vector<HistogramAxis> random_list_HistogramAxis (int min=0, int max=3);
+std::optional<std::vector<HistogramAxis>> random_optional_list_HistogramAxis (int min=0, int max=3);
 
 
 HistogramAxis random_HistogramAxis (void) {
@@ -619,7 +758,7 @@ std::optional<HistogramAxis> random_optional_HistogramAxis (void) {
 }
 
 
-std::vector<HistogramAxis> random_list_HistogramAxis (int min = 0, int max = 3) {
+std::vector<HistogramAxis> random_list_HistogramAxis (int min, int max) {
     const auto size = random_int(min,max);
     std::vector<HistogramAxis> list;
     for(int i=0; i<size; i++)
@@ -628,11 +767,18 @@ std::vector<HistogramAxis> random_list_HistogramAxis (int min = 0, int max = 3) 
 }
 
 
-std::vector<HistogramAxis> random_optional_list_HistogramAxis (int min = 0, int max = 3) {
+std::optional<std::vector<HistogramAxis>> random_optional_list_HistogramAxis (int min, int max) {
     if(yes_no())
         return {};
     return random_list_HistogramAxis (min,max);
 }
+
+// Forward declarations for Histogram
+class Histogram;
+Histogram random_Histogram (void);
+std::optional<Histogram> random_optional_Histogram (void);
+std::vector<Histogram> random_list_Histogram (int min=0, int max=3);
+std::optional<std::vector<Histogram>> random_optional_list_Histogram (int min=0, int max=3);
 
 
 Histogram random_Histogram (void) {
@@ -651,7 +797,7 @@ std::optional<Histogram> random_optional_Histogram (void) {
 }
 
 
-std::vector<Histogram> random_list_Histogram (int min = 0, int max = 3) {
+std::vector<Histogram> random_list_Histogram (int min, int max) {
     const auto size = random_int(min,max);
     std::vector<Histogram> list;
     for(int i=0; i<size; i++)
@@ -660,11 +806,18 @@ std::vector<Histogram> random_list_Histogram (int min = 0, int max = 3) {
 }
 
 
-std::vector<Histogram> random_optional_list_Histogram (int min = 0, int max = 3) {
+std::optional<std::vector<Histogram>> random_optional_list_Histogram (int min, int max) {
     if(yes_no())
         return {};
     return random_list_Histogram (min,max);
 }
+
+// Forward declarations for EvaluationPoint
+class EvaluationPoint;
+EvaluationPoint random_EvaluationPoint (void);
+std::optional<EvaluationPoint> random_optional_EvaluationPoint (void);
+std::vector<EvaluationPoint> random_list_EvaluationPoint (int min=0, int max=3);
+std::optional<std::vector<EvaluationPoint>> random_optional_list_EvaluationPoint (int min=0, int max=3);
 
 
 EvaluationPoint random_EvaluationPoint (void) {
@@ -686,7 +839,7 @@ std::optional<EvaluationPoint> random_optional_EvaluationPoint (void) {
 }
 
 
-std::vector<EvaluationPoint> random_list_EvaluationPoint (int min = 0, int max = 3) {
+std::vector<EvaluationPoint> random_list_EvaluationPoint (int min, int max) {
     const auto size = random_int(min,max);
     std::vector<EvaluationPoint> list;
     for(int i=0; i<size; i++)
@@ -695,11 +848,18 @@ std::vector<EvaluationPoint> random_list_EvaluationPoint (int min = 0, int max =
 }
 
 
-std::vector<EvaluationPoint> random_optional_list_EvaluationPoint (int min = 0, int max = 3) {
+std::optional<std::vector<EvaluationPoint>> random_optional_list_EvaluationPoint (int min, int max) {
     if(yes_no())
         return {};
     return random_list_EvaluationPoint (min,max);
 }
+
+// Forward declarations for Parameter
+class Parameter;
+Parameter random_Parameter (void);
+std::optional<Parameter> random_optional_Parameter (void);
+std::vector<Parameter> random_list_Parameter (int min=0, int max=3);
+std::optional<std::vector<Parameter>> random_optional_list_Parameter (int min=0, int max=3);
 
 
 Parameter random_Parameter (void) {
@@ -720,7 +880,7 @@ std::optional<Parameter> random_optional_Parameter (void) {
 }
 
 
-std::vector<Parameter> random_list_Parameter (int min = 0, int max = 3) {
+std::vector<Parameter> random_list_Parameter (int min, int max) {
     const auto size = random_int(min,max);
     std::vector<Parameter> list;
     for(int i=0; i<size; i++)
@@ -729,11 +889,18 @@ std::vector<Parameter> random_list_Parameter (int min = 0, int max = 3) {
 }
 
 
-std::vector<Parameter> random_optional_list_Parameter (int min = 0, int max = 3) {
+std::optional<std::vector<Parameter>> random_optional_list_Parameter (int min, int max) {
     if(yes_no())
         return {};
     return random_list_Parameter (min,max);
 }
+
+// Forward declarations for Model
+class Model;
+Model random_Model (void);
+std::optional<Model> random_optional_Model (void);
+std::vector<Model> random_list_Model (int min=0, int max=3);
+std::optional<std::vector<Model>> random_optional_list_Model (int min=0, int max=3);
 
 
 Model random_Model (void) {
@@ -758,7 +925,7 @@ std::optional<Model> random_optional_Model (void) {
 }
 
 
-std::vector<Model> random_list_Model (int min = 0, int max = 3) {
+std::vector<Model> random_list_Model (int min, int max) {
     const auto size = random_int(min,max);
     std::vector<Model> list;
     for(int i=0; i<size; i++)
@@ -767,11 +934,18 @@ std::vector<Model> random_list_Model (int min = 0, int max = 3) {
 }
 
 
-std::vector<Model> random_optional_list_Model (int min = 0, int max = 3) {
+std::optional<std::vector<Model>> random_optional_list_Model (int min, int max) {
     if(yes_no())
         return {};
     return random_list_Model (min,max);
 }
+
+// Forward declarations for Result
+class Result;
+Result random_Result (void);
+std::optional<Result> random_optional_Result (void);
+std::vector<Result> random_list_Result (int min=0, int max=3);
+std::optional<std::vector<Result>> random_optional_list_Result (int min=0, int max=3);
 
 
 Result random_Result (void) {
@@ -792,7 +966,7 @@ std::optional<Result> random_optional_Result (void) {
 }
 
 
-std::vector<Result> random_list_Result (int min = 0, int max = 3) {
+std::vector<Result> random_list_Result (int min, int max) {
     const auto size = random_int(min,max);
     std::vector<Result> list;
     for(int i=0; i<size; i++)
@@ -801,11 +975,18 @@ std::vector<Result> random_list_Result (int min = 0, int max = 3) {
 }
 
 
-std::vector<Result> random_optional_list_Result (int min = 0, int max = 3) {
+std::optional<std::vector<Result>> random_optional_list_Result (int min, int max) {
     if(yes_no())
         return {};
     return random_list_Result (min,max);
 }
+
+// Forward declarations for EvaluationResults
+class EvaluationResults;
+EvaluationResults random_EvaluationResults (void);
+std::optional<EvaluationResults> random_optional_EvaluationResults (void);
+std::vector<EvaluationResults> random_list_EvaluationResults (int min=0, int max=3);
+std::optional<std::vector<EvaluationResults>> random_optional_list_EvaluationResults (int min=0, int max=3);
 
 
 EvaluationResults random_EvaluationResults (void) {
@@ -831,7 +1012,7 @@ std::optional<EvaluationResults> random_optional_EvaluationResults (void) {
 }
 
 
-std::vector<EvaluationResults> random_list_EvaluationResults (int min = 0, int max = 3) {
+std::vector<EvaluationResults> random_list_EvaluationResults (int min, int max) {
     const auto size = random_int(min,max);
     std::vector<EvaluationResults> list;
     for(int i=0; i<size; i++)
@@ -840,7 +1021,7 @@ std::vector<EvaluationResults> random_list_EvaluationResults (int min = 0, int m
 }
 
 
-std::vector<EvaluationResults> random_optional_list_EvaluationResults (int min = 0, int max = 3) {
+std::optional<std::vector<EvaluationResults>> random_optional_list_EvaluationResults (int min, int max) {
     if(yes_no())
         return {};
     return random_list_EvaluationResults (min,max);
@@ -863,6 +1044,19 @@ int main (int argc, const char **argv) try {
         std::ofstream f (file1_path);
 
         if (false) {
+
+        } else if (struct_name == "DtoError") {
+            auto obj1 = random_DtoError();
+            std::ofstream(file1_path) << DtoError_to_json_string(obj1);
+            auto obj2 =
+                DtoError_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            if(obj1!=obj2)
+                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
+
 
         } else if (struct_name == "UpdaterDoc") {
             auto obj1 = random_UpdaterDoc();
@@ -1133,6 +1327,19 @@ int main (int argc, const char **argv) try {
 
         if (false) {
 
+        } else if (struct_name == "DtoError") {
+            auto obj =
+                DtoError_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            std::ofstream out (file2_path);
+            out << DtoError_to_json_string(obj);
+            if(!out)
+                throw std::runtime_error("Operation 'convert': IO error on " + struct_name);
+
+
         } else if (struct_name == "UpdaterDoc") {
             auto obj =
                 UpdaterDoc_from_json (
@@ -1399,6 +1606,23 @@ int main (int argc, const char **argv) try {
     } else if (command == "compare") {
 
         if (false) {
+
+        } else if (struct_name == "DtoError") {
+            auto obj1 =
+                DtoError_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            auto obj2 =
+                DtoError_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file2_path
+            )));
+            if(obj1!=obj2)
+                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
+
 
         } else if (struct_name == "UpdaterDoc") {
             auto obj1 =

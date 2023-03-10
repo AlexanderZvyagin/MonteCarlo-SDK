@@ -2,8 +2,8 @@
 
 case "$1" in
     build)
-        cp /home/zvyagin/Projects/MonteCarlo/SDK/mcsdk-f/output/dto/mcsdk.py /home/zvyagin/Projects/MonteCarlo/SDK/mcsdk-f/output/test/python/dto.py
-        cp /home/zvyagin/Projects/MonteCarlo/SDK/mcsdk-f/output/test/mcsdk_test.py /home/zvyagin/Projects/MonteCarlo/SDK/mcsdk-f/output/test/python
+        ln -sf /home/zvyagin/Projects/MonteCarlo/f/mcsdk/output/dto/mcsdk.py /home/zvyagin/Projects/MonteCarlo/f/mcsdk/output/test/python/dto.py
+        ln -sf /home/zvyagin/Projects/MonteCarlo/f/mcsdk/output/test/mcsdk_test.py /home/zvyagin/Projects/MonteCarlo/f/mcsdk/output/test/python
         ;;
     *)
         ./run-python $@

@@ -9,11 +9,23 @@ def random_list_string(min:int = 0, max:int = 3) -> list[str]:
     n = random.randint(min,max)
     return [random_string() for i in range(n)]
 
+def random_optional_string (len_max:int=5) -> str|None:
+    if yes_no(): return None
+    return random_string()
+
+def random_optional_list_string(min:int = 0, max:int = 3) -> list[str]:
+    if yes_no(): return None
+    return random_list_string(min,max)
+
 def random_int (min = -1000, max = 1000) -> int:
     return random.randint(min,max)
 
 def yes_no () -> bool:
     return random_int(0,1)
+
+def random_optional_int (min = -1000, max = 1000) -> int:
+    if yes_no(): return None
+    return random_int(min,max)
 
 def random_list_int(min:int = 0, max:int = 3) -> list[int]:
     n = random.randint(min,max)
@@ -41,6 +53,33 @@ def random_list_float (min:int = 0, max:int = 3) -> list[float]:
 def random_optional_list_float (min = 0, max = 3) -> list[float]|None:
     if yes_no(): return None
     return random_list_float(min,max)
+
+
+def random_DtoError ():
+    return DtoError (
+        random_optional_string(),
+        random_optional_string(),
+        random_optional_int(),
+        random_optional_list_DtoError()
+
+    )
+
+
+def random_optional_DtoError () -> DtoError|None:
+    if yes_no():
+        return None
+    return random_DtoError()
+
+
+def random_list_DtoError (min:int = 0, max:int = 3) -> list[DtoError]:
+    size = random.randint(min,max)
+    return [random_DtoError() for i in range(size)]
+
+
+def random_optional_list_DtoError (min:int = 0, max:int = 3) -> list[DtoError]|None:
+    if yes_no():
+        return None
+    return random_list_DtoError(min,max)
 
 
 def random_UpdaterDoc ():
@@ -601,6 +640,15 @@ def test_round_trip_python(command, struct_name, file1_name, file2_name):
         if False:
             pass
 
+        elif struct_name=='DtoError':
+            obj1 = random_DtoError()
+            open(file1_name,'w').write(DtoError_to_json_string(obj1))
+            obj2 = DtoError_from_json_string(open(file1_name).read())
+            assert isinstance(obj1,DtoError)
+            assert isinstance(obj2,DtoError)
+            assert obj1==obj2
+
+
         elif struct_name=='UpdaterDoc':
             obj1 = random_UpdaterDoc()
             open(file1_name,'w').write(UpdaterDoc_to_json_string(obj1))
@@ -786,6 +834,11 @@ def test_round_trip_python(command, struct_name, file1_name, file2_name):
         if False:
             pass
 
+        elif struct_name=='DtoError':
+            obj = DtoError_from_json_string(open(file1_name).read())
+            open(file2_name,'w').write(DtoError_to_json_string(obj))
+
+
         elif struct_name=='UpdaterDoc':
             obj = UpdaterDoc_from_json_string(open(file1_name).read())
             open(file2_name,'w').write(UpdaterDoc_to_json_string(obj))
@@ -890,6 +943,12 @@ def test_round_trip_python(command, struct_name, file1_name, file2_name):
     elif command=='compare':
         if False:
             pass
+
+        elif struct_name=='DtoError':
+            obj1 = DtoError_from_json_string(open(file1_name).read())
+            obj2 = DtoError_from_json_string(open(file2_name).read())
+            assert obj1==obj2
+
 
         elif struct_name=='UpdaterDoc':
             obj1 = UpdaterDoc_from_json_string(open(file1_name).read())
