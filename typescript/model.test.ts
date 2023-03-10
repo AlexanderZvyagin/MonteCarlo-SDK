@@ -3,6 +3,8 @@ import { expect, expectTypeOf, test } from 'vitest'
 import {server} from './server.js'
 import * as sdk from './mcsdk'
 
+const HttpStatusOK = 200;
+
 const failure = error => {
     expect(error).toBe(undefined);
 }
@@ -16,13 +18,6 @@ async function runModel (model:sdk.Model) {
         }
     ).then(async result => {
         const json = await result.json();
-        if(result.status!==200){
-            let error_multiline = "";
-            for(let e of json.error){
-                error_multiline += '\n' + e;
-            }
-            return Promise.reject(error_multiline);
-        }
         return json;
     })
 }
@@ -34,9 +29,13 @@ test('SimpleModel with 0 time steps', async function () {
     model.Add(new sdk.BrownianMotion(0.1,0.2,2));
     model.evaluations.push(new sdk.EvaluationPoint(0,1));
 
-    await runModel(model).catch(error => {
-        expect(error).toContain('The number of time steps must be positive');
-    });
+    await runModel(model)
+        .then(result => {
+            const error = new sdk.DtoError(result.message,result.details,result.code,result.errors);
+            expect(error.code).not.toBe(HttpStatusOK);
+            expect(error.message).toContain('Error');
+            expect(error.details).toContain('The number of time steps must be positive');
+        });
 })
 
 test('SimpleModel with 0 paths', async function () {
@@ -47,9 +46,13 @@ test('SimpleModel with 0 paths', async function () {
     model.Add(new sdk.BrownianMotion(0.1,0.2,2));
     model.evaluations.push(new sdk.EvaluationPoint(0,1));
 
-    await runModel(model).catch(error => {
-        expect(error).toContain('Bad number of paths');
-    });
+    await runModel(model)
+        .then(result => {
+            const error = new sdk.DtoError(result.message,result.details,result.code,result.errors);
+            expect(error.code).not.toBe(HttpStatusOK);
+            expect(error.message).toContain('Error');
+            expect(error.details).toContain('Bad number of paths');
+        });
 })
 
 test('SimpleModel', async function () {
@@ -70,5 +73,5 @@ test('SimpleModel', async function () {
             expect(result.time_points).toEqual([model.evaluations[0].time]);
             expect(result.time_steps).toEqual([model.TimeSteps]);
         })
-        .catch(failure);    
+        .catch(failure);
 })
