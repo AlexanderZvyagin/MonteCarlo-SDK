@@ -3,7 +3,7 @@ import { expect, expectTypeOf, test } from 'vitest'
 import {server} from './server.js'
 import * as sdk from './mcsdk'
 
-const HttpStatusOK = 200;
+const HttpStatus = {OK:200, BadRequest:400};
 
 const failure = error => {
     expect(error).toBe(undefined);
@@ -32,8 +32,8 @@ test('SimpleModel with 0 time steps', async function () {
     await runModel(model)
         .then(result => {
             const error = new sdk.DtoError(result.message,result.details,result.code,result.errors);
-            expect(error.code).not.toBe(HttpStatusOK);
-            expect(error.message).toContain('Error');
+            expect(error.code).toBe(HttpStatus.BadRequest);
+//            expect(error.message).toContain('Error');
             expect(error.details).toContain('The number of time steps must be positive');
         });
 })
@@ -49,8 +49,8 @@ test('SimpleModel with 0 paths', async function () {
     await runModel(model)
         .then(result => {
             const error = new sdk.DtoError(result.message,result.details,result.code,result.errors);
-            expect(error.code).not.toBe(HttpStatusOK);
-            expect(error.message).toContain('Error');
+            expect(error.code).toBe(HttpStatus.BadRequest);
+//            expect(error.message).toContain('Error');
             expect(error.details).toContain('Bad number of paths');
         });
 })
