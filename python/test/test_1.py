@@ -36,3 +36,9 @@ def test_simple_model():
     er = run( BuildModel_Simple() )
     print(er)
     assert len(er.names)==1
+
+def test_functions_endpoint():
+    response = requests.get(f'{server()}/functions').json()
+    for j in response:
+        f = sdk.UpdaterDoc()
+        sdk.UpdaterDoc_to_json(j,f)
