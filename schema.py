@@ -4,7 +4,7 @@ from cgdto import *
 from math import nan
 
 def schema_version () -> str:
-    return 'MonteCarlo SDK version (0.1.0)'
+    return 'MonteCarlo SDK version (0.1.1)'
 
 def schema ():
 
@@ -725,7 +725,13 @@ return this;
             ('RandomSeed',[Variable('RandomSeed')]),
             ('RunTimeoutSeconds',[Variable('RunTimeoutSeconds')]),
             ('MemoryLimitKB',[Variable('MemoryLimitKB')]),
-        ]
+        ],
+        code = {
+            'python':
+'''
+self.titles = {}
+'''
+        }
     ))
 
     obj.methods.append(Function (
@@ -1081,6 +1087,8 @@ for j in range(self.GetNumberOfEvaluations()):
         data.append(item)
 return pd.DataFrame(data)
 ''',
+            'cpp': None,
+            'typescript': None,
         }
     ))
 
