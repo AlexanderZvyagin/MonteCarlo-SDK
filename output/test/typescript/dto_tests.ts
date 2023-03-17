@@ -1,1 +1,1 @@
-/home/zvyagin/Projects/MonteCarlo/f/mcsdk/output/test/mcsdk_test.ts
+/Users/zvyagin/Projects/az/mcsdk/output/test/mcsdk_test.ts

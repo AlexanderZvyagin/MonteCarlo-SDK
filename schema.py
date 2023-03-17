@@ -3,6 +3,9 @@
 from cgdto import *
 from math import nan
 
+def schema_version () -> str:
+    return 'MonteCarlo SDK version (0.1.0)'
+
 def schema ():
 
     objs = [] # objects in the file
@@ -62,6 +65,8 @@ def schema ():
     objs.append(obj)
 
     obj = Struct('UpdaterDto')
+    objs.append(obj)
+    UpdaterDto = obj
     obj.attributes.append(Variable('name','string'))
     obj.attributes.append(Variable('refs','int', list=True, optional=True))
     obj.attributes.append(Variable('args','float', list=True, optional=True))
@@ -82,10 +87,10 @@ def schema ():
             ('start',[Variable('start')]),
         ]
     ))
-    objs.append(obj)
-    UpdaterDto = obj
 
     obj = Struct('Updater',UpdaterDto)
+    objs.append(obj)
+    Updater = obj
     obj.attributes.append(Variable('_equation','int',skip_dto=True))
     obj.attributes.append(Variable('_state','int',skip_dto=True))
     obj.attributes.append(Variable('title','string',skip_dto=True))
@@ -206,9 +211,6 @@ return this.start;
 '''
         }
     ))
-
-    objs.append(obj)
-    Updater = obj
 
     objs.append(CodeBlock(code={
         'cpp': {'''
@@ -700,6 +702,7 @@ return this;
     obj.attributes.append(Variable('RandomSeed','int'))
     obj.attributes.append(Variable('RunTimeoutSeconds','float'))
     obj.attributes.append(Variable('MemoryLimitKB','int'))
+    obj.attributes.append(Variable('titles','dict[int,string]',skip_dto=True))
     obj.methods.append(Function (
         obj.name,
         'constructor',
@@ -1073,8 +1076,8 @@ for j in range(self.GetNumberOfEvaluations()):
             'stddev': self.stddev[n],
             'skewness': self.skewness[n]
         }
-        # if self.model:
-        #     item['title'] = self.model._titles.get(i,'')
+        if self.model:
+            item['title'] = self.model.titles.get(i,'')
         data.append(item)
 return pd.DataFrame(data)
 ''',
@@ -1118,7 +1121,13 @@ if __name__ == '__main__':
     objs = schema()
 
     for language in languages:
-        write_objs('output/dto','output/dto_test',language,objs)
+        write_objs(
+            'output/dto',
+            'output/dto_test',
+            language,
+            objs,
+            schema_version()
+        )
 
     for lang1 in languages:
         for lang2 in languages:
