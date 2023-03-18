@@ -1,1 +1,1 @@
-/Users/zvyagin/Projects/az/mcsdk/output/dto/mcsdk.ts
+/home/zvyagin/Projects/MonteCarlo/f/mcsdk/output/dto/mcsdk.ts
