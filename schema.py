@@ -4,18 +4,18 @@ from cgdto import *
 from math import nan
 
 def schema_version () -> str:
-    return 'MonteCarlo SDK version (0.1.3)'
+    return 'MonteCarlo SDK version (0.1.4)'
 
 def schema ():
 
     objs = [] # objects in the file
 
-    obj = Struct('DtoError')
-    DtoError = obj
-    obj.attributes.append(Variable('message','string', optional=True))
-    obj.attributes.append(Variable('details','string', optional=True))
-    obj.attributes.append(Variable('code','int', optional=True))
-    obj.attributes.append(Variable('errors',DtoError, optional=True, list=True))
+    obj = Struct('Error')
+    Error = obj
+    obj.AddAttribute(Variable('message','string', optional=True))
+    obj.AddAttribute(Variable('details','string', optional=True))
+    obj.AddAttribute(Variable('code','int', optional=True))
+    obj.AddAttribute(Variable('errors',Error, optional=True, list=True))
     obj.methods.append(Function (
         obj.name,
         'constructor',
@@ -23,7 +23,7 @@ def schema ():
             Variable('message','string',optional=True,defval=None),
             Variable('details','string',optional=True,defval=None),
             Variable('code','int',optional=True,defval=None),
-            Variable('errors',DtoError,optional=True,list=True,defval=None),
+            Variable('errors',Error,optional=True,list=True,defval=None),
         ],
         mapping = [
             ('message',[Variable('message')]),
@@ -36,12 +36,12 @@ def schema ():
 
 
     obj = Struct('UpdaterDoc')
-    obj.attributes.append(Variable('name','string'))
-    obj.attributes.append(Variable('title','string'))
-    obj.attributes.append(Variable('doc_md','string'))
-    obj.attributes.append(Variable('start','string'))
-    obj.attributes.append(Variable('nargs_min','int'))
-    obj.attributes.append(Variable('nrefs_min','int'))
+    obj.AddAttribute(Variable('name','string'))
+    obj.AddAttribute(Variable('title','string'))
+    obj.AddAttribute(Variable('doc_md','string'))
+    obj.AddAttribute(Variable('start','string'))
+    obj.AddAttribute(Variable('nargs_min','int'))
+    obj.AddAttribute(Variable('nrefs_min','int'))
     obj.methods.append(Function (
         obj.name,
         'constructor',
@@ -67,10 +67,10 @@ def schema ():
     obj = Struct('UpdaterDto')
     objs.append(obj)
     UpdaterDto = obj
-    obj.attributes.append(Variable('name','string'))
-    obj.attributes.append(Variable('refs','int', list=True, optional=True))
-    obj.attributes.append(Variable('args','float', list=True, optional=True))
-    obj.attributes.append(Variable('start','float',optional=True))
+    obj.AddAttribute(Variable('name','string'))
+    obj.AddAttribute(Variable('refs','int', list=True, optional=True))
+    obj.AddAttribute(Variable('args','float', list=True, optional=True))
+    obj.AddAttribute(Variable('start','float',optional=True))
     obj.methods.append(Function (
         obj.name,
         'constructor',
@@ -91,9 +91,9 @@ def schema ():
     obj = Struct('Updater',UpdaterDto)
     objs.append(obj)
     Updater = obj
-    obj.attributes.append(Variable('_equation','int',skip_dto=True))
-    obj.attributes.append(Variable('_state','int',skip_dto=True))
-    obj.attributes.append(Variable('title','string',skip_dto=True))
+    obj.AddAttribute(Variable('_equation','int',skip_dto=True))
+    obj.AddAttribute(Variable('_state','int',skip_dto=True))
+    obj.AddAttribute(Variable('title','string',skip_dto=True))
     obj.methods.append(Function (
         obj.name,
         'constructor',
@@ -360,8 +360,8 @@ void from_json(const json &j, std::vector<Updater> &u) {
     objs.append(obj)
 
     obj = Struct('Option',Updater)
-    obj.attributes.append(Variable('Call','int',defval=0, static=True, skip_dto=True))
-    obj.attributes.append(Variable('Put' ,'int',defval=1, static=True, skip_dto=True))
+    obj.AddAttribute(Variable('Call','int',defval=0, static=True, skip_dto=True))
+    obj.AddAttribute(Variable('Put' ,'int',defval=1, static=True, skip_dto=True))
     obj.methods.append(Function (
         obj.name,
         'constructor',
@@ -382,10 +382,10 @@ void from_json(const json &j, std::vector<Updater> &u) {
     objs.append(obj)
 
     obj = Struct('Barrier',Updater)
-    obj.attributes.append(Variable('DirectionUp','int',defval=1, static=True, skip_dto=True))
-    obj.attributes.append(Variable('DirectionDown','int',defval=-1, static=True, skip_dto=True))
-    obj.attributes.append(Variable('DirectionAny','int',defval=0, static=True, skip_dto=True))
-    obj.attributes.append(Variable('ActionSet','int',defval=0, static=True, skip_dto=True))
+    obj.AddAttribute(Variable('DirectionUp','int',defval=1, static=True, skip_dto=True))
+    obj.AddAttribute(Variable('DirectionDown','int',defval=-1, static=True, skip_dto=True))
+    obj.AddAttribute(Variable('DirectionAny','int',defval=0, static=True, skip_dto=True))
+    obj.AddAttribute(Variable('ActionSet','int',defval=0, static=True, skip_dto=True))
     obj.methods.append(Function (
         obj.name,
         'constructor',
@@ -482,10 +482,10 @@ this.args = [...[xmin,xmax],...y];
 
     obj = Struct('HistogramAxis')
     HistogramAxis = obj
-    obj.attributes.append(Variable('state','int'))
-    obj.attributes.append(Variable('nbins','int'))
-    obj.attributes.append(Variable('min','float'))
-    obj.attributes.append(Variable('max','float'))
+    obj.AddAttribute(Variable('state','int'))
+    obj.AddAttribute(Variable('nbins','int'))
+    obj.AddAttribute(Variable('min','float'))
+    obj.AddAttribute(Variable('max','float'))
     obj.methods.append(Function (
         obj.name,
         'constructor',
@@ -506,8 +506,8 @@ this.args = [...[xmin,xmax],...y];
 
     obj = Struct('Histogram')
     Histogram = obj
-    obj.attributes.append(Variable('x',HistogramAxis))
-    obj.attributes.append(Variable('y',HistogramAxis,optional=True))
+    obj.AddAttribute(Variable('x',HistogramAxis))
+    obj.AddAttribute(Variable('y',HistogramAxis,optional=True))
     obj.methods.append(Function (
         obj.name,
         'constructor',
@@ -534,11 +534,11 @@ void from_json(const json &j, std::vector<Histogram> &u) {
 
     obj = Struct ('EvaluationPoint')
     EvaluationPoint = obj
-    obj.attributes.append(Variable('state','int'))
-    obj.attributes.append(Variable('time','float'))
-    obj.attributes.append(Variable('value','float',optional=True))
-    obj.attributes.append(Variable('error','float',optional=True))
-    obj.attributes.append(Variable('histograms',Histogram,list=True))
+    obj.AddAttribute(Variable('state','int'))
+    obj.AddAttribute(Variable('time','float'))
+    obj.AddAttribute(Variable('value','float',optional=True))
+    obj.AddAttribute(Variable('error','float',optional=True))
+    obj.AddAttribute(Variable('histograms',Histogram,list=True))
     obj.methods.append(Function (
         obj.name,
         'constructor',
@@ -670,10 +670,10 @@ return this;
     objs.append(obj)
 
     obj = Struct ('Parameter')
-    obj.attributes.append(Variable('value','float'))
-    obj.attributes.append(Variable('step','float'))
-    obj.attributes.append(Variable('min','float'))
-    obj.attributes.append(Variable('max','float'))
+    obj.AddAttribute(Variable('value','float'))
+    obj.AddAttribute(Variable('step','float'))
+    obj.AddAttribute(Variable('min','float'))
+    obj.AddAttribute(Variable('max','float'))
     obj.methods.append(Function (
         obj.name,
         'constructor',
@@ -694,15 +694,15 @@ return this;
 
     obj = Struct ('Model')
     Model = obj
-    obj.attributes.append(Variable('TimeStart','float'))
-    obj.attributes.append(Variable('TimeSteps','int'))
-    obj.attributes.append(Variable('NumPaths','int'))
-    obj.attributes.append(Variable('updaters',Updater,list=True))
-    obj.attributes.append(Variable('evaluations',EvaluationPoint,list=True))
-    obj.attributes.append(Variable('RandomSeed','int'))
-    obj.attributes.append(Variable('RunTimeoutSeconds','float'))
-    obj.attributes.append(Variable('MemoryLimitKB','int'))
-    obj.attributes.append(Variable('titles','dict[int,string]',skip_dto=True))
+    obj.AddAttribute(Variable('TimeStart','float'))
+    obj.AddAttribute(Variable('TimeSteps','int'))
+    obj.AddAttribute(Variable('NumPaths','int'))
+    obj.AddAttribute(Variable('updaters',Updater,list=True))
+    obj.AddAttribute(Variable('evaluations',EvaluationPoint,list=True))
+    obj.AddAttribute(Variable('RandomSeed','int'))
+    obj.AddAttribute(Variable('RunTimeoutSeconds','float'))
+    obj.AddAttribute(Variable('MemoryLimitKB','int'))
+    obj.AddAttribute(Variable('titles','dict[int,string]',skip_dto=True))
     obj.methods.append(Function (
         obj.name,
         'constructor',
@@ -829,10 +829,10 @@ return updater;
 
     obj = Struct('Result')
     Result = obj
-    obj.attributes.append(Variable('n','int'))
-    obj.attributes.append(Variable('mean','float'))
-    obj.attributes.append(Variable('stddev','float'))
-    obj.attributes.append(Variable('skewness','float'))
+    obj.AddAttribute(Variable('n','int'))
+    obj.AddAttribute(Variable('mean','float'))
+    obj.AddAttribute(Variable('stddev','float'))
+    obj.AddAttribute(Variable('skewness','float'))
 
     obj.methods.append(Function (
         obj.name,
@@ -936,15 +936,16 @@ return this.skewness;
 
     obj = Struct('EvaluationResults')
     EvaluationResults = obj
-    obj.attributes.append(Variable('names','string',list=True))
-    obj.attributes.append(Variable('npaths','int',list=True))
-    obj.attributes.append(Variable('mean','float',list=True))
-    obj.attributes.append(Variable('stddev','float',list=True))
-    obj.attributes.append(Variable('skewness','float',list=True))
-    obj.attributes.append(Variable('time_points','float',list=True))
-    obj.attributes.append(Variable('time_steps','int',list=True))
-    obj.attributes.append(Variable('histograms',Histogram,list=True))
-    obj.attributes.append(Variable('model',Model,optional=True))
+    EvaluationResults.dependencies.add(Result)
+    obj.AddAttribute(Variable('names','string',list=True))
+    obj.AddAttribute(Variable('npaths','int',list=True))
+    obj.AddAttribute(Variable('mean','float',list=True))
+    obj.AddAttribute(Variable('stddev','float',list=True))
+    obj.AddAttribute(Variable('skewness','float',list=True))
+    obj.AddAttribute(Variable('time_points','float',list=True))
+    obj.AddAttribute(Variable('time_steps','int',list=True))
+    obj.AddAttribute(Variable('histograms',Histogram,list=True))
+    obj.AddAttribute(Variable('model',Model,optional=True))
     obj.methods.append(Function (
         obj.name,
         'constructor',

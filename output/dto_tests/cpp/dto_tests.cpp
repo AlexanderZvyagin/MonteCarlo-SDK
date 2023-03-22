@@ -6,7 +6,7 @@
 #include <fstream>
 #include <stdexcept>
 
-#include "DtoError.hpp"
+#include "Error.hpp"
 #include "UpdaterDoc.hpp"
 #include "UpdaterDto.hpp"
 #include "Updater.hpp"
@@ -178,45 +178,45 @@ std::optional<std::vector<std::string>> random_optional_list_string (
         return {};
 }
 
-// Forward declarations for DtoError
-class DtoError;
-DtoError random_DtoError (void);
-std::optional<DtoError> random_optional_DtoError (void);
-std::vector<DtoError> random_list_DtoError (int min=0, int max=3);
-std::optional<std::vector<DtoError>> random_optional_list_DtoError (int min=0, int max=3);
+// Forward declarations for Error
+class Error;
+Error random_Error (void);
+std::optional<Error> random_optional_Error (void);
+std::vector<Error> random_list_Error (int min=0, int max=3);
+std::optional<std::vector<Error>> random_optional_list_Error (int min=0, int max=3);
 
 
-DtoError random_DtoError (void) {
-    return DtoError (
+Error random_Error (void) {
+    return Error (
         random_optional_string(),
         random_optional_string(),
         random_optional_int(),
-        random_optional_list_DtoError()
+        random_optional_list_Error()
 
     );
 }
 
 
-std::optional<DtoError> random_optional_DtoError (void) {
+std::optional<Error> random_optional_Error (void) {
     if(yes_no())
         return {};
-    return random_DtoError ();
+    return random_Error ();
 }
 
 
-std::vector<DtoError> random_list_DtoError (int min, int max) {
+std::vector<Error> random_list_Error (int min, int max) {
     const auto size = random_int(min,max);
-    std::vector<DtoError> list;
+    std::vector<Error> list;
     for(int i=0; i<size; i++)
-        list.push_back(random_DtoError());
+        list.push_back(random_Error());
     return list;
 }
 
 
-std::optional<std::vector<DtoError>> random_optional_list_DtoError (int min, int max) {
+std::optional<std::vector<Error>> random_optional_list_Error (int min, int max) {
     if(yes_no())
         return {};
-    return random_list_DtoError (min,max);
+    return random_list_Error (min,max);
 }
 
 // Forward declarations for UpdaterDoc
@@ -1069,11 +1069,11 @@ int main (int argc, const char **argv) try {
 
         if (false) {
 
-        } else if (struct_name == "DtoError") {
-            auto obj1 = dto::random_DtoError();
-            std::ofstream(file1_path) << dto::DtoError_to_json_string(obj1);
+        } else if (struct_name == "Error") {
+            auto obj1 = dto::random_Error();
+            std::ofstream(file1_path) << dto::Error_to_json_string(obj1);
             auto obj2 =
-                dto::DtoError_from_json (
+                dto::Error_from_json (
                     json::parse (
                         std::ifstream (
                             file1_path
@@ -1351,15 +1351,15 @@ int main (int argc, const char **argv) try {
 
         if (false) {
 
-        } else if (struct_name == "DtoError") {
+        } else if (struct_name == "Error") {
             auto obj =
-                dto::DtoError_from_json (
+                dto::Error_from_json (
                     json::parse (
                         std::ifstream (
                             file1_path
             )));
             std::ofstream out (file2_path);
-            out << DtoError_to_json_string(obj);
+            out << Error_to_json_string(obj);
             if(!out)
                 throw std::runtime_error("Operation 'convert': IO error on " + struct_name);
 
@@ -1631,15 +1631,15 @@ int main (int argc, const char **argv) try {
 
         if (false) {
 
-        } else if (struct_name == "DtoError") {
+        } else if (struct_name == "Error") {
             auto obj1 =
-                dto::DtoError_from_json (
+                dto::Error_from_json (
                     json::parse (
                         std::ifstream (
                             file1_path
             )));
             auto obj2 =
-                dto::DtoError_from_json (
+                dto::Error_from_json (
                     json::parse (
                         std::ifstream (
                             file2_path

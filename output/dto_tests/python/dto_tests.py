@@ -55,31 +55,31 @@ def random_optional_list_float (min = 0, max = 3) -> list[float]|None:
     return random_list_float(min,max)
 
 
-def random_DtoError ():
-    return DtoError (
+def random_Error ():
+    return Error (
         random_optional_string(),
         random_optional_string(),
         random_optional_int(),
-        random_optional_list_DtoError()
+        random_optional_list_Error()
 
     )
 
 
-def random_optional_DtoError () -> DtoError|None:
+def random_optional_Error () -> Error|None:
     if yes_no():
         return None
-    return random_DtoError()
+    return random_Error()
 
 
-def random_list_DtoError (min:int = 0, max:int = 3) -> list[DtoError]:
+def random_list_Error (min:int = 0, max:int = 3) -> list[Error]:
     size = random.randint(min,max)
-    return [random_DtoError() for i in range(size)]
+    return [random_Error() for i in range(size)]
 
 
-def random_optional_list_DtoError (min:int = 0, max:int = 3) -> list[DtoError]|None:
+def random_optional_list_Error (min:int = 0, max:int = 3) -> list[Error]|None:
     if yes_no():
         return None
-    return random_list_DtoError(min,max)
+    return random_list_Error(min,max)
 
 
 def random_UpdaterDoc ():
@@ -640,12 +640,12 @@ def test_round_trip_python(command, struct_name, file1_name, file2_name):
         if False:
             pass
 
-        elif struct_name=='DtoError':
-            obj1 = random_DtoError()
-            open(file1_name,'w').write(DtoError_to_json_string(obj1))
-            obj2 = DtoError_from_json_string(open(file1_name).read())
-            assert isinstance(obj1,DtoError)
-            assert isinstance(obj2,DtoError)
+        elif struct_name=='Error':
+            obj1 = random_Error()
+            open(file1_name,'w').write(Error_to_json_string(obj1))
+            obj2 = Error_from_json_string(open(file1_name).read())
+            assert isinstance(obj1,Error)
+            assert isinstance(obj2,Error)
             assert obj1==obj2
 
 
@@ -834,9 +834,9 @@ def test_round_trip_python(command, struct_name, file1_name, file2_name):
         if False:
             pass
 
-        elif struct_name=='DtoError':
-            obj = DtoError_from_json_string(open(file1_name).read())
-            open(file2_name,'w').write(DtoError_to_json_string(obj))
+        elif struct_name=='Error':
+            obj = Error_from_json_string(open(file1_name).read())
+            open(file2_name,'w').write(Error_to_json_string(obj))
 
 
         elif struct_name=='UpdaterDoc':
@@ -944,9 +944,9 @@ def test_round_trip_python(command, struct_name, file1_name, file2_name):
         if False:
             pass
 
-        elif struct_name=='DtoError':
-            obj1 = DtoError_from_json_string(open(file1_name).read())
-            obj2 = DtoError_from_json_string(open(file2_name).read())
+        elif struct_name=='Error':
+            obj1 = Error_from_json_string(open(file1_name).read())
+            obj2 = Error_from_json_string(open(file2_name).read())
             assert obj1==obj2
 
 
