@@ -31,7 +31,7 @@ test('SimpleModel with 0 time steps', async function () {
 
     await runModel(model)
         .then(result => {
-            const error = new sdk.DtoError(result.message,result.details,result.code,result.errors);
+            const error = new sdk.Error(result.message,result.details,result.code,result.errors);
             expect(error.code).toBe(HttpStatus.BadRequest);
 //            expect(error.message).toContain('Error');
             expect(error.details).toContain('The number of time steps must be positive');
@@ -48,7 +48,7 @@ test('SimpleModel with 0 paths', async function () {
 
     await runModel(model)
         .then(result => {
-            const error = new sdk.DtoError(result.message,result.details,result.code,result.errors);
+            const error = new sdk.Error(result.message,result.details,result.code,result.errors);
             expect(error.code).toBe(HttpStatus.BadRequest);
 //            expect(error.message).toContain('Error');
             expect(error.details).toContain('Bad number of paths');

@@ -1,1 +1,1 @@
-../output/dto/mcsdk.ts
+../output/dto/typescript/dto.ts
