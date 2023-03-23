@@ -614,7 +614,9 @@ function random_optional_list_HistogramAxis () : HistogramAxis[]|undefined {
 function random_Histogram () : Histogram {
     return new Histogram (
         random_HistogramAxis(),
-        random_optional_HistogramAxis()
+        random_optional_HistogramAxis(),
+        random_optional_int(),
+        random_optional_list_float()
 
     );
 }

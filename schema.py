@@ -4,7 +4,7 @@ from cgdto import *
 from math import nan
 
 def schema_version () -> str:
-    return 'MonteCarlo SDK version (0.1.4)'
+    return 'MonteCarlo SDK version (0.1.6)'
 
 def schema ():
 
@@ -239,7 +239,7 @@ void from_json(const json &j, std::vector<Updater> &u) {
         ])]
     ))
     objs.append(obj)
-    
+
     obj = Struct('CorrelatedGaussian',Updater)
     obj.methods.append(Function (
         obj.name,
@@ -413,7 +413,7 @@ void from_json(const json &j, std::vector<Updater> &u) {
             Variable('title'),
         ])]
     ))
-    
+
     objs.append(obj)
 
     obj = Struct('Linear1DInterpolation',Updater,gen_test=False)
@@ -508,16 +508,22 @@ this.args = [...[xmin,xmax],...y];
     Histogram = obj
     obj.AddAttribute(Variable('x',HistogramAxis))
     obj.AddAttribute(Variable('y',HistogramAxis,optional=True))
+    obj.AddAttribute(Variable('evaluation_point','int',optional=True))
+    obj.AddAttribute(Variable('bins','float',list=True,optional=True))
     obj.methods.append(Function (
         obj.name,
         'constructor',
         args = [
             Variable('x',HistogramAxis,Variable('HistogramAxis()',HistogramAxis)),
             Variable('y',HistogramAxis,None,optional=True),
+            Variable('evaluation_point','int',None,optional=True),
+            Variable('bins','float',None,optional=True,list=True)
         ],
         mapping = [
             ('x',[Variable('x')]),
-            ('y',[Variable('y')])
+            ('y',[Variable('y')]),
+            ('evaluation_point',[Variable('evaluation_point')]),
+            ('bins',[Variable('bins')]),
         ]
     ))
     objs.append(obj)

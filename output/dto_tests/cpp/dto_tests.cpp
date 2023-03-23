@@ -806,7 +806,9 @@ std::optional<std::vector<Histogram>> random_optional_list_Histogram (int min=0,
 Histogram random_Histogram (void) {
     return Histogram (
         random_HistogramAxis(),
-        random_optional_HistogramAxis()
+        random_optional_HistogramAxis(),
+        random_optional_int(),
+        random_optional_list_float()
 
     );
 }

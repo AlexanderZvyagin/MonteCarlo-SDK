@@ -465,7 +465,9 @@ def random_optional_list_HistogramAxis (min:int = 0, max:int = 3) -> list[Histog
 def random_Histogram ():
     return Histogram (
         random_HistogramAxis(),
-        random_optional_HistogramAxis()
+        random_optional_HistogramAxis(),
+        random_optional_int(),
+        random_optional_list_float()
 
     )
 
