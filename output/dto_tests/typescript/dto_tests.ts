@@ -651,7 +651,7 @@ function random_EvaluationPoint () : EvaluationPoint {
         random_float(),
         random_optional_float(),
         random_optional_float(),
-        random_list_Histogram()
+        random_optional_list_Histogram()
 
     );
 }
@@ -721,9 +721,9 @@ function random_Model () : Model {
         random_int(),
         random_list_Updater(),
         random_list_EvaluationPoint(),
-        random_int(),
-        random_float(),
-        random_int()
+        random_optional_int(),
+        random_optional_float(),
+        random_optional_int()
 
     );
 }

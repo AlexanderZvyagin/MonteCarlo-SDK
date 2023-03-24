@@ -4,7 +4,7 @@ from cgdto import *
 from math import nan
 
 def schema_version () -> str:
-    return 'MonteCarlo SDK version (0.1.6)'
+    return 'MonteCarlo SDK version (0.1.7)'
 
 def schema ():
 
@@ -544,7 +544,7 @@ void from_json(const json &j, std::vector<Histogram> &u) {
     obj.AddAttribute(Variable('time','float'))
     obj.AddAttribute(Variable('value','float',optional=True))
     obj.AddAttribute(Variable('error','float',optional=True))
-    obj.AddAttribute(Variable('histograms',Histogram,list=True))
+    obj.AddAttribute(Variable('histograms',Histogram,list=True,optional=True))
     obj.methods.append(Function (
         obj.name,
         'constructor',
@@ -553,7 +553,7 @@ void from_json(const json &j, std::vector<Histogram> &u) {
             Variable('time','float',nan),
             Variable('value','float',None,optional=True),
             Variable('error','float',None,optional=True),
-            Variable('histograms',Histogram,[],list=True),
+            Variable('histograms',Histogram,None,optional=True,list=True),
         ],
         mapping = [
             ('state',[Variable('state')]),
@@ -658,16 +658,22 @@ return this.error;
         code = {
             'python':
 '''
+if getattr(self,'histograms',None) is None:
+    self.histograms = []
 self.histograms.append(histogram)
 return self
 ''',
             'cpp':
 '''
-histograms.push_back(histogram);
+if( not histograms.has_value() )
+    histograms = std::vector<Histogram> ();
+histograms.value().push_back(histogram);
 return *this;
 ''',
             'typescript':
 '''
+if(this.histograms === undefined)
+    this.histograms = [];
 this.histograms.push(histogram);
 return this;
 ''',
@@ -705,9 +711,9 @@ return this;
     obj.AddAttribute(Variable('NumPaths','int'))
     obj.AddAttribute(Variable('updaters',Updater,list=True))
     obj.AddAttribute(Variable('evaluations',EvaluationPoint,list=True))
-    obj.AddAttribute(Variable('RandomSeed','int'))
-    obj.AddAttribute(Variable('RunTimeoutSeconds','float'))
-    obj.AddAttribute(Variable('MemoryLimitKB','int'))
+    obj.AddAttribute(Variable('RandomSeed','int',optional=True))
+    obj.AddAttribute(Variable('RunTimeoutSeconds','float',optional=True))
+    obj.AddAttribute(Variable('MemoryLimitKB','int',optional=True))
     obj.AddAttribute(Variable('titles','dict[int,string]',skip_dto=True))
     obj.methods.append(Function (
         obj.name,
@@ -718,9 +724,9 @@ return this;
             Variable('NumPaths','int',0),
             Variable('updaters',Updater,[],list=True),
             Variable('evaluations',EvaluationPoint,[],list=True),
-            Variable('RandomSeed','int',-1),
-            Variable('RunTimeoutSeconds','float',1),
-            Variable('MemoryLimitKB','int',1),
+            Variable('RandomSeed','int',None,optional=True),
+            Variable('RunTimeoutSeconds','float',None,optional=True),
+            Variable('MemoryLimitKB','int',None,optional=True),
         ],
         mapping = [
             ('TimeStart',[Variable('TimeStart')]),
