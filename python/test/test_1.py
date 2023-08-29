@@ -1,9 +1,4 @@
-import requests
-
-from server import server
-import mcsdk as sdk
-
-HttpStatusOK = 200
+from common import *
 
 def test_server_available():
     assert server()
@@ -24,13 +19,6 @@ def BuildModel_Simple():
     m.evaluations.append(sdk.EvaluationPoint(0,2))
 
     return m
-
-def run(model:sdk.Model) -> sdk.EvaluationResults:
-    response = requests.post(f'{server()}/model',sdk.Model_to_json_string(model))
-    assert response.status_code == HttpStatusOK
-    er = sdk.EvaluationResults_from_json_string(response.text)
-    er.model = model
-    return er
 
 def test_simple_model():
     er = run( BuildModel_Simple() )
