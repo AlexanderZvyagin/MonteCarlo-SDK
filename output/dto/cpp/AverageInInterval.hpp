@@ -20,60 +20,60 @@ using json = nlohmann::json;
 
 #include "Updater.hpp"
 namespace dto {
-class ZeroCouponBond;
-std::string ZeroCouponBond_to_json_string(const ZeroCouponBond &obj);
-class ZeroCouponBond: public Updater {
+class AverageInInterval;
+std::string AverageInInterval_to_json_string(const AverageInInterval &obj);
+class AverageInInterval: public Updater {
 public:
 
 
     
-    ZeroCouponBond (
+    AverageInInterval (
         int underlying = -88,
-        float start = NAN,
+        std::vector<float> t = {},
         std::string title = ""
     )
     : Updater (
-        "ZeroCouponBond",
+        "AverageInInterval",
         {underlying},
-        {},
-        start,
+        t,
+        0,
         title
     )
     {
     }
 
-    bool operator == (const ZeroCouponBond &other) const {
+    bool operator == (const AverageInInterval &other) const {
         if (Updater::operator != (other)) return false;
         return true;
     }
-    bool operator != (const ZeroCouponBond &other) const {return not(*this==other);}
+    bool operator != (const AverageInInterval &other) const {return not(*this==other);}
     std::string json (void) const {
-        return ZeroCouponBond_to_json_string(*this);
+        return AverageInInterval_to_json_string(*this);
     }
-}; // ZeroCouponBond
+}; // AverageInInterval
 inline
-void to_json(json &j, const ZeroCouponBond &obj) try {
+void to_json(json &j, const AverageInInterval &obj) try {
     j = json::object();
     to_json(j,static_cast<const Updater &>(obj));
 } catch (const std::exception &e) {
-    std::throw_with_nested(std::runtime_error("void to_json(json &j, const ZeroCouponBond &obj) exception"));
+    std::throw_with_nested(std::runtime_error("void to_json(json &j, const AverageInInterval &obj) exception"));
 }
 
 inline
-std::string ZeroCouponBond_to_json_string(const ZeroCouponBond &obj) {
+std::string AverageInInterval_to_json_string(const AverageInInterval &obj) {
     json j;
     to_json(j,obj);
     return j.dump();
 }
 inline
-void from_json(const json &j, ZeroCouponBond &obj) try {
+void from_json(const json &j, AverageInInterval &obj) try {
     from_json(j,static_cast<Updater &>(obj));
 } catch (const std::exception &e) {
-    std::throw_with_nested(std::runtime_error("void from_json(const json &j, ZeroCouponBond &obj) exception"));
+    std::throw_with_nested(std::runtime_error("void from_json(const json &j, AverageInInterval &obj) exception"));
 }
 inline
-ZeroCouponBond ZeroCouponBond_from_json(const json &j) {
-    ZeroCouponBond obj;
+AverageInInterval AverageInInterval_from_json(const json &j) {
+    AverageInInterval obj;
     from_json(j,obj);
     return obj;
 }

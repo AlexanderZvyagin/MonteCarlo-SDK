@@ -28,6 +28,10 @@ import {
     Model,
     Result,
     EvaluationResults,
+    Sum,
+    SumAtPoints,
+    SumOnIntervals,
+    AverageInInterval,
 } from './dto'
 
 function random_int(min:number = -1000, max:number = 1000) : number {
@@ -825,6 +829,138 @@ function random_optional_list_EvaluationResults () : EvaluationResults[]|undefin
 }
 
 
+function random_Sum () : Sum {
+    return new Sum (
+        random_list_float(),
+        random_list_int(),
+        random_string()
+
+    );
+}
+
+
+function random_optional_Sum () : Sum|undefined {
+    if(yes_no())
+        return undefined;
+    return random_Sum ();
+}
+
+
+function random_list_Sum (min:number = 0, max:number = 3) : Sum[] {
+    const size:number = Math.floor(min + Math.random()*(max-min));
+    const list:Sum[] = [];
+    for(let i=0; i<size; i++)
+        list.push(random_Sum());
+    return list;
+}
+
+
+function random_optional_list_Sum () : Sum[]|undefined {
+    if(yes_no())
+        return undefined;
+    return random_list_Sum ();
+}
+
+
+function random_SumAtPoints () : SumAtPoints {
+    return new SumAtPoints (
+        random_int(),
+        random_list_float(),
+        random_string()
+
+    );
+}
+
+
+function random_optional_SumAtPoints () : SumAtPoints|undefined {
+    if(yes_no())
+        return undefined;
+    return random_SumAtPoints ();
+}
+
+
+function random_list_SumAtPoints (min:number = 0, max:number = 3) : SumAtPoints[] {
+    const size:number = Math.floor(min + Math.random()*(max-min));
+    const list:SumAtPoints[] = [];
+    for(let i=0; i<size; i++)
+        list.push(random_SumAtPoints());
+    return list;
+}
+
+
+function random_optional_list_SumAtPoints () : SumAtPoints[]|undefined {
+    if(yes_no())
+        return undefined;
+    return random_list_SumAtPoints ();
+}
+
+
+function random_SumOnIntervals () : SumOnIntervals {
+    return new SumOnIntervals (
+        random_int(),
+        random_list_float(),
+        random_string()
+
+    );
+}
+
+
+function random_optional_SumOnIntervals () : SumOnIntervals|undefined {
+    if(yes_no())
+        return undefined;
+    return random_SumOnIntervals ();
+}
+
+
+function random_list_SumOnIntervals (min:number = 0, max:number = 3) : SumOnIntervals[] {
+    const size:number = Math.floor(min + Math.random()*(max-min));
+    const list:SumOnIntervals[] = [];
+    for(let i=0; i<size; i++)
+        list.push(random_SumOnIntervals());
+    return list;
+}
+
+
+function random_optional_list_SumOnIntervals () : SumOnIntervals[]|undefined {
+    if(yes_no())
+        return undefined;
+    return random_list_SumOnIntervals ();
+}
+
+
+function random_AverageInInterval () : AverageInInterval {
+    return new AverageInInterval (
+        random_int(),
+        random_list_float(),
+        random_string()
+
+    );
+}
+
+
+function random_optional_AverageInInterval () : AverageInInterval|undefined {
+    if(yes_no())
+        return undefined;
+    return random_AverageInInterval ();
+}
+
+
+function random_list_AverageInInterval (min:number = 0, max:number = 3) : AverageInInterval[] {
+    const size:number = Math.floor(min + Math.random()*(max-min));
+    const list:AverageInInterval[] = [];
+    for(let i=0; i<size; i++)
+        list.push(random_AverageInInterval());
+    return list;
+}
+
+
+function random_optional_list_AverageInInterval () : AverageInInterval[]|undefined {
+    if(yes_no())
+        return undefined;
+    return random_list_AverageInInterval ();
+}
+
+
 function create (struct_name:string, file_name:string){
     if(false){
 
@@ -1079,6 +1215,54 @@ function create (struct_name:string, file_name:string){
         if(!dto.EvaluationResults_equal(obj1,obj2))
             throw new Error(`${struct_name} objects are not equal.`);
 
+
+    } else if (struct_name === 'Sum') {
+        const obj1: Sum = random_Sum();
+        const j: object = {};
+        dto.Sum_to_json(j,obj1);
+
+        fs.writeFileSync (file_name, JSON.stringify (j));
+        const obj2: Sum = new Sum();
+        dto.Sum_from_json(j,obj2);
+        if(!dto.Sum_equal(obj1,obj2))
+            throw new Error(`${struct_name} objects are not equal.`);
+
+
+    } else if (struct_name === 'SumAtPoints') {
+        const obj1: SumAtPoints = random_SumAtPoints();
+        const j: object = {};
+        dto.SumAtPoints_to_json(j,obj1);
+
+        fs.writeFileSync (file_name, JSON.stringify (j));
+        const obj2: SumAtPoints = new SumAtPoints();
+        dto.SumAtPoints_from_json(j,obj2);
+        if(!dto.SumAtPoints_equal(obj1,obj2))
+            throw new Error(`${struct_name} objects are not equal.`);
+
+
+    } else if (struct_name === 'SumOnIntervals') {
+        const obj1: SumOnIntervals = random_SumOnIntervals();
+        const j: object = {};
+        dto.SumOnIntervals_to_json(j,obj1);
+
+        fs.writeFileSync (file_name, JSON.stringify (j));
+        const obj2: SumOnIntervals = new SumOnIntervals();
+        dto.SumOnIntervals_from_json(j,obj2);
+        if(!dto.SumOnIntervals_equal(obj1,obj2))
+            throw new Error(`${struct_name} objects are not equal.`);
+
+
+    } else if (struct_name === 'AverageInInterval') {
+        const obj1: AverageInInterval = random_AverageInInterval();
+        const j: object = {};
+        dto.AverageInInterval_to_json(j,obj1);
+
+        fs.writeFileSync (file_name, JSON.stringify (j));
+        const obj2: AverageInInterval = new AverageInInterval();
+        dto.AverageInInterval_from_json(j,obj2);
+        if(!dto.AverageInInterval_equal(obj1,obj2))
+            throw new Error(`${struct_name} objects are not equal.`);
+
     } else
         throw new Error(`Cannot create an object of the structure ${struct_name}.`);
 }
@@ -1209,6 +1393,30 @@ function convert (struct_name:string, file1_name:string, file2_name:string){
     } else if (struct_name === 'EvaluationResults') {
         const jstr: string = fs.readFileSync(file1_name,'utf-8');
         const obj: EvaluationResults = dto.EvaluationResults_fromJSON_string(jstr);
+        fs.writeFileSync(file2_name, JSON.stringify(obj));
+
+
+    } else if (struct_name === 'Sum') {
+        const jstr: string = fs.readFileSync(file1_name,'utf-8');
+        const obj: Sum = dto.Sum_fromJSON_string(jstr);
+        fs.writeFileSync(file2_name, JSON.stringify(obj));
+
+
+    } else if (struct_name === 'SumAtPoints') {
+        const jstr: string = fs.readFileSync(file1_name,'utf-8');
+        const obj: SumAtPoints = dto.SumAtPoints_fromJSON_string(jstr);
+        fs.writeFileSync(file2_name, JSON.stringify(obj));
+
+
+    } else if (struct_name === 'SumOnIntervals') {
+        const jstr: string = fs.readFileSync(file1_name,'utf-8');
+        const obj: SumOnIntervals = dto.SumOnIntervals_fromJSON_string(jstr);
+        fs.writeFileSync(file2_name, JSON.stringify(obj));
+
+
+    } else if (struct_name === 'AverageInInterval') {
+        const jstr: string = fs.readFileSync(file1_name,'utf-8');
+        const obj: AverageInInterval = dto.AverageInInterval_fromJSON_string(jstr);
         fs.writeFileSync(file2_name, JSON.stringify(obj));
 
     } else
@@ -1404,6 +1612,42 @@ function compare (struct_name:string, file1_name:string, file2_name:string){
         const obj1: EvaluationResults = dto.EvaluationResults_fromJSON_string(jstr1);
         const obj2: EvaluationResults = dto.EvaluationResults_fromJSON_string(jstr2);
         if(!dto.EvaluationResults_equal(obj1,obj2))
+            throw new Error(`${struct_name} objects are not equal.`);
+
+
+    } else if (struct_name === 'Sum') {
+        const jstr1: string = fs.readFileSync(file1_name,'utf-8');
+        const jstr2: string = fs.readFileSync(file2_name,'utf-8');
+        const obj1: Sum = dto.Sum_fromJSON_string(jstr1);
+        const obj2: Sum = dto.Sum_fromJSON_string(jstr2);
+        if(!dto.Sum_equal(obj1,obj2))
+            throw new Error(`${struct_name} objects are not equal.`);
+
+
+    } else if (struct_name === 'SumAtPoints') {
+        const jstr1: string = fs.readFileSync(file1_name,'utf-8');
+        const jstr2: string = fs.readFileSync(file2_name,'utf-8');
+        const obj1: SumAtPoints = dto.SumAtPoints_fromJSON_string(jstr1);
+        const obj2: SumAtPoints = dto.SumAtPoints_fromJSON_string(jstr2);
+        if(!dto.SumAtPoints_equal(obj1,obj2))
+            throw new Error(`${struct_name} objects are not equal.`);
+
+
+    } else if (struct_name === 'SumOnIntervals') {
+        const jstr1: string = fs.readFileSync(file1_name,'utf-8');
+        const jstr2: string = fs.readFileSync(file2_name,'utf-8');
+        const obj1: SumOnIntervals = dto.SumOnIntervals_fromJSON_string(jstr1);
+        const obj2: SumOnIntervals = dto.SumOnIntervals_fromJSON_string(jstr2);
+        if(!dto.SumOnIntervals_equal(obj1,obj2))
+            throw new Error(`${struct_name} objects are not equal.`);
+
+
+    } else if (struct_name === 'AverageInInterval') {
+        const jstr1: string = fs.readFileSync(file1_name,'utf-8');
+        const jstr2: string = fs.readFileSync(file2_name,'utf-8');
+        const obj1: AverageInInterval = dto.AverageInInterval_fromJSON_string(jstr1);
+        const obj2: AverageInInterval = dto.AverageInInterval_fromJSON_string(jstr2);
+        if(!dto.AverageInInterval_equal(obj1,obj2))
             throw new Error(`${struct_name} objects are not equal.`);
 
     } else

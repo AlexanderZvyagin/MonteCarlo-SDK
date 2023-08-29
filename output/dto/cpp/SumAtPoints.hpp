@@ -20,60 +20,60 @@ using json = nlohmann::json;
 
 #include "Updater.hpp"
 namespace dto {
-class ZeroCouponBond;
-std::string ZeroCouponBond_to_json_string(const ZeroCouponBond &obj);
-class ZeroCouponBond: public Updater {
+class SumAtPoints;
+std::string SumAtPoints_to_json_string(const SumAtPoints &obj);
+class SumAtPoints: public Updater {
 public:
 
 
     
-    ZeroCouponBond (
+    SumAtPoints (
         int underlying = -88,
-        float start = NAN,
+        std::vector<float> t = {},
         std::string title = ""
     )
     : Updater (
-        "ZeroCouponBond",
+        "SumAtPoints",
         {underlying},
-        {},
-        start,
+        t,
+        0,
         title
     )
     {
     }
 
-    bool operator == (const ZeroCouponBond &other) const {
+    bool operator == (const SumAtPoints &other) const {
         if (Updater::operator != (other)) return false;
         return true;
     }
-    bool operator != (const ZeroCouponBond &other) const {return not(*this==other);}
+    bool operator != (const SumAtPoints &other) const {return not(*this==other);}
     std::string json (void) const {
-        return ZeroCouponBond_to_json_string(*this);
+        return SumAtPoints_to_json_string(*this);
     }
-}; // ZeroCouponBond
+}; // SumAtPoints
 inline
-void to_json(json &j, const ZeroCouponBond &obj) try {
+void to_json(json &j, const SumAtPoints &obj) try {
     j = json::object();
     to_json(j,static_cast<const Updater &>(obj));
 } catch (const std::exception &e) {
-    std::throw_with_nested(std::runtime_error("void to_json(json &j, const ZeroCouponBond &obj) exception"));
+    std::throw_with_nested(std::runtime_error("void to_json(json &j, const SumAtPoints &obj) exception"));
 }
 
 inline
-std::string ZeroCouponBond_to_json_string(const ZeroCouponBond &obj) {
+std::string SumAtPoints_to_json_string(const SumAtPoints &obj) {
     json j;
     to_json(j,obj);
     return j.dump();
 }
 inline
-void from_json(const json &j, ZeroCouponBond &obj) try {
+void from_json(const json &j, SumAtPoints &obj) try {
     from_json(j,static_cast<Updater &>(obj));
 } catch (const std::exception &e) {
-    std::throw_with_nested(std::runtime_error("void from_json(const json &j, ZeroCouponBond &obj) exception"));
+    std::throw_with_nested(std::runtime_error("void from_json(const json &j, SumAtPoints &obj) exception"));
 }
 inline
-ZeroCouponBond ZeroCouponBond_from_json(const json &j) {
-    ZeroCouponBond obj;
+SumAtPoints SumAtPoints_from_json(const json &j) {
+    SumAtPoints obj;
     from_json(j,obj);
     return obj;
 }

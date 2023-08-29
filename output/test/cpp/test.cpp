@@ -27,6 +27,10 @@
 #include "Model.hpp"
 #include "Result.hpp"
 #include "EvaluationResults.hpp"
+#include "Sum.hpp"
+#include "SumAtPoints.hpp"
+#include "SumOnIntervals.hpp"
+#include "AverageInInterval.hpp"
 
 namespace fs = std::filesystem;
 
@@ -1051,6 +1055,166 @@ std::optional<std::vector<EvaluationResults>> random_optional_list_EvaluationRes
     return random_list_EvaluationResults (min,max);
 }
 
+// Forward declarations for Sum
+class Sum;
+Sum random_Sum (void);
+std::optional<Sum> random_optional_Sum (void);
+std::vector<Sum> random_list_Sum (int min=0, int max=3);
+std::optional<std::vector<Sum>> random_optional_list_Sum (int min=0, int max=3);
+
+
+Sum random_Sum (void) {
+    return Sum (
+        random_list_float(),
+        random_list_int(),
+        random_string()
+
+    );
+}
+
+
+std::optional<Sum> random_optional_Sum (void) {
+    if(yes_no())
+        return {};
+    return random_Sum ();
+}
+
+
+std::vector<Sum> random_list_Sum (int min, int max) {
+    const auto size = random_int(min,max);
+    std::vector<Sum> list;
+    for(int i=0; i<size; i++)
+        list.push_back(random_Sum());
+    return list;
+}
+
+
+std::optional<std::vector<Sum>> random_optional_list_Sum (int min, int max) {
+    if(yes_no())
+        return {};
+    return random_list_Sum (min,max);
+}
+
+// Forward declarations for SumAtPoints
+class SumAtPoints;
+SumAtPoints random_SumAtPoints (void);
+std::optional<SumAtPoints> random_optional_SumAtPoints (void);
+std::vector<SumAtPoints> random_list_SumAtPoints (int min=0, int max=3);
+std::optional<std::vector<SumAtPoints>> random_optional_list_SumAtPoints (int min=0, int max=3);
+
+
+SumAtPoints random_SumAtPoints (void) {
+    return SumAtPoints (
+        random_int(),
+        random_list_float(),
+        random_string()
+
+    );
+}
+
+
+std::optional<SumAtPoints> random_optional_SumAtPoints (void) {
+    if(yes_no())
+        return {};
+    return random_SumAtPoints ();
+}
+
+
+std::vector<SumAtPoints> random_list_SumAtPoints (int min, int max) {
+    const auto size = random_int(min,max);
+    std::vector<SumAtPoints> list;
+    for(int i=0; i<size; i++)
+        list.push_back(random_SumAtPoints());
+    return list;
+}
+
+
+std::optional<std::vector<SumAtPoints>> random_optional_list_SumAtPoints (int min, int max) {
+    if(yes_no())
+        return {};
+    return random_list_SumAtPoints (min,max);
+}
+
+// Forward declarations for SumOnIntervals
+class SumOnIntervals;
+SumOnIntervals random_SumOnIntervals (void);
+std::optional<SumOnIntervals> random_optional_SumOnIntervals (void);
+std::vector<SumOnIntervals> random_list_SumOnIntervals (int min=0, int max=3);
+std::optional<std::vector<SumOnIntervals>> random_optional_list_SumOnIntervals (int min=0, int max=3);
+
+
+SumOnIntervals random_SumOnIntervals (void) {
+    return SumOnIntervals (
+        random_int(),
+        random_list_float(),
+        random_string()
+
+    );
+}
+
+
+std::optional<SumOnIntervals> random_optional_SumOnIntervals (void) {
+    if(yes_no())
+        return {};
+    return random_SumOnIntervals ();
+}
+
+
+std::vector<SumOnIntervals> random_list_SumOnIntervals (int min, int max) {
+    const auto size = random_int(min,max);
+    std::vector<SumOnIntervals> list;
+    for(int i=0; i<size; i++)
+        list.push_back(random_SumOnIntervals());
+    return list;
+}
+
+
+std::optional<std::vector<SumOnIntervals>> random_optional_list_SumOnIntervals (int min, int max) {
+    if(yes_no())
+        return {};
+    return random_list_SumOnIntervals (min,max);
+}
+
+// Forward declarations for AverageInInterval
+class AverageInInterval;
+AverageInInterval random_AverageInInterval (void);
+std::optional<AverageInInterval> random_optional_AverageInInterval (void);
+std::vector<AverageInInterval> random_list_AverageInInterval (int min=0, int max=3);
+std::optional<std::vector<AverageInInterval>> random_optional_list_AverageInInterval (int min=0, int max=3);
+
+
+AverageInInterval random_AverageInInterval (void) {
+    return AverageInInterval (
+        random_int(),
+        random_list_float(),
+        random_string()
+
+    );
+}
+
+
+std::optional<AverageInInterval> random_optional_AverageInInterval (void) {
+    if(yes_no())
+        return {};
+    return random_AverageInInterval ();
+}
+
+
+std::vector<AverageInInterval> random_list_AverageInInterval (int min, int max) {
+    const auto size = random_int(min,max);
+    std::vector<AverageInInterval> list;
+    for(int i=0; i<size; i++)
+        list.push_back(random_AverageInInterval());
+    return list;
+}
+
+
+std::optional<std::vector<AverageInInterval>> random_optional_list_AverageInInterval (int min, int max) {
+    if(yes_no())
+        return {};
+    return random_list_AverageInInterval (min,max);
+}
+
 
 } // namespace dto
 
@@ -1343,6 +1507,58 @@ int main (int argc, const char **argv) try {
             if(obj1!=obj2)
                 throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
 
+
+        } else if (struct_name == "Sum") {
+            auto obj1 = dto::random_Sum();
+            std::ofstream(file1_path) << dto::Sum_to_json_string(obj1);
+            auto obj2 =
+                dto::Sum_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            if(obj1!=obj2)
+                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
+
+
+        } else if (struct_name == "SumAtPoints") {
+            auto obj1 = dto::random_SumAtPoints();
+            std::ofstream(file1_path) << dto::SumAtPoints_to_json_string(obj1);
+            auto obj2 =
+                dto::SumAtPoints_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            if(obj1!=obj2)
+                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
+
+
+        } else if (struct_name == "SumOnIntervals") {
+            auto obj1 = dto::random_SumOnIntervals();
+            std::ofstream(file1_path) << dto::SumOnIntervals_to_json_string(obj1);
+            auto obj2 =
+                dto::SumOnIntervals_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            if(obj1!=obj2)
+                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
+
+
+        } else if (struct_name == "AverageInInterval") {
+            auto obj1 = dto::random_AverageInInterval();
+            std::ofstream(file1_path) << dto::AverageInInterval_to_json_string(obj1);
+            auto obj2 =
+                dto::AverageInInterval_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            if(obj1!=obj2)
+                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
+
         } else {
             throw std::runtime_error("Not supported operation 'create' on struct " + struct_name);
         }
@@ -1622,6 +1838,58 @@ int main (int argc, const char **argv) try {
             )));
             std::ofstream out (file2_path);
             out << EvaluationResults_to_json_string(obj);
+            if(!out)
+                throw std::runtime_error("Operation 'convert': IO error on " + struct_name);
+
+
+        } else if (struct_name == "Sum") {
+            auto obj =
+                dto::Sum_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            std::ofstream out (file2_path);
+            out << Sum_to_json_string(obj);
+            if(!out)
+                throw std::runtime_error("Operation 'convert': IO error on " + struct_name);
+
+
+        } else if (struct_name == "SumAtPoints") {
+            auto obj =
+                dto::SumAtPoints_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            std::ofstream out (file2_path);
+            out << SumAtPoints_to_json_string(obj);
+            if(!out)
+                throw std::runtime_error("Operation 'convert': IO error on " + struct_name);
+
+
+        } else if (struct_name == "SumOnIntervals") {
+            auto obj =
+                dto::SumOnIntervals_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            std::ofstream out (file2_path);
+            out << SumOnIntervals_to_json_string(obj);
+            if(!out)
+                throw std::runtime_error("Operation 'convert': IO error on " + struct_name);
+
+
+        } else if (struct_name == "AverageInInterval") {
+            auto obj =
+                dto::AverageInInterval_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            std::ofstream out (file2_path);
+            out << AverageInInterval_to_json_string(obj);
             if(!out)
                 throw std::runtime_error("Operation 'convert': IO error on " + struct_name);
 
@@ -1982,6 +2250,74 @@ int main (int argc, const char **argv) try {
             )));
             auto obj2 =
                 dto::EvaluationResults_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file2_path
+            )));
+            if(obj1!=obj2)
+                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
+
+
+        } else if (struct_name == "Sum") {
+            auto obj1 =
+                dto::Sum_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            auto obj2 =
+                dto::Sum_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file2_path
+            )));
+            if(obj1!=obj2)
+                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
+
+
+        } else if (struct_name == "SumAtPoints") {
+            auto obj1 =
+                dto::SumAtPoints_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            auto obj2 =
+                dto::SumAtPoints_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file2_path
+            )));
+            if(obj1!=obj2)
+                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
+
+
+        } else if (struct_name == "SumOnIntervals") {
+            auto obj1 =
+                dto::SumOnIntervals_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            auto obj2 =
+                dto::SumOnIntervals_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file2_path
+            )));
+            if(obj1!=obj2)
+                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
+
+
+        } else if (struct_name == "AverageInInterval") {
+            auto obj1 =
+                dto::AverageInInterval_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            auto obj2 =
+                dto::AverageInInterval_from_json (
                     json::parse (
                         std::ifstream (
                             file2_path
