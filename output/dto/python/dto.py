@@ -1645,7 +1645,7 @@ class SdkException (Exception):
         super().__init__(error.message)
         self.error = error
     def __str__ (self):
-        return f'{self.message}'
+        return f'{self.error.message}'
     
 def run (model:Model, server:str) -> EvaluationResults:
     response = requests.post(f'{server}/model',Model_to_json_string(model))
