@@ -18,8 +18,8 @@
 using json = nlohmann::json;
 
 
-#include "Histogram.hpp"
 #include "Result.hpp"
+#include "Histogram.hpp"
 #include "Model.hpp"
 namespace dto {
 class EvaluationResults;
