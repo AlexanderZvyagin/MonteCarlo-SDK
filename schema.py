@@ -975,7 +975,7 @@ return this.skewness;
 
     obj = Struct('EvaluationResults')
     EvaluationResults = obj
-    EvaluationResults.dependencies.add(Result)
+    EvaluationResults.AddDependency(Result)
     obj.AddAttribute(Variable('names','string',list=True))
     obj.AddAttribute(Variable('npaths','int',list=True))
     obj.AddAttribute(Variable('mean','float',list=True))
