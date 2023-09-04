@@ -18,8 +18,8 @@
 using json = nlohmann::json;
 
 
-#include "EvaluationPoint.hpp"
 #include "Updater.hpp"
+#include "EvaluationPoint.hpp"
 namespace dto {
 class Model;
 std::string Model_to_json_string(const Model &obj);
