@@ -19,8 +19,8 @@ using json = nlohmann::json;
 
 
 #include "Result.hpp"
-#include "Histogram.hpp"
 #include "Model.hpp"
+#include "Histogram.hpp"
 namespace dto {
 class EvaluationResults;
 std::string EvaluationResults_to_json_string(const EvaluationResults &obj);
