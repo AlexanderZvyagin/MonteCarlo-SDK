@@ -4,4 +4,5 @@ logging.basicConfig (
     level = logging.INFO
 )
 import mcsdk as sdk
-server = 'http://naz.hopto.org:8001'
+import os
+server = f'http://{os.getenv("SERVER_ADDRESS","naz.hopto.org")}:{os.getenv("SERVER_PORT","8001")}'
