@@ -36,9 +36,12 @@ def schema ():
 
 
     obj = Struct('UpdaterDoc')
-    obj.AddAttribute(Variable('name','string'))
-    obj.AddAttribute(Variable('title','string'))
-    obj.AddAttribute(Variable('doc_md','string'))
+    obj.AddAttribute(Variable('name','string',doc='''
+The parameter 'name' is a single world which uniquely identifies how a MC state will be updated.
+E.g. GeometricalBrownianMotion.
+'''))
+    obj.AddAttribute(Variable('title','string',doc='Short description (single line) what the updater is doing.'))
+    obj.AddAttribute(Variable('doc_md','string',doc='Long multiline description of the updater using Markdown format.'))
     obj.AddAttribute(Variable('start','string'))
     obj.AddAttribute(Variable('nargs_min','int'))
     obj.AddAttribute(Variable('nrefs_min','int'))
@@ -64,7 +67,9 @@ def schema ():
     ))
     objs.append(obj)
 
-    obj = Struct('UpdaterDto')
+    obj = Struct('UpdaterDto',doc='''
+UpdaterDto is used to pass parameters to update a state.
+''')
     objs.append(obj)
     UpdaterDto = obj
     obj.AddAttribute(Variable('name','string'))
@@ -75,10 +80,10 @@ def schema ():
         obj.name,
         'constructor',
         args = [
-            Variable('name', 'string', ''),
-            Variable(name='refs', type='int', defval=None, list=True, optional=True),
-            Variable('args', 'float', defval=None, list=True, optional=True),
-            Variable('start', 'float', defval=None, optional=True)
+            Variable('name', 'string', '',doc='Unique name of the updater, e.g. BrownianMotion'),
+            Variable(name='refs', type='int', defval=None, list=True, optional=True,doc='List of states which an updater requires.'),
+            Variable('args', 'float', defval=None, list=True, optional=True,doc='List of arguments.'),
+            Variable('start', 'float', defval=None, optional=True,doc='State starting value, e.g. start=3 will start a BM process from value 3.')
         ],
         mapping = [
             ('name',[Variable('name')]),
@@ -888,6 +893,7 @@ return this.mean;
         'GetMeanError',
         'float',
         const = True,
+        doc = 'The function computes an error estimate of the mean value.',
         code = {
             'python':
 '''
@@ -1207,7 +1213,9 @@ def EvaluationResults_from_response(r,model=None):
     ))
     objs.append(obj)
 
-    obj = Struct('CashFlows',Updater)
+    obj = Struct('CashFlows',Updater,doc='''
+CashFlows a set of CashFlows at time points Ti.
+''')
     obj.methods.append(Function (
         obj.name,
         'constructor',
@@ -1222,7 +1230,7 @@ def EvaluationResults_from_response(r,model=None):
             Variable('t'),
             0, # start
             Variable('title'),
-        ])],
+        ])]
     ))
     objs.append(obj)
 
