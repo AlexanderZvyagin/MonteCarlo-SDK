@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to MonteCarloEngine’s documentation! &mdash; MonteCarloEngine  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Introduction &amp; Readme" href="Introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            MonteCarloEngine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Introduction.html">Introduction &amp; Readme</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Functions.html">Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ComputationalGrid.html">Computational Grid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EvaluationGrid.html">Evaluation Grid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EvaluationResult.html">Evaluation Results</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">MonteCarloEngine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Welcome to MonteCarloEngine’s documentation!</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="welcome-to-montecarloengine-s-documentation">
+<h1>Welcome to MonteCarloEngine’s documentation!<a class="headerlink" href="#welcome-to-montecarloengine-s-documentation" title="Permalink to this headline"></a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Introduction.html">Introduction &amp; Readme</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Functions.html">Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Functions.html#stateless-functions">Stateless functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Functions.html#stateful-functions">Stateful functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ComputationalGrid.html">Computational Grid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EvaluationGrid.html">Evaluation Grid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EvaluationResult.html">Evaluation Results</a></li>
+</ul>
+</div>
+<span class="target" id="module-dto"></span><dl class="py class">
+<dt class="sig sig-object py" id="dto.AverageInInterval">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">AverageInInterval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">underlying</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-</span> <span class="pre">88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.AverageInInterval" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dto.Updater" title="dto.Updater"><code class="xref py py-class docutils literal notranslate"><span class="pre">dto.Updater</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.AverageInInterval.json">
+<span class="sig-name descname"><span class="pre">json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dto.AverageInInterval.json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.AverageInInterval_from_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">AverageInInterval_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.AverageInInterval" title="dto.AverageInInterval"><span class="pre">dto.AverageInInterval</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.AverageInInterval_from_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.AverageInInterval_from_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">AverageInInterval_from_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jstr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.AverageInInterval_from_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.AverageInInterval_to_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">AverageInInterval_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.AverageInInterval" title="dto.AverageInInterval"><span class="pre">dto.AverageInInterval</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.AverageInInterval_to_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.AverageInInterval_to_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">AverageInInterval_to_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.AverageInInterval" title="dto.AverageInInterval"><span class="pre">dto.AverageInInterval</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.AverageInInterval_to_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.Barrier">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Barrier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">underlying</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-</span> <span class="pre">88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-</span> <span class="pre">88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-</span> <span class="pre">88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Barrier" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dto.Updater" title="dto.Updater"><code class="xref py py-class docutils literal notranslate"><span class="pre">dto.Updater</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dto.Barrier.ActionSet">
+<span class="sig-name descname"><span class="pre">ActionSet</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#dto.Barrier.ActionSet" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dto.Barrier.DirectionAny">
+<span class="sig-name descname"><span class="pre">DirectionAny</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#dto.Barrier.DirectionAny" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dto.Barrier.DirectionDown">
+<span class="sig-name descname"><span class="pre">DirectionDown</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-1</span></em><a class="headerlink" href="#dto.Barrier.DirectionDown" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dto.Barrier.DirectionUp">
+<span class="sig-name descname"><span class="pre">DirectionUp</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#dto.Barrier.DirectionUp" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.Barrier.json">
+<span class="sig-name descname"><span class="pre">json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dto.Barrier.json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Barrier_from_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Barrier_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Barrier" title="dto.Barrier"><span class="pre">dto.Barrier</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Barrier_from_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Barrier_from_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Barrier_from_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jstr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Barrier_from_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Barrier_to_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Barrier_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Barrier" title="dto.Barrier"><span class="pre">dto.Barrier</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Barrier_to_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Barrier_to_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Barrier_to_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Barrier" title="dto.Barrier"><span class="pre">dto.Barrier</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Barrier_to_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.BrownianMotion">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">BrownianMotion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diffusion</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.BrownianMotion" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dto.Updater" title="dto.Updater"><code class="xref py py-class docutils literal notranslate"><span class="pre">dto.Updater</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.BrownianMotion.json">
+<span class="sig-name descname"><span class="pre">json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dto.BrownianMotion.json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.BrownianMotionRef">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">BrownianMotionRef</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-</span> <span class="pre">88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diffusion</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-</span> <span class="pre">88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.BrownianMotionRef" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dto.Updater" title="dto.Updater"><code class="xref py py-class docutils literal notranslate"><span class="pre">dto.Updater</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.BrownianMotionRef.json">
+<span class="sig-name descname"><span class="pre">json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dto.BrownianMotionRef.json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.BrownianMotionRef_from_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">BrownianMotionRef_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.BrownianMotionRef" title="dto.BrownianMotionRef"><span class="pre">dto.BrownianMotionRef</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.BrownianMotionRef_from_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.BrownianMotionRef_from_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">BrownianMotionRef_from_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jstr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.BrownianMotionRef_from_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.BrownianMotionRef_to_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">BrownianMotionRef_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.BrownianMotionRef" title="dto.BrownianMotionRef"><span class="pre">dto.BrownianMotionRef</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.BrownianMotionRef_to_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.BrownianMotionRef_to_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">BrownianMotionRef_to_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.BrownianMotionRef" title="dto.BrownianMotionRef"><span class="pre">dto.BrownianMotionRef</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.BrownianMotionRef_to_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.BrownianMotion_from_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">BrownianMotion_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.BrownianMotion" title="dto.BrownianMotion"><span class="pre">dto.BrownianMotion</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.BrownianMotion_from_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.BrownianMotion_from_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">BrownianMotion_from_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jstr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.BrownianMotion_from_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.BrownianMotion_to_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">BrownianMotion_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.BrownianMotion" title="dto.BrownianMotion"><span class="pre">dto.BrownianMotion</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.BrownianMotion_to_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.BrownianMotion_to_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">BrownianMotion_to_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.BrownianMotion" title="dto.BrownianMotion"><span class="pre">dto.BrownianMotion</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.BrownianMotion_to_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.CashFlows">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">CashFlows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">underlying</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-</span> <span class="pre">88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.CashFlows" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dto.Updater" title="dto.Updater"><code class="xref py py-class docutils literal notranslate"><span class="pre">dto.Updater</span></code></a></p>
+<p>CashFlows a set of CashFlows at time points Ti.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.CashFlows.json">
+<span class="sig-name descname"><span class="pre">json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dto.CashFlows.json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.CashFlows_from_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">CashFlows_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.CashFlows" title="dto.CashFlows"><span class="pre">dto.CashFlows</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.CashFlows_from_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.CashFlows_from_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">CashFlows_from_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jstr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.CashFlows_from_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.CashFlows_to_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">CashFlows_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.CashFlows" title="dto.CashFlows"><span class="pre">dto.CashFlows</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.CashFlows_to_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.CashFlows_to_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">CashFlows_to_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.CashFlows" title="dto.CashFlows"><span class="pre">dto.CashFlows</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.CashFlows_to_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.CorrelatedGaussian">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">CorrelatedGaussian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">correlation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-</span> <span class="pre">88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-</span> <span class="pre">88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.CorrelatedGaussian" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dto.Updater" title="dto.Updater"><code class="xref py py-class docutils literal notranslate"><span class="pre">dto.Updater</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.CorrelatedGaussian.json">
+<span class="sig-name descname"><span class="pre">json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dto.CorrelatedGaussian.json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.CorrelatedGaussian_from_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">CorrelatedGaussian_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.CorrelatedGaussian" title="dto.CorrelatedGaussian"><span class="pre">dto.CorrelatedGaussian</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.CorrelatedGaussian_from_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.CorrelatedGaussian_from_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">CorrelatedGaussian_from_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jstr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.CorrelatedGaussian_from_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.CorrelatedGaussian_to_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">CorrelatedGaussian_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.CorrelatedGaussian" title="dto.CorrelatedGaussian"><span class="pre">dto.CorrelatedGaussian</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.CorrelatedGaussian_to_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.CorrelatedGaussian_to_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">CorrelatedGaussian_to_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.CorrelatedGaussian" title="dto.CorrelatedGaussian"><span class="pre">dto.CorrelatedGaussian</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.CorrelatedGaussian_to_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.Error">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">details</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dto.Error" title="dto.Error"><span class="pre">dto.Error</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Error" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.Error.json">
+<span class="sig-name descname"><span class="pre">json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dto.Error.json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Error_from_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Error_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Error" title="dto.Error"><span class="pre">dto.Error</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Error_from_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Error_from_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Error_from_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jstr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Error_from_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Error_to_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Error_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Error" title="dto.Error"><span class="pre">dto.Error</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Error_to_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Error_to_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Error_to_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Error" title="dto.Error"><span class="pre">dto.Error</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Error_to_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.EvaluationPoint">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">EvaluationPoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-</span> <span class="pre">88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">histograms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dto.Histogram" title="dto.Histogram"><span class="pre">dto.Histogram</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.EvaluationPoint" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.EvaluationPoint.Add">
+<span class="sig-name descname"><span class="pre">Add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">histogram</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.EvaluationPoint.Add" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.EvaluationPoint.GetError">
+<span class="sig-name descname"><span class="pre">GetError</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dto.EvaluationPoint.GetError" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.EvaluationPoint.GetState">
+<span class="sig-name descname"><span class="pre">GetState</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dto.EvaluationPoint.GetState" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.EvaluationPoint.GetTime">
+<span class="sig-name descname"><span class="pre">GetTime</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dto.EvaluationPoint.GetTime" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.EvaluationPoint.GetValue">
+<span class="sig-name descname"><span class="pre">GetValue</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dto.EvaluationPoint.GetValue" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.EvaluationPoint.json">
+<span class="sig-name descname"><span class="pre">json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dto.EvaluationPoint.json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.EvaluationPoint_from_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">EvaluationPoint_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.EvaluationPoint" title="dto.EvaluationPoint"><span class="pre">dto.EvaluationPoint</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.EvaluationPoint_from_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.EvaluationPoint_from_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">EvaluationPoint_from_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jstr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.EvaluationPoint_from_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.EvaluationPoint_to_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">EvaluationPoint_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.EvaluationPoint" title="dto.EvaluationPoint"><span class="pre">dto.EvaluationPoint</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.EvaluationPoint_to_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.EvaluationPoint_to_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">EvaluationPoint_to_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.EvaluationPoint" title="dto.EvaluationPoint"><span class="pre">dto.EvaluationPoint</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.EvaluationPoint_to_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.EvaluationResults">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">EvaluationResults</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">npaths</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stddev</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skewness</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">histograms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dto.Histogram" title="dto.Histogram"><span class="pre">dto.Histogram</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dto.Model" title="dto.Model"><span class="pre">dto.Model</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.EvaluationResults" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.EvaluationResults.GetNumberOfEvaluations">
+<span class="sig-name descname"><span class="pre">GetNumberOfEvaluations</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dto.EvaluationResults.GetNumberOfEvaluations" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.EvaluationResults.GetNumberOfStates">
+<span class="sig-name descname"><span class="pre">GetNumberOfStates</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dto.EvaluationResults.GetNumberOfStates" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.EvaluationResults.GetStateEvaluationResult">
+<span class="sig-name descname"><span class="pre">GetStateEvaluationResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">point</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.EvaluationResults.GetStateEvaluationResult" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.EvaluationResults.Index">
+<span class="sig-name descname"><span class="pre">Index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">point</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.EvaluationResults.Index" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.EvaluationResults.df">
+<span class="sig-name descname"><span class="pre">df</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dto.EvaluationResults.df" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.EvaluationResults.json">
+<span class="sig-name descname"><span class="pre">json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dto.EvaluationResults.json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.EvaluationResults_from_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">EvaluationResults_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.EvaluationResults" title="dto.EvaluationResults"><span class="pre">dto.EvaluationResults</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.EvaluationResults_from_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.EvaluationResults_from_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">EvaluationResults_from_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jstr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.EvaluationResults_from_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.EvaluationResults_from_response">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">EvaluationResults_from_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.EvaluationResults_from_response" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.EvaluationResults_to_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">EvaluationResults_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.EvaluationResults" title="dto.EvaluationResults"><span class="pre">dto.EvaluationResults</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.EvaluationResults_to_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.EvaluationResults_to_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">EvaluationResults_to_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.EvaluationResults" title="dto.EvaluationResults"><span class="pre">dto.EvaluationResults</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.EvaluationResults_to_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.GeometricalBrownianMotion">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">GeometricalBrownianMotion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diffusion</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.GeometricalBrownianMotion" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dto.Updater" title="dto.Updater"><code class="xref py py-class docutils literal notranslate"><span class="pre">dto.Updater</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.GeometricalBrownianMotion.json">
+<span class="sig-name descname"><span class="pre">json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dto.GeometricalBrownianMotion.json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.GeometricalBrownianMotionRef">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">GeometricalBrownianMotionRef</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-</span> <span class="pre">88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diffusion</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-</span> <span class="pre">88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.GeometricalBrownianMotionRef" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dto.Updater" title="dto.Updater"><code class="xref py py-class docutils literal notranslate"><span class="pre">dto.Updater</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.GeometricalBrownianMotionRef.json">
+<span class="sig-name descname"><span class="pre">json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dto.GeometricalBrownianMotionRef.json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.GeometricalBrownianMotionRef_from_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">GeometricalBrownianMotionRef_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.GeometricalBrownianMotionRef" title="dto.GeometricalBrownianMotionRef"><span class="pre">dto.GeometricalBrownianMotionRef</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.GeometricalBrownianMotionRef_from_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.GeometricalBrownianMotionRef_from_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">GeometricalBrownianMotionRef_from_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jstr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.GeometricalBrownianMotionRef_from_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.GeometricalBrownianMotionRef_to_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">GeometricalBrownianMotionRef_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.GeometricalBrownianMotionRef" title="dto.GeometricalBrownianMotionRef"><span class="pre">dto.GeometricalBrownianMotionRef</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.GeometricalBrownianMotionRef_to_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.GeometricalBrownianMotionRef_to_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">GeometricalBrownianMotionRef_to_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.GeometricalBrownianMotionRef" title="dto.GeometricalBrownianMotionRef"><span class="pre">dto.GeometricalBrownianMotionRef</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.GeometricalBrownianMotionRef_to_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.GeometricalBrownianMotion_from_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">GeometricalBrownianMotion_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.GeometricalBrownianMotion" title="dto.GeometricalBrownianMotion"><span class="pre">dto.GeometricalBrownianMotion</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.GeometricalBrownianMotion_from_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.GeometricalBrownianMotion_from_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">GeometricalBrownianMotion_from_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jstr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.GeometricalBrownianMotion_from_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.GeometricalBrownianMotion_to_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">GeometricalBrownianMotion_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.GeometricalBrownianMotion" title="dto.GeometricalBrownianMotion"><span class="pre">dto.GeometricalBrownianMotion</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.GeometricalBrownianMotion_to_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.GeometricalBrownianMotion_to_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">GeometricalBrownianMotion_to_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.GeometricalBrownianMotion" title="dto.GeometricalBrownianMotion"><span class="pre">dto.GeometricalBrownianMotion</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.GeometricalBrownianMotion_to_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.Histogram">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Histogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x:</span> <span class="pre">dto.HistogramAxis</span> <span class="pre">=</span> <span class="pre">&lt;dto.HistogramAxis</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y:</span> <span class="pre">Optional[dto.HistogramAxis]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evaluation_point:</span> <span class="pre">Optional[int]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins:</span> <span class="pre">Optional[list[float]]</span> <span class="pre">=</span> <span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Histogram" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.Histogram.json">
+<span class="sig-name descname"><span class="pre">json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dto.Histogram.json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.HistogramAxis">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">HistogramAxis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-</span> <span class="pre">88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_nbins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-</span> <span class="pre">88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-</span> <span class="pre">88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-</span> <span class="pre">88</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.HistogramAxis" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.HistogramAxis.json">
+<span class="sig-name descname"><span class="pre">json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dto.HistogramAxis.json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.HistogramAxis_from_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">HistogramAxis_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.HistogramAxis" title="dto.HistogramAxis"><span class="pre">dto.HistogramAxis</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.HistogramAxis_from_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.HistogramAxis_from_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">HistogramAxis_from_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jstr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.HistogramAxis_from_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.HistogramAxis_to_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">HistogramAxis_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.HistogramAxis" title="dto.HistogramAxis"><span class="pre">dto.HistogramAxis</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.HistogramAxis_to_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.HistogramAxis_to_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">HistogramAxis_to_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.HistogramAxis" title="dto.HistogramAxis"><span class="pre">dto.HistogramAxis</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.HistogramAxis_to_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Histogram_from_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Histogram_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Histogram" title="dto.Histogram"><span class="pre">dto.Histogram</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Histogram_from_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Histogram_from_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Histogram_from_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jstr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Histogram_from_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Histogram_to_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Histogram_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Histogram" title="dto.Histogram"><span class="pre">dto.Histogram</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Histogram_to_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Histogram_to_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Histogram_to_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Histogram" title="dto.Histogram"><span class="pre">dto.Histogram</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Histogram_to_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.IndependentGaussian">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">IndependentGaussian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">refs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.IndependentGaussian" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dto.Updater" title="dto.Updater"><code class="xref py py-class docutils literal notranslate"><span class="pre">dto.Updater</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.IndependentGaussian.json">
+<span class="sig-name descname"><span class="pre">json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dto.IndependentGaussian.json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.IndependentGaussian_from_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">IndependentGaussian_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.IndependentGaussian" title="dto.IndependentGaussian"><span class="pre">dto.IndependentGaussian</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.IndependentGaussian_from_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.IndependentGaussian_from_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">IndependentGaussian_from_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jstr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.IndependentGaussian_from_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.IndependentGaussian_to_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">IndependentGaussian_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.IndependentGaussian" title="dto.IndependentGaussian"><span class="pre">dto.IndependentGaussian</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.IndependentGaussian_to_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.IndependentGaussian_to_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">IndependentGaussian_to_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.IndependentGaussian" title="dto.IndependentGaussian"><span class="pre">dto.IndependentGaussian</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.IndependentGaussian_to_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.Linear1DInterpolation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Linear1DInterpolation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-</span> <span class="pre">88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xmin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xmax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Linear1DInterpolation" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dto.Updater" title="dto.Updater"><code class="xref py py-class docutils literal notranslate"><span class="pre">dto.Updater</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.Linear1DInterpolation.json">
+<span class="sig-name descname"><span class="pre">json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dto.Linear1DInterpolation.json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Linear1DInterpolation_from_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Linear1DInterpolation_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Linear1DInterpolation" title="dto.Linear1DInterpolation"><span class="pre">dto.Linear1DInterpolation</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Linear1DInterpolation_from_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Linear1DInterpolation_from_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Linear1DInterpolation_from_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jstr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Linear1DInterpolation_from_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Linear1DInterpolation_to_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Linear1DInterpolation_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Linear1DInterpolation" title="dto.Linear1DInterpolation"><span class="pre">dto.Linear1DInterpolation</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Linear1DInterpolation_to_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Linear1DInterpolation_to_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Linear1DInterpolation_to_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Linear1DInterpolation" title="dto.Linear1DInterpolation"><span class="pre">dto.Linear1DInterpolation</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Linear1DInterpolation_to_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.Model">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">TimeStart</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TimeSteps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NumPaths</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">updaters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dto.Updater" title="dto.Updater"><span class="pre">dto.Updater</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evaluations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dto.EvaluationPoint" title="dto.EvaluationPoint"><span class="pre">dto.EvaluationPoint</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RandomSeed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RunTimeoutSeconds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MemoryLimitKB</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Model" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.Model.Add">
+<span class="sig-name descname"><span class="pre">Add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">updater</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Model.Add" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.Model.GetNumberOfStates">
+<span class="sig-name descname"><span class="pre">GetNumberOfStates</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dto.Model.GetNumberOfStates" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.Model.GetNumberOfUpdaters">
+<span class="sig-name descname"><span class="pre">GetNumberOfUpdaters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dto.Model.GetNumberOfUpdaters" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.Model.json">
+<span class="sig-name descname"><span class="pre">json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dto.Model.json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Model_from_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Model_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Model" title="dto.Model"><span class="pre">dto.Model</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Model_from_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Model_from_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Model_from_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jstr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Model_from_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Model_to_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Model_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Model" title="dto.Model"><span class="pre">dto.Model</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Model_to_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Model_to_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Model_to_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Model" title="dto.Model"><span class="pre">dto.Model</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Model_to_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.Multiplication">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Multiplication</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">refs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Multiplication" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dto.Updater" title="dto.Updater"><code class="xref py py-class docutils literal notranslate"><span class="pre">dto.Updater</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.Multiplication.json">
+<span class="sig-name descname"><span class="pre">json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dto.Multiplication.json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Multiplication_from_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Multiplication_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Multiplication" title="dto.Multiplication"><span class="pre">dto.Multiplication</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Multiplication_from_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Multiplication_from_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Multiplication_from_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jstr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Multiplication_from_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Multiplication_to_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Multiplication_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Multiplication" title="dto.Multiplication"><span class="pre">dto.Multiplication</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Multiplication_to_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Multiplication_to_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Multiplication_to_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Multiplication" title="dto.Multiplication"><span class="pre">dto.Multiplication</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Multiplication_to_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.Option">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">underlying</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-</span> <span class="pre">88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strike</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">call_put</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-</span> <span class="pre">88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Option" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dto.Updater" title="dto.Updater"><code class="xref py py-class docutils literal notranslate"><span class="pre">dto.Updater</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dto.Option.Call">
+<span class="sig-name descname"><span class="pre">Call</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#dto.Option.Call" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dto.Option.Put">
+<span class="sig-name descname"><span class="pre">Put</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#dto.Option.Put" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.Option.json">
+<span class="sig-name descname"><span class="pre">json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dto.Option.json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Option_from_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Option_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Option" title="dto.Option"><span class="pre">dto.Option</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Option_from_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Option_from_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Option_from_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jstr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Option_from_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Option_to_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Option_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Option" title="dto.Option"><span class="pre">dto.Option</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Option_to_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Option_to_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Option_to_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Option" title="dto.Option"><span class="pre">dto.Option</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Option_to_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.Parameter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Parameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Parameter" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.Parameter.json">
+<span class="sig-name descname"><span class="pre">json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dto.Parameter.json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Parameter_from_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Parameter_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Parameter" title="dto.Parameter"><span class="pre">dto.Parameter</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Parameter_from_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Parameter_from_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Parameter_from_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jstr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Parameter_from_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Parameter_to_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Parameter_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Parameter" title="dto.Parameter"><span class="pre">dto.Parameter</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Parameter_to_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Parameter_to_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Parameter_to_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Parameter" title="dto.Parameter"><span class="pre">dto.Parameter</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Parameter_to_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.Result">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stddev</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skewness</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Result" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.Result.GetMean">
+<span class="sig-name descname"><span class="pre">GetMean</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dto.Result.GetMean" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.Result.GetMeanError">
+<span class="sig-name descname"><span class="pre">GetMeanError</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dto.Result.GetMeanError" title="Permalink to this definition"></a></dt>
+<dd><p>The function computes an error estimate of the mean value.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.Result.GetSkewness">
+<span class="sig-name descname"><span class="pre">GetSkewness</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dto.Result.GetSkewness" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.Result.GetStdDev">
+<span class="sig-name descname"><span class="pre">GetStdDev</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dto.Result.GetStdDev" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.Result.json">
+<span class="sig-name descname"><span class="pre">json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dto.Result.json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Result_from_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Result_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Result" title="dto.Result"><span class="pre">dto.Result</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Result_from_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Result_from_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Result_from_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jstr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Result_from_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Result_to_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Result_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Result" title="dto.Result"><span class="pre">dto.Result</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Result_to_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Result_to_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Result_to_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Result" title="dto.Result"><span class="pre">dto.Result</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Result_to_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="dto.SdkException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">SdkException</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Error" title="dto.Error"><span class="pre">dto.Error</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.SdkException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.Sum">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">states</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Sum" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dto.Updater" title="dto.Updater"><code class="xref py py-class docutils literal notranslate"><span class="pre">dto.Updater</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.Sum.json">
+<span class="sig-name descname"><span class="pre">json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dto.Sum.json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.SumAtPoints">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">SumAtPoints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">underlying</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-</span> <span class="pre">88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.SumAtPoints" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dto.Updater" title="dto.Updater"><code class="xref py py-class docutils literal notranslate"><span class="pre">dto.Updater</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.SumAtPoints.json">
+<span class="sig-name descname"><span class="pre">json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dto.SumAtPoints.json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.SumAtPoints_from_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">SumAtPoints_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.SumAtPoints" title="dto.SumAtPoints"><span class="pre">dto.SumAtPoints</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.SumAtPoints_from_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.SumAtPoints_from_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">SumAtPoints_from_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jstr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.SumAtPoints_from_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.SumAtPoints_to_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">SumAtPoints_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.SumAtPoints" title="dto.SumAtPoints"><span class="pre">dto.SumAtPoints</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.SumAtPoints_to_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.SumAtPoints_to_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">SumAtPoints_to_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.SumAtPoints" title="dto.SumAtPoints"><span class="pre">dto.SumAtPoints</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.SumAtPoints_to_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.SumOnIntervals">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">SumOnIntervals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">notional</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-</span> <span class="pre">88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.SumOnIntervals" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dto.Updater" title="dto.Updater"><code class="xref py py-class docutils literal notranslate"><span class="pre">dto.Updater</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.SumOnIntervals.json">
+<span class="sig-name descname"><span class="pre">json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dto.SumOnIntervals.json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.SumOnIntervals_from_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">SumOnIntervals_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.SumOnIntervals" title="dto.SumOnIntervals"><span class="pre">dto.SumOnIntervals</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.SumOnIntervals_from_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.SumOnIntervals_from_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">SumOnIntervals_from_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jstr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.SumOnIntervals_from_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.SumOnIntervals_to_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">SumOnIntervals_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.SumOnIntervals" title="dto.SumOnIntervals"><span class="pre">dto.SumOnIntervals</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.SumOnIntervals_to_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.SumOnIntervals_to_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">SumOnIntervals_to_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.SumOnIntervals" title="dto.SumOnIntervals"><span class="pre">dto.SumOnIntervals</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.SumOnIntervals_to_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Sum_from_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Sum_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Sum" title="dto.Sum"><span class="pre">dto.Sum</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Sum_from_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Sum_from_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Sum_from_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jstr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Sum_from_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Sum_to_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Sum_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Sum" title="dto.Sum"><span class="pre">dto.Sum</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Sum_to_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Sum_to_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Sum_to_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Sum" title="dto.Sum"><span class="pre">dto.Sum</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Sum_to_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.Updater">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Updater</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Updater" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dto.UpdaterDto" title="dto.UpdaterDto"><code class="xref py py-class docutils literal notranslate"><span class="pre">dto.UpdaterDto</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.Updater.GetEquationNumber">
+<span class="sig-name descname"><span class="pre">GetEquationNumber</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dto.Updater.GetEquationNumber" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.Updater.GetStart">
+<span class="sig-name descname"><span class="pre">GetStart</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dto.Updater.GetStart" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.Updater.GetStateNumber">
+<span class="sig-name descname"><span class="pre">GetStateNumber</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dto.Updater.GetStateNumber" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.Updater.HasState">
+<span class="sig-name descname"><span class="pre">HasState</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dto.Updater.HasState" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.Updater.json">
+<span class="sig-name descname"><span class="pre">json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dto.Updater.json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.UpdaterDoc">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">UpdaterDoc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doc_md</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nargs_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-</span> <span class="pre">88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nrefs_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-</span> <span class="pre">88</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.UpdaterDoc" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dto.UpdaterDoc.doc_md">
+<span class="sig-name descname"><span class="pre">doc_md</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#dto.UpdaterDoc.doc_md" title="Permalink to this definition"></a></dt>
+<dd><p>Long multiline description of the updater using Markdown format.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.UpdaterDoc.json">
+<span class="sig-name descname"><span class="pre">json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dto.UpdaterDoc.json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dto.UpdaterDoc.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#dto.UpdaterDoc.name" title="Permalink to this definition"></a></dt>
+<dd><p>The parameter ‘name’ is a single world which uniquely identifies how a MC state will be updated.
+E.g. GeometricalBrownianMotion.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dto.UpdaterDoc.title">
+<span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#dto.UpdaterDoc.title" title="Permalink to this definition"></a></dt>
+<dd><p>Short description (single line) what the updater is doing.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.UpdaterDoc_from_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">UpdaterDoc_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.UpdaterDoc" title="dto.UpdaterDoc"><span class="pre">dto.UpdaterDoc</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.UpdaterDoc_from_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.UpdaterDoc_from_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">UpdaterDoc_from_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jstr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.UpdaterDoc_from_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.UpdaterDoc_to_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">UpdaterDoc_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.UpdaterDoc" title="dto.UpdaterDoc"><span class="pre">dto.UpdaterDoc</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.UpdaterDoc_to_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.UpdaterDoc_to_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">UpdaterDoc_to_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.UpdaterDoc" title="dto.UpdaterDoc"><span class="pre">dto.UpdaterDoc</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.UpdaterDoc_to_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.UpdaterDto">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">UpdaterDto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.UpdaterDto" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>UpdaterDto is used to pass parameters to update a state.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.UpdaterDto.json">
+<span class="sig-name descname"><span class="pre">json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dto.UpdaterDto.json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.UpdaterDto_from_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">UpdaterDto_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.UpdaterDto" title="dto.UpdaterDto"><span class="pre">dto.UpdaterDto</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.UpdaterDto_from_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.UpdaterDto_from_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">UpdaterDto_from_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jstr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.UpdaterDto_from_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.UpdaterDto_to_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">UpdaterDto_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.UpdaterDto" title="dto.UpdaterDto"><span class="pre">dto.UpdaterDto</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.UpdaterDto_to_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.UpdaterDto_to_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">UpdaterDto_to_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.UpdaterDto" title="dto.UpdaterDto"><span class="pre">dto.UpdaterDto</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.UpdaterDto_to_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Updater_from_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Updater_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Updater" title="dto.Updater"><span class="pre">dto.Updater</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Updater_from_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Updater_from_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Updater_from_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jstr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Updater_from_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Updater_to_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Updater_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Updater" title="dto.Updater"><span class="pre">dto.Updater</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Updater_to_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.Updater_to_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Updater_to_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Updater" title="dto.Updater"><span class="pre">dto.Updater</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Updater_to_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.ZeroCouponBond">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">ZeroCouponBond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">underlying</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-</span> <span class="pre">88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.ZeroCouponBond" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dto.Updater" title="dto.Updater"><code class="xref py py-class docutils literal notranslate"><span class="pre">dto.Updater</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dto.ZeroCouponBond.json">
+<span class="sig-name descname"><span class="pre">json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dto.ZeroCouponBond.json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.ZeroCouponBond_from_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">ZeroCouponBond_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.ZeroCouponBond" title="dto.ZeroCouponBond"><span class="pre">dto.ZeroCouponBond</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.ZeroCouponBond_from_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.ZeroCouponBond_from_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">ZeroCouponBond_from_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jstr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.ZeroCouponBond_from_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.ZeroCouponBond_to_json">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">ZeroCouponBond_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.ZeroCouponBond" title="dto.ZeroCouponBond"><span class="pre">dto.ZeroCouponBond</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.ZeroCouponBond_to_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.ZeroCouponBond_to_json_string">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">ZeroCouponBond_to_json_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.ZeroCouponBond" title="dto.ZeroCouponBond"><span class="pre">dto.ZeroCouponBond</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.ZeroCouponBond_to_json_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.float_equal">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">float_equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#dto.float_equal" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dto.run">
+<span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dto.Model" title="dto.Model"><span class="pre">dto.Model</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">server</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#dto.EvaluationResults" title="dto.EvaluationResults"><span class="pre">dto.EvaluationResults</span></a></span></span><a class="headerlink" href="#dto.run" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Introduction.html" class="btn btn-neutral float-right" title="Introduction &amp; Readme" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022-2023, Alexander Zvyagin.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
