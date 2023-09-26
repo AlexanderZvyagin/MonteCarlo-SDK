@@ -31,6 +31,7 @@
 #include "SumAtPoints.hpp"
 #include "SumOnIntervals.hpp"
 #include "AverageInInterval.hpp"
+#include "CashFlows.hpp"
 
 namespace fs = std::filesystem;
 
@@ -1215,6 +1216,46 @@ std::optional<std::vector<AverageInInterval>> random_optional_list_AverageInInte
     return random_list_AverageInInterval (min,max);
 }
 
+// Forward declarations for CashFlows
+class CashFlows;
+CashFlows random_CashFlows (void);
+std::optional<CashFlows> random_optional_CashFlows (void);
+std::vector<CashFlows> random_list_CashFlows (int min=0, int max=3);
+std::optional<std::vector<CashFlows>> random_optional_list_CashFlows (int min=0, int max=3);
+
+
+CashFlows random_CashFlows (void) {
+    return CashFlows (
+        random_int(),
+        random_list_float(),
+        random_string()
+
+    );
+}
+
+
+std::optional<CashFlows> random_optional_CashFlows (void) {
+    if(yes_no())
+        return {};
+    return random_CashFlows ();
+}
+
+
+std::vector<CashFlows> random_list_CashFlows (int min, int max) {
+    const auto size = random_int(min,max);
+    std::vector<CashFlows> list;
+    for(int i=0; i<size; i++)
+        list.push_back(random_CashFlows());
+    return list;
+}
+
+
+std::optional<std::vector<CashFlows>> random_optional_list_CashFlows (int min, int max) {
+    if(yes_no())
+        return {};
+    return random_list_CashFlows (min,max);
+}
+
 
 } // namespace dto
 
@@ -1559,6 +1600,19 @@ int main (int argc, const char **argv) try {
             if(obj1!=obj2)
                 throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
 
+
+        } else if (struct_name == "CashFlows") {
+            auto obj1 = dto::random_CashFlows();
+            std::ofstream(file1_path) << dto::CashFlows_to_json_string(obj1);
+            auto obj2 =
+                dto::CashFlows_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            if(obj1!=obj2)
+                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
+
         } else {
             throw std::runtime_error("Not supported operation 'create' on struct " + struct_name);
         }
@@ -1890,6 +1944,19 @@ int main (int argc, const char **argv) try {
             )));
             std::ofstream out (file2_path);
             out << AverageInInterval_to_json_string(obj);
+            if(!out)
+                throw std::runtime_error("Operation 'convert': IO error on " + struct_name);
+
+
+        } else if (struct_name == "CashFlows") {
+            auto obj =
+                dto::CashFlows_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            std::ofstream out (file2_path);
+            out << CashFlows_to_json_string(obj);
             if(!out)
                 throw std::runtime_error("Operation 'convert': IO error on " + struct_name);
 
@@ -2318,6 +2385,23 @@ int main (int argc, const char **argv) try {
             )));
             auto obj2 =
                 dto::AverageInInterval_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file2_path
+            )));
+            if(obj1!=obj2)
+                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
+
+
+        } else if (struct_name == "CashFlows") {
+            auto obj1 =
+                dto::CashFlows_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            auto obj2 =
+                dto::CashFlows_from_json (
                     json::parse (
                         std::ifstream (
                             file2_path

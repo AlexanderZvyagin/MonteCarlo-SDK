@@ -739,6 +739,32 @@ def random_optional_list_AverageInInterval (min:int = 0, max:int = 3) -> list[Av
     return random_list_AverageInInterval(min,max)
 
 
+def random_CashFlows ():
+    return CashFlows (
+        random_int(),
+        random_list_float(),
+        random_string()
+
+    )
+
+
+def random_optional_CashFlows () -> CashFlows|None:
+    if yes_no():
+        return None
+    return random_CashFlows()
+
+
+def random_list_CashFlows (min:int = 0, max:int = 3) -> list[CashFlows]:
+    size = random.randint(min,max)
+    return [random_CashFlows() for i in range(size)]
+
+
+def random_optional_list_CashFlows (min:int = 0, max:int = 3) -> list[CashFlows]|None:
+    if yes_no():
+        return None
+    return random_list_CashFlows(min,max)
+
+
 def test_round_trip_python(command, struct_name, file1_name, file2_name):
     if command=='build':
         return
@@ -971,6 +997,15 @@ def test_round_trip_python(command, struct_name, file1_name, file2_name):
             assert isinstance(obj2,AverageInInterval)
             assert obj1==obj2
 
+
+        elif struct_name=='CashFlows':
+            obj1 = random_CashFlows()
+            open(file1_name,'w').write(CashFlows_to_json_string(obj1))
+            obj2 = CashFlows_from_json_string(open(file1_name).read())
+            assert isinstance(obj1,CashFlows)
+            assert isinstance(obj2,CashFlows)
+            assert obj1==obj2
+
         else:
             raise Exception(f'Operation "{command}" does not supported struct {struct_name}')
     elif command=='convert':
@@ -1100,6 +1135,11 @@ def test_round_trip_python(command, struct_name, file1_name, file2_name):
         elif struct_name=='AverageInInterval':
             obj = AverageInInterval_from_json_string(open(file1_name).read())
             open(file2_name,'w').write(AverageInInterval_to_json_string(obj))
+
+
+        elif struct_name=='CashFlows':
+            obj = CashFlows_from_json_string(open(file1_name).read())
+            open(file2_name,'w').write(CashFlows_to_json_string(obj))
 
         else:
             raise Exception(f'Operation "{command}" does not supported struct {struct_name}')
@@ -1254,6 +1294,12 @@ def test_round_trip_python(command, struct_name, file1_name, file2_name):
         elif struct_name=='AverageInInterval':
             obj1 = AverageInInterval_from_json_string(open(file1_name).read())
             obj2 = AverageInInterval_from_json_string(open(file2_name).read())
+            assert obj1==obj2
+
+
+        elif struct_name=='CashFlows':
+            obj1 = CashFlows_from_json_string(open(file1_name).read())
+            obj2 = CashFlows_from_json_string(open(file2_name).read())
             assert obj1==obj2
 
         else:
