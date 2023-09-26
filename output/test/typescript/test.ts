@@ -32,6 +32,7 @@ import {
     SumAtPoints,
     SumOnIntervals,
     AverageInInterval,
+    CashFlows,
 } from './dto'
 
 function random_int(min:number = -1000, max:number = 1000) : number {
@@ -961,6 +962,39 @@ function random_optional_list_AverageInInterval () : AverageInInterval[]|undefin
 }
 
 
+function random_CashFlows () : CashFlows {
+    return new CashFlows (
+        random_int(),
+        random_list_float(),
+        random_string()
+
+    );
+}
+
+
+function random_optional_CashFlows () : CashFlows|undefined {
+    if(yes_no())
+        return undefined;
+    return random_CashFlows ();
+}
+
+
+function random_list_CashFlows (min:number = 0, max:number = 3) : CashFlows[] {
+    const size:number = Math.floor(min + Math.random()*(max-min));
+    const list:CashFlows[] = [];
+    for(let i=0; i<size; i++)
+        list.push(random_CashFlows());
+    return list;
+}
+
+
+function random_optional_list_CashFlows () : CashFlows[]|undefined {
+    if(yes_no())
+        return undefined;
+    return random_list_CashFlows ();
+}
+
+
 function create (struct_name:string, file_name:string){
     if(false){
 
@@ -1263,6 +1297,18 @@ function create (struct_name:string, file_name:string){
         if(!dto.AverageInInterval_equal(obj1,obj2))
             throw new Error(`${struct_name} objects are not equal.`);
 
+
+    } else if (struct_name === 'CashFlows') {
+        const obj1: CashFlows = random_CashFlows();
+        const j: object = {};
+        dto.CashFlows_to_json(j,obj1);
+
+        fs.writeFileSync (file_name, JSON.stringify (j));
+        const obj2: CashFlows = new CashFlows();
+        dto.CashFlows_from_json(j,obj2);
+        if(!dto.CashFlows_equal(obj1,obj2))
+            throw new Error(`${struct_name} objects are not equal.`);
+
     } else
         throw new Error(`Cannot create an object of the structure ${struct_name}.`);
 }
@@ -1417,6 +1463,12 @@ function convert (struct_name:string, file1_name:string, file2_name:string){
     } else if (struct_name === 'AverageInInterval') {
         const jstr: string = fs.readFileSync(file1_name,'utf-8');
         const obj: AverageInInterval = dto.AverageInInterval_fromJSON_string(jstr);
+        fs.writeFileSync(file2_name, JSON.stringify(obj));
+
+
+    } else if (struct_name === 'CashFlows') {
+        const jstr: string = fs.readFileSync(file1_name,'utf-8');
+        const obj: CashFlows = dto.CashFlows_fromJSON_string(jstr);
         fs.writeFileSync(file2_name, JSON.stringify(obj));
 
     } else
@@ -1648,6 +1700,15 @@ function compare (struct_name:string, file1_name:string, file2_name:string){
         const obj1: AverageInInterval = dto.AverageInInterval_fromJSON_string(jstr1);
         const obj2: AverageInInterval = dto.AverageInInterval_fromJSON_string(jstr2);
         if(!dto.AverageInInterval_equal(obj1,obj2))
+            throw new Error(`${struct_name} objects are not equal.`);
+
+
+    } else if (struct_name === 'CashFlows') {
+        const jstr1: string = fs.readFileSync(file1_name,'utf-8');
+        const jstr2: string = fs.readFileSync(file2_name,'utf-8');
+        const obj1: CashFlows = dto.CashFlows_fromJSON_string(jstr1);
+        const obj2: CashFlows = dto.CashFlows_fromJSON_string(jstr2);
+        if(!dto.CashFlows_equal(obj1,obj2))
             throw new Error(`${struct_name} objects are not equal.`);
 
     } else
