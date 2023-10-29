@@ -4,7 +4,7 @@ from cgdto import *
 from math import nan
 
 def schema_version () -> str:
-    return 'MonteCarlo SDK version (0.2.1)'
+    return 'MonteCarlo SDK version (0.3.0)'
 
 def schema ():
 
@@ -167,26 +167,6 @@ return _equation;
 if self._equation<0:
     raise Exception(f'Updater {self.name} has no _equation.')
 return self._equation
-'''
-        }
-    ))
-
-    obj.methods.append(Function (
-        'HasState',
-        'boolean',
-        const = True,
-        code = {
-            'python':
-'''
-return self.start is not None
-''',
-            'cpp':
-'''
-return start.has_value();
-''',
-            'typescript':
-'''
-return this.start !== undefined;
 '''
         }
     ))
@@ -787,20 +767,15 @@ return updaters.Count();
         code = {
             'python':
 '''
-return len([u for u in self.updaters if u.HasState()])
+return len(self.updaters)
 ''',
             'cpp':
 '''
-int n {0};
-for(const auto &u: updaters)
-    n += u.HasState();
-return n;
+return updaters.size();
 ''',
             'typescript':
 '''
-return this.updaters.filter(
-    u => u.HasState()
-).length;
+return this.updaters.length;
 '''
         }
     ))
@@ -814,9 +789,8 @@ return this.updaters.filter(
 '''
 self.updaters.append(updater)
 updater._equation = self.GetNumberOfUpdaters()-1
-if updater.HasState():
-    updater._state = self.GetNumberOfStates()-1
-    self.titles[updater._state] = updater.title
+updater._state = self.GetNumberOfStates()-1
+self.titles[updater._state] = updater.title
 return updater
 ''',
             'cpp':
@@ -824,20 +798,16 @@ return updater
 updaters.push_back(updater);
 auto &u = updaters.back();
 u._equation = GetNumberOfUpdaters()-1;
-if(u.HasState()){
-    u._state = GetNumberOfStates()-1;
-    titles[u._state] = u.title;
-}
+u._state = GetNumberOfStates()-1;
+titles[u._state] = u.title;
 return u;
 ''',
             'typescript':
 '''
 this.updaters.push(updater);
 updater._equation = this.GetNumberOfUpdaters()-1;
-if(updater.HasState()){
-    updater._state = this.GetNumberOfStates()-1;
-    this.titles[updater._state] = updater.title;
-}
+updater._state = this.GetNumberOfStates()-1;
+this.titles[updater._state] = updater.title;
 return updater;
 ''',
         }
@@ -957,6 +927,7 @@ return this.skewness;
     EvaluationResults = obj
     EvaluationResults.AddDependency(Result)
     obj.AddAttribute(Variable('names','string',list=True))
+    obj.AddAttribute(Variable('has_state','int',list=True))
     obj.AddAttribute(Variable('npaths','int',list=True))
     obj.AddAttribute(Variable('mean','float',list=True))
     obj.AddAttribute(Variable('stddev','float',list=True))
@@ -970,6 +941,7 @@ return this.skewness;
         'constructor',
         args = [
             Variable('names','string',[],list=True),
+            Variable('has_state','int',[],list=True),
             Variable('npaths','int',[],list=True),
             Variable('mean','float',[],list=True),
             Variable('stddev','float',[],list=True),
@@ -981,6 +953,7 @@ return this.skewness;
         ],
         mapping = [
             ('names',[Variable('names')]),
+            ('has_state',[Variable('has_state')]),
             ('npaths',[Variable('npaths')]),
             ('mean',[Variable('mean')]),
             ('stddev',[Variable('stddev')]),
@@ -1099,6 +1072,8 @@ return new Result(this.npaths[n],this.mean[n],this.stddev[n],this.skewness[n]);
 data = []
 for j in range(self.GetNumberOfEvaluations()):
     for i in range(self.GetNumberOfStates()):
+        if not self.has_state[i]:
+            continue
         n = self.Index(i,j)
         item = {
             'name': self.names[i],

@@ -1022,6 +1022,7 @@ EvaluationResults random_EvaluationResults (void) {
     return EvaluationResults (
         random_list_string(),
         random_list_int(),
+        random_list_int(),
         random_list_float(),
         random_list_float(),
         random_list_float(),
