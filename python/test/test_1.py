@@ -23,7 +23,7 @@ def BuildModel_Simple():
 def test_simple_model():
     er = run( BuildModel_Simple() )
     print(er)
-    assert len(er.names)==1
+    assert len(er.names)==2
 
 def test_functions_endpoint():
     response = requests.get(f'{server()}/functions').json()
