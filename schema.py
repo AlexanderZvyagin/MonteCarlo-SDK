@@ -4,7 +4,7 @@ from cgdto import *
 from math import nan
 
 def schema_version () -> str:
-    return 'MonteCarlo SDK version (0.3.0)'
+    return 'MonteCarlo SDK version (0.4.0)'
 
 def schema ():
 
