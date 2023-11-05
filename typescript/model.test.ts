@@ -60,18 +60,17 @@ test('SimpleModel', async function () {
     const model = new sdk.Model(0,10,20000);
     model.RandomSeed = 0;
     model.Add(new sdk.IndependentGaussian());
-        mean     : pars.start+pars.drift*pars.T,
-        model.Add(new sdk.BrownianMotion(pars.start,pars.drift,pars.diffusion));
+    model.Add(new sdk.BrownianMotion(pars.start,pars.drift,pars.diffusion));
     model.evaluations.push(new sdk.EvaluationPoint(0,pars.T));
 
     await sdk.run(model, server())
         .then(result => {
             console.log(result);
-            expect(result.mean[0]).toBeCloseTo(expected.mean,1);
-            expect(result.stddev[0]).toBeCloseTo(expected.stddev,1);
-            expect(result.skewness[0]).toBeCloseTo(expected.skewness,1);
-            expect(result.names).toEqual(['BrownianMotion' ]);
-            expect(result.npaths).toEqual([model.NumPaths]);
+            expect(result.mean[1]).toBeCloseTo(expected.mean,1);
+            expect(result.stddev[1]).toBeCloseTo(expected.stddev,1);
+            expect(result.skewness[1]).toBeCloseTo(expected.skewness,1);
+            expect(result.names).toEqual(['IndependentGaussian','BrownianMotion' ]);
+            expect(result.npaths).toEqual([0,model.NumPaths]);
             expect(result.time_points).toEqual([model.evaluations[0].time]);
             expect(result.time_steps).toEqual([model.TimeSteps-1]);
         })
