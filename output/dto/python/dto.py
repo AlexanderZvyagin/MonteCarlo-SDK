@@ -1391,7 +1391,7 @@ class EvaluationResults:
                     'step': self.time_steps[j],
                     'npaths': self.npaths[n],
                     'mean':self.mean[n],
-                    'mean_error': None if self.stddev[n] is None else self.stddev[n]/math.sqrt(self.npaths[n]),
+                    'mean_error': None if (self.stddev[n] is None or self.npaths[n]<=0) else self.stddev[n]/math.sqrt(self.npaths[n]),
                     'stddev': self.stddev[n],
                     'skewness': self.skewness[n]
                 }
