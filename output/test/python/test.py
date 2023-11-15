@@ -492,10 +492,7 @@ def random_optional_list_Histogram (min:int = 0, max:int = 3) -> list[Histogram]
 
 def random_EvaluationPoint ():
     return EvaluationPoint (
-        random_int(),
         random_float(),
-        random_optional_float(),
-        random_optional_float(),
         random_optional_list_Histogram()
 
     )
@@ -516,33 +513,6 @@ def random_optional_list_EvaluationPoint (min:int = 0, max:int = 3) -> list[Eval
     if yes_no():
         return None
     return random_list_EvaluationPoint(min,max)
-
-
-def random_Parameter ():
-    return Parameter (
-        random_float(),
-        random_float(),
-        random_float(),
-        random_float()
-
-    )
-
-
-def random_optional_Parameter () -> Parameter|None:
-    if yes_no():
-        return None
-    return random_Parameter()
-
-
-def random_list_Parameter (min:int = 0, max:int = 3) -> list[Parameter]:
-    size = random.randint(min,max)
-    return [random_Parameter() for i in range(size)]
-
-
-def random_optional_list_Parameter (min:int = 0, max:int = 3) -> list[Parameter]|None:
-    if yes_no():
-        return None
-    return random_list_Parameter(min,max)
 
 
 def random_Model ():
@@ -823,15 +793,6 @@ def test_round_trip_python(command, struct_name, file1_name, file2_name):
             assert obj1==obj2
 
 
-        elif struct_name=='Parameter':
-            obj1 = random_Parameter()
-            open(file1_name,'w').write(Parameter_to_json_string(obj1))
-            obj2 = Parameter_from_json_string(open(file1_name).read())
-            assert isinstance(obj1,Parameter)
-            assert isinstance(obj2,Parameter)
-            assert obj1==obj2
-
-
         elif struct_name=='Model':
             obj1 = random_Model()
             open(file1_name,'w').write(Model_to_json_string(obj1))
@@ -958,11 +919,6 @@ def test_round_trip_python(command, struct_name, file1_name, file2_name):
             open(file2_name,'w').write(EvaluationPoint_to_json_string(obj))
 
 
-        elif struct_name=='Parameter':
-            obj = Parameter_from_json_string(open(file1_name).read())
-            open(file2_name,'w').write(Parameter_to_json_string(obj))
-
-
         elif struct_name=='Model':
             obj = Model_from_json_string(open(file1_name).read())
             open(file2_name,'w').write(Model_to_json_string(obj))
@@ -1087,12 +1043,6 @@ def test_round_trip_python(command, struct_name, file1_name, file2_name):
         elif struct_name=='EvaluationPoint':
             obj1 = EvaluationPoint_from_json_string(open(file1_name).read())
             obj2 = EvaluationPoint_from_json_string(open(file2_name).read())
-            assert obj1==obj2
-
-
-        elif struct_name=='Parameter':
-            obj1 = Parameter_from_json_string(open(file1_name).read())
-            obj2 = Parameter_from_json_string(open(file2_name).read())
             assert obj1==obj2
 
 

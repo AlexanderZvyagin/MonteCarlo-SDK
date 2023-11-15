@@ -24,7 +24,6 @@ import {
     HistogramAxis,
     Histogram,
     EvaluationPoint,
-    Parameter,
     Model,
     Result,
     EvaluationResults,
@@ -648,10 +647,7 @@ function random_optional_list_Histogram () : Histogram[]|undefined {
 
 function random_EvaluationPoint () : EvaluationPoint {
     return new EvaluationPoint (
-        random_int(),
         random_float(),
-        random_optional_float(),
-        random_optional_float(),
         random_optional_list_Histogram()
 
     );
@@ -678,40 +674,6 @@ function random_optional_list_EvaluationPoint () : EvaluationPoint[]|undefined {
     if(yes_no())
         return undefined;
     return random_list_EvaluationPoint ();
-}
-
-
-function random_Parameter () : Parameter {
-    return new Parameter (
-        random_float(),
-        random_float(),
-        random_float(),
-        random_float()
-
-    );
-}
-
-
-function random_optional_Parameter () : Parameter|undefined {
-    if(yes_no())
-        return undefined;
-    return random_Parameter ();
-}
-
-
-function random_list_Parameter (min:number = 0, max:number = 3) : Parameter[] {
-    const size:number = Math.floor(min + Math.random()*(max-min));
-    const list:Parameter[] = [];
-    for(let i=0; i<size; i++)
-        list.push(random_Parameter());
-    return list;
-}
-
-
-function random_optional_list_Parameter () : Parameter[]|undefined {
-    if(yes_no())
-        return undefined;
-    return random_list_Parameter ();
 }
 
 
@@ -1067,18 +1029,6 @@ function create (struct_name:string, file_name:string){
             throw new Error(`${struct_name} objects are not equal.`);
 
 
-    } else if (struct_name === 'Parameter') {
-        const obj1: Parameter = random_Parameter();
-        const j: object = {};
-        dto.Parameter_to_json(j,obj1);
-
-        fs.writeFileSync (file_name, JSON.stringify (j));
-        const obj2: Parameter = new Parameter();
-        dto.Parameter_from_json(j,obj2);
-        if(!dto.Parameter_equal(obj1,obj2))
-            throw new Error(`${struct_name} objects are not equal.`);
-
-
     } else if (struct_name === 'Model') {
         const obj1: Model = random_Model();
         const j: object = {};
@@ -1232,12 +1182,6 @@ function convert (struct_name:string, file1_name:string, file2_name:string){
     } else if (struct_name === 'EvaluationPoint') {
         const jstr: string = fs.readFileSync(file1_name,'utf-8');
         const obj: EvaluationPoint = dto.EvaluationPoint_fromJSON_string(jstr);
-        fs.writeFileSync(file2_name, JSON.stringify(obj));
-
-
-    } else if (struct_name === 'Parameter') {
-        const jstr: string = fs.readFileSync(file1_name,'utf-8');
-        const obj: Parameter = dto.Parameter_fromJSON_string(jstr);
         fs.writeFileSync(file2_name, JSON.stringify(obj));
 
 
@@ -1421,15 +1365,6 @@ function compare (struct_name:string, file1_name:string, file2_name:string){
         const obj1: EvaluationPoint = dto.EvaluationPoint_fromJSON_string(jstr1);
         const obj2: EvaluationPoint = dto.EvaluationPoint_fromJSON_string(jstr2);
         if(!dto.EvaluationPoint_equal(obj1,obj2))
-            throw new Error(`${struct_name} objects are not equal.`);
-
-
-    } else if (struct_name === 'Parameter') {
-        const jstr1: string = fs.readFileSync(file1_name,'utf-8');
-        const jstr2: string = fs.readFileSync(file2_name,'utf-8');
-        const obj1: Parameter = dto.Parameter_fromJSON_string(jstr1);
-        const obj2: Parameter = dto.Parameter_fromJSON_string(jstr2);
-        if(!dto.Parameter_equal(obj1,obj2))
             throw new Error(`${struct_name} objects are not equal.`);
 
 

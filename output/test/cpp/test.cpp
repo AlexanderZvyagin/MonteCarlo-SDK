@@ -23,7 +23,6 @@
 #include "HistogramAxis.hpp"
 #include "Histogram.hpp"
 #include "EvaluationPoint.hpp"
-#include "Parameter.hpp"
 #include "Model.hpp"
 #include "Result.hpp"
 #include "EvaluationResults.hpp"
@@ -847,10 +846,7 @@ std::optional<std::vector<EvaluationPoint>> random_optional_list_EvaluationPoint
 
 EvaluationPoint random_EvaluationPoint (void) {
     return EvaluationPoint (
-        random_int(),
         random_float(),
-        random_optional_float(),
-        random_optional_float(),
         random_optional_list_Histogram()
 
     );
@@ -877,47 +873,6 @@ std::optional<std::vector<EvaluationPoint>> random_optional_list_EvaluationPoint
     if(yes_no())
         return {};
     return random_list_EvaluationPoint (min,max);
-}
-
-// Forward declarations for Parameter
-class Parameter;
-Parameter random_Parameter (void);
-std::optional<Parameter> random_optional_Parameter (void);
-std::vector<Parameter> random_list_Parameter (int min=0, int max=3);
-std::optional<std::vector<Parameter>> random_optional_list_Parameter (int min=0, int max=3);
-
-
-Parameter random_Parameter (void) {
-    return Parameter (
-        random_float(),
-        random_float(),
-        random_float(),
-        random_float()
-
-    );
-}
-
-
-std::optional<Parameter> random_optional_Parameter (void) {
-    if(yes_no())
-        return {};
-    return random_Parameter ();
-}
-
-
-std::vector<Parameter> random_list_Parameter (int min, int max) {
-    const auto size = random_int(min,max);
-    std::vector<Parameter> list;
-    for(int i=0; i<size; i++)
-        list.push_back(random_Parameter());
-    return list;
-}
-
-
-std::optional<std::vector<Parameter>> random_optional_list_Parameter (int min, int max) {
-    if(yes_no())
-        return {};
-    return random_list_Parameter (min,max);
 }
 
 // Forward declarations for Model
@@ -1334,19 +1289,6 @@ int main (int argc, const char **argv) try {
                 throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
 
 
-        } else if (struct_name == "Parameter") {
-            auto obj1 = dto::random_Parameter();
-            std::ofstream(file1_path) << dto::Parameter_to_json_string(obj1);
-            auto obj2 =
-                dto::Parameter_from_json (
-                    json::parse (
-                        std::ifstream (
-                            file1_path
-            )));
-            if(obj1!=obj2)
-                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
-
-
         } else if (struct_name == "Model") {
             auto obj1 = dto::random_Model();
             std::ofstream(file1_path) << dto::Model_to_json_string(obj1);
@@ -1625,19 +1567,6 @@ int main (int argc, const char **argv) try {
             )));
             std::ofstream out (file2_path);
             out << EvaluationPoint_to_json_string(obj);
-            if(!out)
-                throw std::runtime_error("Operation 'convert': IO error on " + struct_name);
-
-
-        } else if (struct_name == "Parameter") {
-            auto obj =
-                dto::Parameter_from_json (
-                    json::parse (
-                        std::ifstream (
-                            file1_path
-            )));
-            std::ofstream out (file2_path);
-            out << Parameter_to_json_string(obj);
             if(!out)
                 throw std::runtime_error("Operation 'convert': IO error on " + struct_name);
 
@@ -1982,23 +1911,6 @@ int main (int argc, const char **argv) try {
             )));
             auto obj2 =
                 dto::EvaluationPoint_from_json (
-                    json::parse (
-                        std::ifstream (
-                            file2_path
-            )));
-            if(obj1!=obj2)
-                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
-
-
-        } else if (struct_name == "Parameter") {
-            auto obj1 =
-                dto::Parameter_from_json (
-                    json::parse (
-                        std::ifstream (
-                            file1_path
-            )));
-            auto obj2 =
-                dto::Parameter_from_json (
                     json::parse (
                         std::ifstream (
                             file2_path
