@@ -4,7 +4,7 @@ from cgdto import *
 from math import nan
 
 def schema_version () -> str:
-    return 'MonteCarlo SDK version (0.4.0)'
+    return 'MonteCarlo SDK version (0.5.0)'
 
 def schema ():
 
@@ -475,38 +475,38 @@ this.args = [...[xmin,xmax],...y];
         obj.name,
         'constructor',
         args = [
-            Variable('_state','int',-88),
-            Variable('_nbins','int',-88),
-            Variable('_min'  ,'float',-88), # FIXME: cannot use math.nan for the moment
-            Variable('_max'  ,'float',-88), # FIXME: cannot use math.nan for the moment
+            Variable('state','int',-88),
+            Variable('nbins','int',-88),
+            Variable('min'  ,'float',-88), # FIXME: cannot use math.nan for the moment
+            Variable('max'  ,'float',-88), # FIXME: cannot use math.nan for the moment
         ],
         mapping = [
-            ('state',[Variable('_state')]),
-            ('nbins',[Variable('_nbins')]),
-            ('min',[Variable('_min')]),
-            ('max',[Variable('_max')]),
+            ('state',[Variable('state')]),
+            ('nbins',[Variable('nbins')]),
+            ('min',[Variable('min')]),
+            ('max',[Variable('max')]),
         ]
     ))
     objs.append(obj)
 
     obj = Struct('Histogram')
     Histogram = obj
-    obj.AddAttribute(Variable('x',HistogramAxis))
-    obj.AddAttribute(Variable('y',HistogramAxis,optional=True))
+    obj.AddAttribute(Variable('ax',HistogramAxis))
+    obj.AddAttribute(Variable('ay',HistogramAxis,optional=True))
     obj.AddAttribute(Variable('evaluation_point','int',optional=True))
     obj.AddAttribute(Variable('bins','float',list=True,optional=True))
     obj.methods.append(Function (
         obj.name,
         'constructor',
         args = [
-            Variable('x',HistogramAxis,Variable('HistogramAxis()',HistogramAxis)),
-            Variable('y',HistogramAxis,None,optional=True),
+            Variable('ax',HistogramAxis,Variable('HistogramAxis()',HistogramAxis)),
+            Variable('ay',HistogramAxis,None,optional=True),
             Variable('evaluation_point','int',None,optional=True),
             Variable('bins','float',None,optional=True,list=True)
         ],
         mapping = [
-            ('x',[Variable('x')]),
-            ('y',[Variable('y')]),
+            ('ax',[Variable('ax')]),
+            ('ay',[Variable('ay')]),
             ('evaluation_point',[Variable('evaluation_point')]),
             ('bins',[Variable('bins')]),
         ]
@@ -525,47 +525,19 @@ void from_json(const json &j, std::vector<Histogram> &u) {
 
     obj = Struct ('EvaluationPoint')
     EvaluationPoint = obj
-    obj.AddAttribute(Variable('state','int'))
     obj.AddAttribute(Variable('time','float'))
-    obj.AddAttribute(Variable('value','float',optional=True))
-    obj.AddAttribute(Variable('error','float',optional=True))
     obj.AddAttribute(Variable('histograms',Histogram,list=True,optional=True))
     obj.methods.append(Function (
         obj.name,
         'constructor',
         args = [
-            Variable('state','int',-88),
             Variable('time','float',nan),
-            Variable('value','float',None,optional=True),
-            Variable('error','float',None,optional=True),
             Variable('histograms',Histogram,None,optional=True,list=True),
         ],
         mapping = [
-            ('state',[Variable('state')]),
             ('time',[Variable('time')]),
-            ('value',[Variable('value')]),
-            ('error',[Variable('error')]),
             ('histograms',[Variable('histograms')]),
         ]
-    ))
-    obj.methods.append(Function (
-        'GetState',
-        'int',
-        const = True,
-        code = {
-            'python':
-'''
-return self.state
-''',
-            'cpp':
-'''
-return state;
-''',
-            'typescript':
-'''
-return this.state;
-''',
-        }
     ))
     obj.methods.append(Function (
         'GetTime',
@@ -583,56 +555,6 @@ return time;
             'typescript':
 '''
 return this.time;
-''',
-        }
-    ))
-    obj.methods.append(Function (
-        'GetValue',
-        'float',
-        const = True,
-        code = {
-            'python':
-'''
-if self.value is None:
-    raise ValueError()
-return self.value
-''',
-            'cpp':
-'''
-if( not value.has_value() )
-    throw std::invalid_argument("value");
-return value.value();
-''',
-            'typescript':
-'''
-if( this.value === undefined )
-    throw new Error("value");
-return this.value;
-''',
-        }
-    ))
-    obj.methods.append(Function (
-        'GetError',
-        'float',
-        const = True,
-        code = {
-            'python':
-'''
-if self.error is None:
-    raise ValueError()
-return self.error
-''',
-            'cpp':
-'''
-if( not error.has_value() )
-    throw std::invalid_argument("error");
-return error.value();
-''',
-            'typescript':
-'''
-if( this.error === undefined )
-    throw new Error("error");
-return this.error;
 ''',
         }
     ))
@@ -665,29 +587,6 @@ return this;
         }
     ))
 
-    objs.append(obj)
-
-    obj = Struct ('Parameter')
-    obj.AddAttribute(Variable('value','float'))
-    obj.AddAttribute(Variable('step','float'))
-    obj.AddAttribute(Variable('min','float'))
-    obj.AddAttribute(Variable('max','float'))
-    obj.methods.append(Function (
-        obj.name,
-        'constructor',
-        args = [
-            Variable('value','float',nan),
-            Variable('step','float',nan),
-            Variable('min','float',nan),
-            Variable('max','float',nan),
-        ],
-        mapping = [
-            ('value',[Variable('value')]),
-            ('step',[Variable('step')]),
-            ('min',[Variable('min')]),
-            ('max',[Variable('max')]),
-        ]
-    ))
     objs.append(obj)
 
     obj = Struct ('Model')
