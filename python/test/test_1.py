@@ -16,7 +16,7 @@ def BuildModel_Simple():
     m.Add(sdk.IndependentGaussian())
     m.Add(sdk.BrownianMotion(0.1,0.2,2)) # start, drift, diffusion
 
-    m.evaluations.append(sdk.EvaluationPoint(0,2))
+    m.evaluations.append(sdk.EvaluationPoint(2))
 
     return m
 

@@ -39,4 +39,5 @@ def test_all_notebooks (directory = notebooks_directory):
                 with testbook(full_path, execute=True) as tb:
                     pass
             except:
+                print(f'Notebook {fname} error!')
                 raise
