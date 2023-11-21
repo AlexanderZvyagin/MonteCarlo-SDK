@@ -401,6 +401,27 @@ void from_json(const json &j, std::vector<Updater> &u) {
 
     objs.append(obj)
 
+
+    obj = Struct('Polynom',Updater)
+    obj.methods.append(Function (
+        obj.name,
+        'constructor',
+        args = [
+            Variable('ref'     ,'int',defval=-1),
+            Variable('args'    ,'float',defval=[],list=True),
+            Variable('title'   ,'string',defval=''),
+        ],
+        mapping = [(obj.base.name,[
+            'Polynom',
+            [Variable('ref')],
+            Variable('args'),
+            0, # start
+            Variable('title'),
+        ])]
+    ))
+    objs.append(obj)
+
+
     obj = Struct('Linear1DInterpolation',Updater,gen_test=False)
     obj.methods.append(Function (
         obj.name,
@@ -1021,6 +1042,25 @@ def EvaluationResults_from_response(r,model=None):
             'Sum',
             Variable('states'),
             Variable('weights'),
+            0, # start
+            Variable('title'),
+        ])],
+    ))
+    objs.append(obj)
+
+    obj = Struct('SumOfFutureValues',Updater)
+    obj.methods.append(Function (
+        obj.name,
+        'constructor',
+        args = [
+            Variable('state' , 'int'    , defval=-88),
+            Variable('t'     , 'float'  , defval=[], list=True),
+            Variable('title' , 'string' , defval=''),
+        ],
+        mapping = [(obj.base.name,[
+            'SumOfFutureValues',
+            [Variable('state')],
+            Variable('t'),
             0, # start
             Variable('title'),
         ])],
