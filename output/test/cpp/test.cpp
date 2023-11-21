@@ -19,6 +19,7 @@
 #include "ZeroCouponBond.hpp"
 #include "Option.hpp"
 #include "Barrier.hpp"
+#include "Polynom.hpp"
 #include "Multiplication.hpp"
 #include "HistogramAxis.hpp"
 #include "Histogram.hpp"
@@ -27,6 +28,7 @@
 #include "Result.hpp"
 #include "EvaluationResults.hpp"
 #include "Sum.hpp"
+#include "SumOfFutureValues.hpp"
 
 namespace fs = std::filesystem;
 
@@ -714,6 +716,46 @@ std::optional<std::vector<Barrier>> random_optional_list_Barrier (int min, int m
     return random_list_Barrier (min,max);
 }
 
+// Forward declarations for Polynom
+class Polynom;
+Polynom random_Polynom (void);
+std::optional<Polynom> random_optional_Polynom (void);
+std::vector<Polynom> random_list_Polynom (int min=0, int max=3);
+std::optional<std::vector<Polynom>> random_optional_list_Polynom (int min=0, int max=3);
+
+
+Polynom random_Polynom (void) {
+    return Polynom (
+        random_int(),
+        random_list_float(),
+        random_string()
+
+    );
+}
+
+
+std::optional<Polynom> random_optional_Polynom (void) {
+    if(yes_no())
+        return {};
+    return random_Polynom ();
+}
+
+
+std::vector<Polynom> random_list_Polynom (int min, int max) {
+    const auto size = random_int(min,max);
+    std::vector<Polynom> list;
+    for(int i=0; i<size; i++)
+        list.push_back(random_Polynom());
+    return list;
+}
+
+
+std::optional<std::vector<Polynom>> random_optional_list_Polynom (int min, int max) {
+    if(yes_no())
+        return {};
+    return random_list_Polynom (min,max);
+}
+
 // Forward declarations for Multiplication
 class Multiplication;
 Multiplication random_Multiplication (void);
@@ -1048,6 +1090,46 @@ std::optional<std::vector<Sum>> random_optional_list_Sum (int min, int max) {
     return random_list_Sum (min,max);
 }
 
+// Forward declarations for SumOfFutureValues
+class SumOfFutureValues;
+SumOfFutureValues random_SumOfFutureValues (void);
+std::optional<SumOfFutureValues> random_optional_SumOfFutureValues (void);
+std::vector<SumOfFutureValues> random_list_SumOfFutureValues (int min=0, int max=3);
+std::optional<std::vector<SumOfFutureValues>> random_optional_list_SumOfFutureValues (int min=0, int max=3);
+
+
+SumOfFutureValues random_SumOfFutureValues (void) {
+    return SumOfFutureValues (
+        random_int(),
+        random_list_float(),
+        random_string()
+
+    );
+}
+
+
+std::optional<SumOfFutureValues> random_optional_SumOfFutureValues (void) {
+    if(yes_no())
+        return {};
+    return random_SumOfFutureValues ();
+}
+
+
+std::vector<SumOfFutureValues> random_list_SumOfFutureValues (int min, int max) {
+    const auto size = random_int(min,max);
+    std::vector<SumOfFutureValues> list;
+    for(int i=0; i<size; i++)
+        list.push_back(random_SumOfFutureValues());
+    return list;
+}
+
+
+std::optional<std::vector<SumOfFutureValues>> random_optional_list_SumOfFutureValues (int min, int max) {
+    if(yes_no())
+        return {};
+    return random_list_SumOfFutureValues (min,max);
+}
+
 
 } // namespace dto
 
@@ -1237,6 +1319,19 @@ int main (int argc, const char **argv) try {
                 throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
 
 
+        } else if (struct_name == "Polynom") {
+            auto obj1 = dto::random_Polynom();
+            std::ofstream(file1_path) << dto::Polynom_to_json_string(obj1);
+            auto obj2 =
+                dto::Polynom_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            if(obj1!=obj2)
+                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
+
+
         } else if (struct_name == "Multiplication") {
             auto obj1 = dto::random_Multiplication();
             std::ofstream(file1_path) << dto::Multiplication_to_json_string(obj1);
@@ -1333,6 +1428,19 @@ int main (int argc, const char **argv) try {
             std::ofstream(file1_path) << dto::Sum_to_json_string(obj1);
             auto obj2 =
                 dto::Sum_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            if(obj1!=obj2)
+                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
+
+
+        } else if (struct_name == "SumOfFutureValues") {
+            auto obj1 = dto::random_SumOfFutureValues();
+            std::ofstream(file1_path) << dto::SumOfFutureValues_to_json_string(obj1);
+            auto obj2 =
+                dto::SumOfFutureValues_from_json (
                     json::parse (
                         std::ifstream (
                             file1_path
@@ -1519,6 +1627,19 @@ int main (int argc, const char **argv) try {
                 throw std::runtime_error("Operation 'convert': IO error on " + struct_name);
 
 
+        } else if (struct_name == "Polynom") {
+            auto obj =
+                dto::Polynom_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            std::ofstream out (file2_path);
+            out << Polynom_to_json_string(obj);
+            if(!out)
+                throw std::runtime_error("Operation 'convert': IO error on " + struct_name);
+
+
         } else if (struct_name == "Multiplication") {
             auto obj =
                 dto::Multiplication_from_json (
@@ -1619,6 +1740,19 @@ int main (int argc, const char **argv) try {
             )));
             std::ofstream out (file2_path);
             out << Sum_to_json_string(obj);
+            if(!out)
+                throw std::runtime_error("Operation 'convert': IO error on " + struct_name);
+
+
+        } else if (struct_name == "SumOfFutureValues") {
+            auto obj =
+                dto::SumOfFutureValues_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            std::ofstream out (file2_path);
+            out << SumOfFutureValues_to_json_string(obj);
             if(!out)
                 throw std::runtime_error("Operation 'convert': IO error on " + struct_name);
 
@@ -1851,6 +1985,23 @@ int main (int argc, const char **argv) try {
                 throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
 
 
+        } else if (struct_name == "Polynom") {
+            auto obj1 =
+                dto::Polynom_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            auto obj2 =
+                dto::Polynom_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file2_path
+            )));
+            if(obj1!=obj2)
+                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
+
+
         } else if (struct_name == "Multiplication") {
             auto obj1 =
                 dto::Multiplication_from_json (
@@ -1979,6 +2130,23 @@ int main (int argc, const char **argv) try {
             )));
             auto obj2 =
                 dto::Sum_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file2_path
+            )));
+            if(obj1!=obj2)
+                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
+
+
+        } else if (struct_name == "SumOfFutureValues") {
+            auto obj1 =
+                dto::SumOfFutureValues_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            auto obj2 =
+                dto::SumOfFutureValues_from_json (
                     json::parse (
                         std::ifstream (
                             file2_path

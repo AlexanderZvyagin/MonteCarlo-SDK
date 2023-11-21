@@ -1049,6 +1049,71 @@ Barrier_to_json(j:object, obj:Barrier) {
 }
 
 
+class Polynom extends Updater {
+
+
+    constructor(
+        ref : number  = -1,
+        args : number[]  = [],
+        title : string  = "",
+    ){
+        super(
+            "Polynom",
+            [ref],
+            args,
+            0,
+            title,
+        );
+    
+    }
+
+    json (): string {
+        return Polynom_to_json_string(this);
+    }
+}
+export function
+Polynom_equal (a: Polynom, b: Polynom) : boolean {
+    if(!Updater_equal(a,b)) return false;
+    return true;
+}
+
+export function
+Polynom_fromJSON (j:any, obj: Polynom): void {
+    Updater_fromJSON(j,obj)
+}
+export function
+Polynom_fromJSON_string (jstr:string): Polynom {
+    const j = JSON.parse(jstr);
+    const obj = new Polynom();
+    Polynom_fromJSON(j,obj);
+    return obj;
+}
+export function
+Polynom_from_json_string (jstr:string): Polynom {
+    const j: object = JSON.parse(jstr);
+    const obj: Polynom = new Polynom();
+    Polynom_from_json(j,obj);
+    return obj;
+}
+
+export function
+Polynom_to_json_string (self:Polynom) {
+    const j = {};
+    Polynom_to_json(j,self);
+    return JSON.stringify(j);
+}
+
+export function
+Polynom_from_json(j:object, obj:Polynom) {
+    Updater_from_json(j,obj);
+}
+
+export function
+Polynom_to_json(j:object, obj:Polynom) {
+    Updater_to_json(j,obj);
+}
+
+
 class Linear1DInterpolation extends Updater {
 
 
@@ -2010,6 +2075,71 @@ Sum_to_json(j:object, obj:Sum) {
 }
 
 
+class SumOfFutureValues extends Updater {
+
+
+    constructor(
+        state : number  = -88,
+        t : number[]  = [],
+        title : string  = "",
+    ){
+        super(
+            "SumOfFutureValues",
+            [state],
+            t,
+            0,
+            title,
+        );
+    
+    }
+
+    json (): string {
+        return SumOfFutureValues_to_json_string(this);
+    }
+}
+export function
+SumOfFutureValues_equal (a: SumOfFutureValues, b: SumOfFutureValues) : boolean {
+    if(!Updater_equal(a,b)) return false;
+    return true;
+}
+
+export function
+SumOfFutureValues_fromJSON (j:any, obj: SumOfFutureValues): void {
+    Updater_fromJSON(j,obj)
+}
+export function
+SumOfFutureValues_fromJSON_string (jstr:string): SumOfFutureValues {
+    const j = JSON.parse(jstr);
+    const obj = new SumOfFutureValues();
+    SumOfFutureValues_fromJSON(j,obj);
+    return obj;
+}
+export function
+SumOfFutureValues_from_json_string (jstr:string): SumOfFutureValues {
+    const j: object = JSON.parse(jstr);
+    const obj: SumOfFutureValues = new SumOfFutureValues();
+    SumOfFutureValues_from_json(j,obj);
+    return obj;
+}
+
+export function
+SumOfFutureValues_to_json_string (self:SumOfFutureValues) {
+    const j = {};
+    SumOfFutureValues_to_json(j,self);
+    return JSON.stringify(j);
+}
+
+export function
+SumOfFutureValues_from_json(j:object, obj:SumOfFutureValues) {
+    Updater_from_json(j,obj);
+}
+
+export function
+SumOfFutureValues_to_json(j:object, obj:SumOfFutureValues) {
+    Updater_to_json(j,obj);
+}
+
+
 ////////////////////////////////////////////////////////////////
 // The start of "include.ts"
 ////////////////////////////////////////////////////////////////
@@ -2045,6 +2175,7 @@ export {
     ZeroCouponBond,
     Option,
     Barrier,
+    Polynom,
     Linear1DInterpolation,
     Multiplication,
     HistogramAxis,
@@ -2054,4 +2185,5 @@ export {
     Result,
     EvaluationResults,
     Sum,
+    SumOfFutureValues,
 }

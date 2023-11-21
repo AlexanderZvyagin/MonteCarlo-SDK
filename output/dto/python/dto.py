@@ -714,6 +714,50 @@ def Barrier_to_json(j:dict, obj:Barrier):
     pass
 
 # Forward declaration
+class Polynom: pass
+class Polynom (Updater):
+
+    
+    def __init__ (
+        self,
+        ref:int = -1,
+        args:list[float] = [],
+        title:str = ""
+    ):
+        super().__init__(
+            "Polynom",
+            [ref],
+            args,
+            0,
+            title,
+        )
+        pass
+
+    def __eq__ (self, other):
+        if not super().__eq__(other): return False
+        return True
+    def __neq__ (self, other):
+        return not self==other
+    def json (self) -> str:
+        return Polynom_to_json_string(self)
+def Polynom_from_json_string (jstr):
+    j = json.loads(jstr)
+    obj = Polynom()
+    Polynom_from_json(j,obj)
+    return obj
+
+def Polynom_to_json_string (self:Polynom):
+    j = {}
+    Polynom_to_json(j,self)
+    return json.dumps(j)
+def Polynom_from_json (j:dict, obj:Polynom):
+    assert isinstance(obj,Polynom)
+    Updater_from_json(j,obj)
+def Polynom_to_json(j:dict, obj:Polynom):
+    Updater_to_json(j,obj)
+    pass
+
+# Forward declaration
 class Linear1DInterpolation: pass
 class Linear1DInterpolation (Updater):
 
@@ -1416,6 +1460,50 @@ def Sum_from_json (j:dict, obj:Sum):
     assert isinstance(obj,Sum)
     Updater_from_json(j,obj)
 def Sum_to_json(j:dict, obj:Sum):
+    Updater_to_json(j,obj)
+    pass
+
+# Forward declaration
+class SumOfFutureValues: pass
+class SumOfFutureValues (Updater):
+
+    
+    def __init__ (
+        self,
+        state:int = -88,
+        t:list[float] = [],
+        title:str = ""
+    ):
+        super().__init__(
+            "SumOfFutureValues",
+            [state],
+            t,
+            0,
+            title,
+        )
+        pass
+
+    def __eq__ (self, other):
+        if not super().__eq__(other): return False
+        return True
+    def __neq__ (self, other):
+        return not self==other
+    def json (self) -> str:
+        return SumOfFutureValues_to_json_string(self)
+def SumOfFutureValues_from_json_string (jstr):
+    j = json.loads(jstr)
+    obj = SumOfFutureValues()
+    SumOfFutureValues_from_json(j,obj)
+    return obj
+
+def SumOfFutureValues_to_json_string (self:SumOfFutureValues):
+    j = {}
+    SumOfFutureValues_to_json(j,self)
+    return json.dumps(j)
+def SumOfFutureValues_from_json (j:dict, obj:SumOfFutureValues):
+    assert isinstance(obj,SumOfFutureValues)
+    Updater_from_json(j,obj)
+def SumOfFutureValues_to_json(j:dict, obj:SumOfFutureValues):
     Updater_to_json(j,obj)
     pass
 

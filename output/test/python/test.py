@@ -410,6 +410,32 @@ def random_optional_list_Barrier (min:int = 0, max:int = 3) -> list[Barrier]|Non
     return random_list_Barrier(min,max)
 
 
+def random_Polynom ():
+    return Polynom (
+        random_int(),
+        random_list_float(),
+        random_string()
+
+    )
+
+
+def random_optional_Polynom () -> Polynom|None:
+    if yes_no():
+        return None
+    return random_Polynom()
+
+
+def random_list_Polynom (min:int = 0, max:int = 3) -> list[Polynom]:
+    size = random.randint(min,max)
+    return [random_Polynom() for i in range(size)]
+
+
+def random_optional_list_Polynom (min:int = 0, max:int = 3) -> list[Polynom]|None:
+    if yes_no():
+        return None
+    return random_list_Polynom(min,max)
+
+
 def random_Multiplication ():
     return Multiplication (
         random_list_int(),
@@ -632,6 +658,32 @@ def random_optional_list_Sum (min:int = 0, max:int = 3) -> list[Sum]|None:
     return random_list_Sum(min,max)
 
 
+def random_SumOfFutureValues ():
+    return SumOfFutureValues (
+        random_int(),
+        random_list_float(),
+        random_string()
+
+    )
+
+
+def random_optional_SumOfFutureValues () -> SumOfFutureValues|None:
+    if yes_no():
+        return None
+    return random_SumOfFutureValues()
+
+
+def random_list_SumOfFutureValues (min:int = 0, max:int = 3) -> list[SumOfFutureValues]:
+    size = random.randint(min,max)
+    return [random_SumOfFutureValues() for i in range(size)]
+
+
+def random_optional_list_SumOfFutureValues (min:int = 0, max:int = 3) -> list[SumOfFutureValues]|None:
+    if yes_no():
+        return None
+    return random_list_SumOfFutureValues(min,max)
+
+
 def test_round_trip_python(command, struct_name, file1_name, file2_name):
     if command=='build':
         return
@@ -757,6 +809,15 @@ def test_round_trip_python(command, struct_name, file1_name, file2_name):
             assert obj1==obj2
 
 
+        elif struct_name=='Polynom':
+            obj1 = random_Polynom()
+            open(file1_name,'w').write(Polynom_to_json_string(obj1))
+            obj2 = Polynom_from_json_string(open(file1_name).read())
+            assert isinstance(obj1,Polynom)
+            assert isinstance(obj2,Polynom)
+            assert obj1==obj2
+
+
         elif struct_name=='Multiplication':
             obj1 = random_Multiplication()
             open(file1_name,'w').write(Multiplication_to_json_string(obj1))
@@ -826,6 +887,15 @@ def test_round_trip_python(command, struct_name, file1_name, file2_name):
             obj2 = Sum_from_json_string(open(file1_name).read())
             assert isinstance(obj1,Sum)
             assert isinstance(obj2,Sum)
+            assert obj1==obj2
+
+
+        elif struct_name=='SumOfFutureValues':
+            obj1 = random_SumOfFutureValues()
+            open(file1_name,'w').write(SumOfFutureValues_to_json_string(obj1))
+            obj2 = SumOfFutureValues_from_json_string(open(file1_name).read())
+            assert isinstance(obj1,SumOfFutureValues)
+            assert isinstance(obj2,SumOfFutureValues)
             assert obj1==obj2
 
         else:
@@ -899,6 +969,11 @@ def test_round_trip_python(command, struct_name, file1_name, file2_name):
             open(file2_name,'w').write(Barrier_to_json_string(obj))
 
 
+        elif struct_name=='Polynom':
+            obj = Polynom_from_json_string(open(file1_name).read())
+            open(file2_name,'w').write(Polynom_to_json_string(obj))
+
+
         elif struct_name=='Multiplication':
             obj = Multiplication_from_json_string(open(file1_name).read())
             open(file2_name,'w').write(Multiplication_to_json_string(obj))
@@ -937,6 +1012,11 @@ def test_round_trip_python(command, struct_name, file1_name, file2_name):
         elif struct_name=='Sum':
             obj = Sum_from_json_string(open(file1_name).read())
             open(file2_name,'w').write(Sum_to_json_string(obj))
+
+
+        elif struct_name=='SumOfFutureValues':
+            obj = SumOfFutureValues_from_json_string(open(file1_name).read())
+            open(file2_name,'w').write(SumOfFutureValues_to_json_string(obj))
 
         else:
             raise Exception(f'Operation "{command}" does not supported struct {struct_name}')
@@ -1022,6 +1102,12 @@ def test_round_trip_python(command, struct_name, file1_name, file2_name):
             assert obj1==obj2
 
 
+        elif struct_name=='Polynom':
+            obj1 = Polynom_from_json_string(open(file1_name).read())
+            obj2 = Polynom_from_json_string(open(file2_name).read())
+            assert obj1==obj2
+
+
         elif struct_name=='Multiplication':
             obj1 = Multiplication_from_json_string(open(file1_name).read())
             obj2 = Multiplication_from_json_string(open(file2_name).read())
@@ -1067,6 +1153,12 @@ def test_round_trip_python(command, struct_name, file1_name, file2_name):
         elif struct_name=='Sum':
             obj1 = Sum_from_json_string(open(file1_name).read())
             obj2 = Sum_from_json_string(open(file2_name).read())
+            assert obj1==obj2
+
+
+        elif struct_name=='SumOfFutureValues':
+            obj1 = SumOfFutureValues_from_json_string(open(file1_name).read())
+            obj2 = SumOfFutureValues_from_json_string(open(file2_name).read())
             assert obj1==obj2
 
         else:
