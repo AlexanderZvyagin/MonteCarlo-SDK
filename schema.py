@@ -486,6 +486,27 @@ this.args = [...[xmin,xmax],...y];
     objs.append(obj)
 
 
+    obj = Struct('Division',Updater)
+    obj.methods.append(Function (
+        obj.name,
+        'constructor',
+        args = [
+            Variable('numerator'     ,'int',defval=-88),
+            Variable('denominator'   ,'int',defval=-88),
+            Variable('eps'           ,'float',defval=0),
+            Variable('title'         ,'string',defval=''),
+        ],
+        mapping = [(obj.base.name,[
+            'Division',
+            [Variable('numerator'),Variable('denominator')],
+            [Variable('eps')],
+            0, # start
+            Variable('title'),
+        ])]
+    ))
+    objs.append(obj)
+
+
     obj = Struct('HistogramAxis')
     HistogramAxis = obj
     obj.AddAttribute(Variable('state','int'))
