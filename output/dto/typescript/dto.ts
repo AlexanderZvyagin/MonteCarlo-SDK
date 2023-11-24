@@ -1251,6 +1251,72 @@ Multiplication_to_json(j:object, obj:Multiplication) {
 }
 
 
+class Division extends Updater {
+
+
+    constructor(
+        numerator : number  = -88,
+        denominator : number  = -88,
+        eps : number  = 0,
+        title : string  = "",
+    ){
+        super(
+            "Division",
+            [numerator,denominator],
+            [eps],
+            0,
+            title,
+        );
+    
+    }
+
+    json (): string {
+        return Division_to_json_string(this);
+    }
+}
+export function
+Division_equal (a: Division, b: Division) : boolean {
+    if(!Updater_equal(a,b)) return false;
+    return true;
+}
+
+export function
+Division_fromJSON (j:any, obj: Division): void {
+    Updater_fromJSON(j,obj)
+}
+export function
+Division_fromJSON_string (jstr:string): Division {
+    const j = JSON.parse(jstr);
+    const obj = new Division();
+    Division_fromJSON(j,obj);
+    return obj;
+}
+export function
+Division_from_json_string (jstr:string): Division {
+    const j: object = JSON.parse(jstr);
+    const obj: Division = new Division();
+    Division_from_json(j,obj);
+    return obj;
+}
+
+export function
+Division_to_json_string (self:Division) {
+    const j = {};
+    Division_to_json(j,self);
+    return JSON.stringify(j);
+}
+
+export function
+Division_from_json(j:object, obj:Division) {
+    Updater_from_json(j,obj);
+}
+
+export function
+Division_to_json(j:object, obj:Division) {
+    Updater_to_json(j,obj);
+}
+
+
 class HistogramAxis {
 
     state : number;
@@ -2178,6 +2244,7 @@ export {
     Polynom,
     Linear1DInterpolation,
     Multiplication,
+    Division,
     HistogramAxis,
     Histogram,
     EvaluationPoint,

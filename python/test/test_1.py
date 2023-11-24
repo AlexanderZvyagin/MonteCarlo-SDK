@@ -37,7 +37,7 @@ def add_rate_and_discount_processes (
     rate_start     : float     = 0,
     rate_drift     : float     = 0,
     rate_diffusion : float     = 0,
-    prefix         : str         = ''
+    prefix         : str       = ''
 ):
     print(f'The rate process follows a BrownianMotion process starting at {rate_start} with drift={rate_drift} and diffusion={rate_diffusion} parameters.')
     rate_uf = model.Add(sdk.BrownianMotion(start=rate_start,drift=rate_drift,diffusion=rate_diffusion,title=f'{prefix}rate'))

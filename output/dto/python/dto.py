@@ -853,6 +853,51 @@ def Multiplication_to_json(j:dict, obj:Multiplication):
     pass
 
 # Forward declaration
+class Division: pass
+class Division (Updater):
+
+    
+    def __init__ (
+        self,
+        numerator:int = -88,
+        denominator:int = -88,
+        eps:float = 0,
+        title:str = ""
+    ):
+        super().__init__(
+            "Division",
+            [numerator,denominator],
+            [eps],
+            0,
+            title,
+        )
+        pass
+
+    def __eq__ (self, other):
+        if not super().__eq__(other): return False
+        return True
+    def __neq__ (self, other):
+        return not self==other
+    def json (self) -> str:
+        return Division_to_json_string(self)
+def Division_from_json_string (jstr):
+    j = json.loads(jstr)
+    obj = Division()
+    Division_from_json(j,obj)
+    return obj
+
+def Division_to_json_string (self:Division):
+    j = {}
+    Division_to_json(j,self)
+    return json.dumps(j)
+def Division_from_json (j:dict, obj:Division):
+    assert isinstance(obj,Division)
+    Updater_from_json(j,obj)
+def Division_to_json(j:dict, obj:Division):
+    Updater_to_json(j,obj)
+    pass
+
+# Forward declaration
 class HistogramAxis: pass
 class HistogramAxis:
 

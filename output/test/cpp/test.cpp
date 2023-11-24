@@ -21,6 +21,7 @@
 #include "Barrier.hpp"
 #include "Polynom.hpp"
 #include "Multiplication.hpp"
+#include "Division.hpp"
 #include "HistogramAxis.hpp"
 #include "Histogram.hpp"
 #include "EvaluationPoint.hpp"
@@ -796,6 +797,47 @@ std::optional<std::vector<Multiplication>> random_optional_list_Multiplication (
     return random_list_Multiplication (min,max);
 }
 
+// Forward declarations for Division
+class Division;
+Division random_Division (void);
+std::optional<Division> random_optional_Division (void);
+std::vector<Division> random_list_Division (int min=0, int max=3);
+std::optional<std::vector<Division>> random_optional_list_Division (int min=0, int max=3);
+
+
+Division random_Division (void) {
+    return Division (
+        random_int(),
+        random_int(),
+        random_float(),
+        random_string()
+
+    );
+}
+
+
+std::optional<Division> random_optional_Division (void) {
+    if(yes_no())
+        return {};
+    return random_Division ();
+}
+
+
+std::vector<Division> random_list_Division (int min, int max) {
+    const auto size = random_int(min,max);
+    std::vector<Division> list;
+    for(int i=0; i<size; i++)
+        list.push_back(random_Division());
+    return list;
+}
+
+
+std::optional<std::vector<Division>> random_optional_list_Division (int min, int max) {
+    if(yes_no())
+        return {};
+    return random_list_Division (min,max);
+}
+
 // Forward declarations for HistogramAxis
 class HistogramAxis;
 HistogramAxis random_HistogramAxis (void);
@@ -1345,6 +1387,19 @@ int main (int argc, const char **argv) try {
                 throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
 
 
+        } else if (struct_name == "Division") {
+            auto obj1 = dto::random_Division();
+            std::ofstream(file1_path) << dto::Division_to_json_string(obj1);
+            auto obj2 =
+                dto::Division_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            if(obj1!=obj2)
+                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
+
+
         } else if (struct_name == "HistogramAxis") {
             auto obj1 = dto::random_HistogramAxis();
             std::ofstream(file1_path) << dto::HistogramAxis_to_json_string(obj1);
@@ -1649,6 +1704,19 @@ int main (int argc, const char **argv) try {
             )));
             std::ofstream out (file2_path);
             out << Multiplication_to_json_string(obj);
+            if(!out)
+                throw std::runtime_error("Operation 'convert': IO error on " + struct_name);
+
+
+        } else if (struct_name == "Division") {
+            auto obj =
+                dto::Division_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            std::ofstream out (file2_path);
+            out << Division_to_json_string(obj);
             if(!out)
                 throw std::runtime_error("Operation 'convert': IO error on " + struct_name);
 
@@ -2011,6 +2079,23 @@ int main (int argc, const char **argv) try {
             )));
             auto obj2 =
                 dto::Multiplication_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file2_path
+            )));
+            if(obj1!=obj2)
+                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
+
+
+        } else if (struct_name == "Division") {
+            auto obj1 =
+                dto::Division_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            auto obj2 =
+                dto::Division_from_json (
                     json::parse (
                         std::ifstream (
                             file2_path

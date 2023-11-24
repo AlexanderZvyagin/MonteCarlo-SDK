@@ -22,6 +22,7 @@ import {
     Barrier,
     Polynom,
     Multiplication,
+    Division,
     HistogramAxis,
     Histogram,
     EvaluationPoint,
@@ -612,6 +613,40 @@ function random_optional_list_Multiplication () : Multiplication[]|undefined {
 }
 
 
+function random_Division () : Division {
+    return new Division (
+        random_int(),
+        random_int(),
+        random_float(),
+        random_string()
+
+    );
+}
+
+
+function random_optional_Division () : Division|undefined {
+    if(yes_no())
+        return undefined;
+    return random_Division ();
+}
+
+
+function random_list_Division (min:number = 0, max:number = 3) : Division[] {
+    const size:number = Math.floor(min + Math.random()*(max-min));
+    const list:Division[] = [];
+    for(let i=0; i<size; i++)
+        list.push(random_Division());
+    return list;
+}
+
+
+function random_optional_list_Division () : Division[]|undefined {
+    if(yes_no())
+        return undefined;
+    return random_list_Division ();
+}
+
+
 function random_HistogramAxis () : HistogramAxis {
     return new HistogramAxis (
         random_int(),
@@ -1073,6 +1108,18 @@ function create (struct_name:string, file_name:string){
             throw new Error(`${struct_name} objects are not equal.`);
 
 
+    } else if (struct_name === 'Division') {
+        const obj1: Division = random_Division();
+        const j: object = {};
+        dto.Division_to_json(j,obj1);
+
+        fs.writeFileSync (file_name, JSON.stringify (j));
+        const obj2: Division = new Division();
+        dto.Division_from_json(j,obj2);
+        if(!dto.Division_equal(obj1,obj2))
+            throw new Error(`${struct_name} objects are not equal.`);
+
+
     } else if (struct_name === 'HistogramAxis') {
         const obj1: HistogramAxis = random_HistogramAxis();
         const j: object = {};
@@ -1265,6 +1312,12 @@ function convert (struct_name:string, file1_name:string, file2_name:string){
         fs.writeFileSync(file2_name, JSON.stringify(obj));
 
 
+    } else if (struct_name === 'Division') {
+        const jstr: string = fs.readFileSync(file1_name,'utf-8');
+        const obj: Division = dto.Division_fromJSON_string(jstr);
+        fs.writeFileSync(file2_name, JSON.stringify(obj));
+
+
     } else if (struct_name === 'HistogramAxis') {
         const jstr: string = fs.readFileSync(file1_name,'utf-8');
         const obj: HistogramAxis = dto.HistogramAxis_fromJSON_string(jstr);
@@ -1451,6 +1504,15 @@ function compare (struct_name:string, file1_name:string, file2_name:string){
         const obj1: Multiplication = dto.Multiplication_fromJSON_string(jstr1);
         const obj2: Multiplication = dto.Multiplication_fromJSON_string(jstr2);
         if(!dto.Multiplication_equal(obj1,obj2))
+            throw new Error(`${struct_name} objects are not equal.`);
+
+
+    } else if (struct_name === 'Division') {
+        const jstr1: string = fs.readFileSync(file1_name,'utf-8');
+        const jstr2: string = fs.readFileSync(file2_name,'utf-8');
+        const obj1: Division = dto.Division_fromJSON_string(jstr1);
+        const obj2: Division = dto.Division_fromJSON_string(jstr2);
+        if(!dto.Division_equal(obj1,obj2))
             throw new Error(`${struct_name} objects are not equal.`);
 
 

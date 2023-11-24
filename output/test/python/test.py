@@ -462,6 +462,33 @@ def random_optional_list_Multiplication (min:int = 0, max:int = 3) -> list[Multi
     return random_list_Multiplication(min,max)
 
 
+def random_Division ():
+    return Division (
+        random_int(),
+        random_int(),
+        random_float(),
+        random_string()
+
+    )
+
+
+def random_optional_Division () -> Division|None:
+    if yes_no():
+        return None
+    return random_Division()
+
+
+def random_list_Division (min:int = 0, max:int = 3) -> list[Division]:
+    size = random.randint(min,max)
+    return [random_Division() for i in range(size)]
+
+
+def random_optional_list_Division (min:int = 0, max:int = 3) -> list[Division]|None:
+    if yes_no():
+        return None
+    return random_list_Division(min,max)
+
+
 def random_HistogramAxis ():
     return HistogramAxis (
         random_int(),
@@ -827,6 +854,15 @@ def test_round_trip_python(command, struct_name, file1_name, file2_name):
             assert obj1==obj2
 
 
+        elif struct_name=='Division':
+            obj1 = random_Division()
+            open(file1_name,'w').write(Division_to_json_string(obj1))
+            obj2 = Division_from_json_string(open(file1_name).read())
+            assert isinstance(obj1,Division)
+            assert isinstance(obj2,Division)
+            assert obj1==obj2
+
+
         elif struct_name=='HistogramAxis':
             obj1 = random_HistogramAxis()
             open(file1_name,'w').write(HistogramAxis_to_json_string(obj1))
@@ -979,6 +1015,11 @@ def test_round_trip_python(command, struct_name, file1_name, file2_name):
             open(file2_name,'w').write(Multiplication_to_json_string(obj))
 
 
+        elif struct_name=='Division':
+            obj = Division_from_json_string(open(file1_name).read())
+            open(file2_name,'w').write(Division_to_json_string(obj))
+
+
         elif struct_name=='HistogramAxis':
             obj = HistogramAxis_from_json_string(open(file1_name).read())
             open(file2_name,'w').write(HistogramAxis_to_json_string(obj))
@@ -1111,6 +1152,12 @@ def test_round_trip_python(command, struct_name, file1_name, file2_name):
         elif struct_name=='Multiplication':
             obj1 = Multiplication_from_json_string(open(file1_name).read())
             obj2 = Multiplication_from_json_string(open(file2_name).read())
+            assert obj1==obj2
+
+
+        elif struct_name=='Division':
+            obj1 = Division_from_json_string(open(file1_name).read())
+            obj2 = Division_from_json_string(open(file2_name).read())
             assert obj1==obj2
 
 
