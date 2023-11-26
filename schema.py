@@ -96,7 +96,6 @@ UpdaterDto is used to pass parameters to update a state.
     obj = Struct('Updater',UpdaterDto)
     objs.append(obj)
     Updater = obj
-    obj.AddAttribute(Variable('_equation','int',skip_dto=True))
     obj.AddAttribute(Variable('_state','int',skip_dto=True))
     obj.AddAttribute(Variable('title','string',skip_dto=True))
     obj.methods.append(Function (
@@ -116,7 +115,6 @@ UpdaterDto is used to pass parameters to update a state.
                 Variable('args'),
                 Variable('start'),
             ]),
-            ('_equation',[-88]),
             ('_state',[-88]),
             ('title',[Variable('title')]),
         ]
@@ -142,31 +140,6 @@ return _state;
 if self._state<0:
     raise Exception(f'Updater {self.name} has no state.')
 return self._state
-'''
-        }
-    ))
-
-    obj.methods.append(Function (
-        'GetEquationNumber',
-        'int',
-        code = {
-            'typescript':
-'''
-if(this._equation<0)
-    throw new Error(`Updater ${this.name} has no _equation.`);
-return this._equation;
-''',
-            'cpp':
-'''
-if(_equation<0)
-    throw std::runtime_error("An updater has no _equation.");
-return _equation;
-''',
-            'python':
-'''
-if self._equation<0:
-    raise Exception(f'Updater {self.name} has no _equation.')
-return self._equation
 '''
         }
     ))
@@ -729,7 +702,6 @@ return this.updaters.length;
             'python':
 '''
 self.updaters.append(updater)
-updater._equation = self.GetNumberOfUpdaters()-1
 updater._state = self.GetNumberOfStates()-1
 self.titles[updater._state] = updater.title
 return updater
@@ -738,7 +710,6 @@ return updater
 '''
 updaters.push_back(updater);
 auto &u = updaters.back();
-u._equation = GetNumberOfUpdaters()-1;
 u._state = GetNumberOfStates()-1;
 titles[u._state] = u.title;
 return u;
@@ -746,7 +717,6 @@ return u;
             'typescript':
 '''
 this.updaters.push(updater);
-updater._equation = this.GetNumberOfUpdaters()-1;
 updater._state = this.GetNumberOfStates()-1;
 this.titles[updater._state] = updater.title;
 return updater;
@@ -868,7 +838,7 @@ return this.skewness;
     EvaluationResults = obj
     EvaluationResults.AddDependency(Result)
     obj.AddAttribute(Variable('names','string',list=True))
-    obj.AddAttribute(Variable('has_state','int',list=True))
+    obj.AddAttribute(Variable('nstates','int',list=True))
     obj.AddAttribute(Variable('npaths','int',list=True))
     obj.AddAttribute(Variable('mean','float',list=True))
     obj.AddAttribute(Variable('stddev','float',list=True))
@@ -882,7 +852,7 @@ return this.skewness;
         'constructor',
         args = [
             Variable('names','string',[],list=True),
-            Variable('has_state','int',[],list=True),
+            Variable('nstates','int',[],list=True),
             Variable('npaths','int',[],list=True),
             Variable('mean','float',[],list=True),
             Variable('stddev','float',[],list=True),
@@ -894,7 +864,7 @@ return this.skewness;
         ],
         mapping = [
             ('names',[Variable('names')]),
-            ('has_state',[Variable('has_state')]),
+            ('nstates',[Variable('nstates')]),
             ('npaths',[Variable('npaths')]),
             ('mean',[Variable('mean')]),
             ('stddev',[Variable('stddev')]),
@@ -1003,6 +973,7 @@ return new Result(this.npaths[n],this.mean[n],this.stddev[n],this.skewness[n]);
         }
     ))
 
+    # FIXME: nstates
     obj.methods.append(Function (
         'df',
         'any',
@@ -1013,7 +984,7 @@ return new Result(this.npaths[n],this.mean[n],this.stddev[n],this.skewness[n]);
 data = []
 for j in range(self.GetNumberOfEvaluations()):
     for i in range(self.GetNumberOfStates()):
-        if not self.has_state[i]:
+        if not self.nstates[i]:
             continue
         n = self.Index(i,j)
         item = {
