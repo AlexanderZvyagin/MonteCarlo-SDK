@@ -28,7 +28,7 @@ class EvaluationResults {
 public:
 
     std::vector<std::string> names;
-    std::vector<int> has_state;
+    std::vector<int> nstates;
     std::vector<int> npaths;
     std::vector<float> mean;
     std::vector<float> stddev;
@@ -41,7 +41,7 @@ public:
     
     EvaluationResults (
         std::vector<std::string> names = {},
-        std::vector<int> has_state = {},
+        std::vector<int> nstates = {},
         std::vector<int> npaths = {},
         std::vector<float> mean = {},
         std::vector<float> stddev = {},
@@ -54,8 +54,8 @@ public:
     : names (
         names
     )
-    , has_state (
-        has_state
+    , nstates (
+        nstates
     )
     , npaths (
         npaths
@@ -125,7 +125,7 @@ public:
 
     bool operator == (const EvaluationResults &other) const {
         if (names != other.names) return false;
-        if (has_state != other.has_state) return false;
+        if (nstates != other.nstates) return false;
         if (npaths != other.npaths) return false;
         if (mean != other.mean) return false;
         if (stddev != other.stddev) return false;
@@ -145,7 +145,7 @@ inline
 void to_json(json &j, const EvaluationResults &obj) try {
     j = json::object();
     j["names"] = obj.names;
-    j["has_state"] = obj.has_state;
+    j["nstates"] = obj.nstates;
     j["npaths"] = obj.npaths;
     j["mean"] = obj.mean;
     j["stddev"] = obj.stddev;
@@ -168,7 +168,7 @@ std::string EvaluationResults_to_json_string(const EvaluationResults &obj) {
 inline
 void from_json(const json &j, EvaluationResults &obj) try {
     j.at("names").get_to(obj.names);
-    j.at("has_state").get_to(obj.has_state);
+    j.at("nstates").get_to(obj.nstates);
     j.at("npaths").get_to(obj.npaths);
     j.at("mean").get_to(obj.mean);
     j.at("stddev").get_to(obj.stddev);
