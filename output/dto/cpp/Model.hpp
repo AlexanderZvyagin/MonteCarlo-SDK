@@ -97,7 +97,6 @@ public:
         
         updaters.push_back(updater);
         auto &u = updaters.back();
-        u._equation = GetNumberOfUpdaters()-1;
         u._state = GetNumberOfStates()-1;
         titles[u._state] = u.title;
         return u;

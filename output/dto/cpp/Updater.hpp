@@ -25,7 +25,6 @@ std::string Updater_to_json_string(const Updater &obj);
 class Updater: public UpdaterDto {
 public:
 
-    int _equation;
     int _state;
     std::string title;
 
@@ -43,9 +42,6 @@ public:
         args,
         start
     )
-    , _equation (
-        -88
-    )
     , _state (
         -88
     )
@@ -62,16 +58,6 @@ public:
         if(_state<0)
             throw std::runtime_error("An updater has no state.");
         return _state;
-        
-    }
-
-    int GetEquationNumber (
-    )
-    {
-        
-        if(_equation<0)
-            throw std::runtime_error("An updater has no _equation.");
-        return _equation;
         
     }
 

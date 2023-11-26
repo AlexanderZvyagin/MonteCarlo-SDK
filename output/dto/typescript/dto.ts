@@ -351,7 +351,6 @@ UpdaterDto_to_json(j:object, obj:UpdaterDto) {
 
 class Updater extends UpdaterDto {
 
-    _equation : number;
     _state : number;
     title : string;
 
@@ -368,7 +367,6 @@ class Updater extends UpdaterDto {
             args,
             start,
         );
-        this._equation = -88;
         this._state = -88;
         this.title = title;
     
@@ -380,15 +378,6 @@ class Updater extends UpdaterDto {
         if(this._state<0)
             throw new Error(`Updater ${this.name} has no state.`);
         return this._state;
-        
-    }
-
-    GetEquationNumber (
-    ) : number  {
-        
-        if(this._equation<0)
-            throw new Error(`Updater ${this.name} has no _equation.`);
-        return this._equation;
         
     }
 
@@ -1661,7 +1650,6 @@ class Model {
     ) : Updater  {
         
         this.updaters.push(updater);
-        updater._equation = this.GetNumberOfUpdaters()-1;
         updater._state = this.GetNumberOfStates()-1;
         this.titles[updater._state] = updater.title;
         return updater;
@@ -1898,7 +1886,7 @@ Result_to_json(j:object, obj:Result) {
 class EvaluationResults {
 
     names : string[];
-    has_state : number[];
+    nstates : number[];
     npaths : number[];
     mean : number[];
     stddev : number[];
@@ -1910,7 +1898,7 @@ class EvaluationResults {
 
     constructor(
         names : string[]  = [],
-        has_state : number[]  = [],
+        nstates : number[]  = [],
         npaths : number[]  = [],
         mean : number[]  = [],
         stddev : number[]  = [],
@@ -1921,7 +1909,7 @@ class EvaluationResults {
         model : Model|undefined  = undefined,
     ){
         this.names = names;
-        this.has_state = has_state;
+        this.nstates = nstates;
         this.npaths = npaths;
         this.mean = mean;
         this.stddev = stddev;
@@ -1979,7 +1967,7 @@ class EvaluationResults {
 export function
 EvaluationResults_equal (a: EvaluationResults, b: EvaluationResults) : boolean {
     if(!list_equal(a.names,b.names,string_equal)) return false;
-    if(!list_equal(a.has_state,b.has_state,int_equal)) return false;
+    if(!list_equal(a.nstates,b.nstates,int_equal)) return false;
     if(!list_equal(a.npaths,b.npaths,int_equal)) return false;
     if(!list_equal(a.mean,b.mean,float_equal)) return false;
     if(!list_equal(a.stddev,b.stddev,float_equal)) return false;
@@ -1997,7 +1985,7 @@ EvaluationResults_equal (a: EvaluationResults, b: EvaluationResults) : boolean {
 export function
 EvaluationResults_fromJSON (j:any, obj: EvaluationResults): void {
     obj.names = j["names"];
-    obj.has_state = j["has_state"];
+    obj.nstates = j["nstates"];
     obj.npaths = j["npaths"];
     obj.mean = j["mean"];
     obj.stddev = j["stddev"];
@@ -2033,7 +2021,7 @@ EvaluationResults_to_json_string (self:EvaluationResults) {
 export function
 EvaluationResults_from_json(j:object, obj:EvaluationResults) {
     obj.names = j["names"];
-    obj.has_state = j["has_state"];
+    obj.nstates = j["nstates"];
     obj.npaths = j["npaths"];
     obj.mean = j["mean"];
     obj.stddev = j["stddev"];
@@ -2052,7 +2040,7 @@ EvaluationResults_from_json(j:object, obj:EvaluationResults) {
 export function
 EvaluationResults_to_json(j:object, obj:EvaluationResults) {
     j["names"] = obj.names;
-    j["has_state"] = obj.has_state;
+    j["nstates"] = obj.nstates;
     j["npaths"] = obj.npaths;
     j["mean"] = obj.mean;
     j["stddev"] = obj.stddev;

@@ -242,7 +242,6 @@ class Updater (UpdaterDto):
             args,
             start,
         )
-        self._equation : int = -88
         self._state : int = -88
         self.title : str = title
         pass
@@ -254,16 +253,6 @@ class Updater (UpdaterDto):
         if self._state<0:
             raise Exception(f'Updater {self.name} has no state.')
         return self._state
-        
-        pass
-
-    def GetEquationNumber (
-        self,
-    ):
-        
-        if self._equation<0:
-            raise Exception(f'Updater {self.name} has no _equation.')
-        return self._equation
         
         pass
 
@@ -1133,7 +1122,6 @@ class Model:
     ):
         
         self.updaters.append(updater)
-        updater._equation = self.GetNumberOfUpdaters()-1
         updater._state = self.GetNumberOfStates()-1
         self.titles[updater._state] = updater.title
         return updater
@@ -1303,7 +1291,7 @@ class EvaluationResults:
     def __init__ (
         self,
         names:list[str] = [],
-        has_state:list[int] = [],
+        nstates:list[int] = [],
         npaths:list[int] = [],
         mean:list[float] = [],
         stddev:list[float] = [],
@@ -1314,7 +1302,7 @@ class EvaluationResults:
         model:Model|None = None
     ):
         self.names : list[str] = names
-        self.has_state : list[int] = has_state
+        self.nstates : list[int] = nstates
         self.npaths : list[int] = npaths
         self.mean : list[float] = mean
         self.stddev : list[float] = stddev
@@ -1371,7 +1359,7 @@ class EvaluationResults:
         data = []
         for j in range(self.GetNumberOfEvaluations()):
             for i in range(self.GetNumberOfStates()):
-                if not self.has_state[i]:
+                if not self.nstates[i]:
                     continue
                 n = self.Index(i,j)
                 item = {
@@ -1395,7 +1383,7 @@ class EvaluationResults:
 
     def __eq__ (self, other):
         if self.names != other.names: return False
-        if self.has_state != other.has_state: return False
+        if self.nstates != other.nstates: return False
         if self.npaths != other.npaths: return False
         if self.mean != other.mean: return False
         if self.stddev != other.stddev: return False
@@ -1422,7 +1410,7 @@ def EvaluationResults_to_json_string (self:EvaluationResults):
 def EvaluationResults_from_json (j:dict, obj:EvaluationResults):
     assert isinstance(obj,EvaluationResults)
     obj.names = j["names"]
-    obj.has_state = j["has_state"]
+    obj.nstates = j["nstates"]
     obj.npaths = j["npaths"]
     obj.mean = j["mean"]
     obj.stddev = j["stddev"]
@@ -1439,7 +1427,7 @@ def EvaluationResults_from_json (j:dict, obj:EvaluationResults):
         Model_from_json(j["model"],obj.model)
 def EvaluationResults_to_json(j:dict, obj:EvaluationResults):
     j["names"] = obj.names
-    j["has_state"] = obj.has_state
+    j["nstates"] = obj.nstates
     j["npaths"] = obj.npaths
     j["mean"] = obj.mean
     j["stddev"] = obj.stddev
