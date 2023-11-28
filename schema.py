@@ -4,7 +4,7 @@ from cgdto import *
 from math import nan
 
 def schema_version () -> str:
-    return 'MonteCarlo SDK version (0.6.0)'
+    return 'MonteCarlo SDK version (0.6.1)'
 
 def schema ():
 
@@ -122,6 +122,27 @@ UpdaterDto is used to pass parameters to update a state.
             ('title',[Variable('title')]),
         ]
     ))
+
+    obj.methods.append(Function (
+        '__repr__',
+        'string',
+        const = True,
+        code = {
+            'python':
+'''
+if self._nstates==0:
+    state='None'
+elif self._nstates==1:
+    state=f'{self._state}'
+else:
+    states=f'[{self._state}...{self._state+self._nstates-1}]'
+refs = str(self.refs)
+args = str(self.args)
+return f'{self.name} nstates={self._nstates} state={state} refs={self.refs} args={self.args} start={self.start}'
+'''
+        }
+    ))
+    
     obj.methods.append(Function (
         'GetStateNumber',
         'int',
@@ -659,6 +680,18 @@ self.titles = {}
             'typescript':
 '''
 this.titles = {};
+'''
+        }
+    ))
+
+    obj.methods.append(Function (
+        '__repr__',
+        'string',
+        const = True,
+        code = {
+            'python':
+'''
+return f'TimeStart={self.TimeStart} TimeSteps={self.TimeSteps} NumPaths={self.NumPaths} updaters={len(self.updaters)}'
 '''
         }
     ))
