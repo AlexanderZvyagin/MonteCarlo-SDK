@@ -212,6 +212,7 @@ function random_Updater () : Updater {
         random_list_int(),
         random_list_float(),
         random_list_float(),
+        random_int(),
         random_string()
 
     );
@@ -756,7 +757,8 @@ function random_Model () : Model {
         random_list_EvaluationPoint(),
         random_optional_int(),
         random_optional_float(),
-        random_optional_int()
+        random_optional_int(),
+        random_int()
 
     );
 }
@@ -822,7 +824,6 @@ function random_optional_list_Result () : Result[]|undefined {
 function random_EvaluationResults () : EvaluationResults {
     return new EvaluationResults (
         random_list_string(),
-        random_list_int(),
         random_list_int(),
         random_list_float(),
         random_list_float(),

@@ -320,6 +320,7 @@ Updater random_Updater (void) {
         random_list_int(),
         random_list_float(),
         random_list_float(),
+        random_int(),
         random_string()
 
     );
@@ -976,7 +977,8 @@ Model random_Model (void) {
         random_list_EvaluationPoint(),
         random_optional_int(),
         random_optional_float(),
-        random_optional_int()
+        random_optional_int(),
+        random_int()
 
     );
 }
@@ -1056,7 +1058,6 @@ std::optional<std::vector<EvaluationResults>> random_optional_list_EvaluationRes
 EvaluationResults random_EvaluationResults (void) {
     return EvaluationResults (
         random_list_string(),
-        random_list_int(),
         random_list_int(),
         random_list_float(),
         random_list_float(),

@@ -145,6 +145,7 @@ def random_Updater ():
         random_list_int(),
         random_list_float(),
         random_list_float(),
+        random_int(),
         random_string()
 
     )
@@ -577,7 +578,8 @@ def random_Model ():
         random_list_EvaluationPoint(),
         random_optional_int(),
         random_optional_float(),
-        random_optional_int()
+        random_optional_int(),
+        random_int()
 
     )
 
@@ -629,7 +631,6 @@ def random_optional_list_Result (min:int = 0, max:int = 3) -> list[Result]|None:
 def random_EvaluationResults ():
     return EvaluationResults (
         random_list_string(),
-        random_list_int(),
         random_list_int(),
         random_list_float(),
         random_list_float(),
