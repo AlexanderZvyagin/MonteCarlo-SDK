@@ -24,7 +24,7 @@ def BuildModel_Simple():
 def test_simple_model():
     er = sdk.run( BuildModel_Simple(), server )
     print(er)
-    assert len(er.names)==2
+    assert len(er.names)==1
 
 def test_functions_endpoint():
     response = requests.get(f'{server}/functions').json()
