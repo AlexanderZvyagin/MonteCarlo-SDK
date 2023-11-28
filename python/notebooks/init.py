@@ -6,4 +6,4 @@ logging.basicConfig (
 import mcsdk as sdk
 from plot import plot
 import os
-server = f'http://{os.getenv("SERVER_ADDRESS","naz.hopto.org")}:{os.getenv("SERVER_PORT","8001")}'
+server = f'http://{os.getenv("SERVER_ADDRESS","az.hopto.org")}:{os.getenv("SERVER_PORT","8001")}'
