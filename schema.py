@@ -75,15 +75,15 @@ UpdaterDto is used to pass parameters to update a state.
     obj.AddAttribute(Variable('name','string'))
     obj.AddAttribute(Variable('refs','int', list=True, optional=True))
     obj.AddAttribute(Variable('args','float', list=True, optional=True))
-    obj.AddAttribute(Variable('start','float',optional=True))
+    obj.AddAttribute(Variable('start','float',list=True, optional=True))
     obj.methods.append(Function (
         obj.name,
         'constructor',
         args = [
             Variable('name', 'string', '',doc='Unique name of the updater, e.g. BrownianMotion'),
-            Variable(name='refs', type='int', defval=None, list=True, optional=True,doc='List of states which an updater requires.'),
-            Variable('args', 'float', defval=None, list=True, optional=True,doc='List of arguments.'),
-            Variable('start', 'float', defval=None, optional=True,doc='State starting value, e.g. start=3 will start a BM process from value 3.')
+            Variable(name='refs', type='int', defval=None, list=True, optional=True, doc='List of states which an updater requires.'),
+            Variable('args', 'float', defval=None, list=True, optional=True, doc='List of arguments.'),
+            Variable('start', 'float', defval=None, list=True, optional=True, doc='State starting value, e.g. start=3 will start a BM process from value 3.')
         ],
         mapping = [
             ('name',[Variable('name')]),
@@ -105,7 +105,7 @@ UpdaterDto is used to pass parameters to update a state.
             Variable('name','string',''),
             Variable('refs','int',[],list=True),
             Variable('args','float',[],list=True),
-            Variable('start','float',None,optional=True),
+            Variable('start','float',[],list=True),
             Variable('title','string',''),
         ],
         mapping = [
@@ -146,26 +146,20 @@ return self._state
 
     obj.methods.append(Function (
         'GetStart',
-        'float',
+        Variable(None,'float', list=True),
         const = True,
         code = {
             'python':
 '''
-if self.start is None:
-    raise ValueError()
-return self.start
+return []   if self.start is None else   self.start
 ''',
             'cpp':
 '''
-if( not start.has_value() )
-    throw std::invalid_argument("start");
-return start.value();
+return start.value_or(std::vector<float>{});
 ''',
             'typescript':
 '''
-if( this.start === undefined )
-    throw new Error("start");
-return this.start;
+return this.start || [];
 '''
         }
     ))
@@ -192,7 +186,7 @@ void from_json(const json &j, std::vector<Updater> &u) {
             'IndependentGaussian',
             Variable('refs'),
             [],
-            None,
+            [],
             Variable('title'),
         ])]
     ))
@@ -212,7 +206,7 @@ void from_json(const json &j, std::vector<Updater> &u) {
             'CorrelatedGaussian',
             [Variable('state1'),Variable('state2')],
             [Variable('correlation')],
-            None,
+            [],
             Variable('title'),
         ])]
     ))
@@ -232,7 +226,7 @@ void from_json(const json &j, std::vector<Updater> &u) {
             'BrownianMotion',
             [], # refs
             [Variable('drift'),Variable('diffusion')], # args
-            Variable('start'),
+            [Variable('start')],
             Variable('title'),
         ])]
     ))
@@ -252,7 +246,7 @@ void from_json(const json &j, std::vector<Updater> &u) {
             'BrownianMotion',
             [Variable('drift'),Variable('diffusion')], # refs
             [], # args
-            Variable('start'),
+            [Variable('start')],
             Variable('title'),
         ])]
     ))
@@ -272,7 +266,7 @@ void from_json(const json &j, std::vector<Updater> &u) {
             'GeometricalBrownianMotion',
             [], # refs
             [Variable('drift'),Variable('diffusion')], # args
-            Variable('start'),
+            [Variable('start')],
             Variable('title'),
         ])]
     ))
@@ -292,7 +286,7 @@ void from_json(const json &j, std::vector<Updater> &u) {
             'GeometricalBrownianMotion',
             [Variable('drift'),Variable('diffusion')], # refs
             [], # args
-            Variable('start'),
+            [Variable('start')],
             Variable('title'),
         ])]
     ))
@@ -311,7 +305,7 @@ void from_json(const json &j, std::vector<Updater> &u) {
             'ZeroCouponBond',
             [Variable('underlying')], # refs
             [], # args
-            Variable('start'),
+            [Variable('start')],
             Variable('title'),
         ])]
     ))
@@ -333,7 +327,7 @@ void from_json(const json &j, std::vector<Updater> &u) {
             'Option',
             [Variable('underlying')], # refs
             [Variable('strike'),Variable('call_put')], # args
-            0, # start
+            [], # start
             Variable('title'),
         ])]
     ))
@@ -367,7 +361,7 @@ void from_json(const json &j, std::vector<Updater> &u) {
                 Variable('direction'),
                 Variable('action')
             ],
-            Variable('start'),
+            [Variable('start')],
             Variable('title'),
         ])]
     ))
@@ -388,7 +382,7 @@ void from_json(const json &j, std::vector<Updater> &u) {
             'Polynom',
             [Variable('ref')],
             Variable('args'),
-            0, # start
+            [], # start
             Variable('title'),
         ])]
     ))
@@ -409,8 +403,8 @@ void from_json(const json &j, std::vector<Updater> &u) {
         mapping = [(obj.base.name,[
             'Linear1DInterpolation',
             [Variable('ref')],
-            [],
-            0, # start
+            [], # args
+            [], # start
             Variable('title'),
         ])],
         code = {
@@ -452,7 +446,7 @@ this.args = [...[xmin,xmax],...y];
             'Multiplication',
             Variable('refs'),
             [Variable('factor')],
-            0, # start
+            [], # start
             Variable('title'),
         ])]
     ))
@@ -473,7 +467,7 @@ this.args = [...[xmin,xmax],...y];
             'Division',
             [Variable('numerator'),Variable('denominator')],
             [Variable('eps')],
-            0, # start
+            [], # start
             Variable('title'),
         ])]
     ))
@@ -1034,7 +1028,7 @@ def EvaluationResults_from_response(r,model=None):
             'Sum',
             Variable('states'),
             Variable('weights'),
-            0, # start
+            [],
             Variable('title'),
         ])],
     ))
@@ -1053,7 +1047,7 @@ def EvaluationResults_from_response(r,model=None):
             'SumOfFutureValues',
             [Variable('state')],
             Variable('t'),
-            0, # start
+            [],
             Variable('title'),
         ])],
     ))

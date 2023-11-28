@@ -177,7 +177,7 @@ function random_UpdaterDto () : UpdaterDto {
         random_string(),
         random_optional_list_int(),
         random_optional_list_float(),
-        random_optional_float()
+        random_optional_list_float()
 
     );
 }
@@ -211,7 +211,7 @@ function random_Updater () : Updater {
         random_string(),
         random_list_int(),
         random_list_float(),
-        random_optional_float(),
+        random_list_float(),
         random_string()
 
     );

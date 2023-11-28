@@ -278,7 +278,7 @@ UpdaterDto random_UpdaterDto (void) {
         random_string(),
         random_optional_list_int(),
         random_optional_list_float(),
-        random_optional_float()
+        random_optional_list_float()
 
     );
 }
@@ -319,7 +319,7 @@ Updater random_Updater (void) {
         random_string(),
         random_list_int(),
         random_list_float(),
-        random_optional_float(),
+        random_list_float(),
         random_string()
 
     );

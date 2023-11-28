@@ -117,7 +117,7 @@ def random_UpdaterDto ():
         random_string(),
         random_optional_list_int(),
         random_optional_list_float(),
-        random_optional_float()
+        random_optional_list_float()
 
     )
 
@@ -144,7 +144,7 @@ def random_Updater ():
         random_string(),
         random_list_int(),
         random_list_float(),
-        random_optional_float(),
+        random_list_float(),
         random_string()
 
     )
