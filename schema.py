@@ -4,7 +4,7 @@ from cgdto import *
 from math import nan
 
 def schema_version () -> str:
-    return 'MonteCarlo SDK version (0.6.1)'
+    return 'MonteCarlo SDK version (0.6.2)'
 
 def schema ():
 
@@ -138,7 +138,7 @@ else:
     states=f'[{self._state}...{self._state+self._nstates-1}]'
 refs = str(self.refs)
 args = str(self.args)
-return f'{self.name} nstates={self._nstates} state={state} refs={self.refs} args={self.args} start={self.start}'
+return f'{self.name} nstates={self._nstates} state={self._state} refs={self.refs} args={self.args} start={self.start}'
 '''
         }
     ))
