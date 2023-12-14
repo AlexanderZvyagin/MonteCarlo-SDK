@@ -37,3 +37,8 @@ state value, given at initial time :math:`t_{start}`.
 
     - one *stateless* function to generate a normally distributed random variable :math:`W_t`
     - one *stateful* function for the process :math:`S_t`, which depends on :math:`S(t=t_{start},\mu,\sigma)`
+
+.. toctree::
+    :glob:
+
+    functions/*
