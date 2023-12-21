@@ -4,7 +4,7 @@ from cgdto import *
 from math import nan
 
 def schema_version () -> str:
-    return 'MonteCarlo SDK version (0.6.2)'
+    return 'MonteCarlo SDK version (0.6.3)'
 
 def schema ():
 
@@ -1034,6 +1034,7 @@ for j in range(self.GetNumberOfEvaluations()):
             'name': self.names[i],
             'title': '',
             'state': i,
+            'point': j,
             'time': self.time_points[j],
             'step': self.time_steps[j],
             'npaths': self.npaths[n],
