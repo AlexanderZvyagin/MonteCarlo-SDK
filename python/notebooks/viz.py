@@ -11,6 +11,9 @@ def tr (lorig:list, nmax:int=4):
     return f'[{lstr}]'
         
 def viz (model,graph_attr={'rankdir':'LR'}):
+    '''
+        graph_attr parameter documentation: https://graphviz.org/doc/info/attrs.html
+    '''
     g = Digraph(format='svg',graph_attr=graph_attr)
     states = {} # state number => updater number
     
