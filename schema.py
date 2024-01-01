@@ -4,7 +4,300 @@ from cgdto import *
 from math import nan
 
 def schema_version () -> str:
-    return 'MonteCarlo SDK version (0.6.3)'
+    return 'MonteCarlo SDK version (0.7.0)'
+
+def V0_Model (Updater,EvaluationPoint):
+    obj = Struct ('Model',namespace='V0',default_version=False)
+    Model = obj
+    obj.AddAttribute(Variable('TimeStart','float'))
+    obj.AddAttribute(Variable('TimeSteps','int'))
+    obj.AddAttribute(Variable('NumPaths','int'))
+    obj.AddAttribute(Variable('updaters',Updater,list=True))
+    obj.AddAttribute(Variable('evaluations',EvaluationPoint,list=True))
+    obj.AddAttribute(Variable('RandomSeed','int',optional=True))
+    obj.AddAttribute(Variable('RunTimeoutSeconds','float',optional=True))
+    obj.AddAttribute(Variable('MemoryLimitKB','int',optional=True))
+    obj.AddAttribute(Variable('titles','dict[int,string]',skip_dto=True))
+    obj.AddAttribute(Variable('_nstates','int',skip_dto=True))
+    obj.methods.append(Function (
+        obj.name,
+        'constructor',
+        args = [
+            Variable('TimeStart','float',nan),
+            Variable('TimeSteps','int',0),
+            Variable('NumPaths','int',0),
+            Variable('updaters',Updater,[],list=True),
+            Variable('evaluations',EvaluationPoint,[],list=True),
+            Variable('RandomSeed','int',None,optional=True),
+            Variable('RunTimeoutSeconds','float',None,optional=True),
+            Variable('MemoryLimitKB','int',None,optional=True),
+            Variable('nstates','int',0),
+        ],
+        mapping = [
+            ('TimeStart'        ,[Variable('TimeStart')]),
+            ('TimeSteps'        ,[Variable('TimeSteps')]),
+            ('NumPaths'         ,[Variable('NumPaths')]),
+            ('updaters'         ,[Variable('updaters')]),
+            ('evaluations'      ,[Variable('evaluations')]),
+            ('RandomSeed'       ,[Variable('RandomSeed')]),
+            ('RunTimeoutSeconds',[Variable('RunTimeoutSeconds')]),
+            ('MemoryLimitKB'    ,[Variable('MemoryLimitKB')]),
+            ('_nstates'         ,[Variable('nstates')]),
+        ],
+        code = {
+            'python':
+'''
+self.titles = {}
+''',
+            'typescript':
+'''
+this.titles = {};
+'''
+        }
+    ))
+
+    obj.methods.append(Function (
+        '__repr__',
+        'string',
+        const = True,
+        code = {
+            'python':
+'''
+return f'TimeStart={self.TimeStart} TimeSteps={self.TimeSteps} NumPaths={self.NumPaths} updaters={len(self.updaters)}'
+'''
+        }
+    ))
+
+    obj.methods.append(Function (
+        'GetNumberOfUpdaters',
+        'int',
+        const = True,
+        code = {
+            'python':
+'''
+return len(self.updaters)
+''',
+            'cpp':
+'''
+return updaters.size();
+''',
+            'typescript':
+'''
+return this.updaters.length;
+''',
+            'csharp':
+'''
+return updaters.Count();
+'''
+        }
+    ))
+
+    obj.methods.append(Function (
+        'GetNumberOfStates',
+        'int',
+        const = True,
+        code = {
+            'python':
+'''
+return self._nstates
+''',
+            'cpp':
+'''
+return _nstates;
+''',
+            'typescript':
+'''
+return this._nstates;
+'''
+        }
+    ))
+
+    obj.methods.append(Function (
+        'Add',
+        Updater,
+        args = [Variable('updater',Updater)],
+        code = {
+            'python':
+'''
+updater._state = self._nstates
+self._nstates += updater._nstates
+self.updaters.append(updater)
+self.titles[updater._state] = updater.title
+return updater
+''',
+            'cpp':
+'''
+updaters.push_back(updater);
+auto &u = updaters.back();
+u._state = _nstates;
+_nstates += updater._nstates;
+titles[u._state] = u.title;
+return u;
+''',
+            'typescript':
+'''
+updater._state = this._nstates;
+this._nstates += updater._nstates;
+this.updaters.push(updater);
+this.titles[updater._state] = updater.title;
+return updater;
+''',
+        }
+    ))
+
+    return obj
+    
+
+def V1_Model (Updater,EvaluationPoint):
+    version = 1
+    obj = Struct ('Model',namespace=f'V{version}',default_version=True)
+    Model = obj
+    obj.AddAttribute(Variable('version','string',defval=f'{obj.name}:{version}'))
+    obj.AddAttribute(Variable('TimeStart','float'))
+    obj.AddAttribute(Variable('TimeSteps','int'))
+    obj.AddAttribute(Variable('NumPaths','int'))
+    obj.AddAttribute(Variable('updaters',Updater,list=True))
+    obj.AddAttribute(Variable('evaluations',EvaluationPoint,list=True))
+    obj.AddAttribute(Variable('RandomSeed','int',optional=True))
+    obj.AddAttribute(Variable('RunTimeoutSeconds','float',optional=True))
+    obj.AddAttribute(Variable('titles','dict[int,string]',skip_dto=True))
+    obj.AddAttribute(Variable('_nstates','int',skip_dto=True))
+    obj.methods.append(Function (
+        obj.name,
+        'constructor',
+        args = [
+            Variable('TimeStart','float',nan),
+            Variable('TimeSteps','int',0),
+            Variable('NumPaths','int',0),
+            Variable('updaters',Updater,[],list=True),
+            Variable('evaluations',EvaluationPoint,[],list=True),
+            Variable('RandomSeed','int',None,optional=True),
+            Variable('RunTimeoutSeconds','float',None,optional=True),
+            Variable('nstates','int',0),
+        ],
+        mapping = [
+            ('TimeStart'        ,[Variable('TimeStart')]),
+            ('TimeSteps'        ,[Variable('TimeSteps')]),
+            ('NumPaths'         ,[Variable('NumPaths')]),
+            ('updaters'         ,[Variable('updaters')]),
+            ('evaluations'      ,[Variable('evaluations')]),
+            ('RandomSeed'       ,[Variable('RandomSeed')]),
+            ('RunTimeoutSeconds',[Variable('RunTimeoutSeconds')]),
+            ('_nstates'         ,[Variable('nstates')]),
+        ],
+        code = {
+            'python':
+'''
+self.titles = {}
+''',
+            'typescript':
+'''
+this.titles = {};
+'''
+        }
+    ))
+
+    obj.methods.append(Function (
+        '__repr__',
+        'string',
+        const = True,
+        code = {
+            'python':
+'''
+return f'TimeStart={self.TimeStart} TimeSteps={self.TimeSteps} NumPaths={self.NumPaths} updaters={len(self.updaters)}'
+'''
+        }
+    ))
+
+    obj.methods.append(Function (
+        'GetNumberOfUpdaters',
+        'int',
+        const = True,
+        code = {
+            'python':
+'''
+return len(self.updaters)
+''',
+            'cpp':
+'''
+return updaters.size();
+''',
+            'typescript':
+'''
+return this.updaters.length;
+''',
+            'csharp':
+'''
+return updaters.Count();
+'''
+        }
+    ))
+
+    obj.methods.append(Function (
+        'GetNumberOfStates',
+        'int',
+        const = True,
+        code = {
+            'python':
+'''
+return self._nstates
+''',
+            'cpp':
+'''
+return _nstates;
+''',
+            'typescript':
+'''
+return this._nstates;
+'''
+        }
+    ))
+
+    obj.methods.append(Function (
+        'Add',
+        Updater,
+        args = [Variable('updater',Updater)],
+        code = {
+            'python':
+'''
+updater._state = self._nstates
+self._nstates += updater._nstates
+self.updaters.append(updater)
+self.titles[updater._state] = updater.title
+return updater
+''',
+            'cpp':
+'''
+updaters.push_back(updater);
+auto &u = updaters.back();
+u._state = _nstates;
+_nstates += updater._nstates;
+titles[u._state] = u.title;
+return u;
+''',
+            'typescript':
+'''
+updater._state = this._nstates;
+this._nstates += updater._nstates;
+this.updaters.push(updater);
+this.titles[updater._state] = updater.title;
+return updater;
+''',
+        }
+    ))
+
+    return obj
+
+def add(funcs=[],kargs=(),kwargs={}):
+    objs = []
+    default_obj = None
+    for func in funcs:
+        obj = func(*kargs,**kwargs)
+        objs.append(obj)
+        if obj.default_version:
+            assert default_obj is None
+            default_obj = obj
+    return objs, default_obj
 
 def schema ():
 
@@ -33,7 +326,6 @@ def schema ():
         ]
     ))
     objs.append(obj)
-
 
     obj = Struct('UpdaterDoc')
     obj.AddAttribute(Variable('name','string',doc='''
@@ -635,145 +927,9 @@ return this;
 
     objs.append(obj)
 
-    obj = Struct ('Model')
-    Model = obj
-    obj.AddAttribute(Variable('TimeStart','float'))
-    obj.AddAttribute(Variable('TimeSteps','int'))
-    obj.AddAttribute(Variable('NumPaths','int'))
-    obj.AddAttribute(Variable('updaters',Updater,list=True))
-    obj.AddAttribute(Variable('evaluations',EvaluationPoint,list=True))
-    obj.AddAttribute(Variable('RandomSeed','int',optional=True))
-    obj.AddAttribute(Variable('RunTimeoutSeconds','float',optional=True))
-    obj.AddAttribute(Variable('MemoryLimitKB','int',optional=True))
-    obj.AddAttribute(Variable('titles','dict[int,string]',skip_dto=True))
-    obj.AddAttribute(Variable('_nstates','int',skip_dto=True))
-    obj.methods.append(Function (
-        obj.name,
-        'constructor',
-        args = [
-            Variable('TimeStart','float',nan),
-            Variable('TimeSteps','int',0),
-            Variable('NumPaths','int',0),
-            Variable('updaters',Updater,[],list=True),
-            Variable('evaluations',EvaluationPoint,[],list=True),
-            Variable('RandomSeed','int',None,optional=True),
-            Variable('RunTimeoutSeconds','float',None,optional=True),
-            Variable('MemoryLimitKB','int',None,optional=True),
-            Variable('nstates','int',0),
-        ],
-        mapping = [
-            ('TimeStart'        ,[Variable('TimeStart')]),
-            ('TimeSteps'        ,[Variable('TimeSteps')]),
-            ('NumPaths'         ,[Variable('NumPaths')]),
-            ('updaters'         ,[Variable('updaters')]),
-            ('evaluations'      ,[Variable('evaluations')]),
-            ('RandomSeed'       ,[Variable('RandomSeed')]),
-            ('RunTimeoutSeconds',[Variable('RunTimeoutSeconds')]),
-            ('MemoryLimitKB'    ,[Variable('MemoryLimitKB')]),
-            ('_nstates'         ,[Variable('nstates')]),
-        ],
-        code = {
-            'python':
-'''
-self.titles = {}
-''',
-            'typescript':
-'''
-this.titles = {};
-'''
-        }
-    ))
-
-    obj.methods.append(Function (
-        '__repr__',
-        'string',
-        const = True,
-        code = {
-            'python':
-'''
-return f'TimeStart={self.TimeStart} TimeSteps={self.TimeSteps} NumPaths={self.NumPaths} updaters={len(self.updaters)}'
-'''
-        }
-    ))
-
-    obj.methods.append(Function (
-        'GetNumberOfUpdaters',
-        'int',
-        const = True,
-        code = {
-            'python':
-'''
-return len(self.updaters)
-''',
-            'cpp':
-'''
-return updaters.size();
-''',
-            'typescript':
-'''
-return this.updaters.length;
-''',
-            'csharp':
-'''
-return updaters.Count();
-'''
-        }
-    ))
-
-    obj.methods.append(Function (
-        'GetNumberOfStates',
-        'int',
-        const = True,
-        code = {
-            'python':
-'''
-return self._nstates
-''',
-            'cpp':
-'''
-return _nstates;
-''',
-            'typescript':
-'''
-return this._nstates;
-'''
-        }
-    ))
-
-    obj.methods.append(Function (
-        'Add',
-        Updater,
-        args = [Variable('updater',Updater)],
-        code = {
-            'python':
-'''
-updater._state = self._nstates
-self._nstates += updater._nstates
-self.updaters.append(updater)
-self.titles[updater._state] = updater.title
-return updater
-''',
-            'cpp':
-'''
-updaters.push_back(updater);
-auto &u = updaters.back();
-u._state = _nstates;
-_nstates += updater._nstates;
-titles[u._state] = u.title;
-return u;
-''',
-            'typescript':
-'''
-updater._state = this._nstates;
-this._nstates += updater._nstates;
-this.updaters.push(updater);
-this.titles[updater._state] = updater.title;
-return updater;
-''',
-        }
-    ))
-
-    objs.append(obj)
+    Model_versions, Model = add([V0_Model,V1_Model],kargs=(Updater,EvaluationPoint))
+    # Model_versions, Model = Model_schema(Updater,EvaluationPoint)
+    objs.extend(Model_versions)
 
     obj = Struct('Result')
     Result = obj
@@ -881,7 +1037,6 @@ return this.skewness;
     ))
 
     objs.append(obj)
-
 
     obj = Struct('EvaluationResults')
     EvaluationResults = obj

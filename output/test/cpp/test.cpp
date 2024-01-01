@@ -26,6 +26,7 @@
 #include "Histogram.hpp"
 #include "EvaluationPoint.hpp"
 #include "Model.hpp"
+#include "Model.hpp"
 #include "Result.hpp"
 #include "EvaluationResults.hpp"
 #include "Sum.hpp"
@@ -960,6 +961,7 @@ std::optional<std::vector<EvaluationPoint>> random_optional_list_EvaluationPoint
     return random_list_EvaluationPoint (min,max);
 }
 
+namespace V0 {
 // Forward declarations for Model
 class Model;
 Model random_Model (void);
@@ -1005,6 +1007,60 @@ std::optional<std::vector<Model>> random_optional_list_Model (int min, int max) 
         return {};
     return random_list_Model (min,max);
 }
+
+} // namespace V0
+namespace V1 {
+// Forward declarations for Model
+class Model;
+Model random_Model (void);
+std::optional<Model> random_optional_Model (void);
+std::vector<Model> random_list_Model (int min=0, int max=3);
+std::optional<std::vector<Model>> random_optional_list_Model (int min=0, int max=3);
+
+
+Model random_Model (void) {
+    return Model (
+        random_float(),
+        random_int(),
+        random_int(),
+        random_list_Updater(),
+        random_list_EvaluationPoint(),
+        random_optional_int(),
+        random_optional_float(),
+        random_int()
+
+    );
+}
+
+
+std::optional<Model> random_optional_Model (void) {
+    if(yes_no())
+        return {};
+    return random_Model ();
+}
+
+
+std::vector<Model> random_list_Model (int min, int max) {
+    const auto size = random_int(min,max);
+    std::vector<Model> list;
+    for(int i=0; i<size; i++)
+        list.push_back(random_Model());
+    return list;
+}
+
+
+std::optional<std::vector<Model>> random_optional_list_Model (int min, int max) {
+    if(yes_no())
+        return {};
+    return random_list_Model (min,max);
+}
+
+} // namespace V1
+
+using V1::random_Model;
+using V1::random_list_Model;
+using V1::random_optional_Model;
+using V1::random_optional_list_Model;
 
 // Forward declarations for Result
 class Result;
@@ -1441,10 +1497,23 @@ int main (int argc, const char **argv) try {
 
 
         } else if (struct_name == "Model") {
-            auto obj1 = dto::random_Model();
-            std::ofstream(file1_path) << dto::Model_to_json_string(obj1);
+            auto obj1 = dto::V0::random_Model();
+            std::ofstream(file1_path) << dto::V0::Model_to_json_string(obj1);
             auto obj2 =
-                dto::Model_from_json (
+                dto::V0::Model_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            if(obj1!=obj2)
+                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
+
+
+        } else if (struct_name == "Model") {
+            auto obj1 = dto::V1::random_Model();
+            std::ofstream(file1_path) << dto::V1::Model_to_json_string(obj1);
+            auto obj2 =
+                dto::V1::Model_from_json (
                     json::parse (
                         std::ifstream (
                             file1_path
@@ -1763,7 +1832,20 @@ int main (int argc, const char **argv) try {
 
         } else if (struct_name == "Model") {
             auto obj =
-                dto::Model_from_json (
+                dto::V0::Model_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            std::ofstream out (file2_path);
+            out << Model_to_json_string(obj);
+            if(!out)
+                throw std::runtime_error("Operation 'convert': IO error on " + struct_name);
+
+
+        } else if (struct_name == "Model") {
+            auto obj =
+                dto::V1::Model_from_json (
                     json::parse (
                         std::ifstream (
                             file1_path
@@ -2158,13 +2240,30 @@ int main (int argc, const char **argv) try {
 
         } else if (struct_name == "Model") {
             auto obj1 =
-                dto::Model_from_json (
+                dto::V0::Model_from_json (
                     json::parse (
                         std::ifstream (
                             file1_path
             )));
             auto obj2 =
-                dto::Model_from_json (
+                dto::V0::Model_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file2_path
+            )));
+            if(obj1!=obj2)
+                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
+
+
+        } else if (struct_name == "Model") {
+            auto obj1 =
+                dto::V1::Model_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            auto obj2 =
+                dto::V1::Model_from_json (
                     json::parse (
                         std::ifstream (
                             file2_path
