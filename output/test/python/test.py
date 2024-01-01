@@ -578,7 +578,6 @@ def random_Model ():
         random_list_EvaluationPoint(),
         random_optional_int(),
         random_optional_float(),
-        random_optional_int(),
         random_int()
 
     )
