@@ -11,7 +11,6 @@ const failure = error => {
 test('SimpleModel with 0 time steps', async function () {
 
     const model = new sdk.Model(0,0,10000);
-    model.Add(new sdk.IndependentGaussian());
     model.Add(new sdk.BrownianMotion(0.1,0.2,2));
     model.evaluations.push(new sdk.EvaluationPoint(1));
 
@@ -19,7 +18,6 @@ test('SimpleModel with 0 time steps', async function () {
         .then(result => {
             const error = new sdk.Error(result.message,result.details,result.code,result.errors);
             expect(error.code).toBe(HttpStatus.BadRequest);
-//            expect(error.message).toContain('Error');
             expect(error.details).toContain('The number of time steps must be positive');
         });
 })
@@ -28,7 +26,6 @@ test('SimpleModel with 0 paths', async function () {
 
     const model = new sdk.Model(0,10,0);
     model.RandomSeed = 0;
-    model.Add(new sdk.IndependentGaussian());
     model.Add(new sdk.BrownianMotion(0.1,0.2,2));
     model.evaluations.push(new sdk.EvaluationPoint(1));
 
@@ -36,7 +33,6 @@ test('SimpleModel with 0 paths', async function () {
         .then(result => {
             const error = new sdk.Error(result.message,result.details,result.code,result.errors);
             expect(error.code).toBe(HttpStatus.BadRequest);
-//            expect(error.message).toContain('Error');
             expect(error.details).toContain('Bad number of paths');
         });
 })
@@ -59,7 +55,6 @@ test('SimpleModel', async function () {
 
     const model = new sdk.Model(0,10,20000);
     model.RandomSeed = 0;
-    model.Add(new sdk.IndependentGaussian());
     const bm_state = model.Add(new sdk.BrownianMotion(pars.start,pars.drift,pars.diffusion)).GetStateNumber();
     model.evaluations.push(new sdk.EvaluationPoint(pars.T));
 

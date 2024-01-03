@@ -14,7 +14,6 @@ def BuildModel_Simple():
     m.TimeStart = 0
     m.TimeSteps = 10
     m.NumPaths = 10000
-    m.Add(sdk.IndependentGaussian())
     m.Add(sdk.BrownianMotion(0.1,0.2,2)) # start, drift, diffusion
 
     m.evaluations.append(sdk.EvaluationPoint(2))
@@ -100,7 +99,6 @@ def test_multi_simulations ():
     model.TimeStart = t0
     model.TimeSteps = 10
     model.NumPaths = 100
-    model.Add(sdk.IndependentGaussian())
 
     add1 = add_rate_and_discount_processes(model=model,rate_start=0,rate_drift=0.02,rate_diffusion=0.5)
     add2 = add_fixed_leg(model=model,t0=0,dt=0.5,n=3,fixed_rate=0.01,discount=add1['df'],notional=1,prefix='[fixed leg] ')
