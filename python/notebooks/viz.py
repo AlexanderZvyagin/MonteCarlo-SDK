@@ -41,5 +41,6 @@ def viz (model,graph_attr={'rankdir':'LR'}):
         )
         
         for ref in updater.refs:
+            if ref<0: continue
             g.edge(f'{name}:u',f'<u{states[ref]}>:<s{ref}>')
     return g
