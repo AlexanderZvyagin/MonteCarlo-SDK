@@ -10,8 +10,6 @@
 #include "UpdaterDoc.hpp"
 #include "UpdaterDto.hpp"
 #include "Updater.hpp"
-#include "IndependentGaussian.hpp"
-#include "CorrelatedGaussian.hpp"
 #include "BrownianMotion.hpp"
 #include "BrownianMotionRef.hpp"
 #include "GeometricalBrownianMotion.hpp"
@@ -348,86 +346,6 @@ std::optional<std::vector<Updater>> random_optional_list_Updater (int min, int m
     if(yes_no())
         return {};
     return random_list_Updater (min,max);
-}
-
-// Forward declarations for IndependentGaussian
-class IndependentGaussian;
-IndependentGaussian random_IndependentGaussian (void);
-std::optional<IndependentGaussian> random_optional_IndependentGaussian (void);
-std::vector<IndependentGaussian> random_list_IndependentGaussian (int min=0, int max=3);
-std::optional<std::vector<IndependentGaussian>> random_optional_list_IndependentGaussian (int min=0, int max=3);
-
-
-IndependentGaussian random_IndependentGaussian (void) {
-    return IndependentGaussian (
-        random_list_int(),
-        random_string()
-
-    );
-}
-
-
-std::optional<IndependentGaussian> random_optional_IndependentGaussian (void) {
-    if(yes_no())
-        return {};
-    return random_IndependentGaussian ();
-}
-
-
-std::vector<IndependentGaussian> random_list_IndependentGaussian (int min, int max) {
-    const auto size = random_int(min,max);
-    std::vector<IndependentGaussian> list;
-    for(int i=0; i<size; i++)
-        list.push_back(random_IndependentGaussian());
-    return list;
-}
-
-
-std::optional<std::vector<IndependentGaussian>> random_optional_list_IndependentGaussian (int min, int max) {
-    if(yes_no())
-        return {};
-    return random_list_IndependentGaussian (min,max);
-}
-
-// Forward declarations for CorrelatedGaussian
-class CorrelatedGaussian;
-CorrelatedGaussian random_CorrelatedGaussian (void);
-std::optional<CorrelatedGaussian> random_optional_CorrelatedGaussian (void);
-std::vector<CorrelatedGaussian> random_list_CorrelatedGaussian (int min=0, int max=3);
-std::optional<std::vector<CorrelatedGaussian>> random_optional_list_CorrelatedGaussian (int min=0, int max=3);
-
-
-CorrelatedGaussian random_CorrelatedGaussian (void) {
-    return CorrelatedGaussian (
-        random_float(),
-        random_int(),
-        random_int(),
-        random_string()
-
-    );
-}
-
-
-std::optional<CorrelatedGaussian> random_optional_CorrelatedGaussian (void) {
-    if(yes_no())
-        return {};
-    return random_CorrelatedGaussian ();
-}
-
-
-std::vector<CorrelatedGaussian> random_list_CorrelatedGaussian (int min, int max) {
-    const auto size = random_int(min,max);
-    std::vector<CorrelatedGaussian> list;
-    for(int i=0; i<size; i++)
-        list.push_back(random_CorrelatedGaussian());
-    return list;
-}
-
-
-std::optional<std::vector<CorrelatedGaussian>> random_optional_list_CorrelatedGaussian (int min, int max) {
-    if(yes_no())
-        return {};
-    return random_list_CorrelatedGaussian (min,max);
 }
 
 // Forward declarations for BrownianMotion
@@ -1301,32 +1219,6 @@ int main (int argc, const char **argv) try {
                 throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
 
 
-        } else if (struct_name == "IndependentGaussian") {
-            auto obj1 = dto::random_IndependentGaussian();
-            std::ofstream(file1_path) << dto::IndependentGaussian_to_json_string(obj1);
-            auto obj2 =
-                dto::IndependentGaussian_from_json (
-                    json::parse (
-                        std::ifstream (
-                            file1_path
-            )));
-            if(obj1!=obj2)
-                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
-
-
-        } else if (struct_name == "CorrelatedGaussian") {
-            auto obj1 = dto::random_CorrelatedGaussian();
-            std::ofstream(file1_path) << dto::CorrelatedGaussian_to_json_string(obj1);
-            auto obj2 =
-                dto::CorrelatedGaussian_from_json (
-                    json::parse (
-                        std::ifstream (
-                            file1_path
-            )));
-            if(obj1!=obj2)
-                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
-
-
         } else if (struct_name == "BrownianMotion") {
             auto obj1 = dto::random_BrownianMotion();
             std::ofstream(file1_path) << dto::BrownianMotion_to_json_string(obj1);
@@ -1631,32 +1523,6 @@ int main (int argc, const char **argv) try {
             )));
             std::ofstream out (file2_path);
             out << Updater_to_json_string(obj);
-            if(!out)
-                throw std::runtime_error("Operation 'convert': IO error on " + struct_name);
-
-
-        } else if (struct_name == "IndependentGaussian") {
-            auto obj =
-                dto::IndependentGaussian_from_json (
-                    json::parse (
-                        std::ifstream (
-                            file1_path
-            )));
-            std::ofstream out (file2_path);
-            out << IndependentGaussian_to_json_string(obj);
-            if(!out)
-                throw std::runtime_error("Operation 'convert': IO error on " + struct_name);
-
-
-        } else if (struct_name == "CorrelatedGaussian") {
-            auto obj =
-                dto::CorrelatedGaussian_from_json (
-                    json::parse (
-                        std::ifstream (
-                            file1_path
-            )));
-            std::ofstream out (file2_path);
-            out << CorrelatedGaussian_to_json_string(obj);
             if(!out)
                 throw std::runtime_error("Operation 'convert': IO error on " + struct_name);
 
@@ -1975,40 +1841,6 @@ int main (int argc, const char **argv) try {
             )));
             auto obj2 =
                 dto::Updater_from_json (
-                    json::parse (
-                        std::ifstream (
-                            file2_path
-            )));
-            if(obj1!=obj2)
-                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
-
-
-        } else if (struct_name == "IndependentGaussian") {
-            auto obj1 =
-                dto::IndependentGaussian_from_json (
-                    json::parse (
-                        std::ifstream (
-                            file1_path
-            )));
-            auto obj2 =
-                dto::IndependentGaussian_from_json (
-                    json::parse (
-                        std::ifstream (
-                            file2_path
-            )));
-            if(obj1!=obj2)
-                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
-
-
-        } else if (struct_name == "CorrelatedGaussian") {
-            auto obj1 =
-                dto::CorrelatedGaussian_from_json (
-                    json::parse (
-                        std::ifstream (
-                            file1_path
-            )));
-            auto obj2 =
-                dto::CorrelatedGaussian_from_json (
                     json::parse (
                         std::ifstream (
                             file2_path

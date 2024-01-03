@@ -490,46 +490,6 @@ void from_json(const json &j, std::vector<Updater> &u) {
         }
     }))
 
-    obj = Struct('IndependentGaussian',Updater)
-    obj.methods.append(Function (
-        obj.name,
-        'constructor',
-        args = [
-            Variable('refs','int'  ,defval=[], list=True),
-            Variable('title','string',''),
-        ],
-        mapping = [(obj.base.name,[
-            'IndependentGaussian',
-            Variable('refs'),
-            [],
-            [],
-            0,
-            Variable('title'),
-        ])]
-    ))
-    objs.append(obj)
-
-    obj = Struct('CorrelatedGaussian',Updater)
-    obj.methods.append(Function (
-        obj.name,
-        'constructor',
-        args = [
-            Variable('correlation','float'  ,nan),
-            Variable('state1','int'  ,-88),
-            Variable('state2','int'  ,-88),
-            Variable('title','string',''),
-        ],
-        mapping = [(obj.base.name,[
-            'CorrelatedGaussian',
-            [Variable('state1'),Variable('state2')],
-            [Variable('correlation')],
-            [],
-            0,
-            Variable('title'),
-        ])]
-    ))
-    objs.append(obj)
-
     obj = Struct('BrownianMotion',Updater)
     obj.methods.append(Function (
         obj.name,
