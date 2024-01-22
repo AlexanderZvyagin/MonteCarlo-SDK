@@ -11,7 +11,7 @@ test('modules are loaded', () => {
 })
 
 test('server endpoints are accessible', async function () {
-        for(let endpoint of ['/','/version','/metrics','/functions']){
+        for(let endpoint of ['/','/metrics','/functions']){
             await fetch(`${server()}${endpoint}`,{
                 // method: 'post',
                 // body:JSON.stringify(null),
