@@ -18,11 +18,10 @@
         <script src="_static/documentation_options.js?v=5929fcd5"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Barrier" href="functions/Barrier.html" />
+    <link rel="next" title="Barrier" href="functions.html" />
     <link rel="prev" title="Introduction &amp; Readme" href="Introduction.html" /> 
 </head>
 
@@ -49,29 +48,30 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Introduction.html">Introduction &amp; Readme</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Functions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#stateless-functions">Stateless functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#stateful-functions">Stateful functions</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="functions/Barrier.html">Barrier</a></li>
-<li class="toctree-l3"><a class="reference internal" href="functions/BrownianMotion.html">BrownianMotion</a></li>
-<li class="toctree-l3"><a class="reference internal" href="functions/CorrelatedGaussian.html">Linear1DInterpolation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="functions/Division.html">Division</a></li>
-<li class="toctree-l3"><a class="reference internal" href="functions/ForwardZeroCouponBond.html">ForwardZeroCouponBond</a></li>
-<li class="toctree-l3"><a class="reference internal" href="functions/GeometricalBrownianMotion.html">BrownianMotion</a></li>
-<li class="toctree-l3"><a class="reference internal" href="functions/HullWhite1FactorModel.html">HullWhite1FactorModel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="functions/IndependentGaussian.html">Sum</a></li>
-<li class="toctree-l3"><a class="reference internal" href="functions/Multiplication.html">Multiplication</a></li>
-<li class="toctree-l3"><a class="reference internal" href="functions/Option.html">European option</a></li>
-<li class="toctree-l3"><a class="reference internal" href="functions/Polynom.html">Polynom</a></li>
-<li class="toctree-l3"><a class="reference internal" href="functions/SumOfFutureValues.html">SumOfFutureValues</a></li>
-<li class="toctree-l3"><a class="reference internal" href="functions/Swap1.html">Swap1</a></li>
-<li class="toctree-l3"><a class="reference internal" href="functions/ZeroCouponBond.html">ZeroCouponBond</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html">Barrier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#brownianmotion">BrownianMotion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#division">Division</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#expectedvalue">ExpectedValue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#forwardzerocouponbond">ForwardZeroCouponBond</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#geometricalbrownianmotion">GeometricalBrownianMotion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#hullwhite1factormodel">HullWhite1FactorModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#linear1dinterpolation">Linear1DInterpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#multiplication">Multiplication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#option">Option</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#polynom">Polynom</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#randomnormal">RandomNormal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#sum">Sum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#sumoffuturevalues">SumOfFutureValues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#swapfixedleg">SwapFixedLeg</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#swapfloatingleg">SwapFloatingLeg</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zerocouponbond">ZeroCouponBond</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="ComputationalGrid.html">Computational Grid</a></li>
 <li class="toctree-l1"><a class="reference internal" href="EvaluationGrid.html">Evaluation Grid</a></li>
 <li class="toctree-l1"><a class="reference internal" href="EvaluationResult.html">Evaluation Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mcsdk.html">mcsdk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test-doctest.html">Test of doctest</a></li>
 </ul>
 
         </div>
@@ -100,106 +100,176 @@
              
   <section id="functions">
 <h1>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h1>
-<section id="stateless-functions">
-<h2>Stateless functions<a class="headerlink" href="#stateless-functions" title="Link to this heading"></a></h2>
-<p>Generation of (pseudo)random numbers does not require
-a knowledge of a previous random generator state explicitly.
-It is enough to have some function which will
-just produce a new random number on each
-call, like :code:’r()’. And the function will handle
-its state internally.
-Usually, you need to provide at least one function of this kind,
-to generate the random numbers. Such functions
-do not have any initial states
-(initial seed number is handled in a special way).
-They still can have parameters,
-for example you need to pass somehow a correlation
-parameter <span class="math notranslate nohighlight">\(\rho\)</span> to generate two correlated
-Brownian motion processes. Still, the a random number
-does not have a <em>state</em>, its next value should be independent
-from the current.</p>
-</section>
-<section id="stateful-functions">
-<h2>Stateful functions<a class="headerlink" href="#stateful-functions" title="Link to this heading"></a></h2>
-<p>Other functions (e.g. simple Brownian motion process)
-do have states. They (usually) require some initial
-state value, given at initial time <span class="math notranslate nohighlight">\(t_{start}\)</span>.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>To generate a simple Brownian motion process
-<span class="math notranslate nohighlight">\(dS_t = \mu \cdot \text{d}t + \sigma \cdot \text{d}W_t\)</span>
-we need to use two functions:</p>
-<ul class="simple">
-<li><p>one <em>stateless</em> function to generate a normally distributed random variable <span class="math notranslate nohighlight">\(W_t\)</span></p></li>
-<li><p>one <em>stateful</em> function for the process <span class="math notranslate nohighlight">\(S_t\)</span>, which depends on <span class="math notranslate nohighlight">\(S(t=t_{start},\mu,\sigma)\)</span></p></li>
-</ul>
-</div>
+<p>The list of functions provided by the MC engine to update states.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="functions/Barrier.html">Barrier</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="functions/Barrier.html#references">References</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="functions/Barrier.html#ref-0">[ref 0]</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">Barrier</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#dto.Barrier"><code class="docutils literal notranslate"><span class="pre">Barrier</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#barrier">Barrier</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#references">References</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="functions.html#ref-0">[ref 0]</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="functions/Barrier.html#arguments">Arguments</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="functions/Barrier.html#arg-0-level">[arg 0] level</a></li>
-<li class="toctree-l3"><a class="reference internal" href="functions/Barrier.html#arg-1-valueoncrossing">[arg 1] valueOnCrossing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="functions/Barrier.html#arg-2-direction">[arg 2] direction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#arguments">Arguments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="functions.html#arg-0-level">[arg 0] level</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions.html#arg-1-valueoncrossing">[arg 1] valueOnCrossing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions.html#arg-2-direction">[arg 2] direction</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="functions/Barrier.html#examples">Examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="functions/Barrier.html#s0-0-args-1000-1-1-0-0">S0=0, args=[1000,1,-1,0,0]</a></li>
-<li class="toctree-l3"><a class="reference internal" href="functions/Barrier.html#s0-0-args-1000-1-1-0-2-111-1-222-2-333-3-444-4">S0=0, args=[1000,1,-1,0,2,111.1,222.2,333.3,444.4]</a></li>
-<li class="toctree-l3"><a class="reference internal" href="functions/Barrier.html#s0-0-args-1000-1-1-1-2-111-1-222-2-333-3-444-4">S0=0, args=[1000,1,-1,1,2,111.1,222.2,333.3,444.4]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples">Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="functions.html#s0-0-args-1000-1-1-0-0">S0=0, args=[1000,1,-1,0,0]</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions.html#s0-0-args-1000-1-1-0-2-111-1-222-2-333-3-444-4">S0=0, args=[1000,1,-1,0,2,111.1,222.2,333.3,444.4]</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions.html#s0-0-args-1000-1-1-1-2-111-1-222-2-333-3-444-4">S0=0, args=[1000,1,-1,1,2,111.1,222.2,333.3,444.4]</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="functions/BrownianMotion.html">BrownianMotion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="functions/CorrelatedGaussian.html">Linear1DInterpolation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="functions/CorrelatedGaussian.html#example-args-1-2-3-4-5">Example: args=[1,2,3,4,5]</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="functions/Division.html">Division</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="functions/Division.html#initial-state">Initial state</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions/Division.html#arguments">Arguments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions/Division.html#references">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions/Division.html#example">Example:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html#brownianmotion">BrownianMotion</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#dto.BrownianMotion"><code class="docutils literal notranslate"><span class="pre">BrownianMotion</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#brownianmotion">BrownianMotion</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#input-parameters">Input parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="functions.html#nrefs-0-and-nargs-2">nrefs=0 and nargs=2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions.html#nrefs-1-and-nargs-2">nrefs=1 and nargs=2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions.html#nrefs-2-and-nargs-0">nrefs=2 and nargs=0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions.html#nrefs-3-and-nargs-0">nrefs=3 and nargs=0</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="functions/ForwardZeroCouponBond.html">ForwardZeroCouponBond</a></li>
-<li class="toctree-l1"><a class="reference internal" href="functions/GeometricalBrownianMotion.html">BrownianMotion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="functions/HullWhite1FactorModel.html">HullWhite1FactorModel</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="functions/HullWhite1FactorModel.html#references">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions/HullWhite1FactorModel.html#arguments">Arguments</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="functions/IndependentGaussian.html">Sum</a></li>
-<li class="toctree-l1"><a class="reference internal" href="functions/Multiplication.html">Multiplication</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="functions/Multiplication.html#initial-state-parameter">Initial state parameter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions/Multiplication.html#arguments">Arguments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions/Multiplication.html#references">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions/Multiplication.html#example">Example:</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="functions/Option.html">European option</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="functions/Option.html#initial-state">Initial state</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions/Option.html#arguments">Arguments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions/Option.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html#division">Division</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#dto.Division"><code class="docutils literal notranslate"><span class="pre">Division</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#division">Division</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#initial-state">Initial state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#arguments">Arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#references">References</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#example">Example:</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="functions/Polynom.html">Polynom</a></li>
-<li class="toctree-l1"><a class="reference internal" href="functions/SumOfFutureValues.html">SumOfFutureValues</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="functions/SumOfFutureValues.html#arguments-args">Arguments <em>args</em></a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions/SumOfFutureValues.html#references-args">References <em>args</em></a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions/SumOfFutureValues.html#description">Description</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="functions/Swap1.html">Swap1</a></li>
-<li class="toctree-l1"><a class="reference internal" href="functions/ZeroCouponBond.html">ZeroCouponBond</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html#expectedvalue">ExpectedValue</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#expectedvalue">ExpectedValue</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#input-arguments">Input arguments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="functions.html#example">Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html#forwardzerocouponbond">ForwardZeroCouponBond</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#forwardzerocouponbond">ForwardZeroCouponBond</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html#geometricalbrownianmotion">GeometricalBrownianMotion</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#dto.GeometricalBrownianMotion"><code class="docutils literal notranslate"><span class="pre">GeometricalBrownianMotion</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#geometricalbrownianmotion">GeometricalBrownianMotion</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#input-parameters">Input parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="functions.html#nrefs-0-and-nargs-2">nrefs=0 and nargs=2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions.html#nrefs-1-and-nargs-2">nrefs=1 and nargs=2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions.html#nrefs-2-and-nargs-0">nrefs=2 and nargs=0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions.html#nrefs-3-and-nargs-0">nrefs=3 and nargs=0</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html#hullwhite1factormodel">HullWhite1FactorModel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#hullwhite1factormodel">HullWhite1FactorModel</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#input-parameters">Input parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="functions.html#constant-parameters-the-random-variable-is-internally-generated">Constant parameters, the random variable is internally generated.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions.html#constant-parameters-with-externally-given-random-variable">Constant parameters, with externally given random variable.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions.html#parameters-are-given-as-processes-the-random-variable-is-internally-generated">Parameters are given as processes, the random variable is internally generated.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions.html#parameters-are-given-as-processes-the-random-variable-is-externally-generated">Parameters are given as processes, the random variable is externally generated.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html#linear1dinterpolation">Linear1DInterpolation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#dto.Linear1DInterpolation"><code class="docutils literal notranslate"><span class="pre">Linear1DInterpolation</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#linear1dinterpolation">Linear1DInterpolation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#example-args-1-2-3-4-5">Example: args=[1,2,3,4,5]</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html#multiplication">Multiplication</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#dto.Multiplication"><code class="docutils literal notranslate"><span class="pre">Multiplication</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#multiplication">Multiplication</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#initial-state">Initial state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#arguments">Arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#references">References</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#example">Example:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html#option">Option</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#dto.Option"><code class="docutils literal notranslate"><span class="pre">Option</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#european-option">European option</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#initial-state">Initial state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#arguments">Arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html#polynom">Polynom</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#dto.Polynom"><code class="docutils literal notranslate"><span class="pre">Polynom</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#polynom">Polynom</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html#randomnormal">RandomNormal</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#randomnormal">RandomNormal</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#initial-state">Initial state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#arguments-references">Arguments &amp; References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html#sum">Sum</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#dto.Sum"><code class="docutils literal notranslate"><span class="pre">Sum</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#sum">Sum</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html#sumoffuturevalues">SumOfFutureValues</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#dto.SumOfFutureValues"><code class="docutils literal notranslate"><span class="pre">SumOfFutureValues</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#sumoffuturevalues">SumOfFutureValues</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#arguments-args">Arguments <em>args</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#references-args">References <em>args</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#description">Description</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html#swapfixedleg">SwapFixedLeg</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#swapfixedleg">SwapFixedLeg</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#input-parameters">Input parameters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html#swapfloatingleg">SwapFloatingLeg</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#swapfloatingleg">SwapFloatingLeg</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#input-parameters">Input parameters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html#zerocouponbond">ZeroCouponBond</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#dto.ZeroCouponBond"><code class="docutils literal notranslate"><span class="pre">ZeroCouponBond</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zerocouponbond">ZeroCouponBond</a></li>
+</ul>
+</li>
 </ul>
 </div>
-</section>
 </section>
 
 
@@ -207,7 +277,7 @@ we need to use two functions:</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="Introduction.html" class="btn btn-neutral float-left" title="Introduction &amp; Readme" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="functions/Barrier.html" class="btn btn-neutral float-right" title="Barrier" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="functions.html" class="btn btn-neutral float-right" title="Barrier" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -18,11 +18,11 @@
         <script src="../_static/documentation_options.js?v=5929fcd5"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Sum" href="IndependentGaussian.html" />
-    <link rel="prev" title="BrownianMotion" href="GeometricalBrownianMotion.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,36 +45,14 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../Introduction.html">Introduction &amp; Readme</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../Functions.html">Functions</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../Functions.html#stateless-functions">Stateless functions</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../Functions.html#stateful-functions">Stateful functions</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="Barrier.html">Barrier</a></li>
-<li class="toctree-l3"><a class="reference internal" href="BrownianMotion.html">BrownianMotion</a></li>
-<li class="toctree-l3"><a class="reference internal" href="CorrelatedGaussian.html">Linear1DInterpolation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Division.html">Division</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ForwardZeroCouponBond.html">ForwardZeroCouponBond</a></li>
-<li class="toctree-l3"><a class="reference internal" href="GeometricalBrownianMotion.html">BrownianMotion</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">HullWhite1FactorModel</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#references">References</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#arguments">Arguments</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="IndependentGaussian.html">Sum</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Multiplication.html">Multiplication</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Option.html">European option</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Polynom.html">Polynom</a></li>
-<li class="toctree-l3"><a class="reference internal" href="SumOfFutureValues.html">SumOfFutureValues</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Swap1.html">Swap1</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ZeroCouponBond.html">ZeroCouponBond</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../Functions.html">Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ComputationalGrid.html">Computational Grid</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../EvaluationGrid.html">Evaluation Grid</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../EvaluationResult.html">Evaluation Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mcsdk.html">mcsdk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../test-doctest.html">Test of doctest</a></li>
 </ul>
 
         </div>
@@ -91,7 +69,6 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../Functions.html">Functions</a></li>
       <li class="breadcrumb-item active">HullWhite1FactorModel</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/functions/HullWhite1FactorModel.md.txt" rel="nofollow"> View page source</a>
@@ -102,67 +79,191 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="hullwhite1factormodel">
+  <section class="tex2jax_ignore mathjax_ignore" id="hullwhite1factormodel">
 <h1>HullWhite1FactorModel<a class="headerlink" href="#hullwhite1factormodel" title="Link to this heading"></a></h1>
 <p>One Factor Hull-White Model.</p>
-<p>dr(t) = [theta(t)-alpha(t)*r(t)]*dt + sigma(t)*dW(t)</p>
+<p><span class="math notranslate nohighlight">\(dr(t) = [theta(t)-alpha(t)*r(t)]*dt + sigma(t)*dW(t)\)</span></p>
 <p>The updater accepts either:</p>
 <ul class="simple">
 <li><p>3 arguments and 0 references (for constant alpha,theta,sigma parameters)
 OR</p></li>
 <li><p>0 arguments and 3 references (any t-adapted processes of alpha,theta,sigma)</p></li>
 </ul>
-<section id="references">
-<h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<section id="input-parameters">
+<h2>Input parameters<a class="headerlink" href="#input-parameters" title="Link to this heading"></a></h2>
+<section id="constant-parameters-the-random-variable-is-internally-generated">
+<h3>Constant parameters, the random variable is internally generated.<a class="headerlink" href="#constant-parameters-the-random-variable-is-internally-generated" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="head"><p>Reference</p></th>
-<th class="head"><p>Description</p></th>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>name</p></th>
+<th class="head"><p>range</p></th>
+<th class="head"><p>description</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>0</p></td>
-<td><p>alpha(t)</p></td>
+<tr class="row-even"><td><p>nrefs</p></td>
+<td><p></p></td>
+<td><p>0</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>0</p></td>
-<td><p>theta(t)</p></td>
+<tr class="row-odd"><td><p>nargs</p></td>
+<td><p></p></td>
+<td><p>3</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>0</p></td>
-<td><p>sigma(t)</p></td>
+<tr class="row-even"><td><p>args[0]</p></td>
+<td><p>alpha</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>args[1]</p></td>
+<td><p>theta</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>args[2]</p></td>
+<td><p>sigma</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="arguments">
-<h2>Arguments<a class="headerlink" href="#arguments" title="Link to this heading"></a></h2>
+<section id="constant-parameters-with-externally-given-random-variable">
+<h3>Constant parameters, with externally given random variable.<a class="headerlink" href="#constant-parameters-with-externally-given-random-variable" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="head"><p>Reference</p></th>
-<th class="head"><p>Description</p></th>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>name</p></th>
+<th class="head"><p>range</p></th>
+<th class="head"><p>description</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>0</p></td>
+<tr class="row-even"><td><p>nrefs</p></td>
+<td><p></p></td>
+<td><p>1</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>refs[0]</p></td>
+<td><p>W</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>nargs</p></td>
+<td><p></p></td>
+<td><p>3</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>args[0]</p></td>
 <td><p>alpha</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>0</p></td>
+<tr class="row-even"><td><p>args[1]</p></td>
 <td><p>theta</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>0</p></td>
+<tr class="row-odd"><td><p>args[2]</p></td>
 <td><p>sigma</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
+</section>
+<section id="parameters-are-given-as-processes-the-random-variable-is-internally-generated">
+<h3>Parameters are given as processes, the random variable is internally generated.<a class="headerlink" href="#parameters-are-given-as-processes-the-random-variable-is-internally-generated" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>name</p></th>
+<th class="head"><p>range</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>nrefs</p></td>
+<td><p></p></td>
+<td><p>3</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>refs[0]</p></td>
+<td><p>alpha(t)</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>refs[1]</p></td>
+<td><p>theta(t)</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>refs[2]</p></td>
+<td><p>sigma(t)</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>nargs</p></td>
+<td><p></p></td>
+<td><p>0</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="parameters-are-given-as-processes-the-random-variable-is-externally-generated">
+<h3>Parameters are given as processes, the random variable is externally generated.<a class="headerlink" href="#parameters-are-given-as-processes-the-random-variable-is-externally-generated" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>name</p></th>
+<th class="head"><p>range</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>nrefs</p></td>
+<td><p></p></td>
+<td><p>4</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>refs[0]</p></td>
+<td><p>alpha(t)</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>refs[1]</p></td>
+<td><p>theta(t)</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>refs[2]</p></td>
+<td><p>sigma(t)</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>refs[3]</p></td>
+<td><p>W</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>nargs</p></td>
+<td><p></p></td>
+<td><p>0</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
 </section>
 </section>
 
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="GeometricalBrownianMotion.html" class="btn btn-neutral float-left" title="BrownianMotion" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="IndependentGaussian.html" class="btn btn-neutral float-right" title="Sum" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 

@@ -20,9 +20,7 @@
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="BrownianMotion" href="BrownianMotion.html" />
-    <link rel="prev" title="Functions" href="../Functions.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,37 +43,14 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../Introduction.html">Introduction &amp; Readme</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../Functions.html">Functions</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../Functions.html#stateless-functions">Stateless functions</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../Functions.html#stateful-functions">Stateful functions</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Barrier</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#references">References</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#arguments">Arguments</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="BrownianMotion.html">BrownianMotion</a></li>
-<li class="toctree-l3"><a class="reference internal" href="CorrelatedGaussian.html">Linear1DInterpolation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Division.html">Division</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ForwardZeroCouponBond.html">ForwardZeroCouponBond</a></li>
-<li class="toctree-l3"><a class="reference internal" href="GeometricalBrownianMotion.html">BrownianMotion</a></li>
-<li class="toctree-l3"><a class="reference internal" href="HullWhite1FactorModel.html">HullWhite1FactorModel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="IndependentGaussian.html">Sum</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Multiplication.html">Multiplication</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Option.html">European option</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Polynom.html">Polynom</a></li>
-<li class="toctree-l3"><a class="reference internal" href="SumOfFutureValues.html">SumOfFutureValues</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Swap1.html">Swap1</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ZeroCouponBond.html">ZeroCouponBond</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../Functions.html">Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ComputationalGrid.html">Computational Grid</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../EvaluationGrid.html">Evaluation Grid</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../EvaluationResult.html">Evaluation Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mcsdk.html">mcsdk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../test-doctest.html">Test of doctest</a></li>
 </ul>
 
         </div>
@@ -92,7 +67,6 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../Functions.html">Functions</a></li>
       <li class="breadcrumb-item active">Barrier</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/functions/Barrier.md.txt" rel="nofollow"> View page source</a>
@@ -103,7 +77,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="barrier">
+  <section class="tex2jax_ignore mathjax_ignore" id="barrier">
 <h1>Barrier<a class="headerlink" href="#barrier" title="Link to this heading"></a></h1>
 <p>A barrier state starts from some initial value S0.
 On each computation step we verify the barrier crossing condition, and if it is satisfied, the barrier state will
@@ -157,12 +131,6 @@ be set to STATE=valueOnCrossing.</p>
 </tr>
 </tbody>
 </table>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>.has_start  = false,
-.nargs_min  = 4,
-.nrefs_min  = 1,
-</pre></div>
-</div>
-<p>r of time windows</p>
 <p>The number of time windows (say <strong>m</strong>) when the barrier will be checked.
 The next <strong>m * 2</strong> parameters will be treated as [from,to) pairs, time windows
 where the barrier condition will be checked. If <strong>m==0</strong>, the barrier condition
@@ -183,7 +151,7 @@ the barrier will have an effect, when we change the barrier state from 0
 </section>
 <section id="s0-0-args-1000-1-1-0-2-111-1-222-2-333-3-444-4">
 <h3>S0=0, args=[1000,1,-1,0,2,111.1,222.2,333.3,444.4]<a class="headerlink" href="#s0-0-args-1000-1-1-0-2-111-1-222-2-333-3-444-4" title="Link to this heading"></a></h3>
-<p>The same as above, but wee only check the barrier condition if the time
+<p>The same as above, but we only check the barrier condition if the time
 is in one of the two (because arg[5]==2) windows:</p>
 <ul class="simple">
 <li><p>[111.1,222.2)</p></li>
@@ -201,10 +169,7 @@ how many times the barrier is crossed in the ‘down’ direction.</p>
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../Functions.html" class="btn btn-neutral float-left" title="Functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="BrownianMotion.html" class="btn btn-neutral float-right" title="BrownianMotion" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 

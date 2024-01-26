@@ -40,10 +40,6 @@ This is the barrier crossing condition.
 | -1 | down          |
 |  0 | any (up or down) |
 | +1 | up |
-    .has_start  = false,
-    .nargs_min  = 4,
-    .nrefs_min  = 1,
-r of time windows
 
 The number of time windows (say **m**) when the barrier will be checked.
 The next **m * 2** parameters will be treated as [from,to) pairs, time windows
@@ -64,7 +60,7 @@ the barrier will have an effect, when we change the barrier state from 0
 
 ### S0=0, args=[1000,1,-1,0,2,111.1,222.2,333.3,444.4]
 
-The same as above, but wee only check the barrier condition if the time
+The same as above, but we only check the barrier condition if the time
 is in one of the two (because arg[5]==2) windows:
 
 - [111.1,222.2)

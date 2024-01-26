@@ -1,11 +1,16 @@
 
 # Multiplication
 
-The function computes A*S1*S2*..., where A is a constant and S1,S2,... are process states.
+The function computes
 
-## Initial state parameter
+$$
+A \cdot \prod_{i=1}^n S_i
+$$
+where A is a constant args[0] and $S_1,S_2,\dots,S_n$ are process states refs[0], ..., refs[n-1].
 
-The initial state is ignored, the function state is computed on each time step.
+## Initial state
+
+Not applicable, the function state is computed on each time step.
 
 ## Arguments
 
@@ -13,17 +18,16 @@ The function has one arguments.
 
 |   | name |
 |---|------|
-| 0 | multiplication factor |
+| args[0] | A, multiplication factor |
 
 ## References
 
-Non-zero number of references: nrefs>0. All states will be multipplied.
+Non-zero number of references: nrefs>0.
 
 ## Example:
 
-- start = ignored
 - args = [0.5]
 - refs = [0,7,9]
 
-Computes 0.5*state[0]*state[7]*state[9]
+The function will compute: 0.5*state[0]*state[7]*state[9]
 
