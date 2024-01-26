@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Barrier &mdash; MonteCarloEngine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Computational Grid" href="ComputationalGrid.html" />
+    <link rel="prev" title="Functions" href="Functions.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MonteCarloEngine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Introduction.html">Introduction &amp; Readme</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Functions.html">Functions</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Barrier</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dto.Barrier"><code class="docutils literal notranslate"><span class="pre">Barrier</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#barrier">Barrier</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#references">References</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#arguments">Arguments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#brownianmotion">BrownianMotion</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dto.BrownianMotion"><code class="docutils literal notranslate"><span class="pre">BrownianMotion</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#brownianmotion">BrownianMotion</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#input-parameters">Input parameters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#division">Division</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dto.Division"><code class="docutils literal notranslate"><span class="pre">Division</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#division">Division</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#initial-state">Initial state</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#arguments">Arguments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#references">References</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example">Example:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#expectedvalue">ExpectedValue</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#expectedvalue">ExpectedValue</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#input-arguments">Input arguments</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#forwardzerocouponbond">ForwardZeroCouponBond</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#forwardzerocouponbond">ForwardZeroCouponBond</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#geometricalbrownianmotion">GeometricalBrownianMotion</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dto.GeometricalBrownianMotion"><code class="docutils literal notranslate"><span class="pre">GeometricalBrownianMotion</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#geometricalbrownianmotion">GeometricalBrownianMotion</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#input-parameters">Input parameters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#hullwhite1factormodel">HullWhite1FactorModel</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hullwhite1factormodel">HullWhite1FactorModel</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#input-parameters">Input parameters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#linear1dinterpolation">Linear1DInterpolation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dto.Linear1DInterpolation"><code class="docutils literal notranslate"><span class="pre">Linear1DInterpolation</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#linear1dinterpolation">Linear1DInterpolation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#example-args-1-2-3-4-5">Example: args=[1,2,3,4,5]</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#multiplication">Multiplication</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dto.Multiplication"><code class="docutils literal notranslate"><span class="pre">Multiplication</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multiplication">Multiplication</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#initial-state">Initial state</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#arguments">Arguments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#references">References</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example">Example:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#option">Option</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dto.Option"><code class="docutils literal notranslate"><span class="pre">Option</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#european-option">European option</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#initial-state">Initial state</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#arguments">Arguments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#polynom">Polynom</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dto.Polynom"><code class="docutils literal notranslate"><span class="pre">Polynom</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#polynom">Polynom</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#randomnormal">RandomNormal</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#randomnormal">RandomNormal</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#initial-state">Initial state</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#arguments-references">Arguments &amp; References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sum">Sum</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dto.Sum"><code class="docutils literal notranslate"><span class="pre">Sum</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sum">Sum</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sumoffuturevalues">SumOfFutureValues</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dto.SumOfFutureValues"><code class="docutils literal notranslate"><span class="pre">SumOfFutureValues</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sumoffuturevalues">SumOfFutureValues</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#arguments-args">Arguments <em>args</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#references-args">References <em>args</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#swapfixedleg">SwapFixedLeg</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#swapfixedleg">SwapFixedLeg</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#input-parameters">Input parameters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#swapfloatingleg">SwapFloatingLeg</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#swapfloatingleg">SwapFloatingLeg</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#input-parameters">Input parameters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#zerocouponbond">ZeroCouponBond</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dto.ZeroCouponBond"><code class="docutils literal notranslate"><span class="pre">ZeroCouponBond</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#zerocouponbond">ZeroCouponBond</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ComputationalGrid.html">Computational Grid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EvaluationGrid.html">Evaluation Grid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EvaluationResult.html">Evaluation Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mcsdk.html">mcsdk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test-doctest.html">Test of doctest</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MonteCarloEngine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Functions.html">Functions</a></li>
+      <li class="breadcrumb-item active">Barrier</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/functions.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="barrier">
+<h1>Barrier<a class="headerlink" href="#barrier" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.Barrier">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Barrier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">underlying</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Barrier" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<section class="tex2jax_ignore mathjax_ignore" id="barrier">
+<h2>Barrier<a class="headerlink" href="#barrier" title="Link to this heading"></a></h2>
+<p>A barrier state starts from some initial value S0.
+On each computation step we verify the barrier crossing condition, and if it is satisfied, the barrier state will
+be set to STATE=valueOnCrossing.</p>
+<p>For direction ‘up’:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if(Sold&lt;level and Snew&gt;=level)
+    barrierState = valueOnCrossing;
+</pre></div>
+</div>
+<p>For direction ‘down’:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if(Sold&gt;level and Snew&lt;=level)
+    barrierState = valueOnCrossing;
+</pre></div>
+</div>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Link to this heading"></a></h3>
+<p>The barrier function expectes exactly one reference: an <strong>underlying</strong>.</p>
+<section id="ref-0">
+<h4>[ref 0]<a class="headerlink" href="#ref-0" title="Link to this heading"></a></h4>
+<p>The underlying process.</p>
+</section>
+</section>
+<section id="arguments">
+<h3>Arguments<a class="headerlink" href="#arguments" title="Link to this heading"></a></h3>
+<section id="arg-0-level">
+<h4>[arg 0] level<a class="headerlink" href="#arg-0-level" title="Link to this heading"></a></h4>
+<p>Barrier level</p>
+</section>
+<section id="arg-1-valueoncrossing">
+<h4>[arg 1] valueOnCrossing<a class="headerlink" href="#arg-1-valueoncrossing" title="Link to this heading"></a></h4>
+<p>The value we set when the barrier is crossed.</p>
+</section>
+<section id="arg-2-direction">
+<h4>[arg 2] direction<a class="headerlink" href="#arg-2-direction" title="Link to this heading"></a></h4>
+<p>This is the barrier crossing condition.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>value</p></th>
+<th class="head text-right"><p>direction</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>-1</p></td>
+<td class="text-right"><p>down</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td class="text-right"><p>any (up or down)</p></td>
+</tr>
+<tr class="row-even"><td><p>+1</p></td>
+<td class="text-right"><p>up</p></td>
+</tr>
+</tbody>
+</table>
+<p>The number of time windows (say <strong>m</strong>) when the barrier will be checked.
+The next <strong>m * 2</strong> parameters will be treated as [from,to) pairs, time windows
+where the barrier condition will be checked. If <strong>m==0</strong>, the barrier condition
+will be checked on all time step.</p>
+</section>
+</section>
+<section id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h3>
+<section id="s0-0-args-1000-1-1-0-0">
+<h4>S0=0, args=[1000,1,-1,0,0]<a class="headerlink" href="#s0-0-args-1000-1-1-0-0" title="Link to this heading"></a></h4>
+<p>The barrier inital state is 0. We check on any time step (because arg[4]==0)
+the the barrier level==1000 will be crossed in the down direction (for example,
+from 1000.5 to 1000). If the condition is NOT fulfilled, we don’t change the
+barrier state. Otherwise, we set the barrier value (arg[3]==0 means ‘set’)
+to value 1 (because arg[1]==1). Obvioulsy, only the first crossing over
+the barrier will have an effect, when we change the barrier state from 0
+(because S0==0) to 1 (because arg[1]==1 and arg[3]==0)</p>
+</section>
+<section id="s0-0-args-1000-1-1-0-2-111-1-222-2-333-3-444-4">
+<h4>S0=0, args=[1000,1,-1,0,2,111.1,222.2,333.3,444.4]<a class="headerlink" href="#s0-0-args-1000-1-1-0-2-111-1-222-2-333-3-444-4" title="Link to this heading"></a></h4>
+<p>The same as above, but we only check the barrier condition if the time
+is in one of the two (because arg[5]==2) windows:</p>
+<ul class="simple">
+<li><p>[111.1,222.2)</p></li>
+<li><p>[333.3,444.4)</p></li>
+</ul>
+</section>
+<section id="s0-0-args-1000-1-1-1-2-111-1-222-2-333-3-444-4">
+<h4>S0=0, args=[1000,1,-1,1,2,111.1,222.2,333.3,444.4]<a class="headerlink" href="#s0-0-args-1000-1-1-1-2-111-1-222-2-333-3-444-4" title="Link to this heading"></a></h4>
+<p>The same as above, we ‘count’ (arg[3]==1 is the increment)
+how many times the barrier is crossed in the ‘down’ direction.</p>
+</section>
+</section>
+</section>
+</section>
+<section id="brownianmotion">
+<h1>BrownianMotion<a class="headerlink" href="#brownianmotion" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.BrownianMotion">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">BrownianMotion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diffusion</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.BrownianMotion" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<section class="tex2jax_ignore mathjax_ignore" id="brownianmotion">
+<h2>BrownianMotion<a class="headerlink" href="#brownianmotion" title="Link to this heading"></a></h2>
+<div class="math notranslate nohighlight">
+\[dS = \mu dt + \sigma dW_t\]</div>
+<p>The function requires <em>mean</em> and <em>sigma</em> parameters and a gaussian random variable to advance its state.
+The parameters <em>mean</em> and <em>sigma</em> can be passed either as constant values in <em>args</em> or
+they can be themself some processes and in this case the reference process must be provided in <em>refs</em>.
+A random number can be genegerated internally, or provided externally with <em>refs</em>.</p>
+<section id="input-parameters">
+<h3>Input parameters<a class="headerlink" href="#input-parameters" title="Link to this heading"></a></h3>
+<section id="nrefs-0-and-nargs-2">
+<h4>nrefs=0 and nargs=2<a class="headerlink" href="#nrefs-0-and-nargs-2" title="Link to this heading"></a></h4>
+<p>Constant <em>mean</em> and <em>sigma</em>, internally generated random variable.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>name</p></th>
+<th class="head"><p>range</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>args[0]</p></td>
+<td><p>mean</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>args[1]</p></td>
+<td><p>sigma</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="nrefs-1-and-nargs-2">
+<h4>nrefs=1 and nargs=2<a class="headerlink" href="#nrefs-1-and-nargs-2" title="Link to this heading"></a></h4>
+<p>Constant <em>mean</em> and <em>sigma</em>, externally taken random variable.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>name</p></th>
+<th class="head"><p>range</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>refs[0]</p></td>
+<td><p>W</p></td>
+<td><p>any</p></td>
+<td><p>normally distributed variable</p></td>
+</tr>
+<tr class="row-odd"><td><p>args[0]</p></td>
+<td><p>mean</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>args[1]</p></td>
+<td><p>sigma</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="nrefs-2-and-nargs-0">
+<h4>nrefs=2 and nargs=0<a class="headerlink" href="#nrefs-2-and-nargs-0" title="Link to this heading"></a></h4>
+<p>Parameters <em>mean</em> and <em>sigma</em> are given as a reference processes,
+the random variable is generated internally.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>name</p></th>
+<th class="head"><p>range</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>refs[0]</p></td>
+<td><p>mean</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>refs[1]</p></td>
+<td><p>sigma</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="nrefs-3-and-nargs-0">
+<h4>nrefs=3 and nargs=0<a class="headerlink" href="#nrefs-3-and-nargs-0" title="Link to this heading"></a></h4>
+<p>Parameters <em>mean</em>, <em>sigma</em> and the random variable are given as a reference processes,</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>name</p></th>
+<th class="head"><p>range</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>refs[0]</p></td>
+<td><p>mean</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>refs[1]</p></td>
+<td><p>sigma</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>refs[2]</p></td>
+<td><p>W</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+</section>
+<section id="division">
+<h1>Division<a class="headerlink" href="#division" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.Division">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Division</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">numerator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">denominator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Division" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<section class="tex2jax_ignore mathjax_ignore" id="division">
+<h2>Division<a class="headerlink" href="#division" title="Link to this heading"></a></h2>
+<p>Compute division of two processes.</p>
+<p>If abs(denominator)&lt;=eps, than the division result will be not-a-number.</p>
+<section id="initial-state">
+<h3>Initial state<a class="headerlink" href="#initial-state" title="Link to this heading"></a></h3>
+<p>Not used, the function will override previously computed values.</p>
+</section>
+<section id="arguments">
+<h3>Arguments<a class="headerlink" href="#arguments" title="Link to this heading"></a></h3>
+<p>The function has exactly one arguments. It is a non-negative number eps.
+If denominator state absolute value is less than eps, the division result will be set to NaN.
+This can be used to avoid producing +/- infinity values for the division result.
+A value 0 can be used (which essentially will allow division by zero).</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>name</p></th>
+<th class="head"><p>description</p></th>
+<th class="head"><p>range</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>eps</p></td>
+<td><p>abs(denominator) min value</p></td>
+<td><p>non-negative</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Numerator</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Denominator</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="example">
+<h3>Example:<a class="headerlink" href="#example" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>start = Ignore</p></li>
+<li><p>args = [0.01]</p></li>
+<li><p>refs = [2,5]</p></li>
+</ul>
+<p>Take a state[5] value, if abs(state[5])&gt;=0.01 set the division result to state[2]/state[5].
+Otherwise, the resukts is NAN.</p>
+</section>
+</section>
+</section>
+<section id="expectedvalue">
+<h1>ExpectedValue<a class="headerlink" href="#expectedvalue" title="Link to this heading"></a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="expectedvalue">
+<h2>ExpectedValue<a class="headerlink" href="#expectedvalue" title="Link to this heading"></a></h2>
+<p>The function will compute <span class="math notranslate nohighlight">\(\mathbb{E} S(T)\)</span>.</p>
+<section id="input-arguments">
+<h3>Input arguments<a class="headerlink" href="#input-arguments" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>refs[0] is the reference process</p></li>
+<li><p>args[0] extraction point number (non-negative integer)</p></li>
+</ul>
+<section id="example">
+<h4>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h4>
+<p>Let’s suppose that a model starts simulation at t=0, and we want to evaluate the
+model state values at time points t=[10,20,50].
+Thus, the model has three extraction points. If we want to use ExpectedValue at
+t=20 for a state S=9, we will need
+to pass into ExpectedValue function:</p>
+<ul class="simple">
+<li><p>refs[0]=9</p></li>
+<li><p>args[0]=1</p></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+<section id="forwardzerocouponbond">
+<h1>ForwardZeroCouponBond<a class="headerlink" href="#forwardzerocouponbond" title="Link to this heading"></a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="forwardzerocouponbond">
+<h2>ForwardZeroCouponBond<a class="headerlink" href="#forwardzerocouponbond" title="Link to this heading"></a></h2>
+<p>Compute the discount bond P(T0,T1,T2).</p>
+<p>refs: size 1, reference to a state which computes ZeroCouponBond
+args: size 2. Time points T1,T2</p>
+</section>
+</section>
+<section id="geometricalbrownianmotion">
+<h1>GeometricalBrownianMotion<a class="headerlink" href="#geometricalbrownianmotion" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.GeometricalBrownianMotion">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">GeometricalBrownianMotion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diffusion</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.GeometricalBrownianMotion" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<section class="tex2jax_ignore mathjax_ignore" id="geometricalbrownianmotion">
+<h2>GeometricalBrownianMotion<a class="headerlink" href="#geometricalbrownianmotion" title="Link to this heading"></a></h2>
+<div class="math notranslate nohighlight">
+\[dS = S(\mu dt + \sigma dW_t)\]</div>
+<p>The function requires <em>mean</em> and <em>sigma</em> parameters and a gaussian random variable to advance its state.
+The parameters <em>mean</em> and <em>sigma</em> can be passed either as constant values in <em>args</em> or
+they can be themself some processes and in this case the reference process must be provided in <em>refs</em>.
+A random number can be genegerated internally, or provided externally with <em>refs</em>.</p>
+<section id="input-parameters">
+<h3>Input parameters<a class="headerlink" href="#input-parameters" title="Link to this heading"></a></h3>
+<section id="nrefs-0-and-nargs-2">
+<h4>nrefs=0 and nargs=2<a class="headerlink" href="#nrefs-0-and-nargs-2" title="Link to this heading"></a></h4>
+<p>Constant <em>mean</em> and <em>sigma</em>, internally generated random variable.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>name</p></th>
+<th class="head"><p>range</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>args[0]</p></td>
+<td><p>mean</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>args[1]</p></td>
+<td><p>sigma</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="nrefs-1-and-nargs-2">
+<h4>nrefs=1 and nargs=2<a class="headerlink" href="#nrefs-1-and-nargs-2" title="Link to this heading"></a></h4>
+<p>Constant <em>mean</em> and <em>sigma</em>, externally taken random variable.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>name</p></th>
+<th class="head"><p>range</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>refs[0]</p></td>
+<td><p>W</p></td>
+<td><p>any</p></td>
+<td><p>normally distributed variable</p></td>
+</tr>
+<tr class="row-odd"><td><p>args[0]</p></td>
+<td><p>mean</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>args[1]</p></td>
+<td><p>sigma</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="nrefs-2-and-nargs-0">
+<h4>nrefs=2 and nargs=0<a class="headerlink" href="#nrefs-2-and-nargs-0" title="Link to this heading"></a></h4>
+<p>Parameters <em>mean</em> and <em>sigma</em> are given as a reference processes,
+the random variable is generated internally.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>name</p></th>
+<th class="head"><p>range</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>refs[0]</p></td>
+<td><p>mean</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>refs[1]</p></td>
+<td><p>sigma</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="nrefs-3-and-nargs-0">
+<h4>nrefs=3 and nargs=0<a class="headerlink" href="#nrefs-3-and-nargs-0" title="Link to this heading"></a></h4>
+<p>Parameters <em>mean</em>, <em>sigma</em> and the random variable are given as a reference processes,</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>name</p></th>
+<th class="head"><p>range</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>refs[0]</p></td>
+<td><p>mean</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>refs[1]</p></td>
+<td><p>sigma</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>refs[2]</p></td>
+<td><p>W</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+</section>
+<section id="hullwhite1factormodel">
+<h1>HullWhite1FactorModel<a class="headerlink" href="#hullwhite1factormodel" title="Link to this heading"></a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="hullwhite1factormodel">
+<h2>HullWhite1FactorModel<a class="headerlink" href="#hullwhite1factormodel" title="Link to this heading"></a></h2>
+<p>One Factor Hull-White Model.</p>
+<p><span class="math notranslate nohighlight">\(dr(t) = [theta(t)-alpha(t)*r(t)]*dt + sigma(t)*dW(t)\)</span></p>
+<p>The updater accepts either:</p>
+<ul class="simple">
+<li><p>3 arguments and 0 references (for constant alpha,theta,sigma parameters)
+OR</p></li>
+<li><p>0 arguments and 3 references (any t-adapted processes of alpha,theta,sigma)</p></li>
+</ul>
+<section id="input-parameters">
+<h3>Input parameters<a class="headerlink" href="#input-parameters" title="Link to this heading"></a></h3>
+<section id="constant-parameters-the-random-variable-is-internally-generated">
+<h4>Constant parameters, the random variable is internally generated.<a class="headerlink" href="#constant-parameters-the-random-variable-is-internally-generated" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>name</p></th>
+<th class="head"><p>range</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>nrefs</p></td>
+<td><p></p></td>
+<td><p>0</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>nargs</p></td>
+<td><p></p></td>
+<td><p>3</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>args[0]</p></td>
+<td><p>alpha</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>args[1]</p></td>
+<td><p>theta</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>args[2]</p></td>
+<td><p>sigma</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="constant-parameters-with-externally-given-random-variable">
+<h4>Constant parameters, with externally given random variable.<a class="headerlink" href="#constant-parameters-with-externally-given-random-variable" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>name</p></th>
+<th class="head"><p>range</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>nrefs</p></td>
+<td><p></p></td>
+<td><p>1</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>refs[0]</p></td>
+<td><p>W</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>nargs</p></td>
+<td><p></p></td>
+<td><p>3</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>args[0]</p></td>
+<td><p>alpha</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>args[1]</p></td>
+<td><p>theta</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>args[2]</p></td>
+<td><p>sigma</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="parameters-are-given-as-processes-the-random-variable-is-internally-generated">
+<h4>Parameters are given as processes, the random variable is internally generated.<a class="headerlink" href="#parameters-are-given-as-processes-the-random-variable-is-internally-generated" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>name</p></th>
+<th class="head"><p>range</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>nrefs</p></td>
+<td><p></p></td>
+<td><p>3</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>refs[0]</p></td>
+<td><p>alpha(t)</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>refs[1]</p></td>
+<td><p>theta(t)</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>refs[2]</p></td>
+<td><p>sigma(t)</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>nargs</p></td>
+<td><p></p></td>
+<td><p>0</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="parameters-are-given-as-processes-the-random-variable-is-externally-generated">
+<h4>Parameters are given as processes, the random variable is externally generated.<a class="headerlink" href="#parameters-are-given-as-processes-the-random-variable-is-externally-generated" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>name</p></th>
+<th class="head"><p>range</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>nrefs</p></td>
+<td><p></p></td>
+<td><p>4</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>refs[0]</p></td>
+<td><p>alpha(t)</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>refs[1]</p></td>
+<td><p>theta(t)</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>refs[2]</p></td>
+<td><p>sigma(t)</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>refs[3]</p></td>
+<td><p>W</p></td>
+<td><p>any</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>nargs</p></td>
+<td><p></p></td>
+<td><p>0</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+</section>
+<section id="linear1dinterpolation">
+<h1>Linear1DInterpolation<a class="headerlink" href="#linear1dinterpolation" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.Linear1DInterpolation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Linear1DInterpolation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xmin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xmax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Linear1DInterpolation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<section class="tex2jax_ignore mathjax_ignore" id="linear1dinterpolation">
+<h2>Linear1DInterpolation<a class="headerlink" href="#linear1dinterpolation" title="Link to this heading"></a></h2>
+<p>Perform one demensional interpolation between [Xmin,Xmax].
+The number of interpolation points
+is deduced from the number of arguments passed to the function.
+The first two arguments are Xmin,Xmax. The rest arguments are Y-values on the
+regular grid between [Xmin,Xmax]. Thus, the total nummber of arguments
+must be at least 4. And the total number of interpolation points is narg-2.</p>
+<section id="example-args-1-2-3-4-5">
+<h3>Example: args=[1,2,3,4,5]<a class="headerlink" href="#example-args-1-2-3-4-5" title="Link to this heading"></a></h3>
+<p>there are three interpolation points (5-2=3):</p>
+<ul class="simple">
+<li><p>Xmin = 1.0</p></li>
+<li><p>Xmax = 2.0</p></li>
+<li><p>Y(X=1.0) = 3</p></li>
+<li><p>Y(X=1.5) = 4</p></li>
+<li><p>Y(X=2.0) = 5</p></li>
+</ul>
+<p>The interpolation function argument is passed as ‘Xref’. If Xref=-1, then the argument is time.
+Otherwise, it is a state number to will be used as an ‘x’-argument.</p>
+<p>Linear1DInterpolation returns Y(Xmin) if X&lt;Xmin and Y(Xmax) if X&gt;Xmax.</p>
+<p>Linear1DInterpolation does not use the old state value.
+Thus, the starting process state value is ignored.</p>
+</section>
+</section>
+</section>
+<section id="multiplication">
+<h1>Multiplication<a class="headerlink" href="#multiplication" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.Multiplication">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Multiplication</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">refs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Multiplication" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<section class="tex2jax_ignore mathjax_ignore" id="multiplication">
+<h2>Multiplication<a class="headerlink" href="#multiplication" title="Link to this heading"></a></h2>
+<p>The function computes</p>
+<div class="math notranslate nohighlight">
+\[
+A \cdot \prod_{i=1}^n S_i
+\]</div>
+<p>where A is a constant args[0] and <span class="math notranslate nohighlight">\(S_1,S_2,\dots,S_n\)</span> are process states refs[0], …, refs[n-1].</p>
+<section id="initial-state">
+<h3>Initial state<a class="headerlink" href="#initial-state" title="Link to this heading"></a></h3>
+<p>Not applicable, the function state is computed on each time step.</p>
+</section>
+<section id="arguments">
+<h3>Arguments<a class="headerlink" href="#arguments" title="Link to this heading"></a></h3>
+<p>The function has one arguments.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>args[0]</p></td>
+<td><p>A, multiplication factor</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Link to this heading"></a></h3>
+<p>Non-zero number of references: nrefs&gt;0.</p>
+</section>
+<section id="example">
+<h3>Example:<a class="headerlink" href="#example" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>args = [0.5]</p></li>
+<li><p>refs = [0,7,9]</p></li>
+</ul>
+<p>The function will compute: 0.5*state[0]*state[7]*state[9]</p>
+</section>
+</section>
+</section>
+<section id="option">
+<h1>Option<a class="headerlink" href="#option" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.Option">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">underlying</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strike</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">call_put</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Option" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<section class="tex2jax_ignore mathjax_ignore" id="european-option">
+<h2>European option<a class="headerlink" href="#european-option" title="Link to this heading"></a></h2>
+<section id="initial-state">
+<h3>Initial state<a class="headerlink" href="#initial-state" title="Link to this heading"></a></h3>
+<p>The updater has no initial state.</p>
+</section>
+<section id="arguments">
+<h3>Arguments<a class="headerlink" href="#arguments" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>name</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>strike</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>type</p></td>
+<td><p>0-call, 1-put</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>name</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>underlying</p></td>
+<td><p>underlying process S</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+<section id="polynom">
+<h1>Polynom<a class="headerlink" href="#polynom" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.Polynom">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Polynom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Polynom" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<section class="tex2jax_ignore mathjax_ignore" id="polynom">
+<h2>Polynom<a class="headerlink" href="#polynom" title="Link to this heading"></a></h2>
+<p>The updater will compute a polynom of order N.</p>
+<p>The number N is equal to the number of arguments passed to the Polynom updater.
+The minimal number is 1, and in this case a constant function is defined.
+Otherwise it will compute a0+a1<em>x+a2</em>x*x+…, where ‘x’-is the
+polynom argumnt (see below) and a0,a1… are arguments of the
+function.</p>
+<p>The polynopm argument ‘x’ is passed as ‘reference’, thus the updeter expects
+strictly one reference and 1…N arguments. If Xref=-1, then the argument is current MC time.
+Otherwise, it is a state number to which will be used as an ‘x’-argument.</p>
+<p>Examples:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Polynom</p></th>
+<th class="head"><p>refs</p></th>
+<th class="head"><p>args</p></th>
+<th class="head"><p>Comment</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>P(t) = 44</p></td>
+<td><p>[-1]</p></td>
+<td><p>[44]</p></td>
+<td><p>A constant function</p></td>
+</tr>
+<tr class="row-odd"><td><p>P(t) = 1+2*t^4</p></td>
+<td><p>[-1]</p></td>
+<td><p>[1,0,0,0,2]</p></td>
+<td><p>use ref=-1 for the time argument</p></td>
+</tr>
+<tr class="row-even"><td><p>P(x) = -x^2</p></td>
+<td><p>[123]</p></td>
+<td><p>[0,0,-1]</p></td>
+<td><p>assuming that state 123 holds the ‘x’ argument</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="randomnormal">
+<h1>RandomNormal<a class="headerlink" href="#randomnormal" title="Link to this heading"></a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="randomnormal">
+<h2>RandomNormal<a class="headerlink" href="#randomnormal" title="Link to this heading"></a></h2>
+<p>The function can do one of the following:</p>
+<ul class="simple">
+<li><p>generate a single normally distributed random variable</p></li>
+<li><p>generate two correlated normally distributed random variables</p></li>
+</ul>
+<section id="initial-state">
+<h3>Initial state<a class="headerlink" href="#initial-state" title="Link to this heading"></a></h3>
+<p>Not applicable, the function has no initial state.</p>
+</section>
+<section id="arguments-references">
+<h3>Arguments &amp; References<a class="headerlink" href="#arguments-references" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>nrefs</p></th>
+<th class="head"><p>nargs</p></th>
+<th class="head"><p>#states</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>Generate a single variable.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>2</p></td>
+<td><p>Generate two correlated (correlation coefficient is args[0]) random variables.</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>Takes a random variable from refs[0] and generate a correlated (correlation coefficient is args[0]) random variable.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+<section id="sum">
+<h1>Sum<a class="headerlink" href="#sum" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.Sum">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">Sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">states</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.Sum" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<section class="tex2jax_ignore mathjax_ignore" id="sum">
+<h2>Sum<a class="headerlink" href="#sum" title="Link to this heading"></a></h2>
+<p>The function computes a weighted sum of several processes: <span class="math notranslate nohighlight">\(\sum_{i=1}^n S_i \cdot w_i\)</span></p>
+</section>
+</section>
+<section id="sumoffuturevalues">
+<h1>SumOfFutureValues<a class="headerlink" href="#sumoffuturevalues" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.SumOfFutureValues">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">SumOfFutureValues</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.SumOfFutureValues" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<section class="tex2jax_ignore mathjax_ignore" id="sumoffuturevalues">
+<h2>SumOfFutureValues<a class="headerlink" href="#sumoffuturevalues" title="Link to this heading"></a></h2>
+<section id="arguments-args">
+<h3>Arguments <em>args</em><a class="headerlink" href="#arguments-args" title="Link to this heading"></a></h3>
+<p>an array of (monotnoically increasing) m time points T[i]:  T[0]&lt;T[1]&lt;…&lt;T[m-1]</p>
+</section>
+<section id="references-args">
+<h3>References <em>args</em><a class="headerlink" href="#references-args" title="Link to this heading"></a></h3>
+<p>An array of size 1 with a reference process number N.</p>
+</section>
+<section id="description">
+<h3>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h3>
+<p>At every extraction point SumOfFutureValues state is computed as</p>
+<p>SumOfFutureValues = sum(i = [j…N]) N[i]</p>
+<p>where j is the first time point which is not less than t: T[j]&gt;=t (and j==0 or T[j-1]&lt;t). Which means that all past values will not be taken into the sum.</p>
+<p>Between every two extraction points Ta,Tb the SumOfFutureValues value is constant.</p>
+</section>
+</section>
+</section>
+<section id="swapfixedleg">
+<h1>SwapFixedLeg<a class="headerlink" href="#swapfixedleg" title="Link to this heading"></a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="swapfixedleg">
+<h2>SwapFixedLeg<a class="headerlink" href="#swapfixedleg" title="Link to this heading"></a></h2>
+<p>The function computes the sum (T[i]-T[i-1])*N[i],
+for i=1…n</p>
+<section id="input-parameters">
+<h3>Input parameters<a class="headerlink" href="#input-parameters" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>name</p></th>
+<th class="head"><p>range</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>args[0]</p></td>
+<td><p>T[0]</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>args[1]</p></td>
+<td><p>T[1]</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>args[2]</p></td>
+<td><p>…</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>refs[0]</p></td>
+<td><p>notional*df</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>time points Ti=[T0,…Tn]   n&gt;=1, the minimal length of Ti vector is two: [T0,T1]</p></li>
+<li><p>notional process</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="swapfloatingleg">
+<h1>SwapFloatingLeg<a class="headerlink" href="#swapfloatingleg" title="Link to this heading"></a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="swapfloatingleg">
+<h2>SwapFloatingLeg<a class="headerlink" href="#swapfloatingleg" title="Link to this heading"></a></h2>
+<p>The reset (or fixing) time points are i=0,1,…n-1.
+At this moment the reference process value N[i] is checked, but the cash flow
+is only generated at time point i+1.</p>
+<section id="input-parameters">
+<h3>Input parameters<a class="headerlink" href="#input-parameters" title="Link to this heading"></a></h3>
+<p>To compute the leg value we need to know:</p>
+<ul class="simple">
+<li><p>notional values at points i=1…n, n values in total</p></li>
+<li><p>P_df(T_start,T[i]) discount factors at points i=1…n, n values in total</p></li>
+<li><p>P_L(T_start,T[i]) factors at points i=0…n, n+1 values in total</p></li>
+</ul>
+<p>L(T_start,T[i],T[i+1]) = (P’(T_start,T[i])/P’(T_start,T[i+1])-1) / (T[i+1]-T[i])</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>name</p></th>
+<th class="head"><p>range</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>args[0]</p></td>
+<td><p>T[0]</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>args[1]</p></td>
+<td><p>T[1]</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>args[2]</p></td>
+<td><p>…</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>refs[0]</p></td>
+<td><p>P_df(T_start,T[i])*N[i]</p></td>
+<td><p>notional*df</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>refs[1]</p></td>
+<td><p>P_L(T_start,T[i])</p></td>
+<td><p>For L() computation</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+<section id="zerocouponbond">
+<h1>ZeroCouponBond<a class="headerlink" href="#zerocouponbond" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="dto.ZeroCouponBond">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dto.</span></span><span class="sig-name descname"><span class="pre">ZeroCouponBond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">underlying</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dto.ZeroCouponBond" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<section class="tex2jax_ignore mathjax_ignore" id="zerocouponbond">
+<h2>ZeroCouponBond<a class="headerlink" href="#zerocouponbond" title="Link to this heading"></a></h2>
+<p>Requires a reference process (the underlying).</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Functions.html" class="btn btn-neutral float-left" title="Functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ComputationalGrid.html" class="btn btn-neutral float-right" title="Computational Grid" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022-2023, Alexander Zvyagin.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
