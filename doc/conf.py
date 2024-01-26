@@ -30,7 +30,26 @@ author = 'Alexander Zvyagin'
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
-    'myst_parser'
+    'myst_parser',
+    'sphinx.ext.doctest',
+    # 'm2r2'
+]
+
+myst_enable_extensions = [
+    "amsmath",
+    "attrs_inline",
+    "colon_fence",
+    "deflist",
+    "dollarmath",
+    "fieldlist",
+    "html_admonition",
+    "html_image",
+    # "linkify",
+    "replacements",
+    "smartquotes",
+    "strikethrough",
+    "substitution",
+    "tasklist",
 ]
 
 # Add any paths that contain templates here, relative to this directory.

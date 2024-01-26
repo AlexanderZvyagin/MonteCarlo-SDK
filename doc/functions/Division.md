@@ -33,6 +33,6 @@ A value 0 can be used (which essentially will allow division by zero).
 - args = [0.01]
 - refs = [2,5]
 
-Take a state[5] value, if abs(state[5])<=0.01 set the division result to NaN.
-Otherwise, computes state[2]/state[5] and saves the result into current state.
+Take a state[5] value, if abs(state[5])>=0.01 set the division result to state[2]/state[5].
+Otherwise, the resukts is NAN.
 

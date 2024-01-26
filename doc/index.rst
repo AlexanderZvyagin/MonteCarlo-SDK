@@ -15,8 +15,5 @@ Welcome to MonteCarloEngine's documentation!
    ComputationalGrid
    EvaluationGrid
    EvaluationResult
-
-.. automodule:: dto
-   :members:
-   :undoc-members:
-   :show-inheritance:
+   mcsdk
+   test-doctest

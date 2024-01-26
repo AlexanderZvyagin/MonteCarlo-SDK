@@ -8,7 +8,7 @@ The first two arguments are Xmin,Xmax. The rest arguments are Y-values on the
 regular grid between [Xmin,Xmax]. Thus, the total nummber of arguments
 must be at least 4. And the total number of interpolation points is narg-2.
 
-### Example: args=[1,2,3,4,5]
+## Example: args=[1,2,3,4,5]
 there are three interpolation points (5-2=3):
 
 - Xmin = 1.0
