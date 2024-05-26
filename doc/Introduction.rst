@@ -23,4 +23,4 @@ the system of SDE and the API to solve it.
 The software access is provided by a RESTful API
 (https://en.wikipedia.org/wiki/Representational_state_transfer).
 The software development kit SDK (with examnples) can be found in
-the repository https://github.com/WarShoe/mcsdk.
+https://github.com/AlexanderZvyagin/MonteCarlo-SDK.
