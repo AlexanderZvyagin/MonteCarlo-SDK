@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Polynom &mdash; MonteCarloEngine  documentation</title>
+  <title>Choice &mdash; MonteCarloEngine  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -67,9 +67,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Polynom</li>
+      <li class="breadcrumb-item active">Choice</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/functions/Polynom.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/functions/Choice.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -77,44 +77,62 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section class="tex2jax_ignore mathjax_ignore" id="polynom">
-<h1>Polynom<a class="headerlink" href="#polynom" title="Link to this heading"></a></h1>
-<p>The function will compute a polynom of an order N.</p>
-<p>The number N is equal to the number of arguments passed to the Polynom updater.
-The minimal number is 1, and in this case a constant function is defined.
-Otherwise it will compute a0+a1<em>x+a2</em>x*x+…, where ‘x’-is the
-polynom argument (see below) and a0,a1… are arguments of the
-function.</p>
-<p>The polynom argument ‘x’ is passed as a ‘reference’, thus the Polynom function expects
-strictly one reference and 1…N arguments. If Xref=-1, then the argument is a current MC time.
-Otherwise, it is a state number which is used as an ‘x’-argument.</p>
-<p>Examples:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="choice">
+<h1>Choice<a class="headerlink" href="#choice" title="Link to this heading"></a></h1>
+<p>The function accepts no arguments and a list of references of length n+1, n&gt;=0.</p>
+<p>A state value ferom the first reference (which is a mandatory) is converted into an int value <em>m</em>.</p>
+<p>If the resulted integer <em>m</em> is between 1 and <em>n</em>,
+then the function value will be set to a state of the referenced function.
+Otherwise (the converted argument is not a valid index in the refs),
+the Choice function state is set to not-a-number (NAN).</p>
+<section id="initial-state">
+<h2>Initial state<a class="headerlink" href="#initial-state" title="Link to this heading"></a></h2>
+<p>The function has no initial state.</p>
+</section>
+<section id="arguments">
+<h2>Arguments<a class="headerlink" href="#arguments" title="Link to this heading"></a></h2>
+<p>The function does not have any arguments.</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
 <table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="head"><p>Polynom</p></th>
-<th class="head"><p>refs</p></th>
-<th class="head"><p>args</p></th>
-<th class="head"><p>Comment</p></th>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>name</p></th>
+<th class="head"><p>description</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>P(t) = 44</p></td>
-<td><p>[-1]</p></td>
-<td><p>[44]</p></td>
-<td><p>A constant function</p></td>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Sindex</p></td>
+<td><p>index</p></td>
 </tr>
-<tr class="row-odd"><td><p>P(t) = 1+2*t^4</p></td>
-<td><p>[-1]</p></td>
-<td><p>[1,0,0,0,2]</p></td>
-<td><p>use ref=-1 for the time argument</p></td>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>S0</p></td>
+<td><p>state of index=0</p></td>
 </tr>
-<tr class="row-even"><td><p>P(x) = -x^2</p></td>
-<td><p>[123]</p></td>
-<td><p>[0,0,-1]</p></td>
-<td><p>assuming that state 123 holds the ‘x’ argument</p></td>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>S1</p></td>
+<td><p>state of index=1</p></td>
+</tr>
+<tr class="row-odd"><td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+</tr>
+<tr class="row-even"><td><p>n</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
 </tr>
 </tbody>
 </table>
+</section>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h2>
+<p>Consider a state I which is an indicator function, taking values only 0 and 1.
+In this case, Choice(I,S0,S1) will return a state value of
+S0 if round(I)==0 and S1 if round(I)==1.
+If round(I) is not 0 or 1, the Choice state will be set to NAN.</p>
+</section>
 </section>
 
 

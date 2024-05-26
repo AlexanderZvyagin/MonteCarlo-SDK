@@ -1,17 +1,17 @@
 
 # Polynom
 
-The updater will compute a polynom of order N.
+The function will compute a polynom of an order N.
 
 The number N is equal to the number of arguments passed to the Polynom updater.
 The minimal number is 1, and in this case a constant function is defined.
 Otherwise it will compute a0+a1*x+a2*x*x+..., where 'x'-is the
-polynom argumnt (see below) and a0,a1... are arguments of the
+polynom argument (see below) and a0,a1... are arguments of the
 function.
 
-The polynopm argument 'x' is passed as 'reference', thus the updeter expects
-strictly one reference and 1...N arguments. If Xref=-1, then the argument is current MC time.
-Otherwise, it is a state number to which will be used as an 'x'-argument.
+The polynom argument 'x' is passed as a 'reference', thus the Polynom function expects
+strictly one reference and 1...N arguments. If Xref=-1, then the argument is a current MC time.
+Otherwise, it is a state number which is used as an 'x'-argument.
 
 Examples: 
 | Polynom | refs | args | Comment |
