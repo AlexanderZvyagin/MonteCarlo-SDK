@@ -1,4 +1,6 @@
-import os, requests
+import os, requests, sys
+sys.path.append(os.getcwd()+f'/../output/dto/python')
+import dto
 
 def main(server,outdir,index_file='f'):
     os.makedirs(outdir,exist_ok=True)
@@ -10,15 +12,22 @@ def main(server,outdir,index_file='f'):
     with open(f'{index_file}.rst','w') as index:
         for f in functions:
             name = f['name']
+
+            autodoc = ''
+            if hasattr(dto,name):
+                autodoc = f'.. autoclass:: dto.{name}'
+            
             index.write(f'''
 {name}
 =====================================================
 
-.. autoclass:: dto.{name}
+{autodoc}
 
 .. toctree::
 
-   functions/{name}.md
+.. include:: functions/{name}.md
+   :parser: myst_parser.sphinx_
+
 ''')
 
 if __name__ == '__main__':
