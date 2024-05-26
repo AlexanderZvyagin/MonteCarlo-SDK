@@ -32,4 +32,4 @@ def main(server,outdir,index_file='f'):
 
 if __name__ == '__main__':
     server = f'http://{os.getenv("SERVER_ADDRESS","az.hopto.org")}:{os.getenv("SERVER_PORT","8000")}'
-    main(server,'functions')
+    main(server,'functions','functions')
