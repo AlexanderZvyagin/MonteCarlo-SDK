@@ -23,6 +23,7 @@ import {
     Division,
     HistogramAxis,
     Histogram,
+    Histogram2,
     EvaluationPoint,
     Model,
     Result,
@@ -648,6 +649,44 @@ function random_optional_list_Histogram () : Histogram[]|undefined {
 }
 
 
+function random_Histogram2 () : Histogram2 {
+    return new Histogram2 (
+        random_HistogramAxis(),
+        random_optional_HistogramAxis(),
+        random_optional_HistogramAxis(),
+        random_optional_int(),
+        random_optional_int(),
+        random_optional_int(),
+        random_optional_string(),
+        random_optional_list_float()
+
+    );
+}
+
+
+function random_optional_Histogram2 () : Histogram2|undefined {
+    if(yes_no())
+        return undefined;
+    return random_Histogram2 ();
+}
+
+
+function random_list_Histogram2 (min:number = 0, max:number = 3) : Histogram2[] {
+    const size:number = Math.floor(min + Math.random()*(max-min));
+    const list:Histogram2[] = [];
+    for(let i=0; i<size; i++)
+        list.push(random_Histogram2());
+    return list;
+}
+
+
+function random_optional_list_Histogram2 () : Histogram2[]|undefined {
+    if(yes_no())
+        return undefined;
+    return random_list_Histogram2 ();
+}
+
+
 function random_EvaluationPoint () : EvaluationPoint {
     return new EvaluationPoint (
         random_float(),
@@ -762,6 +801,7 @@ function random_EvaluationResults () : EvaluationResults {
         random_list_float(),
         random_list_int(),
         random_list_Histogram(),
+        random_list_Histogram2(),
         random_optional_Model()
 
     );
@@ -1052,6 +1092,18 @@ function create (struct_name:string, file_name:string){
             throw new Error(`${struct_name} objects are not equal.`);
 
 
+    } else if (struct_name === 'Histogram2') {
+        const obj1: Histogram2 = random_Histogram2();
+        const j: object = {};
+        dto.Histogram2_to_json(j,obj1);
+
+        fs.writeFileSync (file_name, JSON.stringify (j));
+        const obj2: Histogram2 = new Histogram2();
+        dto.Histogram2_from_json(j,obj2);
+        if(!dto.Histogram2_equal(obj1,obj2))
+            throw new Error(`${struct_name} objects are not equal.`);
+
+
     } else if (struct_name === 'EvaluationPoint') {
         const obj1: EvaluationPoint = random_EvaluationPoint();
         const j: object = {};
@@ -1223,6 +1275,12 @@ function convert (struct_name:string, file1_name:string, file2_name:string){
     } else if (struct_name === 'Histogram') {
         const jstr: string = fs.readFileSync(file1_name,'utf-8');
         const obj: Histogram = dto.Histogram_fromJSON_string(jstr);
+        fs.writeFileSync(file2_name, JSON.stringify(obj));
+
+
+    } else if (struct_name === 'Histogram2') {
+        const jstr: string = fs.readFileSync(file1_name,'utf-8');
+        const obj: Histogram2 = dto.Histogram2_fromJSON_string(jstr);
         fs.writeFileSync(file2_name, JSON.stringify(obj));
 
 
@@ -1409,6 +1467,15 @@ function compare (struct_name:string, file1_name:string, file2_name:string){
         const obj1: Histogram = dto.Histogram_fromJSON_string(jstr1);
         const obj2: Histogram = dto.Histogram_fromJSON_string(jstr2);
         if(!dto.Histogram_equal(obj1,obj2))
+            throw new Error(`${struct_name} objects are not equal.`);
+
+
+    } else if (struct_name === 'Histogram2') {
+        const jstr1: string = fs.readFileSync(file1_name,'utf-8');
+        const jstr2: string = fs.readFileSync(file2_name,'utf-8');
+        const obj1: Histogram2 = dto.Histogram2_fromJSON_string(jstr1);
+        const obj2: Histogram2 = dto.Histogram2_fromJSON_string(jstr2);
+        if(!dto.Histogram2_equal(obj1,obj2))
             throw new Error(`${struct_name} objects are not equal.`);
 
 

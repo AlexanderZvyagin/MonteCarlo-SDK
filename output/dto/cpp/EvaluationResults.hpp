@@ -20,6 +20,7 @@ using json = nlohmann::json;
 
 #include "Result.hpp"
 #include "Histogram.hpp"
+#include "Histogram2.hpp"
 #include "Model.hpp"
 namespace dto {
 class EvaluationResults;
@@ -35,6 +36,7 @@ public:
     std::vector<float> time_points;
     std::vector<int> time_steps;
     std::vector<Histogram> histograms;
+    std::vector<Histogram2> histograms2;
     std::optional<Model> model;
 
     
@@ -47,6 +49,7 @@ public:
         std::vector<float> time_points = {},
         std::vector<int> time_steps = {},
         std::vector<Histogram> histograms = {},
+        std::vector<Histogram2> histograms2 = {},
         std::optional<Model> model = {}
     )
     : names (
@@ -72,6 +75,9 @@ public:
     )
     , histograms (
         histograms
+    )
+    , histograms2 (
+        histograms2
     )
     , model (
         model
@@ -127,6 +133,7 @@ public:
         if (time_points != other.time_points) return false;
         if (time_steps != other.time_steps) return false;
         if (histograms != other.histograms) return false;
+        if (histograms2 != other.histograms2) return false;
         if (model != other.model) return false;
         return true;
     }
@@ -146,6 +153,7 @@ void to_json(json &j, const EvaluationResults &obj) try {
     j["time_points"] = obj.time_points;
     j["time_steps"] = obj.time_steps;
     j["histograms"] = obj.histograms;
+    j["histograms2"] = obj.histograms2;
     if(obj.model.has_value())
         j["model"] = obj.model.value();
 } catch (const std::exception &e) {
@@ -168,6 +176,7 @@ void from_json(const json &j, EvaluationResults &obj) try {
     j.at("time_points").get_to(obj.time_points);
     j.at("time_steps").get_to(obj.time_steps);
     j.at("histograms").get_to(obj.histograms);
+    j.at("histograms2").get_to(obj.histograms2);
     if(auto it=j.find("model"); it!=j.end() and !it->is_null())
         obj.model = *it;
 } catch (const std::exception &e) {

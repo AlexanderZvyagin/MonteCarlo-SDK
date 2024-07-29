@@ -821,6 +821,83 @@ void from_json(const json &j, std::vector<Histogram> &u) {
         }
     }))
 
+
+        # Type            =  0,
+        # Flags           =  1,
+        
+        # ExtractionPoint =  2,
+        # TimeStep        =  3,
+
+        # Xstate          =  4,
+        # Xbins           =  5,
+        # Xmin            =  6,
+        # Xmax            =  7,
+
+        # Ystate          =  8,
+        # Ybins           =  9,
+        # Ymin            = 10,
+        # Ymax            = 11,
+
+        # Zstate          = 12,
+        # Zbins           = 13,
+        # Zmin            = 14,
+        # Zmax            = 15,
+
+        # TitleBegin      = 16,
+        # TitleEnd        = 32,
+        # TitleMaxLength  = (TitleEnd-TitleBegin)*sizeof(float)-1, // c-style string! Remember about the trailing 0.
+
+        # DataStart       = TitleEnd
+
+
+
+    obj = Struct('Histogram2')
+    Histogram2 = obj
+    obj.AddAttribute(Variable('AxisX',HistogramAxis))
+    obj.AddAttribute(Variable('AxisY',HistogramAxis,optional=True))
+    obj.AddAttribute(Variable('AxisZ',HistogramAxis,optional=True))
+    obj.AddAttribute(Variable('Flags','int',optional=True))
+    obj.AddAttribute(Variable('EvaluationPoint','int',optional=True))
+    obj.AddAttribute(Variable('TimeStep','int',optional=True))
+    obj.AddAttribute(Variable('Title','string',optional=True))
+    obj.AddAttribute(Variable('Bins','float',list=True,optional=True))
+
+    obj.methods.append(Function (
+        obj.name,
+        'constructor',
+        args = [
+            Variable('AxisX',HistogramAxis,defval=Variable('HistogramAxis()',HistogramAxis)),
+            Variable('AxisY',HistogramAxis,optional=True),
+            Variable('AxisZ',HistogramAxis,optional=True),
+            Variable('Flags','int',optional=True),
+            Variable('EvaluationPoint','int',optional=True),
+            Variable('TimeStep','int',optional=True),
+            Variable('Title','string',optional=True),
+            Variable('Bins','float',optional=True,list=True),
+        ],
+        mapping = [
+            ('AxisX',[Variable('AxisX')]),
+            ('AxisY',[Variable('AxisY')]),
+            ('AxisZ',[Variable('AxisZ')]),
+            ('Flags',[Variable('Flags')]),
+            ('EvaluationPoint',[Variable('EvaluationPoint')]),
+            ('TimeStep',[Variable('TimeStep')]),
+            ('Title',[Variable('Title')]),
+            ('Bins',[Variable('Bins')]),
+        ]
+    ))
+    objs.append(obj)
+
+    objs.append(CodeBlock(code={
+        'cpp': {'''
+void from_json(const json &j, std::vector<Histogram> &u) {
+    for(auto v: j)
+        u.push_back(v);
+}
+'''
+        }
+    }))
+
     obj = Struct ('EvaluationPoint')
     EvaluationPoint = obj
     obj.AddAttribute(Variable('time','float'))
@@ -1009,6 +1086,7 @@ return this.skewness;
     obj.AddAttribute(Variable('time_points','float',list=True))
     obj.AddAttribute(Variable('time_steps','int',list=True))
     obj.AddAttribute(Variable('histograms',Histogram,list=True))
+    obj.AddAttribute(Variable('histograms2',Histogram2,list=True))
     obj.AddAttribute(Variable('model',Model,optional=True))
     obj.methods.append(Function (
         obj.name,
@@ -1022,6 +1100,7 @@ return this.skewness;
             Variable('time_points','float',[],list=True),
             Variable('time_steps','int',[],list=True),
             Variable('histograms',Histogram,[],list=True),
+            Variable('histograms2',Histogram2,[],list=True),
             Variable('model',Model,None,optional=True),
         ],
         mapping = [
@@ -1033,6 +1112,7 @@ return this.skewness;
             ('time_points',[Variable('time_points')]),
             ('time_steps',[Variable('time_steps')]),
             ('histograms',[Variable('histograms')]),
+            ('histograms2',[Variable('histograms2')]),
             ('model',[Variable('model')]),
         ]
     ))

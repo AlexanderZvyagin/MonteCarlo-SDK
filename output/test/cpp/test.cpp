@@ -22,6 +22,7 @@
 #include "Division.hpp"
 #include "HistogramAxis.hpp"
 #include "Histogram.hpp"
+#include "Histogram2.hpp"
 #include "EvaluationPoint.hpp"
 #include "Model.hpp"
 #include "Model.hpp"
@@ -840,6 +841,51 @@ std::optional<std::vector<Histogram>> random_optional_list_Histogram (int min, i
     return random_list_Histogram (min,max);
 }
 
+// Forward declarations for Histogram2
+class Histogram2;
+Histogram2 random_Histogram2 (void);
+std::optional<Histogram2> random_optional_Histogram2 (void);
+std::vector<Histogram2> random_list_Histogram2 (int min=0, int max=3);
+std::optional<std::vector<Histogram2>> random_optional_list_Histogram2 (int min=0, int max=3);
+
+
+Histogram2 random_Histogram2 (void) {
+    return Histogram2 (
+        random_HistogramAxis(),
+        random_optional_HistogramAxis(),
+        random_optional_HistogramAxis(),
+        random_optional_int(),
+        random_optional_int(),
+        random_optional_int(),
+        random_optional_string(),
+        random_optional_list_float()
+
+    );
+}
+
+
+std::optional<Histogram2> random_optional_Histogram2 (void) {
+    if(yes_no())
+        return {};
+    return random_Histogram2 ();
+}
+
+
+std::vector<Histogram2> random_list_Histogram2 (int min, int max) {
+    const auto size = random_int(min,max);
+    std::vector<Histogram2> list;
+    for(int i=0; i<size; i++)
+        list.push_back(random_Histogram2());
+    return list;
+}
+
+
+std::optional<std::vector<Histogram2>> random_optional_list_Histogram2 (int min, int max) {
+    if(yes_no())
+        return {};
+    return random_list_Histogram2 (min,max);
+}
+
 // Forward declarations for EvaluationPoint
 class EvaluationPoint;
 EvaluationPoint random_EvaluationPoint (void);
@@ -1039,6 +1085,7 @@ EvaluationResults random_EvaluationResults (void) {
         random_list_float(),
         random_list_int(),
         random_list_Histogram(),
+        random_list_Histogram2(),
         random_optional_Model()
 
     );
@@ -1375,6 +1422,19 @@ int main (int argc, const char **argv) try {
                 throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
 
 
+        } else if (struct_name == "Histogram2") {
+            auto obj1 = dto::random_Histogram2();
+            std::ofstream(file1_path) << dto::Histogram2_to_json_string(obj1);
+            auto obj2 =
+                dto::Histogram2_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            if(obj1!=obj2)
+                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
+
+
         } else if (struct_name == "EvaluationPoint") {
             auto obj1 = dto::random_EvaluationPoint();
             std::ofstream(file1_path) << dto::EvaluationPoint_to_json_string(obj1);
@@ -1679,6 +1739,19 @@ int main (int argc, const char **argv) try {
             )));
             std::ofstream out (file2_path);
             out << Histogram_to_json_string(obj);
+            if(!out)
+                throw std::runtime_error("Operation 'convert': IO error on " + struct_name);
+
+
+        } else if (struct_name == "Histogram2") {
+            auto obj =
+                dto::Histogram2_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            std::ofstream out (file2_path);
+            out << Histogram2_to_json_string(obj);
             if(!out)
                 throw std::runtime_error("Operation 'convert': IO error on " + struct_name);
 
@@ -2045,6 +2118,23 @@ int main (int argc, const char **argv) try {
             )));
             auto obj2 =
                 dto::Histogram_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file2_path
+            )));
+            if(obj1!=obj2)
+                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
+
+
+        } else if (struct_name == "Histogram2") {
+            auto obj1 =
+                dto::Histogram2_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            auto obj2 =
+                dto::Histogram2_from_json (
                     json::parse (
                         std::ifstream (
                             file2_path
