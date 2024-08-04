@@ -586,7 +586,8 @@ function random_HistogramAxis () : HistogramAxis {
         random_int(),
         random_int(),
         random_float(),
-        random_float()
+        random_float(),
+        random_string()
 
     );
 }

@@ -4,7 +4,7 @@ from cgdto import *
 from math import nan
 
 def schema_version () -> str:
-    return 'MonteCarlo SDK version (0.7.0)'
+    return 'MonteCarlo SDK version (0.7.1)'
 
 def V0_Model (Updater,EvaluationPoint):
     obj = Struct ('Model',namespace='V0',default_version=False)
@@ -767,8 +767,9 @@ this.args = [...[xmin,xmax],...y];
     HistogramAxis = obj
     obj.AddAttribute(Variable('state','int'))
     obj.AddAttribute(Variable('nbins','int'))
-    obj.AddAttribute(Variable('min','float'))
-    obj.AddAttribute(Variable('max','float'))
+    obj.AddAttribute(Variable('min','float',optional=True))
+    obj.AddAttribute(Variable('max','float',optional=True))
+    obj.AddAttribute(Variable('title','string',optional=True))
     obj.methods.append(Function (
         obj.name,
         'constructor',
@@ -777,12 +778,14 @@ this.args = [...[xmin,xmax],...y];
             Variable('nbins','int',-88),
             Variable('min'  ,'float',-88), # FIXME: cannot use math.nan for the moment
             Variable('max'  ,'float',-88), # FIXME: cannot use math.nan for the moment
+            Variable('title'  ,'string',''), # FIXME: cannot use math.nan for the moment
         ],
         mapping = [
             ('state',[Variable('state')]),
             ('nbins',[Variable('nbins')]),
-            ('min',[Variable('min')]),
-            ('max',[Variable('max')]),
+            ('min',  [Variable('min'  )]),
+            ('max',  [Variable('max'  )]),
+            ('title',[Variable('title')]),
         ]
     ))
     objs.append(obj)
