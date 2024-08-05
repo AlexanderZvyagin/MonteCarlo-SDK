@@ -48,3 +48,44 @@ def find(results:mcsdk.EvaluationResults,point:int,stateX:int,stateY:int|None=No
 def plot(results:mcsdk.EvaluationResults,point:int,stateX:int,stateY:int|None=None,histogram_index=0):
     find(results,point,stateX,stateY,histogram_index)
     plt.show()
+
+import pandas as pd
+def show_histograms2(results):
+    def add_axis(d,name,a):
+        return {f'{name} title':a.title,f'{name} bins':a.nbins,f'{name} min':a.min,f'{name} max':a.max}
+    
+    def add_histogram(h):
+        d = {'Title':h.Title,'TimeStep':h.TimeStep,'EPoint':h.EvaluationPoint}
+        for a,xyz in [(h.AxisX,'X'),(h.AxisY,'Y'),(h.AxisZ,'Z')]:
+            if a:
+                d = d | add_axis(d,xyz,a)
+        return d
+    
+    return pd.DataFrame([add_histogram(h) for h in results.histograms2])
+
+def plot2(h):
+    fig, ax = plt.subplots(tight_layout=True)
+    ax.set_title(h.Title)
+
+    if not h.AxisY:
+        edges = linspace(h.AxisX.min,h.AxisX.max,h.AxisX.nbins)
+        n, bins, patches = ax.hist(edges[:-1], edges, weights=h.Bins, density=True)
+    else:
+        # 2D histogram
+        x_edges = linspace(h.AxisX.min,h.AxisX.max,h.AxisX.nbins)
+        y_edges = linspace(h.AxisY.min,h.AxisY.max,h.AxisY.nbins)
+
+        vx = []
+        vy = []
+        for y in y_edges[:-1]:
+            for x in x_edges[:-1]:
+                vx.append(x)
+                vy.append(y)
+
+        ax.hist2d(vx,vy,bins=[x_edges,y_edges],weights=h.Bins,cmap = plt.colormaps["winter"])
+        bins = None
+        ax.set_ylabel(h.AxisY.title)
+
+    ax.set_xlabel(h.AxisX.title)
+    plt.show()
+    # return fig,ax,bins

@@ -4,6 +4,6 @@ logging.basicConfig (
     level = logging.INFO
 )
 import mcsdk as sdk
-from plot import plot
+from plot import *
 import os
 server = f'http://{os.getenv("SERVER_ADDRESS","az.hopto.org")}:{os.getenv("SERVER_PORT","8001")}'
