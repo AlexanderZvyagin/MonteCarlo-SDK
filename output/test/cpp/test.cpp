@@ -898,7 +898,7 @@ std::optional<std::vector<EvaluationPoint>> random_optional_list_EvaluationPoint
 EvaluationPoint random_EvaluationPoint (void) {
     return EvaluationPoint (
         random_float(),
-        random_optional_list_Histogram()
+        random_optional_list_Histogram2()
 
     );
 }

@@ -4,7 +4,7 @@ from cgdto import *
 from math import nan
 
 def schema_version () -> str:
-    return 'MonteCarlo SDK version (0.7.1)'
+    return 'MonteCarlo SDK version (0.8.0)'
 
 def V0_Model (Updater,EvaluationPoint):
     obj = Struct ('Model',namespace='V0',default_version=False)
@@ -824,36 +824,6 @@ void from_json(const json &j, std::vector<Histogram> &u) {
         }
     }))
 
-
-        # Type            =  0,
-        # Flags           =  1,
-        
-        # ExtractionPoint =  2,
-        # TimeStep        =  3,
-
-        # Xstate          =  4,
-        # Xbins           =  5,
-        # Xmin            =  6,
-        # Xmax            =  7,
-
-        # Ystate          =  8,
-        # Ybins           =  9,
-        # Ymin            = 10,
-        # Ymax            = 11,
-
-        # Zstate          = 12,
-        # Zbins           = 13,
-        # Zmin            = 14,
-        # Zmax            = 15,
-
-        # TitleBegin      = 16,
-        # TitleEnd        = 32,
-        # TitleMaxLength  = (TitleEnd-TitleBegin)*sizeof(float)-1, // c-style string! Remember about the trailing 0.
-
-        # DataStart       = TitleEnd
-
-
-
     obj = Struct('Histogram2')
     Histogram2 = obj
     obj.AddAttribute(Variable('AxisX',HistogramAxis))
@@ -904,13 +874,13 @@ void from_json(const json &j, std::vector<Histogram> &u) {
     obj = Struct ('EvaluationPoint')
     EvaluationPoint = obj
     obj.AddAttribute(Variable('time','float'))
-    obj.AddAttribute(Variable('histograms',Histogram,list=True,optional=True))
+    obj.AddAttribute(Variable('histograms',Histogram2,list=True,optional=True))
     obj.methods.append(Function (
         obj.name,
         'constructor',
         args = [
             Variable('time','float',nan),
-            Variable('histograms',Histogram,None,optional=True,list=True),
+            Variable('histograms',Histogram2,None,optional=True,list=True),
         ],
         mapping = [
             ('time',[Variable('time')]),
@@ -939,7 +909,7 @@ return this.time;
     obj.methods.append(Function (
         'Add',
         EvaluationPoint,
-        args = [Variable('histogram',Histogram)],
+        args = [Variable('histogram',Histogram2)],
         code = {
             'python':
 '''
@@ -951,7 +921,7 @@ return self
             'cpp':
 '''
 if( not histograms.has_value() )
-    histograms = std::vector<Histogram> ();
+    histograms = std::vector<Histogram2> ();
 histograms.value().push_back(histogram);
 return *this;
 ''',

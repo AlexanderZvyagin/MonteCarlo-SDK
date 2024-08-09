@@ -527,7 +527,7 @@ def random_optional_list_Histogram2 (min:int = 0, max:int = 3) -> list[Histogram
 def random_EvaluationPoint ():
     return EvaluationPoint (
         random_float(),
-        random_optional_list_Histogram()
+        random_optional_list_Histogram2()
 
     )
 

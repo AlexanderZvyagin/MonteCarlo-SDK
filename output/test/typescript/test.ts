@@ -691,7 +691,7 @@ function random_optional_list_Histogram2 () : Histogram2[]|undefined {
 function random_EvaluationPoint () : EvaluationPoint {
     return new EvaluationPoint (
         random_float(),
-        random_optional_list_Histogram()
+        random_optional_list_Histogram2()
 
     );
 }
