@@ -762,7 +762,6 @@ this.args = [...[xmin,xmax],...y];
     ))
     objs.append(obj)
 
-
     obj = Struct('HistogramAxis')
     HistogramAxis = obj
     obj.AddAttribute(Variable('state','int'))
@@ -789,40 +788,6 @@ this.args = [...[xmin,xmax],...y];
         ]
     ))
     objs.append(obj)
-
-    obj = Struct('Histogram')
-    Histogram = obj
-    obj.AddAttribute(Variable('ax',HistogramAxis))
-    obj.AddAttribute(Variable('ay',HistogramAxis,optional=True))
-    obj.AddAttribute(Variable('evaluation_point','int',optional=True))
-    obj.AddAttribute(Variable('bins','float',list=True,optional=True))
-    obj.methods.append(Function (
-        obj.name,
-        'constructor',
-        args = [
-            Variable('ax',HistogramAxis,Variable('HistogramAxis()',HistogramAxis)),
-            Variable('ay',HistogramAxis,None,optional=True),
-            Variable('evaluation_point','int',None,optional=True),
-            Variable('bins','float',None,optional=True,list=True)
-        ],
-        mapping = [
-            ('ax',[Variable('ax')]),
-            ('ay',[Variable('ay')]),
-            ('evaluation_point',[Variable('evaluation_point')]),
-            ('bins',[Variable('bins')]),
-        ]
-    ))
-    objs.append(obj)
-
-    objs.append(CodeBlock(code={
-        'cpp': {'''
-void from_json(const json &j, std::vector<Histogram> &u) {
-    for(auto v: j)
-        u.push_back(v);
-}
-'''
-        }
-    }))
 
     obj = Struct('Histogram2')
     Histogram2 = obj
@@ -1058,7 +1023,6 @@ return this.skewness;
     obj.AddAttribute(Variable('skewness','float',list=True))
     obj.AddAttribute(Variable('time_points','float',list=True))
     obj.AddAttribute(Variable('time_steps','int',list=True))
-    obj.AddAttribute(Variable('histograms',Histogram,list=True))
     obj.AddAttribute(Variable('histograms2',Histogram2,list=True))
     obj.AddAttribute(Variable('model',Model,optional=True))
     obj.methods.append(Function (
@@ -1072,7 +1036,6 @@ return this.skewness;
             Variable('skewness','float',[],list=True),
             Variable('time_points','float',[],list=True),
             Variable('time_steps','int',[],list=True),
-            Variable('histograms',Histogram,[],list=True),
             Variable('histograms2',Histogram2,[],list=True),
             Variable('model',Model,None,optional=True),
         ],
@@ -1084,7 +1047,6 @@ return this.skewness;
             ('skewness',[Variable('skewness')]),
             ('time_points',[Variable('time_points')]),
             ('time_steps',[Variable('time_steps')]),
-            ('histograms',[Variable('histograms')]),
             ('histograms2',[Variable('histograms2')]),
             ('model',[Variable('model')]),
         ]
