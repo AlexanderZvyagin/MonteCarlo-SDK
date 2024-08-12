@@ -789,8 +789,8 @@ this.args = [...[xmin,xmax],...y];
     ))
     objs.append(obj)
 
-    obj = Struct('Histogram2')
-    Histogram2 = obj
+    obj = Struct('Histogram')
+    Histogram = obj
     obj.AddAttribute(Variable('AxisX',HistogramAxis))
     obj.AddAttribute(Variable('AxisY',HistogramAxis,optional=True))
     obj.AddAttribute(Variable('AxisZ',HistogramAxis,optional=True))
@@ -839,13 +839,13 @@ void from_json(const json &j, std::vector<Histogram> &u) {
     obj = Struct ('EvaluationPoint')
     EvaluationPoint = obj
     obj.AddAttribute(Variable('time','float'))
-    obj.AddAttribute(Variable('histograms',Histogram2,list=True,optional=True))
+    obj.AddAttribute(Variable('histograms',Histogram,list=True,optional=True))
     obj.methods.append(Function (
         obj.name,
         'constructor',
         args = [
             Variable('time','float',nan),
-            Variable('histograms',Histogram2,None,optional=True,list=True),
+            Variable('histograms',Histogram,None,optional=True,list=True),
         ],
         mapping = [
             ('time',[Variable('time')]),
@@ -874,7 +874,7 @@ return this.time;
     obj.methods.append(Function (
         'Add',
         EvaluationPoint,
-        args = [Variable('histogram',Histogram2)],
+        args = [Variable('histogram',Histogram)],
         code = {
             'python':
 '''
@@ -886,7 +886,7 @@ return self
             'cpp':
 '''
 if( not histograms.has_value() )
-    histograms = std::vector<Histogram2> ();
+    histograms = std::vector<Histogram> ();
 histograms.value().push_back(histogram);
 return *this;
 ''',
@@ -1023,7 +1023,7 @@ return this.skewness;
     obj.AddAttribute(Variable('skewness','float',list=True))
     obj.AddAttribute(Variable('time_points','float',list=True))
     obj.AddAttribute(Variable('time_steps','int',list=True))
-    obj.AddAttribute(Variable('histograms2',Histogram2,list=True))
+    obj.AddAttribute(Variable('histograms',Histogram,list=True))
     obj.AddAttribute(Variable('model',Model,optional=True))
     obj.methods.append(Function (
         obj.name,
@@ -1036,7 +1036,7 @@ return this.skewness;
             Variable('skewness','float',[],list=True),
             Variable('time_points','float',[],list=True),
             Variable('time_steps','int',[],list=True),
-            Variable('histograms2',Histogram2,[],list=True),
+            Variable('histograms',Histogram,[],list=True),
             Variable('model',Model,None,optional=True),
         ],
         mapping = [
@@ -1047,7 +1047,7 @@ return this.skewness;
             ('skewness',[Variable('skewness')]),
             ('time_points',[Variable('time_points')]),
             ('time_steps',[Variable('time_steps')]),
-            ('histograms2',[Variable('histograms2')]),
+            ('histograms',[Variable('histograms')]),
             ('model',[Variable('model')]),
         ]
     ))

@@ -25,38 +25,62 @@ std::string Histogram_to_json_string(const Histogram &obj);
 class Histogram {
 public:
 
-    HistogramAxis ax;
-    std::optional<HistogramAxis> ay;
-    std::optional<int> evaluation_point;
-    std::optional<std::vector<float>> bins;
+    HistogramAxis AxisX;
+    std::optional<HistogramAxis> AxisY;
+    std::optional<HistogramAxis> AxisZ;
+    std::optional<int> Flags;
+    std::optional<int> EvaluationPoint;
+    std::optional<int> TimeStep;
+    std::optional<std::string> Title;
+    std::optional<std::vector<float>> Bins;
 
     
     Histogram (
-        HistogramAxis ax = HistogramAxis(),
-        std::optional<HistogramAxis> ay = {},
-        std::optional<int> evaluation_point = {},
-        std::optional<std::vector<float>> bins = {}
+        HistogramAxis AxisX = HistogramAxis(),
+        std::optional<HistogramAxis> AxisY = {},
+        std::optional<HistogramAxis> AxisZ = {},
+        std::optional<int> Flags = {},
+        std::optional<int> EvaluationPoint = {},
+        std::optional<int> TimeStep = {},
+        std::optional<std::string> Title = {},
+        std::optional<std::vector<float>> Bins = {}
     )
-    : ax (
-        ax
+    : AxisX (
+        AxisX
     )
-    , ay (
-        ay
+    , AxisY (
+        AxisY
     )
-    , evaluation_point (
-        evaluation_point
+    , AxisZ (
+        AxisZ
     )
-    , bins (
-        bins
+    , Flags (
+        Flags
+    )
+    , EvaluationPoint (
+        EvaluationPoint
+    )
+    , TimeStep (
+        TimeStep
+    )
+    , Title (
+        Title
+    )
+    , Bins (
+        Bins
     )
     {
     }
 
     bool operator == (const Histogram &other) const {
-        if (ax != other.ax) return false;
-        if (ay != other.ay) return false;
-        if (evaluation_point != other.evaluation_point) return false;
-        if (bins != other.bins) return false;
+        if (AxisX != other.AxisX) return false;
+        if (AxisY != other.AxisY) return false;
+        if (AxisZ != other.AxisZ) return false;
+        if (Flags != other.Flags) return false;
+        if (EvaluationPoint != other.EvaluationPoint) return false;
+        if (TimeStep != other.TimeStep) return false;
+        if (Title != other.Title) return false;
+        if (Bins != other.Bins) return false;
         return true;
     }
     bool operator != (const Histogram &other) const {return not(*this==other);}
@@ -67,13 +91,21 @@ public:
 inline
 void to_json(json &j, const Histogram &obj) try {
     j = json::object();
-    j["ax"] = obj.ax;
-    if(obj.ay.has_value())
-        j["ay"] = obj.ay.value();
-    if(obj.evaluation_point.has_value())
-        j["evaluation_point"] = obj.evaluation_point.value();
-    if(obj.bins.has_value())
-        j["bins"] = obj.bins.value();
+    j["AxisX"] = obj.AxisX;
+    if(obj.AxisY.has_value())
+        j["AxisY"] = obj.AxisY.value();
+    if(obj.AxisZ.has_value())
+        j["AxisZ"] = obj.AxisZ.value();
+    if(obj.Flags.has_value())
+        j["Flags"] = obj.Flags.value();
+    if(obj.EvaluationPoint.has_value())
+        j["EvaluationPoint"] = obj.EvaluationPoint.value();
+    if(obj.TimeStep.has_value())
+        j["TimeStep"] = obj.TimeStep.value();
+    if(obj.Title.has_value())
+        j["Title"] = obj.Title.value();
+    if(obj.Bins.has_value())
+        j["Bins"] = obj.Bins.value();
 } catch (const std::exception &e) {
     std::throw_with_nested(std::runtime_error("void to_json(json &j, const Histogram &obj) exception"));
 }
@@ -86,13 +118,21 @@ std::string Histogram_to_json_string(const Histogram &obj) {
 }
 inline
 void from_json(const json &j, Histogram &obj) try {
-    j.at("ax").get_to(obj.ax);
-    if(auto it=j.find("ay"); it!=j.end() and !it->is_null())
-        obj.ay = *it;
-    if(auto it=j.find("evaluation_point"); it!=j.end() and !it->is_null())
-        obj.evaluation_point = *it;
-    if(auto it=j.find("bins"); it!=j.end() and !it->is_null())
-        obj.bins = *it;
+    j.at("AxisX").get_to(obj.AxisX);
+    if(auto it=j.find("AxisY"); it!=j.end() and !it->is_null())
+        obj.AxisY = *it;
+    if(auto it=j.find("AxisZ"); it!=j.end() and !it->is_null())
+        obj.AxisZ = *it;
+    if(auto it=j.find("Flags"); it!=j.end() and !it->is_null())
+        obj.Flags = *it;
+    if(auto it=j.find("EvaluationPoint"); it!=j.end() and !it->is_null())
+        obj.EvaluationPoint = *it;
+    if(auto it=j.find("TimeStep"); it!=j.end() and !it->is_null())
+        obj.TimeStep = *it;
+    if(auto it=j.find("Title"); it!=j.end() and !it->is_null())
+        obj.Title = *it;
+    if(auto it=j.find("Bins"); it!=j.end() and !it->is_null())
+        obj.Bins = *it;
 } catch (const std::exception &e) {
     std::throw_with_nested(std::runtime_error("void from_json(const json &j, Histogram &obj) exception"));
 }

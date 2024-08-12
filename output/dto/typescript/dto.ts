@@ -1303,119 +1303,6 @@ HistogramAxis_to_json(j:object, obj:HistogramAxis) {
 
 class Histogram {
 
-    ax : HistogramAxis;
-    ay : HistogramAxis|undefined;
-    evaluation_point : number|undefined;
-    bins : number[]|undefined;
-
-    constructor(
-        ax : HistogramAxis  = new HistogramAxis(),
-        ay : HistogramAxis|undefined  = undefined,
-        evaluation_point : number|undefined  = undefined,
-        bins : number[]|undefined  = undefined,
-    ){
-        this.ax = ax;
-        this.ay = ay;
-        this.evaluation_point = evaluation_point;
-        this.bins = bins;
-    
-    }
-
-    json (): string {
-        return Histogram_to_json_string(this);
-    }
-}
-export function
-Histogram_equal (a: Histogram, b: Histogram) : boolean {
-    if(!HistogramAxis_equal(a.ax,b.ax)) return false;
-    if(a.ay===undefined && b.ay!==undefined) return false;
-    if(a.ay!==undefined && b.ay===undefined) return false;
-    if(a.ay!==undefined && b.ay!==undefined)
-    if(!HistogramAxis_equal(a.ay!,b.ay!)) return false;
-    if(a.evaluation_point===undefined && b.evaluation_point!==undefined) return false;
-    if(a.evaluation_point!==undefined && b.evaluation_point===undefined) return false;
-    if(a.evaluation_point!==undefined && b.evaluation_point!==undefined)
-    if(!int_equal(a.evaluation_point!,b.evaluation_point!)) return false;
-    if(a.bins===undefined && b.bins!==undefined) return false;
-    if(a.bins!==undefined && b.bins===undefined) return false;
-    if(a.bins!==undefined && b.bins!==undefined)
-        if(!list_equal(a.bins!,b.bins!,float_equal)) return false;
-    return true;
-}
-
-export function
-Histogram_fromJSON (j:any, obj: Histogram): void {
-    obj.ax = j["ax"];
-    if("ay" in j)
-        obj.ay = j["ay"];
-    if("evaluation_point" in j)
-        obj.evaluation_point = j["evaluation_point"];
-    if("bins" in j)
-        obj.bins = j["bins"];
-}
-export function
-Histogram_fromJSON_string (jstr:string): Histogram {
-    const j = JSON.parse(jstr);
-    const obj = new Histogram();
-    Histogram_fromJSON(j,obj);
-    return obj;
-}
-export function
-Histogram_from_json_string (jstr:string): Histogram {
-    const j: object = JSON.parse(jstr);
-    const obj: Histogram = new Histogram();
-    Histogram_from_json(j,obj);
-    return obj;
-}
-
-export function
-Histogram_to_json_string (self:Histogram) {
-    const j = {};
-    Histogram_to_json(j,self);
-    return JSON.stringify(j);
-}
-
-export function
-Histogram_from_json(j:object, obj:Histogram) {
-    HistogramAxis_from_json(j["ax"],obj.ax);
-    if( "ay" in j)
-        obj.ay = j["ay"] as HistogramAxis|undefined;
-    if("evaluation_point" in j)
-        obj.evaluation_point = j["evaluation_point"] as number|undefined;
-    else
-        obj.evaluation_point = undefined;
-    if("bins" in j)
-        obj.bins = j["bins"] as number[]|undefined;
-    else
-        obj.bins = undefined;
-}
-
-export function
-Histogram_to_json(j:object, obj:Histogram) {
-    {
-        const jj = {};
-        HistogramAxis_to_json(jj,obj.ax);
-        j["ax"] = jj;
-    }
-    if( obj.ay !== undefined) {
-        {
-            const jj = {};
-            HistogramAxis_to_json(jj,obj.ay);
-            j["ay"] = jj;
-        }
-    }
-    if( obj.evaluation_point !== undefined) {
-        j["evaluation_point"] = obj.evaluation_point;
-    }
-    if( obj.bins !== undefined) {
-        j["bins"] = obj.bins;
-    }
-}
-
-
-
-class Histogram2 {
-
     AxisX : HistogramAxis;
     AxisY : HistogramAxis|undefined;
     AxisZ : HistogramAxis|undefined;
@@ -1447,11 +1334,11 @@ class Histogram2 {
     }
 
     json (): string {
-        return Histogram2_to_json_string(this);
+        return Histogram_to_json_string(this);
     }
 }
 export function
-Histogram2_equal (a: Histogram2, b: Histogram2) : boolean {
+Histogram_equal (a: Histogram, b: Histogram) : boolean {
     if(!HistogramAxis_equal(a.AxisX,b.AxisX)) return false;
     if(a.AxisY===undefined && b.AxisY!==undefined) return false;
     if(a.AxisY!==undefined && b.AxisY===undefined) return false;
@@ -1485,7 +1372,7 @@ Histogram2_equal (a: Histogram2, b: Histogram2) : boolean {
 }
 
 export function
-Histogram2_fromJSON (j:any, obj: Histogram2): void {
+Histogram_fromJSON (j:any, obj: Histogram): void {
     obj.AxisX = j["AxisX"];
     if("AxisY" in j)
         obj.AxisY = j["AxisY"];
@@ -1503,29 +1390,29 @@ Histogram2_fromJSON (j:any, obj: Histogram2): void {
         obj.Bins = j["Bins"];
 }
 export function
-Histogram2_fromJSON_string (jstr:string): Histogram2 {
+Histogram_fromJSON_string (jstr:string): Histogram {
     const j = JSON.parse(jstr);
-    const obj = new Histogram2();
-    Histogram2_fromJSON(j,obj);
+    const obj = new Histogram();
+    Histogram_fromJSON(j,obj);
     return obj;
 }
 export function
-Histogram2_from_json_string (jstr:string): Histogram2 {
+Histogram_from_json_string (jstr:string): Histogram {
     const j: object = JSON.parse(jstr);
-    const obj: Histogram2 = new Histogram2();
-    Histogram2_from_json(j,obj);
+    const obj: Histogram = new Histogram();
+    Histogram_from_json(j,obj);
     return obj;
 }
 
 export function
-Histogram2_to_json_string (self:Histogram2) {
+Histogram_to_json_string (self:Histogram) {
     const j = {};
-    Histogram2_to_json(j,self);
+    Histogram_to_json(j,self);
     return JSON.stringify(j);
 }
 
 export function
-Histogram2_from_json(j:object, obj:Histogram2) {
+Histogram_from_json(j:object, obj:Histogram) {
     HistogramAxis_from_json(j["AxisX"],obj.AxisX);
     if( "AxisY" in j)
         obj.AxisY = j["AxisY"] as HistogramAxis|undefined;
@@ -1554,7 +1441,7 @@ Histogram2_from_json(j:object, obj:Histogram2) {
 }
 
 export function
-Histogram2_to_json(j:object, obj:Histogram2) {
+Histogram_to_json(j:object, obj:Histogram) {
     {
         const jj = {};
         HistogramAxis_to_json(jj,obj.AxisX);
@@ -1596,11 +1483,11 @@ Histogram2_to_json(j:object, obj:Histogram2) {
 class EvaluationPoint {
 
     time : number;
-    histograms : Histogram2[]|undefined;
+    histograms : Histogram[]|undefined;
 
     constructor(
         time : number  = Number.NaN,
-        histograms : Histogram2[]|undefined  = undefined,
+        histograms : Histogram[]|undefined  = undefined,
     ){
         this.time = time;
         this.histograms = histograms;
@@ -1616,7 +1503,7 @@ class EvaluationPoint {
 
     Add (
         
-        histogram : Histogram2,
+        histogram : Histogram,
     ) : EvaluationPoint  {
         
         if(this.histograms === undefined)
@@ -1636,7 +1523,7 @@ EvaluationPoint_equal (a: EvaluationPoint, b: EvaluationPoint) : boolean {
     if(a.histograms===undefined && b.histograms!==undefined) return false;
     if(a.histograms!==undefined && b.histograms===undefined) return false;
     if(a.histograms!==undefined && b.histograms!==undefined)
-        if(!list_equal(a.histograms!,b.histograms!,Histogram2_equal)) return false;
+        if(!list_equal(a.histograms!,b.histograms!,Histogram_equal)) return false;
     return true;
 }
 
@@ -1672,7 +1559,7 @@ export function
 EvaluationPoint_from_json(j:object, obj:EvaluationPoint) {
     obj.time = j["time"];
     if( "histograms" in j)
-        obj.histograms = j["histograms"] as Histogram2[]|undefined;
+        obj.histograms = j["histograms"] as Histogram[]|undefined;
 }
 
 export function
@@ -1682,7 +1569,7 @@ EvaluationPoint_to_json(j:object, obj:EvaluationPoint) {
         j["histograms"] = [];
         for(let item of obj.histograms) {
             const jj = {};
-            Histogram2_to_json(jj,item);
+            Histogram_to_json(jj,item);
             j["histograms"].push(jj);
         }
     }
@@ -1981,7 +1868,6 @@ class EvaluationResults {
     time_points : number[];
     time_steps : number[];
     histograms : Histogram[];
-    histograms2 : Histogram2[];
     model : Model|undefined;
 
     constructor(
@@ -1993,7 +1879,6 @@ class EvaluationResults {
         time_points : number[]  = [],
         time_steps : number[]  = [],
         histograms : Histogram[]  = [],
-        histograms2 : Histogram2[]  = [],
         model : Model|undefined  = undefined,
     ){
         this.names = names;
@@ -2004,7 +1889,6 @@ class EvaluationResults {
         this.time_points = time_points;
         this.time_steps = time_steps;
         this.histograms = histograms;
-        this.histograms2 = histograms2;
         this.model = model;
     
     }
@@ -2062,7 +1946,6 @@ EvaluationResults_equal (a: EvaluationResults, b: EvaluationResults) : boolean {
     if(!list_equal(a.time_points,b.time_points,float_equal)) return false;
     if(!list_equal(a.time_steps,b.time_steps,int_equal)) return false;
     if(!list_equal(a.histograms,b.histograms,Histogram_equal)) return false;
-    if(!list_equal(a.histograms2,b.histograms2,Histogram2_equal)) return false;
     if(a.model===undefined && b.model!==undefined) return false;
     if(a.model!==undefined && b.model===undefined) return false;
     if(a.model!==undefined && b.model!==undefined)
@@ -2080,7 +1963,6 @@ EvaluationResults_fromJSON (j:any, obj: EvaluationResults): void {
     obj.time_points = j["time_points"];
     obj.time_steps = j["time_steps"];
     obj.histograms = j["histograms"];
-    obj.histograms2 = j["histograms2"];
     if("model" in j)
         obj.model = j["model"];
 }
@@ -2120,11 +2002,6 @@ EvaluationResults_from_json(j:object, obj:EvaluationResults) {
         Histogram_from_json(item,v);
         obj.histograms.push(v);
     }
-    for(let item of j["histograms2"]) {
-        const v: Histogram2 = new Histogram2();
-        Histogram2_from_json(item,v);
-        obj.histograms2.push(v);
-    }
     if( "model" in j)
         obj.model = j["model"] as Model|undefined;
 }
@@ -2143,12 +2020,6 @@ EvaluationResults_to_json(j:object, obj:EvaluationResults) {
         const jj = {};
         Histogram_to_json(jj,item);
         j["histograms"].push(jj);
-    }
-    j["histograms2"] = [];
-    for(let item of obj.histograms2) {
-        const jj = {};
-        Histogram2_to_json(jj,item);
-        j["histograms2"].push(jj);
     }
     if( obj.model !== undefined) {
         {
@@ -2332,7 +2203,6 @@ export {
     Division,
     HistogramAxis,
     Histogram,
-    Histogram2,
     EvaluationPoint,
     Model,
     Result,

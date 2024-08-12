@@ -900,69 +900,6 @@ class Histogram:
     
     def __init__ (
         self,
-        ax:HistogramAxis = HistogramAxis(),
-        ay:HistogramAxis|None = None,
-        evaluation_point:int|None = None,
-        bins:list[float]|None = None
-    ):
-        self.ax : HistogramAxis = deepcopy(ax)
-        self.ay : HistogramAxis|None = deepcopy(ay)
-        self.evaluation_point : int|None = evaluation_point
-        self.bins : list[float]|None = bins
-        pass
-
-    def __eq__ (self, other):
-        if self.ax != other.ax: return False
-        if self.ay != other.ay: return False
-        if self.evaluation_point != other.evaluation_point: return False
-        if self.bins != other.bins: return False
-        return True
-    def __neq__ (self, other):
-        return not self==other
-    def json (self) -> str:
-        return Histogram_to_json_string(self)
-def Histogram_from_json_string (jstr):
-    j = json.loads(jstr)
-    obj = Histogram()
-    Histogram_from_json(j,obj)
-    return obj
-
-def Histogram_to_json_string (self:Histogram):
-    j = {}
-    Histogram_to_json(j,self)
-    return json.dumps(j)
-def Histogram_from_json (j:dict, obj:Histogram):
-    assert isinstance(obj,Histogram)
-    HistogramAxis_from_json(j["ax"],obj.ax)
-    if j.get("ay",None) is not None:
-        obj.ay = HistogramAxis()
-        HistogramAxis_from_json(j["ay"],obj.ay)
-    if j.get("evaluation_point",None) is not None:
-        obj.evaluation_point = j["evaluation_point"]
-    if j.get("bins",None) is not None:
-        obj.bins = j["bins"]
-def Histogram_to_json(j:dict, obj:Histogram):
-    jj = {}
-    HistogramAxis_to_json(jj,obj.ax)
-    j["ax"] = jj
-    if obj.ay is not None:
-        jj = {}
-        HistogramAxis_to_json(jj,obj.ay)
-        j["ay"] = jj
-    if obj.evaluation_point is not None:
-        j["evaluation_point"] = obj.evaluation_point
-    if obj.bins is not None:
-        j["bins"] = obj.bins
-    pass
-
-
-# Forward declaration
-class Histogram2: pass
-class Histogram2:
-
-    
-    def __init__ (
-        self,
         AxisX:HistogramAxis = HistogramAxis(),
         AxisY:HistogramAxis|None = None,
         AxisZ:HistogramAxis|None = None,
@@ -995,19 +932,19 @@ class Histogram2:
     def __neq__ (self, other):
         return not self==other
     def json (self) -> str:
-        return Histogram2_to_json_string(self)
-def Histogram2_from_json_string (jstr):
+        return Histogram_to_json_string(self)
+def Histogram_from_json_string (jstr):
     j = json.loads(jstr)
-    obj = Histogram2()
-    Histogram2_from_json(j,obj)
+    obj = Histogram()
+    Histogram_from_json(j,obj)
     return obj
 
-def Histogram2_to_json_string (self:Histogram2):
+def Histogram_to_json_string (self:Histogram):
     j = {}
-    Histogram2_to_json(j,self)
+    Histogram_to_json(j,self)
     return json.dumps(j)
-def Histogram2_from_json (j:dict, obj:Histogram2):
-    assert isinstance(obj,Histogram2)
+def Histogram_from_json (j:dict, obj:Histogram):
+    assert isinstance(obj,Histogram)
     HistogramAxis_from_json(j["AxisX"],obj.AxisX)
     if j.get("AxisY",None) is not None:
         obj.AxisY = HistogramAxis()
@@ -1025,7 +962,7 @@ def Histogram2_from_json (j:dict, obj:Histogram2):
         obj.Title = j["Title"]
     if j.get("Bins",None) is not None:
         obj.Bins = j["Bins"]
-def Histogram2_to_json(j:dict, obj:Histogram2):
+def Histogram_to_json(j:dict, obj:Histogram):
     jj = {}
     HistogramAxis_to_json(jj,obj.AxisX)
     j["AxisX"] = jj
@@ -1058,10 +995,10 @@ class EvaluationPoint:
     def __init__ (
         self,
         time:float = nan,
-        histograms:list[Histogram2]|None = None
+        histograms:list[Histogram]|None = None
     ):
         self.time : float = time
-        self.histograms : list[Histogram2]|None = deepcopy(histograms)
+        self.histograms : list[Histogram]|None = deepcopy(histograms)
         pass
 
     def GetTime (
@@ -1108,8 +1045,8 @@ def EvaluationPoint_from_json (j:dict, obj:EvaluationPoint):
     if j.get("histograms",None) is not None:
         obj.histograms = []
         for item in j["histograms"]:
-            v = Histogram2()
-            Histogram2_from_json(item,v)
+            v = Histogram()
+            Histogram_from_json(item,v)
             obj.histograms.append(v)
 def EvaluationPoint_to_json(j:dict, obj:EvaluationPoint):
     j["time"] = obj.time
@@ -1117,7 +1054,7 @@ def EvaluationPoint_to_json(j:dict, obj:EvaluationPoint):
         j["histograms"] = []
         for item in obj.histograms:
             jj = {}
-            Histogram2_to_json(jj,item)
+            Histogram_to_json(jj,item)
             j["histograms"].append(jj)
     pass
 
@@ -1356,7 +1293,6 @@ class EvaluationResults:
         time_points:list[float] = [],
         time_steps:list[int] = [],
         histograms:list[Histogram] = [],
-        histograms2:list[Histogram2] = [],
         model:Model|None = None
     ):
         self.names : list[str] = names
@@ -1367,7 +1303,6 @@ class EvaluationResults:
         self.time_points : list[float] = time_points
         self.time_steps : list[int] = time_steps
         self.histograms : list[Histogram] = deepcopy(histograms)
-        self.histograms2 : list[Histogram2] = deepcopy(histograms2)
         self.model : Model|None = deepcopy(model)
         pass
 
@@ -1447,7 +1382,6 @@ class EvaluationResults:
         if self.time_points != other.time_points: return False
         if self.time_steps != other.time_steps: return False
         if self.histograms != other.histograms: return False
-        if self.histograms2 != other.histograms2: return False
         if self.model != other.model: return False
         return True
     def __neq__ (self, other):
@@ -1478,11 +1412,6 @@ def EvaluationResults_from_json (j:dict, obj:EvaluationResults):
         v = Histogram()
         Histogram_from_json(item,v)
         obj.histograms.append(v)
-    obj.histograms2 = []
-    for item in j["histograms2"]:
-        v = Histogram2()
-        Histogram2_from_json(item,v)
-        obj.histograms2.append(v)
     if j.get("model",None) is not None:
         obj.model = Model()
         Model_from_json(j["model"],obj.model)
@@ -1499,11 +1428,6 @@ def EvaluationResults_to_json(j:dict, obj:EvaluationResults):
         jj = {}
         Histogram_to_json(jj,item)
         j["histograms"].append(jj)
-    j["histograms2"] = []
-    for item in obj.histograms2:
-        jj = {}
-        Histogram2_to_json(jj,item)
-        j["histograms2"].append(jj)
     if obj.model is not None:
         jj = {}
         Model_to_json(jj,obj.model)

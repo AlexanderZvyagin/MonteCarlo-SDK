@@ -18,7 +18,7 @@
 using json = nlohmann::json;
 
 
-#include "Histogram2.hpp"
+#include "Histogram.hpp"
 namespace dto {
 class EvaluationPoint;
 std::string EvaluationPoint_to_json_string(const EvaluationPoint &obj);
@@ -26,12 +26,12 @@ class EvaluationPoint {
 public:
 
     float time;
-    std::optional<std::vector<Histogram2>> histograms;
+    std::optional<std::vector<Histogram>> histograms;
 
     
     EvaluationPoint (
         float time = NAN,
-        std::optional<std::vector<Histogram2>> histograms = {}
+        std::optional<std::vector<Histogram>> histograms = {}
     )
     : time (
         time
@@ -51,12 +51,12 @@ public:
     }
 
     EvaluationPoint & Add (
-        Histogram2 histogram
+        Histogram histogram
     )
     {
         
         if( not histograms.has_value() )
-            histograms = std::vector<Histogram2> ();
+            histograms = std::vector<Histogram> ();
         histograms.value().push_back(histogram);
         return *this;
         
