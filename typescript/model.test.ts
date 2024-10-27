@@ -60,7 +60,6 @@ test('SimpleModel', async function () {
 
     await sdk.run(model, server())
         .then(result => {
-            console.log(result);
             expect(result.mean[bm_state]).toBeCloseTo(expected.mean,1);
             expect(result.stddev[bm_state]).toBeCloseTo(expected.stddev,1);
             expect(result.skewness[bm_state]).toBeCloseTo(expected.skewness,1);
