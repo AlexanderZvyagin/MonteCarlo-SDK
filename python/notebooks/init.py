@@ -6,4 +6,6 @@ logging.basicConfig (
 import mcsdk as sdk
 from plot import *
 import os
-server = f'http://{os.getenv("SERVER_ADDRESS","az.hopto.org")}:{os.getenv("SERVER_PORT","8001")}'
+server = os.getenv("SERVER_ADDRESS")
+if not server:
+    raise Exception('Please, set SERVER_ADDRESS environment variable, e.g. SERVER_ADDRESS=http://my.host:port/addr')
