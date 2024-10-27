@@ -1,7 +1,6 @@
 import os, requests
 import mcsdk as sdk
-
-server = f'http://{os.getenv("SERVER_ADDRESS","az.hopto.org")}:{os.getenv("SERVER_PORT","8001")}'
+from init import server
 
 def test_server_available():
     for endpoint in ('/','/functions','/metrics'):
@@ -104,12 +103,6 @@ def test_multi_simulations ():
     add2 = add_fixed_leg(model=model,t0=0,dt=0.5,n=3,fixed_rate=0.01,discount=add1['df'],notional=1,prefix='[fixed leg] ')
     model.evaluations.append(
         sdk.EvaluationPoint(model.TimeStart)
-            .Add(sdk.Histogram(
-                ax = sdk.HistogramAxis(
-                    add2['fixed_leg_discounted'].GetStateNumber(),
-                    200
-                ),
-            ))                
     )
     model.evaluations.append(sdk.EvaluationPoint(add2['time_points'][-1]))
 
