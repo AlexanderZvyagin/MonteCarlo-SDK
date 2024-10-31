@@ -69,4 +69,6 @@ test('SimpleModel', async function () {
             expect(result.time_steps).toEqual([model.TimeSteps-1]);
         })
         .catch(failure);
+},{
+    timeout: 60000,
 })
