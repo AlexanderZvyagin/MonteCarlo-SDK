@@ -9,27 +9,27 @@ def linspace(min:float,max:float,n:int):
     step = (max-min)/n
     return [min] + [min+step*i for i in range(1,n)] + [max]
 
-def find(results:mcsdk.EvaluationResults,point:int,stateX:int,stateY:int|None=None,histogram_index=0):
+def find(results:mcsdk.EvaluationResults,time_step:int,stateX:int,stateY:int|None=None,histogram_index=0):
     fig, ax = plt.subplots(tight_layout=True)
-    ax.set_title(f'Extraction point {point} out of [0,{len(results.time_points)}), time={results.time_points[point]}')
-    histograms_filtered = [h for h in results.histograms if h.evaluation_point==point and h.ax.state==stateX]
+    #ax.set_title(f'Extraction point {point} out of [0,{len(results.time_points)}), time={results.time_points[point]}')
+    histograms_filtered = [h for h in results.histograms if h.TimeStep==time_step and h.AxisX.state==stateX]
     if stateY is None:
-        histograms_filtered = [h for h in histograms_filtered if not h.ay]
+        histograms_filtered = [h for h in histograms_filtered if not h.AxisY]
         if len(histograms_filtered)<=histogram_index:
             raise Exception('Cannot find the requested 1D histogram.')
         h = histograms_filtered[histogram_index]
         
-        edges = linspace(h.ax.min,h.ax.max,h.ax.nbins)
-        n, bins, patches = ax.hist(edges[:-1], edges, weights=h.bins, density=True)
+        edges = linspace(h.AxisX.min,h.AxisX.max,h.AxisX.nbins)
+        n, bins, patches = ax.hist(edges[:-1], edges, weights=h.Bins, density=True)
     else:
         # 2D histogram
-        histograms_filtered = [h for h in histograms_filtered if h.ay and h.ay.state==stateY]
+        histograms_filtered = [h for h in histograms_filtered if h.AxisY and h.AxisY.state==stateY]
         if len(histograms_filtered)<=histogram_index:
             raise Exception('Cannot find the requested 2D histogram.')
         h = histograms_filtered[histogram_index]
 
-        x_edges = linspace(h.ax.min,h.ax.max,h.ax.nbins)
-        y_edges = linspace(h.ay.min,h.ay.max,h.ay.nbins)
+        x_edges = linspace(h.AxisX.min,h.AxisX.max,h.AxisX.nbins)
+        y_edges = linspace(h.AxisY.min,h.AxisY.max,h.AxisY.nbins)
 
         vx = []
         vy = []
@@ -38,7 +38,7 @@ def find(results:mcsdk.EvaluationResults,point:int,stateX:int,stateY:int|None=No
                 vx.append(x)
                 vy.append(y)
 
-        ax.hist2d(vx,vy,bins=[x_edges,y_edges],weights=h.bins)
+        ax.hist2d(vx,vy,bins=[x_edges,y_edges],weights=h.Bins)
         bins = None
         ax.set_ylabel(results.model.titles[stateY])
 

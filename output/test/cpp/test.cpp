@@ -22,10 +22,13 @@
 #include "Division.hpp"
 #include "HistogramAxis.hpp"
 #include "Histogram.hpp"
+#include "Histogram.hpp"
 #include "EvaluationPoint.hpp"
 #include "Model.hpp"
 #include "Model.hpp"
+#include "Model.hpp"
 #include "Result.hpp"
+#include "EvaluationResults.hpp"
 #include "EvaluationResults.hpp"
 #include "Sum.hpp"
 #include "SumOfFutureValues.hpp"
@@ -235,6 +238,7 @@ UpdaterDoc random_UpdaterDoc (void) {
         random_string(),
         random_string(),
         random_string(),
+        random_string(),
         random_int(),
         random_int()
 
@@ -277,7 +281,8 @@ UpdaterDto random_UpdaterDto (void) {
         random_string(),
         random_optional_list_int(),
         random_optional_list_float(),
-        random_optional_list_float()
+        random_optional_list_float(),
+        random_string()
 
     );
 }
@@ -800,6 +805,7 @@ std::optional<std::vector<HistogramAxis>> random_optional_list_HistogramAxis (in
     return random_list_HistogramAxis (min,max);
 }
 
+namespace V0 {
 // Forward declarations for Histogram
 class Histogram;
 Histogram random_Histogram (void);
@@ -844,6 +850,59 @@ std::optional<std::vector<Histogram>> random_optional_list_Histogram (int min, i
         return {};
     return random_list_Histogram (min,max);
 }
+
+} // namespace V0
+namespace V1 {
+// Forward declarations for Histogram
+class Histogram;
+Histogram random_Histogram (void);
+std::optional<Histogram> random_optional_Histogram (void);
+std::vector<Histogram> random_list_Histogram (int min=0, int max=3);
+std::optional<std::vector<Histogram>> random_optional_list_Histogram (int min=0, int max=3);
+
+
+Histogram random_Histogram (void) {
+    return Histogram (
+        random_HistogramAxis(),
+        random_optional_HistogramAxis(),
+        random_optional_HistogramAxis(),
+        random_optional_int(),
+        random_optional_int(),
+        random_optional_string(),
+        random_optional_list_float()
+
+    );
+}
+
+
+std::optional<Histogram> random_optional_Histogram (void) {
+    if(yes_no())
+        return {};
+    return random_Histogram ();
+}
+
+
+std::vector<Histogram> random_list_Histogram (int min, int max) {
+    const auto size = random_int(min,max);
+    std::vector<Histogram> list;
+    for(int i=0; i<size; i++)
+        list.push_back(random_Histogram());
+    return list;
+}
+
+
+std::optional<std::vector<Histogram>> random_optional_list_Histogram (int min, int max) {
+    if(yes_no())
+        return {};
+    return random_list_Histogram (min,max);
+}
+
+} // namespace V1
+
+using V1::random_Histogram;
+using V1::random_list_Histogram;
+using V1::random_optional_Histogram;
+using V1::random_optional_list_Histogram;
 
 // Forward declarations for EvaluationPoint
 class EvaluationPoint;
@@ -979,11 +1038,60 @@ std::optional<std::vector<Model>> random_optional_list_Model (int min, int max) 
 }
 
 } // namespace V1
+namespace V2 {
+// Forward declarations for Model
+class Model;
+Model random_Model (void);
+std::optional<Model> random_optional_Model (void);
+std::vector<Model> random_list_Model (int min=0, int max=3);
+std::optional<std::vector<Model>> random_optional_list_Model (int min=0, int max=3);
 
-using V1::random_Model;
-using V1::random_list_Model;
-using V1::random_optional_Model;
-using V1::random_optional_list_Model;
+
+Model random_Model (void) {
+    return Model (
+        random_float(),
+        random_int(),
+        random_int(),
+        random_list_Updater(),
+        random_list_EvaluationPoint(),
+        random_optional_int(),
+        random_optional_float(),
+        random_optional_string(),
+        random_optional_int(),
+        random_int()
+
+    );
+}
+
+
+std::optional<Model> random_optional_Model (void) {
+    if(yes_no())
+        return {};
+    return random_Model ();
+}
+
+
+std::vector<Model> random_list_Model (int min, int max) {
+    const auto size = random_int(min,max);
+    std::vector<Model> list;
+    for(int i=0; i<size; i++)
+        list.push_back(random_Model());
+    return list;
+}
+
+
+std::optional<std::vector<Model>> random_optional_list_Model (int min, int max) {
+    if(yes_no())
+        return {};
+    return random_list_Model (min,max);
+}
+
+} // namespace V2
+
+using V2::random_Model;
+using V2::random_list_Model;
+using V2::random_optional_Model;
+using V2::random_optional_list_Model;
 
 // Forward declarations for Result
 class Result;
@@ -1026,6 +1134,7 @@ std::optional<std::vector<Result>> random_optional_list_Result (int min, int max
     return random_list_Result (min,max);
 }
 
+namespace V0 {
 // Forward declarations for EvaluationResults
 class EvaluationResults;
 EvaluationResults random_EvaluationResults (void);
@@ -1071,6 +1180,62 @@ std::optional<std::vector<EvaluationResults>> random_optional_list_EvaluationRes
         return {};
     return random_list_EvaluationResults (min,max);
 }
+
+} // namespace V0
+namespace V1 {
+// Forward declarations for EvaluationResults
+class EvaluationResults;
+EvaluationResults random_EvaluationResults (void);
+std::optional<EvaluationResults> random_optional_EvaluationResults (void);
+std::vector<EvaluationResults> random_list_EvaluationResults (int min=0, int max=3);
+std::optional<std::vector<EvaluationResults>> random_optional_list_EvaluationResults (int min=0, int max=3);
+
+
+EvaluationResults random_EvaluationResults (void) {
+    return EvaluationResults (
+        random_list_string(),
+        random_list_int(),
+        random_list_float(),
+        random_list_float(),
+        random_list_float(),
+        random_list_float(),
+        random_list_int(),
+        random_list_Histogram(),
+        random_list_string(),
+        random_optional_Model()
+
+    );
+}
+
+
+std::optional<EvaluationResults> random_optional_EvaluationResults (void) {
+    if(yes_no())
+        return {};
+    return random_EvaluationResults ();
+}
+
+
+std::vector<EvaluationResults> random_list_EvaluationResults (int min, int max) {
+    const auto size = random_int(min,max);
+    std::vector<EvaluationResults> list;
+    for(int i=0; i<size; i++)
+        list.push_back(random_EvaluationResults());
+    return list;
+}
+
+
+std::optional<std::vector<EvaluationResults>> random_optional_list_EvaluationResults (int min, int max) {
+    if(yes_no())
+        return {};
+    return random_list_EvaluationResults (min,max);
+}
+
+} // namespace V1
+
+using V1::random_EvaluationResults;
+using V1::random_list_EvaluationResults;
+using V1::random_optional_EvaluationResults;
+using V1::random_optional_list_EvaluationResults;
 
 // Forward declarations for Sum
 class Sum;
@@ -1368,10 +1533,23 @@ int main (int argc, const char **argv) try {
 
 
         } else if (struct_name == "Histogram") {
-            auto obj1 = dto::random_Histogram();
-            std::ofstream(file1_path) << dto::Histogram_to_json_string(obj1);
+            auto obj1 = dto::V0::random_Histogram();
+            std::ofstream(file1_path) << dto::V0::Histogram_to_json_string(obj1);
             auto obj2 =
-                dto::Histogram_from_json (
+                dto::V0::Histogram_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            if(obj1!=obj2)
+                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
+
+
+        } else if (struct_name == "Histogram") {
+            auto obj1 = dto::V1::random_Histogram();
+            std::ofstream(file1_path) << dto::V1::Histogram_to_json_string(obj1);
+            auto obj2 =
+                dto::V1::Histogram_from_json (
                     json::parse (
                         std::ifstream (
                             file1_path
@@ -1419,6 +1597,19 @@ int main (int argc, const char **argv) try {
                 throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
 
 
+        } else if (struct_name == "Model") {
+            auto obj1 = dto::V2::random_Model();
+            std::ofstream(file1_path) << dto::V2::Model_to_json_string(obj1);
+            auto obj2 =
+                dto::V2::Model_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            if(obj1!=obj2)
+                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
+
+
         } else if (struct_name == "Result") {
             auto obj1 = dto::random_Result();
             std::ofstream(file1_path) << dto::Result_to_json_string(obj1);
@@ -1433,10 +1624,23 @@ int main (int argc, const char **argv) try {
 
 
         } else if (struct_name == "EvaluationResults") {
-            auto obj1 = dto::random_EvaluationResults();
-            std::ofstream(file1_path) << dto::EvaluationResults_to_json_string(obj1);
+            auto obj1 = dto::V0::random_EvaluationResults();
+            std::ofstream(file1_path) << dto::V0::EvaluationResults_to_json_string(obj1);
             auto obj2 =
-                dto::EvaluationResults_from_json (
+                dto::V0::EvaluationResults_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            if(obj1!=obj2)
+                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
+
+
+        } else if (struct_name == "EvaluationResults") {
+            auto obj1 = dto::V1::random_EvaluationResults();
+            std::ofstream(file1_path) << dto::V1::EvaluationResults_to_json_string(obj1);
+            auto obj2 =
+                dto::V1::EvaluationResults_from_json (
                     json::parse (
                         std::ifstream (
                             file1_path
@@ -1677,7 +1881,20 @@ int main (int argc, const char **argv) try {
 
         } else if (struct_name == "Histogram") {
             auto obj =
-                dto::Histogram_from_json (
+                dto::V0::Histogram_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            std::ofstream out (file2_path);
+            out << Histogram_to_json_string(obj);
+            if(!out)
+                throw std::runtime_error("Operation 'convert': IO error on " + struct_name);
+
+
+        } else if (struct_name == "Histogram") {
+            auto obj =
+                dto::V1::Histogram_from_json (
                     json::parse (
                         std::ifstream (
                             file1_path
@@ -1727,6 +1944,19 @@ int main (int argc, const char **argv) try {
                 throw std::runtime_error("Operation 'convert': IO error on " + struct_name);
 
 
+        } else if (struct_name == "Model") {
+            auto obj =
+                dto::V2::Model_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            std::ofstream out (file2_path);
+            out << Model_to_json_string(obj);
+            if(!out)
+                throw std::runtime_error("Operation 'convert': IO error on " + struct_name);
+
+
         } else if (struct_name == "Result") {
             auto obj =
                 dto::Result_from_json (
@@ -1742,7 +1972,20 @@ int main (int argc, const char **argv) try {
 
         } else if (struct_name == "EvaluationResults") {
             auto obj =
-                dto::EvaluationResults_from_json (
+                dto::V0::EvaluationResults_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            std::ofstream out (file2_path);
+            out << EvaluationResults_to_json_string(obj);
+            if(!out)
+                throw std::runtime_error("Operation 'convert': IO error on " + struct_name);
+
+
+        } else if (struct_name == "EvaluationResults") {
+            auto obj =
+                dto::V1::EvaluationResults_from_json (
                     json::parse (
                         std::ifstream (
                             file1_path
@@ -2043,13 +2286,30 @@ int main (int argc, const char **argv) try {
 
         } else if (struct_name == "Histogram") {
             auto obj1 =
-                dto::Histogram_from_json (
+                dto::V0::Histogram_from_json (
                     json::parse (
                         std::ifstream (
                             file1_path
             )));
             auto obj2 =
-                dto::Histogram_from_json (
+                dto::V0::Histogram_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file2_path
+            )));
+            if(obj1!=obj2)
+                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
+
+
+        } else if (struct_name == "Histogram") {
+            auto obj1 =
+                dto::V1::Histogram_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            auto obj2 =
+                dto::V1::Histogram_from_json (
                     json::parse (
                         std::ifstream (
                             file2_path
@@ -2109,6 +2369,23 @@ int main (int argc, const char **argv) try {
                 throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
 
 
+        } else if (struct_name == "Model") {
+            auto obj1 =
+                dto::V2::Model_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            auto obj2 =
+                dto::V2::Model_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file2_path
+            )));
+            if(obj1!=obj2)
+                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
+
+
         } else if (struct_name == "Result") {
             auto obj1 =
                 dto::Result_from_json (
@@ -2128,13 +2405,30 @@ int main (int argc, const char **argv) try {
 
         } else if (struct_name == "EvaluationResults") {
             auto obj1 =
-                dto::EvaluationResults_from_json (
+                dto::V0::EvaluationResults_from_json (
                     json::parse (
                         std::ifstream (
                             file1_path
             )));
             auto obj2 =
-                dto::EvaluationResults_from_json (
+                dto::V0::EvaluationResults_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file2_path
+            )));
+            if(obj1!=obj2)
+                throw std::runtime_error("Operation 'compare' failed for struct " + struct_name);
+
+
+        } else if (struct_name == "EvaluationResults") {
+            auto obj1 =
+                dto::V1::EvaluationResults_from_json (
+                    json::parse (
+                        std::ifstream (
+                            file1_path
+            )));
+            auto obj2 =
+                dto::V1::EvaluationResults_from_json (
                     json::parse (
                         std::ifstream (
                             file2_path

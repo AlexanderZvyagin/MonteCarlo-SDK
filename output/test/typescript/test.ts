@@ -140,6 +140,7 @@ function random_UpdaterDoc () : UpdaterDoc {
         random_string(),
         random_string(),
         random_string(),
+        random_string(),
         random_int(),
         random_int()
 
@@ -175,7 +176,8 @@ function random_UpdaterDto () : UpdaterDto {
         random_string(),
         random_optional_list_int(),
         random_optional_list_float(),
-        random_optional_list_float()
+        random_optional_list_float(),
+        random_string()
 
     );
 }
@@ -622,7 +624,6 @@ function random_Histogram () : Histogram {
         random_optional_HistogramAxis(),
         random_optional_int(),
         random_optional_int(),
-        random_optional_int(),
         random_optional_string(),
         random_optional_list_float()
 
@@ -694,6 +695,8 @@ function random_Model () : Model {
         random_list_EvaluationPoint(),
         random_optional_int(),
         random_optional_float(),
+        random_optional_string(),
+        random_optional_int(),
         random_int()
 
     );
@@ -767,6 +770,7 @@ function random_EvaluationResults () : EvaluationResults {
         random_list_float(),
         random_list_int(),
         random_list_Histogram(),
+        random_list_string(),
         random_optional_Model()
 
     );

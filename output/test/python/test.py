@@ -89,6 +89,7 @@ def random_UpdaterDoc ():
         random_string(),
         random_string(),
         random_string(),
+        random_string(),
         random_int(),
         random_int()
 
@@ -117,7 +118,8 @@ def random_UpdaterDto ():
         random_string(),
         random_optional_list_int(),
         random_optional_list_float(),
-        random_optional_list_float()
+        random_optional_list_float(),
+        random_string()
 
     )
 
@@ -473,7 +475,6 @@ def random_Histogram ():
         random_optional_HistogramAxis(),
         random_optional_int(),
         random_optional_int(),
-        random_optional_int(),
         random_optional_string(),
         random_optional_list_float()
 
@@ -531,6 +532,8 @@ def random_Model ():
         random_list_EvaluationPoint(),
         random_optional_int(),
         random_optional_float(),
+        random_optional_string(),
+        random_optional_int(),
         random_int()
 
     )
@@ -590,6 +593,7 @@ def random_EvaluationResults ():
         random_list_float(),
         random_list_int(),
         random_list_Histogram(),
+        random_list_string(),
         random_optional_Model()
 
     )
