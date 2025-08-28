@@ -14,4 +14,5 @@ def test(server='https://mc0.netlify.app/engine-8200'):
     for t in [1,2]:
         model.evaluations.append(EvaluationPoint(t))
     results = run (model, server)
-    return results.df()
+    print('mean values:',results.mean)
+    return results
