@@ -1,0 +1,15 @@
+[project]
+name = 'mcsdk'
+version = '0.0.0'
+description = 'MonteCarlo SDK for Python'
+authors = [
+  {name = 'Alexander ZVYAGIN', email = 'Zvyagin.Alexander@gmail.com'},
+]
+dependencies = [
+    'requests',
+    'pandas',
+]
+# readme = 'README.md'
+
+[tool.setuptools.packages.find]
+where = ['python/src']
