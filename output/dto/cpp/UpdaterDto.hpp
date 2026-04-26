@@ -95,11 +95,11 @@ inline
 void from_json(const json &j, UpdaterDto &obj) try {
     j.at("name").get_to(obj.name);
     if(auto it=j.find("refs"); it!=j.end() and !it->is_null())
-        obj.refs = *it;
+        obj.refs = it->get<std::vector<int>>();
     if(auto it=j.find("args"); it!=j.end() and !it->is_null())
-        obj.args = *it;
+        obj.args = it->get<std::vector<float>>();
     if(auto it=j.find("start"); it!=j.end() and !it->is_null())
-        obj.start = *it;
+        obj.start = it->get<std::vector<float>>();
     if(auto it=j.find("logging"); it!=j.end() and !it->is_null())
         obj.logging = *it;
 } catch (const std::exception &e) {

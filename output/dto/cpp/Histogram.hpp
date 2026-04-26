@@ -133,7 +133,7 @@ void from_json(const json &j, Histogram &obj) try {
     if(auto it=j.find("Title"); it!=j.end() and !it->is_null())
         obj.Title = *it;
     if(auto it=j.find("Bins"); it!=j.end() and !it->is_null())
-        obj.Bins = *it;
+        obj.Bins = it->get<std::vector<float>>();
 } catch (const std::exception &e) {
     std::throw_with_nested(std::runtime_error("void from_json(const json &j, Histogram &obj) exception"));
 }
@@ -271,7 +271,7 @@ void from_json(const json &j, Histogram &obj) try {
     if(auto it=j.find("Title"); it!=j.end() and !it->is_null())
         obj.Title = *it;
     if(auto it=j.find("Bins"); it!=j.end() and !it->is_null())
-        obj.Bins = *it;
+        obj.Bins = it->get<std::vector<float>>();
 } catch (const std::exception &e) {
     std::throw_with_nested(std::runtime_error("void from_json(const json &j, Histogram &obj) exception"));
 }
